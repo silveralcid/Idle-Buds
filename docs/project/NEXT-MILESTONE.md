@@ -1,11 +1,9 @@
 # Recommended next milestone
 
-Status: RECOMMENDED, not owner-approved implementation or release scope.
+Status: MVP execution plan drafted; release scope, BEAT BAES gate and gameplay authorization still require owner confirmation.
 
-The latest design-history planning-saturation checkpoint says to stop granular design interviews. The next useful decision is a short MVP boundary and measurable acceptance plan: identify must-ship, nice-to-have and excluded work; confirm the BEAT BAES gate and explicitly authorize the first gameplay milestone. Use existing approved qualitative targets as inputs, not as a fabricated finalized release specification.
+The [active end-to-end MVP plan](../plans/active/mvp-execution-plan.md) provides a proposed must-ship/nice-to-have/excluded boundary, dependency-ordered implementation milestones, measurable acceptance, content/engineering workstreams and release/recovery gates. Use that plan instead of restarting granular interviews; no parallel competing spec or backlog.
 
-After that authorization, build one internal integrated onboarding slice: gathering and crafting → an earned first catch → Bud assignment → persisted/offline progression. Freeze a small set of measurable behaviors and test server-owned time/rewards and save integrity at the real boundaries. This is a recommended development sequence, not approval to implement it now or a reduction of the game's eventual scope.
+Next action: confirm BEAT BAES demo officially public and playable, explicitly approve the Current Release Specification based on the proposed envelope and acceptance, and authorize M1. Then build the integrated onboarding slice: gathering and crafting → earned first catch → Bud assignment → persisted/offline progression. Test server-owned time/rewards and save integrity at the real boundaries. This is not permission to implement now.
 
-The owner requires the small complete ecosystem's breadth for holistic product validation. Incremental slices can establish mechanics and integration, but an isolated prototype cannot prove the entire game's appeal. Preserve that distinction and expand only through approved scope.
-
-Sources: [release direction](../design/bible/12-release-direction.md), [current questions](../design/bible/13-open-decisions.md), [historical log](../research/design-history.md) section 12.47, and [authority](../design/AUTHORITY.md).
+The full small ecosystem remains required for holistic product validation; incremental slices establish mechanics and integration, not overall product appeal. See [release direction](../design/bible/12-release-direction.md), [open decisions](../design/bible/13-open-decisions.md), [authority](../design/AUTHORITY.md), and the [Constitution](CONSTITUTION.md).
