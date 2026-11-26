@@ -84,13 +84,38 @@ Reference patterns were adapted from the already-imported [reference map](../pla
 
 Provisional parameters include original content names, capture percentages, XP/IV curves, 90s breeding plus 120s incubation, prices/tax, stat/technique distributions, the three-point work-only condensation bonus, one clan goal/benefit, and simple ranked bands. Successful sale proceeds are paid immediately rather than requiring a separate claim click. The single shared-world transaction lock favors correctness for a small cohort; throughput and adversarial load are not qualified.
 
+## Work Cloud continuation for issue #6
+
+Verified the merged source `be36448c984fd4c3e56954673afc84a3f39eb188` in an isolated Linux x64 checkout with Node 24.22.3, npm 11.19.1, PostgreSQL 18.7 and Chrome for Testing 159.0.8154.6. The source passed both post-merge workflows. [Repository health](https://github.com/silveralcid/Idle-Buds/actions/runs/45766010131) · [Web validation](https://github.com/silveralcid/Idle-Buds/actions/runs/45766010264)
+
+| Check | Work Cloud result |
+|---|---|
+| Normal `npm ci` and `npm run play` | Started on an unused loopback port with a new `idle_buds_dev` database. In Chromium, registered an empty account and gathered three Iron Scrap for 24 Mining XP. A second launch and fresh browser login recovered the exact inventory, XP and gathered count. |
+| Separate `npm run playtest` | Started on different loopback ports with a new `idle_buds_test` database. `alpha` and `beta` had progressed saves and exchanged chat across separate desktop and narrow Chromium contexts. `fresh` had empty progress. After gathering, `alpha` retained 32 Scrap, 248 Mining XP and 102 gathered items across restart. Fixtures were seeded without a reset. |
+| Shutdown and data isolation | Ctrl+C closed the local HTTP and PostgreSQL listeners. Each database contained only the accounts created for its own check. Existing databases were untouched. |
+| Production browser suite | `npm run test:browser` passed 4/4 in 2.0 minutes with a third, disposable PostgreSQL cluster. The desktop and narrow flows gathered, crafted, caught and resumed offline work, then exercised two-account breeding, trade, community and ranked play. Narrow-mode coverage also exercised landscape. Human sessions and physical-device checks are pending. |
+
+### Bounded combat retest
+
+Reproduced the original `npm run experiments` baseline using the original three-asset formations, same Tender XP and strength 66 for each style. In one follow-up cycle, the shipped resolver ran with effects enabled against the same `combat-0` through `combat-99` seeds. Tested two snapshot-only adjustments. The first capped the prepared +5 weapon's effective Attack contribution at +3. The second added one Attack to each owned early-level Bud in the test formations. Both preserved the unarmed starter Tender. Effective strengths for Tender-led, Bud-led and Hybrid were 62/66/62 for the cap and 68/72/70 for the Bud increase.
+
+| Snapshot profile | Tender-led vs Bud-led | Tender-led vs Hybrid | Bud-led vs Hybrid |
+|---|---|---|---|
+| Shipped baseline | 100/0/0 | 100/0/0 | 0/100/0 |
+| Weapon contribution capped at +3 | 100/0/0 | 100/0/0 | 0/0/100 |
+| Early owned Bud Attack +1 | 100/0/0 | 100/0/0 | 0/100/0 |
+
+Each cell is wins/losses/draws for the first style per position. Outcomes matched when sides were swapped. For each profile, every style won 100/100 paired PvE battles sampled from the existing Glassreach wild encounter pool. This benchmark establishes clearance and was too easy to distinguish the styles. A Bud-led fixture placed one strength point below the Tender-led opponent lost all 100 seeds in original order and in reversed order under each profile. Across these checks, 3,300 battles replayed exactly, with zero side-dependent winners or round-cap hits and durations of 4–12 rounds. The fixed compositions do not represent acquisition cost or the breadth of live play.
+
+**Decision.** Retain the shipped combat settings. Neither adjustment broke the Tender-led sweep or produced a weaker-Bud win in the order check. Close the bounded tuning cycle and observe owner play before selecting another hypothesis. Retain the current production, economy and ranked settings for this playtest. Defer live pacing, demand and queue judgments until observed play.
+
 ## What remains
 
 Local implementation, aggregate verification and hosted gameplay/repository checks are complete. Delivery is tracked in [PR #5](https://github.com/silveralcid/Idle-Buds/pull/5); continuation is [issue #6](https://github.com/silveralcid/Idle-Buds/issues/6).
 
 1. Observe the owner playing a fresh account, a progressed account and two-account multiplayer. Record confusing, tedious and enjoyable moments separately from defects.
-2. Address the measured combat-style dominance with one bounded tuning/retest cycle. Use production, economy and ranked baselines to make explicit keep/revise/defer decisions after observed play. Do not mistake fixed-cohort conservation for market sustainability or static matching for live fairness.
-3. Verify installation and actual browser/touch behavior on the intended Cloud Work/server rig and target devices. Decide any private remote serving separately from implementation.
+2. Observe when formation order, gear choices and Bud investment feel meaningful. The bounded tuning cycle above retained the baseline. Use human play to inform future balance, progression, economy and ranked decisions.
+3. Verify actual touch, portrait and landscape behavior on the intended physical devices, plus installation on any owner machine used for play. Decide any private remote serving separately from implementation.
 4. Run the proposed small seven-day playtest if the owner wants that cohort. Human availability and retention are outcomes, not reasons to create more systems.
 
 [Miyu continuation](../project/MIYU-HANDOFF.md) contains the exact startup commands and requested Sol Extra High route. Public deployment, paid services, commercial launch and additional content remain outside this task.
