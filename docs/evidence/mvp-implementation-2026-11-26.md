@@ -48,7 +48,7 @@ All evidence below describes the local Linux x64 environment with Node 24.22.3 a
 | Browser gameplay | 4/4 passed, no skips: fresh-account loop and two-account full flow at both 1280×800 and 390×844, plus 844×390 landscape. Breeding/hatching, partial trades/cancellation, funded orders, chat/friends, clan completion and ranked history passed; populated screens have no horizontal overflow. Browser portion: 2.0 minutes |
 | Repository checks | 75/75 infrastructure regressions passed; links/configuration, strict context budget and original-source migration integrity passed |
 | Dependency audit | `npm audit --audit-level=high` passed. Three moderate development-chain findings remain in node-pg-migrate/glob/minimatch; no high/critical findings reported. The offered automatic fix is a breaking migration-library downgrade and was not applied |
-| Hosted CI | Pending publication of the tested branch |
+| Hosted CI | PASS on `c8ceb1916eba4dd45290e5e5b6930dbd208220b1`: [Repository health](https://github.com/silveralcid/Idle-Buds/actions/runs/45764869566) and [Web validation](https://github.com/silveralcid/Idle-Buds/actions/runs/45764869584), including the standard Playwright browser install and full gameplay suite. Subsequent commits in this PR only record evidence/handoff; see [PR #5](https://github.com/silveralcid/Idle-Buds/pull/5) for final-head checks |
 
 The environment's system Chromium wrapper pointed to a missing executable and the official Playwright CDN returned HTTP 403. An isolated packaged Chromium 158.0.8127.0 was qualified through actual browser play; no game dependency was added for that fallback. The standard Playwright download remains the documented default and CI route.
 
@@ -86,10 +86,11 @@ Provisional parameters include original content names, capture percentages, XP/I
 
 ## What remains
 
-1. Confirm hosted checks at the merge boundary and preserve their exact source/result. Local implementation and aggregate verification are complete.
-2. Observe the owner playing a fresh account, a progressed account and two-account multiplayer. Record confusing, tedious and enjoyable moments separately from defects.
-3. Address the measured combat-style dominance with one bounded tuning/retest cycle. Use production, economy and ranked baselines to make explicit keep/revise/defer decisions after observed play. Do not mistake fixed-cohort conservation for market sustainability or static matching for live fairness.
-4. Verify installation and actual browser/touch behavior on the intended Cloud Work/server rig and target devices. Decide any private remote serving separately from implementation.
-5. Run the proposed small seven-day playtest if the owner wants that cohort. Human availability and retention are outcomes, not reasons to create more systems.
+Local implementation, aggregate verification and hosted gameplay/repository checks are complete. Delivery is tracked in [PR #5](https://github.com/silveralcid/Idle-Buds/pull/5); continuation is [issue #6](https://github.com/silveralcid/Idle-Buds/issues/6).
+
+1. Observe the owner playing a fresh account, a progressed account and two-account multiplayer. Record confusing, tedious and enjoyable moments separately from defects.
+2. Address the measured combat-style dominance with one bounded tuning/retest cycle. Use production, economy and ranked baselines to make explicit keep/revise/defer decisions after observed play. Do not mistake fixed-cohort conservation for market sustainability or static matching for live fairness.
+3. Verify installation and actual browser/touch behavior on the intended Cloud Work/server rig and target devices. Decide any private remote serving separately from implementation.
+4. Run the proposed small seven-day playtest if the owner wants that cohort. Human availability and retention are outcomes, not reasons to create more systems.
 
 [Miyu continuation](../project/MIYU-HANDOFF.md) contains the exact startup commands and requested Sol Extra High route. Public deployment, paid services, commercial launch and additional content remain outside this task.

@@ -4,7 +4,7 @@
 
 Silver authorized building and merging MVP Execution Blueprint v2 on November 26, 2026 and explicitly requested Miyu continue unfinished work in **Cloud Work or the server rig using Sol at Extra High effort**. The implementing chat used GPT-6.2 Sol / `xhigh` for the bounded coding lanes. Use that available Sol tier on continuation; do not silently substitute a different requested model.
 
-This file is a durable handoff, not a dispatch receipt. The originating chat cannot establish that a separate Miyu session or machine task has started. The shared GitHub coordination record links this file; verify current task ownership before starting a second writer.
+This file is a durable handoff, not a dispatch receipt. The originating chat cannot establish that a separate Miyu session or machine task has started. Track continuation in [Idle Buds issue #6](https://github.com/silveralcid/Idle-Buds/issues/6), implementation in [PR #5](https://github.com/silveralcid/Idle-Buds/pull/5), and cross-machine ownership in the existing [shared coordination record](https://github.com/silveralcid/jasmine-dragon-cloud/issues/1). Verify current task ownership before starting a second writer.
 
 ## Resume from actual current main
 
