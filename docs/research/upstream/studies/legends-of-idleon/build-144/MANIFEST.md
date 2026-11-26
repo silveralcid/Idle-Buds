@@ -1,4 +1,4 @@
-> **Imported research, not approved Idle Buds design.** [Source snapshot](https://github.com/silveralcid/research/blob/88163607cfd407230512650a5c6750e1b7a96f98/reverse-engineering/game-dev/legends-of-idleon/build-144/MANIFEST.md); [scope, corrections and rights](../../../README.md). Upstream evidence labels and reported test results are preserved, not newly reproduced. Counts and commands may refer to excluded upstream artifacts.
+> **Imported research, not approved Idle Buds design.** [Source snapshot](https://github.com/silveralcid/research/blob/3629e5eaec87049d38a0c0f4269135b90beea5d3/reverse-engineering/game-dev/legends-of-idleon/build-144/MANIFEST.md); [scope, corrections and rights](../../../README.md). Upstream evidence labels and reported test results are preserved, not newly reproduced. Counts and commands may refer to excluded upstream artifacts.
 
 # Manifest
 
@@ -11,7 +11,7 @@ Study: `legends-of-idleon/build-144`. Target: `../../Legends of Idleon/` (Steam 
 | `content` | 1 | 0.00 |
 | `development-lessons` | 1 | 0.00 |
 | `economy` | 1 | 0.00 |
-| `evidence` | 66 | 31.77 |
+| `evidence` | 66 | 30.30 |
 | `experiments` | 1 | 0.00 |
 | `gameplay` | 1 | 0.01 |
 | `mathematics` | 1 | 0.01 |

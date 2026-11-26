@@ -2,54 +2,53 @@
   "schema_version": 1,
   "source_repository": "silveralcid/research",
   "source_ref": "main",
-  "source_commit": "88163607cfd407230512650a5c6750e1b7a96f98",
-  "snapshot_fetched_utc": "2026-11-26T04:36:16Z",
+  "source_commit": "3629e5eaec87049d38a0c0f4269135b90beea5d3",
+  "snapshot_fetched_utc": "2026-11-26T04:47:00Z",
   "classification": "Research/reference only. No approval of design, architecture, implementation or release scope.",
   "branches": [
     {
-      "name": "main",
-      "sha": "88163607cfd407230512650a5c6750e1b7a96f98",
-      "selection": "Selected current merged source"
+      "name": "backup/idle-game-re-2026-11-26-pass2",
+      "sha": "5986d2f1570abb0e39a0878687fe4746e6a2b003",
+      "selection": "Merged into main; no unique commits at selected snapshot"
     },
     {
       "name": "backup/idle-game-re-2026-11-26",
       "sha": "bd413b3107778aa532c62404a4e45ad92aadf7cf",
-      "ahead_of_main": 0,
-      "behind_main": 1,
-      "pull_request": 2,
-      "state": "merged"
+      "selection": "Merged into main; no unique commits at selected snapshot"
     },
     {
       "name": "docs/game-research-handoffs-20261021",
       "sha": "4e3ef1550be6ad32879370b51202b954267dd78c",
-      "ahead_of_main": 0,
-      "behind_main": 12,
-      "pull_request": 1,
-      "state": "merged"
+      "selection": "Merged into main; no unique commits at selected snapshot"
+    },
+    {
+      "name": "main",
+      "sha": "3629e5eaec87049d38a0c0f4269135b90beea5d3",
+      "selection": "Selected current merged source"
     }
   ],
   "historical_engineering_catalog_commit": "04bf510b60e46a5a937a7e660851df9de5c4aa69",
-  "source_scope": "All three branch tips, program and eleven study inventories, all non-evidence/non-tool study subtrees, older catalog and evidence audit covering 35 packages; selected authored material only.",
-  "transformations": "Markdown receives a status/provenance prefix and relative Markdown links are localized when selected, otherwise pinned to upstream. Other selected artifacts are byte-identical. Source SHA-256 and Git blob IDs identify original bytes.",
+  "source_scope": "Initial scope: all three branch tips, program and eleven study inventories, all non-evidence/non-tool study subtrees, older catalog and evidence audit covering 35 packages; selected authored material only. Refresh: all four branch tips, comparison with initial snapshot, updated Idleon reports and aggregate output, program/overview and new RimWorld non-evidence subtree inventory.",
+  "transformations": "Markdown receives a status/provenance prefix and relative Markdown links are localized when selected, otherwise pinned to upstream. Other selected artifacts are byte-identical. Source SHA-256 and Git blob IDs identify original bytes. Unchanged copies retain their original pinned provenance; revised and new copies use the refreshed commit.",
   "files": [
     {
       "source_path": "projects/game-dev/idle-game-reverse-engineering/COMPARATIVE_NOTES.md",
-      "source_blob_sha": "947fc9baae9ccaa100ef7b2e6c4d3d223bb7ea3c",
-      "source_sha256": "703be6f425ef94a55e67734f9edcc31816863afa1f9e7e5c621f4ab9e1d8d170",
-      "source_bytes": 17885,
+      "source_blob_sha": "2acc6fead51980d3377800801890ca91a0acd699",
+      "source_sha256": "42e09a144df1ea2310fe87f233ef4408de157877c8991411ddc49fba8a2506fb",
+      "source_bytes": 20156,
       "destination": "docs/research/upstream/comparative-notes.md",
-      "destination_sha256": "126dbb28ba5068ff0312b633856e86271d96877de5adf39a56dab55e3162fcb3",
-      "destination_bytes": 18311,
+      "destination_sha256": "ecf89ad01e7fa56b339cd395ff3f0fe1377a6bcc540432875287b7cf0151365b",
+      "destination_bytes": 20582,
       "classification": "authored research narrative"
     },
     {
       "source_path": "projects/game-dev/idle-game-reverse-engineering/README.md",
-      "source_blob_sha": "3e2494e5f1a1107c7a008b2f2931fc6f1865336c",
-      "source_sha256": "096fefd6f5127f7c0e24d12734f4061806ec2f0d43d47d92c933a518fb3ec02a",
-      "source_bytes": 7581,
+      "source_blob_sha": "15269a5feeb24b91b07508d1f2c53f29d609346e",
+      "source_sha256": "2682f7cfc6eeddc6677a4a9075cf0545309e1ee4cbefc94bcd6770c07e662cd6",
+      "source_bytes": 8109,
       "destination": "docs/research/upstream/program-source.md",
-      "destination_sha256": "125c3c999a5f280b27fd9c30d43d2a8dfc420e6a28854d7da6a34848bc6720ae",
-      "destination_bytes": 7933,
+      "destination_sha256": "f015fa1e8d40f02944b63439b7952e3ae864590da19712318fb6ceb502417ce9",
+      "destination_bytes": 8431,
       "classification": "authored research narrative"
     },
     {
@@ -724,21 +723,21 @@
     },
     {
       "source_path": "reverse-engineering/game-dev/legends-of-idleon/build-144/FINAL_REPORT.md",
-      "source_blob_sha": "44294c599aa4bb305bf5d85e03c950fb1536226a",
-      "source_sha256": "3b117a2ca1fbf123149b359ed6fb0f5c4ac41264b370168509cacafb96e8181b",
-      "source_bytes": 4263,
+      "source_blob_sha": "80ec28f1381a0ab380295eaa6ab3eb882620ce4f",
+      "source_sha256": "8c11380c23b2642ed849baf47c752bb47072ee3a4ec71e8410f685a84e7d960f",
+      "source_bytes": 8122,
       "destination": "docs/research/upstream/studies/legends-of-idleon/build-144/FINAL_REPORT.md",
-      "destination_sha256": "7b2beb586b318f475e642cc1854dadbb1fac6d89b614a779c7e50745f6adc6f4",
-      "destination_bytes": 4702,
+      "destination_sha256": "a368f88806ffbe94c594eac3df4f7dcbd9cc34f972f0e89422ea68574c6b2db6",
+      "destination_bytes": 8561,
       "classification": "authored research narrative"
     },
     {
       "source_path": "reverse-engineering/game-dev/legends-of-idleon/build-144/MANIFEST.md",
-      "source_blob_sha": "894462f984f1ef0e32448443224bae4c902d4a75",
-      "source_sha256": "10e2e5c2123a52c717ee6724609b946cbe7fca1980ba243f9276583220935b50",
+      "source_blob_sha": "1c543f4b00fdc9e40234081d1d0cc6de493b1412",
+      "source_sha256": "892cf5e51992de9989fd628033ed5a0745adb9f2be522292b7b82113343f484f",
       "source_bytes": 1451,
       "destination": "docs/research/upstream/studies/legends-of-idleon/build-144/MANIFEST.md",
-      "destination_sha256": "d17b2a63ea5c07bb9123b6a3b4d2d3444842ea58b341bd861f1e7f6566bf2f7f",
+      "destination_sha256": "7ef47e6d5c76b3da8d4bcdcf184517b199916e3acceb98cfbaee0c7e5915bda1",
       "destination_bytes": 1886,
       "classification": "authored research narrative"
     },
@@ -754,102 +753,102 @@
     },
     {
       "source_path": "reverse-engineering/game-dev/legends-of-idleon/build-144/architecture/ARCHITECTURE.md",
-      "source_blob_sha": "6aaaefcce408f100634d36261d8c52bb3f9532ab",
-      "source_sha256": "392ca89b38533f3ed9e7e11e72e2db9f1aacb5ffc36f6cd74a093c04cc6d8dfc",
-      "source_bytes": 7915,
+      "source_blob_sha": "5eaeaa0b98066ff6d982dba3a7161541ca52319e",
+      "source_sha256": "edc060d590bcd3d23858c0e3b05f16a62fe9c686dca075b35c2d9f318f228475",
+      "source_bytes": 9903,
       "destination": "docs/research/upstream/studies/legends-of-idleon/build-144/architecture/ARCHITECTURE.md",
-      "destination_sha256": "7a2bdb701a787c62924473fe9df421f394ca70013c9a6a50a0aecf4b4f8c5b69",
-      "destination_bytes": 8370,
+      "destination_sha256": "a2cd4f1888f9c23a607503b67a10921328f5ab7a0165f787e2d3e0dd9f4d0ee0",
+      "destination_bytes": 10358,
       "classification": "authored research narrative"
     },
     {
       "source_path": "reverse-engineering/game-dev/legends-of-idleon/build-144/content/CONTENT.md",
-      "source_blob_sha": "ce49ec8e842046ff68e28a273bd0da140e312064",
-      "source_sha256": "0bb2378975bcc4679097bb3853b918e39453ecdfea63d81e4c064986ae5899cf",
-      "source_bytes": 3552,
+      "source_blob_sha": "cfc50fd517fad8911ad342fa78549d89eeae7004",
+      "source_sha256": "5ce1a332c0c6a134fc010b6fd31449e313016f330b6c252631ef9d692d455673",
+      "source_bytes": 3642,
       "destination": "docs/research/upstream/studies/legends-of-idleon/build-144/content/CONTENT.md",
-      "destination_sha256": "353b8965eb4bb32c9301e31e27eaa3dd9e7cb89bb040ab011885f35136ae9db6",
-      "destination_bytes": 3997,
+      "destination_sha256": "667c92f3bc242e855a5d39e43f63d083b0753972517fb4e8252a788d90627657",
+      "destination_bytes": 4087,
       "classification": "authored research narrative"
     },
     {
       "source_path": "reverse-engineering/game-dev/legends-of-idleon/build-144/development-lessons/DEVELOPMENT_LESSONS.md",
-      "source_blob_sha": "5f837bfd34829be0a6008d55b9c7a62544bfd3dd",
-      "source_sha256": "ee084f8c6ee72c88bb41de384cbab5e7a8871386df2dc0b1d86e743bc4ed4d82",
-      "source_bytes": 3184,
+      "source_blob_sha": "c5f3cd80212840b73f7bd7bd06af048a9a639019",
+      "source_sha256": "8cf230c5bac4d05546a46236203fb9c245fe24358d0e6f01189e592e4c6d4bc5",
+      "source_bytes": 3349,
       "destination": "docs/research/upstream/studies/legends-of-idleon/build-144/development-lessons/DEVELOPMENT_LESSONS.md",
-      "destination_sha256": "7fc67b720b334955976edd2c579bbb768bbacfd0be97ed9d4d8f7d52aa206c62",
-      "destination_bytes": 3653,
+      "destination_sha256": "392e5016edfec6cb59cd86f6f3418e556ee808f41b60908d66a69dd1aa8ca37b",
+      "destination_bytes": 3818,
       "classification": "authored research narrative"
     },
     {
       "source_path": "reverse-engineering/game-dev/legends-of-idleon/build-144/economy/ECONOMY.md",
-      "source_blob_sha": "c706cf6f308212962048d4e17b6e40d536fe6e6f",
-      "source_sha256": "3cf17223d9839767bad5bac97992238d91e0c4f0506516f96fbfc60ad9cc2b67",
-      "source_bytes": 3284,
+      "source_blob_sha": "b8ed8a955e202f8f63accd28eff6179da8dacbd4",
+      "source_sha256": "a8da689271b6ae7e9971296c5301be9e6c637ad7f129921fb4159646385b687a",
+      "source_bytes": 3611,
       "destination": "docs/research/upstream/studies/legends-of-idleon/build-144/economy/ECONOMY.md",
-      "destination_sha256": "33d543bc8dcb68f2db542492178aa21fe7f2f0d14a61b4ad6ef603eb2fac52e4",
-      "destination_bytes": 3729,
+      "destination_sha256": "665cc7b63228f6d4551b1160801ae06cd039c2098b24edb8540ec00b71316d61",
+      "destination_bytes": 4056,
       "classification": "authored research narrative"
     },
     {
       "source_path": "reverse-engineering/game-dev/legends-of-idleon/build-144/experiments/EXPERIMENT_LOG.md",
-      "source_blob_sha": "b96b3103d85d56886dd73a1eccd0453233cfedd0",
-      "source_sha256": "d1683581c74644c6e2f1747f539da2512a0cdf784e476be45866a8e75a1f561e",
-      "source_bytes": 2418,
+      "source_blob_sha": "8127d32c4d58684cc3102d9d7bbd8053b80f370e",
+      "source_sha256": "dbcd127029c5a01ba507d8806d8119184649555007ebacf37eb23d79d24fe7cc",
+      "source_bytes": 2808,
       "destination": "docs/research/upstream/studies/legends-of-idleon/build-144/experiments/EXPERIMENT_LOG.md",
-      "destination_sha256": "39dfe2690684d8c30da9ad4d3cdb13841604332c25fcff40ce87ebeda7a6c47d",
-      "destination_bytes": 2874,
+      "destination_sha256": "a54069d2290e2c0a3a47751c97db73af158279423dfe236be84021f99733771d",
+      "destination_bytes": 3264,
       "classification": "authored research narrative"
     },
     {
       "source_path": "reverse-engineering/game-dev/legends-of-idleon/build-144/gameplay/GAMEPLAY_SYSTEMS.md",
-      "source_blob_sha": "292f1d765db4c2327956bf33f2cccb846e6df100",
-      "source_sha256": "4fbb06ba782067a9dc16cb16e0544c9a6f0686feb93a5e3ad6e19580441998c8",
-      "source_bytes": 6211,
+      "source_blob_sha": "55b18ec242221f9bc1aa52abfff2ca5b5d32f608",
+      "source_sha256": "df5dc82e0e3f190b9867310daabdbe2a7dd9a5a481cd4a61098c83b2a316458a",
+      "source_bytes": 6215,
       "destination": "docs/research/upstream/studies/legends-of-idleon/build-144/gameplay/GAMEPLAY_SYSTEMS.md",
-      "destination_sha256": "66fa8c08aa762962960608498c0866c57154d135e01b4a51083cd20cb77e35a7",
-      "destination_bytes": 6666,
+      "destination_sha256": "45d0727c2b47949f583a5c420ba39e62b9935bccdec2ed8ee710dfa9fffa67bc",
+      "destination_bytes": 6670,
       "classification": "authored research narrative"
     },
     {
       "source_path": "reverse-engineering/game-dev/legends-of-idleon/build-144/mathematics/FORMULAS.md",
-      "source_blob_sha": "d766953c817fe08ff68500860c3651636716df28",
-      "source_sha256": "e1463b0055da284a8b5bef23f763c9cfb05bb8d5e806627b7c699baf1b896ed5",
-      "source_bytes": 10705,
+      "source_blob_sha": "cbe356af590f464766806a97f053df7623a42c01",
+      "source_sha256": "04228797e10b1f95d6f607539b2292d16be9491ccc72bd80f2762993bfa067a6",
+      "source_bytes": 12193,
       "destination": "docs/research/upstream/studies/legends-of-idleon/build-144/mathematics/FORMULAS.md",
-      "destination_sha256": "25766fece1cb9b54876c264b9f96659a7d2aa728467736937f28374bf30d8041",
-      "destination_bytes": 11155,
+      "destination_sha256": "a972a82db029df90ee91b1ec0203bf55d21dca1e30586adbf4519719c0a6f944",
+      "destination_bytes": 12643,
       "classification": "authored research narrative"
     },
     {
       "source_path": "reverse-engineering/game-dev/legends-of-idleon/build-144/progression/PROGRESSION.md",
-      "source_blob_sha": "e178e01bcee970a527cd2971799569cbd081fff3",
-      "source_sha256": "01a9dbc4ea9228f7556f80ee93108cf59c0faa310a46d7ad890aa37d5b2f4445",
-      "source_bytes": 3649,
+      "source_blob_sha": "9b303231f28f020dd0c3633bc51d57572b5f3225",
+      "source_sha256": "0b170697aca125c6ab965eed2f0b082750b92d91b9863ee51e20ed8ea580388c",
+      "source_bytes": 3803,
       "destination": "docs/research/upstream/studies/legends-of-idleon/build-144/progression/PROGRESSION.md",
-      "destination_sha256": "67e41855740dd0ab509f66d693bf5feb2cbef2b311554a9d83200819219b9343",
-      "destination_bytes": 4102,
+      "destination_sha256": "69dd34c9983ec41b5b864afcd1510699fc3d0ac2cb1e2dd81a843c4960c1ee11",
+      "destination_bytes": 4256,
       "classification": "authored research narrative"
     },
     {
       "source_path": "reverse-engineering/game-dev/legends-of-idleon/build-144/simulations/idleon_model_output.txt",
-      "source_blob_sha": "125b9a92bcadbc97b1ee83d1d35f5f441342cf22",
-      "source_sha256": "190937b30527f4ee58865b9e76654378fa1eac1fa5178eee36fa257daeb7b5fb",
-      "source_bytes": 13359,
+      "source_blob_sha": "eefb2c5f6043115d6dc89226a6519f792c463430",
+      "source_sha256": "6cfed40ef9ee4f5c93d7c8ad5e8a691bfcde826f05b2a752a47539d45f92d762",
+      "source_bytes": 13743,
       "destination": "docs/research/upstream/studies/legends-of-idleon/build-144/simulations/idleon_model_output.txt",
-      "destination_sha256": "190937b30527f4ee58865b9e76654378fa1eac1fa5178eee36fa257daeb7b5fb",
-      "destination_bytes": 13359,
+      "destination_sha256": "6cfed40ef9ee4f5c93d7c8ad5e8a691bfcde826f05b2a752a47539d45f92d762",
+      "destination_bytes": 13743,
       "classification": "upstream-reported aggregate simulation output; not rerun"
     },
     {
       "source_path": "reverse-engineering/game-dev/legends-of-idleon/build-144/user-experience/UX_ANALYSIS.md",
-      "source_blob_sha": "8337f29ac67183d92c2b5ff5c0142a35d73e3147",
-      "source_sha256": "a855af344532a7ff93e3154aa13d7c0da3dcb252a6522d1c21a28a89d9dde89c",
-      "source_bytes": 2414,
+      "source_blob_sha": "b84eefc9fd9b12307091835db0aba09471b03f4d",
+      "source_sha256": "634101dd59993a4c6c966f2f1c6dc359d0584c33eb0a83d8309a2e671905ea08",
+      "source_bytes": 2564,
       "destination": "docs/research/upstream/studies/legends-of-idleon/build-144/user-experience/UX_ANALYSIS.md",
-      "destination_sha256": "ec85ba0e56946d3063907fca8529f7f4fb7fa6ecc6b06bd65c7e6af55d8c8acd",
-      "destination_bytes": 2871,
+      "destination_sha256": "82cbc565addbabf42e893c7527a93f9f8f6dcfe00f214db687c14d438b640fe1",
+      "destination_bytes": 3021,
       "classification": "authored research narrative"
     },
     {
@@ -1881,6 +1880,156 @@
       "destination_sha256": "7d23cef0bda861188a54517a48d38a12b4081cf99aae788799c4ddd948dd7a87",
       "destination_bytes": 1828,
       "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/rimworld/1.6.4871/FINAL_REPORT.md",
+      "destination": "docs/research/upstream/studies/rimworld/1.6.4871/FINAL_REPORT.md",
+      "classification": "authored research narrative",
+      "source_blob_sha": "5a3284b73e4a82305188e6d01e7eaf79c142f70c",
+      "source_sha256": "b08a8a98c699ad0676e01bdfa92d99b37ec0b52196249afd26f2a32fe69944e6",
+      "source_bytes": 6255,
+      "destination_sha256": "a9ecdcad7792d2a82524930237436f1d39b6b91aea740e8aff4107b16f19c5fe",
+      "destination_bytes": 6684
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/rimworld/1.6.4871/MANIFEST.md",
+      "destination": "docs/research/upstream/studies/rimworld/1.6.4871/MANIFEST.md",
+      "classification": "authored research narrative",
+      "source_blob_sha": "8317e89e573e5b0b5367c549360edaa9db75edad",
+      "source_sha256": "b772971c1b34d57c101322b2907ea13d66061b80f39e12ffd778e3c08161dabd",
+      "source_bytes": 1632,
+      "destination_sha256": "598828635a7e90aa336985853f7fd49e253c221ddcaab39dbf0e981b314bffd8",
+      "destination_bytes": 2057
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/rimworld/1.6.4871/README.md",
+      "destination": "docs/research/upstream/studies/rimworld/1.6.4871/README.md",
+      "classification": "authored research narrative",
+      "source_blob_sha": "ce9377b02e922b669bc937a72231bcd50820dcc9",
+      "source_sha256": "a347f28e00673de1053fba749c85e61148156ae07d303f36c023a3a89acffeb2",
+      "source_bytes": 2430,
+      "destination_sha256": "63da5711178ef9352f8f4cc6d868dfda0517b58e3924c773438ef0e5bfa3af4b",
+      "destination_bytes": 2853
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/rimworld/1.6.4871/ai/AI_ARCHITECTURE.md",
+      "destination": "docs/research/upstream/studies/rimworld/1.6.4871/ai/AI_ARCHITECTURE.md",
+      "classification": "authored research narrative",
+      "source_blob_sha": "0051fd9bc425e33c714df1bb5fc9eaeb7732c4f6",
+      "source_sha256": "7bd511eb447a9db5bc3153ba07e7b5893c4ddca659fae34c7f9d2edea8d07724",
+      "source_bytes": 18882,
+      "destination_sha256": "4e1f46caaa8bef22133e7cee046ec86df60f3fb75b15c7e9ce3ca0a9b749daae",
+      "destination_bytes": 19320
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/rimworld/1.6.4871/architecture/ARCHITECTURE.md",
+      "destination": "docs/research/upstream/studies/rimworld/1.6.4871/architecture/ARCHITECTURE.md",
+      "classification": "authored research narrative",
+      "source_blob_sha": "ececb6451412b22294a8ad5857c3e0dfe0b8b75e",
+      "source_sha256": "1303fd029723cb4272e86d246e11fcbc50272a97e268846eb488228a83765066",
+      "source_bytes": 7767,
+      "destination_sha256": "835b3d160d44e84d56bc7db9707ddacc3c0624f7bb6b41140240174e16a8c56d",
+      "destination_bytes": 8212
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/rimworld/1.6.4871/content/CONTENT.md",
+      "destination": "docs/research/upstream/studies/rimworld/1.6.4871/content/CONTENT.md",
+      "classification": "authored research narrative",
+      "source_blob_sha": "b5d8273c7e477db0e4a0eae61c3c5a893e32bc08",
+      "source_sha256": "578a119efc59d6bffa31fff6f634675ac4dc19b361ca340e7db09fb1b534cecf",
+      "source_bytes": 4387,
+      "destination_sha256": "3cf28edd1ca90ad3e981035c648ec09246bcf87117236b13817ab8f06b30b43c",
+      "destination_bytes": 4822
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/rimworld/1.6.4871/development-lessons/DEVELOPMENT_LESSONS.md",
+      "destination": "docs/research/upstream/studies/rimworld/1.6.4871/development-lessons/DEVELOPMENT_LESSONS.md",
+      "classification": "authored research narrative",
+      "source_blob_sha": "af8f00e2663baeae7242eb8fcacbc67e0ca4333f",
+      "source_sha256": "227bfeb1f5673fca42f9dc544e6ec9319c43aa14a1d62d6b21b480a7a648fa8d",
+      "source_bytes": 4689,
+      "destination_sha256": "3edf82313935d7a5a02edb2654f0a0388ce4607017189e4a3b6d1020f48e7857",
+      "destination_bytes": 5148
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/rimworld/1.6.4871/economy/ECONOMY.md",
+      "destination": "docs/research/upstream/studies/rimworld/1.6.4871/economy/ECONOMY.md",
+      "classification": "authored research narrative",
+      "source_blob_sha": "591bb585e5e0785098900363f4f7d5af605e9ea2",
+      "source_sha256": "8adfcc076ed47a043d7bd37537ed2e662f3aabb722973b137d8272730615f1de",
+      "source_bytes": 3961,
+      "destination_sha256": "cc96c3ecc16bc682c599c1951d694a100bab27c363042bd50c8efd198290aeae",
+      "destination_bytes": 4396
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/rimworld/1.6.4871/experiments/EXPERIMENT_LOG.md",
+      "destination": "docs/research/upstream/studies/rimworld/1.6.4871/experiments/EXPERIMENT_LOG.md",
+      "classification": "authored research narrative",
+      "source_blob_sha": "661320b1cf635da38ac7ad2d370cfc4d4bef0500",
+      "source_sha256": "cd58d550304b4218f7290643161e279f3560b0f90338527c26269d9f1d402c79",
+      "source_bytes": 3746,
+      "destination_sha256": "43cf865852236891d53c418b5f09b45ed2989a7541d544f73fb68174a72e82f3",
+      "destination_bytes": 4192
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/rimworld/1.6.4871/gameplay/GAMEPLAY_SYSTEMS.md",
+      "destination": "docs/research/upstream/studies/rimworld/1.6.4871/gameplay/GAMEPLAY_SYSTEMS.md",
+      "classification": "authored research narrative",
+      "source_blob_sha": "548580a8bc590cd09ff515bbfbf3948960cdafde",
+      "source_sha256": "bcfe109477c73707b045065bdd120f2a9e1ecab245b449071684b449287b42c2",
+      "source_bytes": 6204,
+      "destination_sha256": "d15d16afddfd22e25c539da07379003395b3c360a02a248fe24c27d2255a0356",
+      "destination_bytes": 6649
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/rimworld/1.6.4871/mathematics/FORMULAS.md",
+      "destination": "docs/research/upstream/studies/rimworld/1.6.4871/mathematics/FORMULAS.md",
+      "classification": "authored research narrative",
+      "source_blob_sha": "fdacc3dca8533ef08053e420e8e259f110f8da04",
+      "source_sha256": "9ee2a2a4c96cb96a7a128653a631f3f061a425d7f8a3947493eb8bade2eb2237",
+      "source_bytes": 10706,
+      "destination_sha256": "a79756441e2b601263617e802ca4d55fc2e4c29703a2e2f07ab0aac020a43946",
+      "destination_bytes": 11146
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/rimworld/1.6.4871/performance/PERFORMANCE_ARCHITECTURE.md",
+      "destination": "docs/research/upstream/studies/rimworld/1.6.4871/performance/PERFORMANCE_ARCHITECTURE.md",
+      "classification": "authored research narrative",
+      "source_blob_sha": "0fde04b223b00c2b74f8d82fdbd24ece085d9686",
+      "source_sha256": "26ac20e32800b03fa9afa60789184fd737d2bf35a54aeb5ada19cba4cb12182b",
+      "source_bytes": 11759,
+      "destination_sha256": "249d55c239af2f23b3396d87e47f94f91a5713524c4e6bd466b784ccdf9e3963",
+      "destination_bytes": 12215
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/rimworld/1.6.4871/progression/PROGRESSION.md",
+      "destination": "docs/research/upstream/studies/rimworld/1.6.4871/progression/PROGRESSION.md",
+      "classification": "authored research narrative",
+      "source_blob_sha": "f8f2be22bcd8382ec0fe86db71a8e0c0007cc943",
+      "source_sha256": "632d902774d49de9d056e7d45fe53ce3a11b57628ba011aff9b3645f3be2b0a9",
+      "source_bytes": 4581,
+      "destination_sha256": "79d915b9a4e59b20583caa36c5c08470a124239035c1455bd0a4f980704bcd13",
+      "destination_bytes": 5024
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/rimworld/1.6.4871/user-experience/UX_ANALYSIS.md",
+      "destination": "docs/research/upstream/studies/rimworld/1.6.4871/user-experience/UX_ANALYSIS.md",
+      "classification": "authored research narrative",
+      "source_blob_sha": "e65a9f8b5efa9cd707d258bf63f31efdbae8aa12",
+      "source_sha256": "7da39052065fbaa6f4473d829c3e1e42be895136ede9914e74039cdb838135d3",
+      "source_bytes": 3949,
+      "destination_sha256": "5eef3b535c02060e18f020598928c41f758535bfaf413312161cbb805dc50f3f",
+      "destination_bytes": 4396
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/rimworld/1.6.4871/simulations/rimworld_model_output.txt",
+      "destination": "docs/research/upstream/studies/rimworld/1.6.4871/simulations/rimworld_model_output.txt",
+      "classification": "upstream-reported aggregate simulation output; not rerun",
+      "source_blob_sha": "c326261a702c8e43ca6013df70bbbfc8fc4c6bed",
+      "source_sha256": "86784c22724242566735c51d4e2b9b1abbb289ffbd114f7e10e87db459cfc55d",
+      "source_bytes": 17418,
+      "destination_sha256": "86784c22724242566735c51d4e2b9b1abbb289ffbd114f7e10e87db459cfc55d",
+      "destination_bytes": 17418
     }
   ],
   "generated_docs": [
@@ -1899,8 +2048,7 @@
       "Whole-study SHA256SUMS for excluded private artifacts"
     ],
     "unavailable": [
-      "RimWorld study not backed up at the selected source commit.",
-      "Legends of Idleon independent review pending upstream."
+      "RimWorld independent review is still pending in the selected source; do not claim reviewed or game-runtime verified."
     ],
     "files": [
       {
@@ -1960,12 +2108,12 @@
       },
       {
         "source_path": "reverse-engineering/game-dev/legends-of-idleon/build-144/prototypes/idleon_workbench.html",
-        "source_blob_sha": "52770c1347d01cdcfae52f1810ce6439e716cbde",
+        "source_blob_sha": "848ae65528fad13b479ade65841bda0b9eab5cba",
         "reason": "Prototype embeds bulk extracted game data; original narrative retained."
       },
       {
         "source_path": "reverse-engineering/game-dev/legends-of-idleon/build-144/simulations/idleon_model.py",
-        "source_blob_sha": "043ea3db6beb0e37a942ed6ee66861f948e15b5a",
+        "source_blob_sha": "a76dbee2101e9f374ec45f708c8e3b62ed4a0c60",
         "reason": "Model requires excluded proprietary evidence; results and analysis retained."
       },
       {
@@ -2022,7 +2170,33 @@
         "source_path": "reverse-engineering/game-dev/siralim-ultimate/2.0-gms-2024.14/simulations/siralim_model.py",
         "source_blob_sha": "46608c321d800788c7e13e4e79612a364f8e383c",
         "reason": "Model requires excluded proprietary evidence; results and analysis retained."
+      },
+      {
+        "source_path": "reverse-engineering/game-dev/rimworld/1.6.4871/prototypes/rimworld_workbench.html",
+        "source_blob_sha": "90ab6c40d63adb3c11cfb508f818cc0a5c6ed268",
+        "reason": "Executable research workbench with exact donor scheduler/RNG reproduction; leave upstream pending scope and independent review; analysis retained."
+      },
+      {
+        "source_path": "reverse-engineering/game-dev/rimworld/1.6.4871/simulations/rimworld_model.py",
+        "source_blob_sha": "711144b282b10c8b1cb377583b793c80e2b6715e",
+        "reason": "Model requires excluded proprietary evidence; aggregate results and analysis retained."
+      },
+      {
+        "source_path": "reverse-engineering/game-dev/rimworld/1.6.4871/experiments/protocheck/run.js",
+        "source_blob_sha": "97ab9f6376713f4517b7b1388f9464a7fac9439e",
+        "reason": "Research-only donor workbench test; not applicable to active web foundation."
+      },
+      {
+        "source_path": "reverse-engineering/game-dev/rimworld/1.6.4871/experiments/rngcheck/Program.cs",
+        "source_blob_sha": "f8b66cb24be3fdcd6ec5e998bb37766cd2def54a",
+        "reason": "Research-only donor runtime check; not applicable to active web foundation."
+      },
+      {
+        "source_path": "reverse-engineering/game-dev/rimworld/1.6.4871/experiments/rngcheck/rngcheck.csproj",
+        "source_blob_sha": "ed9781c223ab97571e13f98c401aa0e9a1b55a4b",
+        "reason": "Research-only donor runtime check; not applicable to active web foundation."
       }
     ]
-  }
+  },
+  "initial_source_commit": "88163607cfd407230512650a5c6750e1b7a96f98"
 }
