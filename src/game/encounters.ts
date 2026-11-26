@@ -2,7 +2,7 @@ import { CAPTURE_ITEMS, SPECIES, ZONES } from '../data/catalog.ts'
 import { buildFormation, getLoadout, resolveBattle } from './battle.ts'
 import { addBud, addEgg, rollGenetics } from './breeding.ts'
 import { MAX_BUDS, MAX_EGGS } from './limits.ts'
-import { addItems, earnCoins, earnXp, itemCount, levelForXp, MAX_XP, takeItems } from './progression.ts'
+import { awardItems, budSlotsUsed, earnCoins, earnXp, itemCount, levelForXp, MAX_XP, takeItems } from './progression.ts'
 import { eventRandom } from './random.ts'
 import type { Random } from './random.ts'
 import type { BattleUnit, CaptureFilter, EncounterResult, GameState, PlayerView, Species, ZoneId } from './types.ts'
@@ -30,7 +30,7 @@ function capture(state: GameState, species: Species, random: Random): EncounterR
   const filter = state.captureFilters.find((entry) => filterMatches(state, entry, species))
   const itemId = filter?.itemId
   if (!itemId || itemId === 'skip') return { outcome: 'skipped', reason: itemId ? 'Matching filter skipped capture.' : 'No capture filter matched.' }
-  if (state.buds.length >= MAX_BUDS) return { outcome: 'unavailable', itemId, reason: 'Your collection is full.' }
+  if (budSlotsUsed(state) >= MAX_BUDS) return { outcome: 'unavailable', itemId, reason: 'Your collection is full.' }
   if (!itemCount(state, itemId)) return { outcome: 'unavailable', itemId, reason: 'The matching capture item was out of stock.' }
 
   const chance = captureChance(state, species.id, itemId)
@@ -52,7 +52,7 @@ function chooseSpecies(zoneId: ZoneId, random: Random): Species {
 }
 
 function wildUnit(species: Species, id: string): BattleUnit {
-  return { id, name: species.name, attack: species.attack, health: species.health, affinity: species.affinity, ability: species.ability }
+  return { id, name: species.name, speciesId: species.id, attack: species.attack, health: species.health, affinity: species.affinity, ability: species.ability }
 }
 
 export function completeEncounter(state: GameState, zoneId: ZoneId, at: number): void {
@@ -81,7 +81,7 @@ export function completeEncounter(state: GameState, zoneId: ZoneId, at: number):
     state.stats.wins += 1
     state.stats.zoneWins[zoneId] += 1
     earnCoins(state, 7 * zone.tier)
-    addItems(state, 'portal-dust', zone.tier)
+    awardItems(state, 'tender', 'portal-dust', zone.tier)
     const canFindEgg = state.stats.catches > 0
     result = capture(state, species, random)
     if (canFindEgg && state.eggs.length + Number(state.breeding !== null) < MAX_EGGS && random() < 0.06) {
@@ -92,5 +92,5 @@ export function completeEncounter(state: GameState, zoneId: ZoneId, at: number):
       state.discoveries.push('tide-resonator')
     }
   }
-  state.lastEncounter = { zoneId, speciesId: species.id, battle, capture: result }
+  state.lastEncounter = { id: `encounter-${state.stats.battles}`, completedAt: at, zoneId, speciesId: species.id, battle, capture: result }
 }

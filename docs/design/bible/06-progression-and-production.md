@@ -1,5 +1,21 @@
 > Migrated source text, November 25, 2026. Approved intent, provisional choices and open questions retain their original status. Read the [current authority and scope](../AUTHORITY.md) before implementation.
 
+## Current owner decision: simpler production and storage (November 26, 2026)
+
+This playtest decision is approved for the Experience MVP and supersedes the older node-exclusivity, location restriction, remote-relay and individual item-cap paragraphs retained below.
+
+- Start any eligible activity directly. Access becomes available automatically when its existing combat or production requirements are met; no manual travel or unlock command is needed.
+- Gather and patrol continuously until stopped. Crafting supports a finite quantity or continuous work. A valid replacement immediately discards the previous incomplete cycle and its uncompleted queue, retaining all already completed output.
+- Assign **one Bud per production skill**, including one Crafting Bud for the whole major crafting area. Buds work without the Tender participating. The Tender and one Bud can work on the same resource simultaneously. Replacing the helper unassigns the old one automatically.
+- Preserve earned total deployment capacity while limiting every skill to one Bud. Combat formation and breeding commitments retain their existing restrictions and do not become production-helper slots.
+- Tender mastery and species aptitude determine work eligibility. Bud level changes efficiency, never repeats the Tender's resource-level gate. Reuse the existing modest general-level, IV, trait and bond effects; no separate per-Bud skill XP tracks.
+- Explicit pause or stop remains deliberate. A job blocked by inputs or storage resumes automatically when its requirements become available, including during offline event reconciliation.
+- Inventory has shared slots: one slot per fungible item type with unlimited quantity, and one per unique unequipped equipment instance. Equipped weapon/armor, Bud collection and eggs have separate treatment.
+- If space fills during a cycle, retain its completed roll without loss or reroll and pause that lane until delivery is possible. Keep one pending completed output per Tender/skill lane, independent of worker replacement or stopping. Do not build a general overflow mailbox.
+- Current numerical baseline: 24 inventory slots plus 8 per earned storage upgrade. This is provisional economy tuning, not a new commercial decision. Preserve over-capacity legacy possessions; existing stacks can grow while new slot-requiring additions wait.
+
+Geography remains world identity, encounter content and progression context. Remove the Remote Relay requirement and compensate earlier purchases once. Specific efficiency curves, deployment pacing and storage costs remain future economic evaluation.
+
 > Reconciliation: later owner decisions in this section supersede older generic unknowns: Tender skills and individual Bud levels cap at 99; Melee, Ranged, Resonance and Vitality are the four conceptual Tender combat skills; the derived Combat Level was removed. Combat gear has a narrow approved variability direction (weapons: Attack and compatible technique; armor: Health and compatible passive), while routine goods stay predictable. Permanent equipment has no durability or mandatory repairs. Exact formulas and effects remain open; this does not approve implementation.
 
 ## Trainer skills and monster progression

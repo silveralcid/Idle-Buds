@@ -7,8 +7,8 @@ import { buildApp } from '../../server/app.ts'
 import { moderate, reports } from '../../server/moderation.ts'
 import type { WorldCommand, WorldView } from '../../server/world-types.ts'
 import { NODES } from '../../src/data/index.ts'
-import { OFFLINE_CAP_MS, resolveBattle } from '../../src/game/index.ts'
-import type { AdvanceSummary, BattleResult, BattleTeam, GameCommand, PlayerView } from '../../src/game/types.ts'
+import { OFFLINE_CAP_MS, resolveBattle, inventorySlotsUsed, SAVE_VERSION } from '../../src/game/index.ts'
+import type { AdvanceSummary, BattleResult, BattleTeam, GameCommand, GameState, PlayerView } from '../../src/game/types.ts'
 import { FIXTURE_PASSWORD, progressedFixture } from '../../tools/fixtures.ts'
 
 const testUrl = process.env.DATABASE_URL
@@ -190,12 +190,12 @@ describe('durable authority and sessions', () => {
   it('keeps a rejected command receipt immutable after the player becomes eligible', async () => {
     const a = await register('alpha')
     const id = randomUUID()
-    const craft = { type: 'startActivity', order: { kind: 'craft', recipeId: 'capture-kit' } } as const
+    const craft = { type: 'startActivity', order: { kind: 'gather', nodeId: 'glass-quartz' } } as const
     const rejected = await send(a, craft, id)
     expect(rejected.statusCode, rejected.body).toBe(409)
-    await command(a, { type: 'startActivity', order: { kind: 'gather', nodeId: 'earth-scrap', count: 3 } })
-    now += NODES['earth-scrap'].durationMs * 3
-    expect((await player(a)).state.inventory.scrap).toBe(3)
+    await command(a, { type: 'startActivity', order: { kind: 'gather', nodeId: 'earth-scrap', count: 6 } })
+    now += NODES['earth-scrap'].durationMs * 6
+    expect((await player(a)).state.inventory.scrap).toBe(6)
     const retried = await send(a, craft, id)
     expect(retried.statusCode).toBe(409)
     expect(retried.json()).toEqual(rejected.json())
@@ -220,6 +220,89 @@ describe('durable authority and sessions', () => {
     expect((await player(a)).state.activities.tender.order).toEqual(order)
     const count = await pool.query<{ n: number }>('SELECT count(*)::integer AS n FROM command_receipts')
     expect(count.rows[0].n).toBe(1)
+  })
+})
+
+describe('experience save and capacity integrity', () => {
+  it('migrates an old full save on a real request, once, without deleting any assets', async () => {
+    const cookie = await register('legacy', true)
+    const fixture = progressedFixture('legacy', now)
+    fixture.version = 1
+    fixture.upgrades.remote = 1
+    Reflect.deleteProperty(fixture, 'pendingRewards')
+    Reflect.deleteProperty(fixture, 'storageReservations')
+    fixture.equipment = Array.from({ length: 50 }, (_, index) => ({
+      id: `legacy-${index}`, definitionId: 'scrap-blade', slot: 'weapon' as const, bonus: 2,
+    }))
+    await pool.query('UPDATE players p SET state = $2 FROM accounts a WHERE p.account_id = a.id AND a.username = $1', ['legacy', fixture])
+    const migrated = await player(cookie)
+    expect(migrated.state.version).toBe(SAVE_VERSION)
+    expect(migrated.state.equipment).toEqual(fixture.equipment)
+    expect(migrated.state.inventory.quartz).toBe(32)
+    expect(migrated.state.inventory['portal-compound']).toBe(32)
+    expect(migrated.state.coins).toBe(1045)
+    expect(migrated.state.upgrades.remote).toBe(0)
+    await app.close()
+    app = await buildApp({ pool, clock: () => now, allowedOrigin: origin })
+    expect((await player(cookie)).state).toEqual(migrated.state)
+    expect((await command(cookie, { type: 'store.buy', itemId: 'scrap', quantity: 2 })).state.inventory.scrap).toBe(32)
+  })
+
+  it('keeps one completed gear roll through a server restart and retries, then automatically stores it when equipped gear frees a slot', async () => {
+    const cookie = await register('pending', true)
+    const fixture = progressedFixture('pending', now)
+    fixture.upgrades.storage = 0
+    fixture.inventory = { scrap: 30, fiber: 30 }
+    fixture.equipment = Array.from({ length: 21 }, (_, index) => ({
+      id: `existing-${index}`, definitionId: 'scrap-blade', slot: 'weapon' as const, bonus: 2,
+    }))
+    await pool.query('UPDATE players p SET state = $2 FROM accounts a WHERE p.account_id = a.id AND a.username = $1', ['pending', fixture])
+    await command(cookie, { type: 'startActivity', order: { kind: 'craft', recipeId: 'scrap-blade', markMaker: true } })
+    const { rows: [row] } = await pool.query<{ state: GameState }>('SELECT p.state FROM players p JOIN accounts a ON a.id = p.account_id WHERE a.username = $1', ['pending'])
+    row.state.equipment.push({ id: 'new-arrival', definitionId: 'fiber-vest', slot: 'armor', bonus: 2 })
+    await pool.query('UPDATE players p SET state = $2 FROM accounts a WHERE p.account_id = a.id AND a.username = $1', ['pending', row.state])
+    now += 7_000
+    const blocked = await player(cookie)
+    expect(blocked.state.pendingRewards.tender.gear).toHaveLength(1)
+    const earned = blocked.state.pendingRewards.tender.gear[0]
+    await app.close()
+    app = await buildApp({ pool, clock: () => now, allowedOrigin: origin })
+    now += 90_000
+    expect((await player(cookie)).state.pendingRewards.tender.gear).toEqual([earned])
+    const id = randomUUID()
+    const equip = { type: 'equip', slot: 'weapon', gearId: 'existing-0' } as const
+    const released = await command(cookie, equip, id)
+    expect(released.state.pendingRewards).toEqual({})
+    expect(released.state.equipment.filter((entry) => entry.id === earned.id)).toEqual([earned])
+    expect(released.state.stats.crafted).toBe(fixture.stats.crafted + 1)
+    expect(await command(cookie, equip, id)).toEqual(released)
+    expect((await player(cookie)).state.equipment.filter((entry) => entry.id === earned.id)).toHaveLength(1)
+  })
+
+  it('reserves sell-escrow slots and returns cancelled gear without loss while a full inventory waits', async () => {
+    const cookie = await register('seller', true)
+    const fixture = progressedFixture('seller', now)
+    fixture.upgrades.storage = 0
+    fixture.inventory = { scrap: 30 }
+    fixture.equipment = Array.from({ length: 23 }, (_, index) => ({
+      id: `escrow-${index}`, definitionId: 'scrap-blade', slot: 'weapon' as const, bonus: 2,
+    }))
+    await pool.query('UPDATE players p SET state = $2 FROM accounts a WHERE p.account_id = a.id AND a.username = $1', ['seller', fixture])
+    const listed = await command(cookie, { type: 'market.list', asset: { kind: 'gear', instanceId: 'escrow-0' }, quantity: 1, unitPrice: 10 })
+    expect(inventorySlotsUsed(listed.state)).toBe(24)
+    expect(listed.state.equipment).toHaveLength(22)
+    const [listing] = (await world(cookie)).listings
+    const waiting = await command(cookie, { type: 'startActivity', order: { kind: 'gather', nodeId: 'earth-fiber' } })
+    expect(waiting.state.activities.tender.status).toBe('blocked')
+    expect((await send(cookie, { type: 'store.buy', itemId: 'fiber', quantity: 1 })).statusCode).toBe(409)
+    const returned = await command(cookie, { type: 'market.cancel', listingId: listing.id })
+    expect(returned.state.equipment).toHaveLength(23)
+    expect(returned.state.equipment.find((entry) => entry.id === 'escrow-0')).toEqual(fixture.equipment[0])
+    expect(returned.state.storageReservations).toEqual({})
+    expect(inventorySlotsUsed(returned.state)).toBe(24)
+    expect((await world(cookie)).listings).toEqual([])
+    const freed = await command(cookie, { type: 'equip', slot: 'weapon', gearId: 'escrow-0' })
+    expect(freed.state.activities.tender.status).toBe('running')
   })
 })
 

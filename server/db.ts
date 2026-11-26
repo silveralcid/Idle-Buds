@@ -1,5 +1,5 @@
 import type { Pool, PoolClient } from 'pg'
-import { advance, OFFLINE_CAP_MS } from '../src/game/index.ts'
+import { advance, OFFLINE_CAP_MS, refreshActivities } from '../src/game/index.ts'
 import type { AdvanceSummary, GameState } from '../src/game/types.ts'
 import { requireRule } from './errors.ts'
 
@@ -34,6 +34,14 @@ export async function lockRawPlayer(db: PoolClient, playerId: string): Promise<P
     'SELECT state, foreground_at, pending_summary FROM players WHERE account_id = $1 FOR UPDATE', [playerId],
   )
   requireRule(row, 'This player is unavailable.', 404)
+  // Reserve escrow slots, including listings posted by older save versions.
+  const { rows: reservations } = await db.query<{ id: string; asset_kind: 'item' | 'gear' | 'bud'; item_id: string | null }>(
+    `SELECT id, asset_kind, item_id FROM market_listings
+      WHERE owner_id = $1 AND side = 'sell' AND remaining > 0`, [playerId],
+  )
+  row.state.storageReservations = Object.fromEntries(reservations.map((entry) => [entry.id,
+    entry.asset_kind === 'item' ? { kind: 'item' as const, itemId: entry.item_id! } : { kind: entry.asset_kind },
+  ]))
   return row
 }
 
@@ -79,6 +87,7 @@ export function reconcilePlayer(row: PlayerRow, now: number) {
 export async function savePlayer(
   db: PoolClient, playerId: string, state: GameState, foregroundAt: number, pendingSummary: AdvanceSummary | null = null,
 ) {
+  refreshActivities(state, state.lastAt)
   await db.query(
     'UPDATE players SET state = $2, foreground_at = $3, pending_summary = $4 WHERE account_id = $1',
     [playerId, state, foregroundAt, pendingSummary],

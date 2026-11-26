@@ -1,17 +1,13 @@
-import { FOOD_DURATION, GEAR_DEFINITIONS, PRODUCTION_SKILLS, SPECIES, UPGRADES, ZONES } from '../data/catalog.ts'
+import { FOOD_DURATION, GEAR_DEFINITIONS, SPECIES, UPGRADES, ZONES } from '../data/catalog.ts'
 import { getBud, pauseActivity, queueActivity, resumeActivity, startActivity, stopActivity, travel } from './activities.ts'
 import { activityAssigned, hatchEgg, isBudCommitted, startBreeding } from './breeding.ts'
 import { LEARN_MIN_LEVEL, requireRule, TENDER_ID } from './limits.ts'
-import { budLevelForXp, hasItems, levelForXp, spendCoins, takeItems } from './progression.ts'
+import { budLevelForXp, canReceiveGear, hasItems, levelForXp, spendCoins, takeItems, unlockEligibleZones } from './progression.ts'
 import type { GameCommand, GameState, ZoneId } from './types.ts'
 
 export function unlockZone(state: GameState, zoneId: ZoneId): void {
-  requireRule(!state.unlockedZones.includes(zoneId), 'This zone is already unlocked.')
-  const access = ZONES[zoneId].access
-  requireRule(access && state.unlockedZones.includes(access.previous), 'Unlock the preceding zone first.')
-  const production = PRODUCTION_SKILLS.some((skill) => levelForXp(state.xp[skill]) >= access.productionLevel)
-  requireRule(production || state.stats.zoneWins[access.previous] >= access.wins, 'Meet this portal’s combat or production requirement first.')
-  state.unlockedZones.push(zoneId)
+  unlockEligibleZones(state)
+  requireRule(state.unlockedZones.includes(zoneId), 'Meet this portal’s combat or production requirement first.')
 }
 
 function ensureBattleIdle(state: GameState): void {
@@ -27,12 +23,13 @@ export function executeCommand(state: GameState, command: GameCommand, now: numb
     case 'resumeActivity': return resumeActivity(state, command.workerId ?? TENDER_ID, now)
     case 'stopActivity': return stopActivity(state, command.workerId ?? TENDER_ID)
     case 'travel':
-      travel(state, command.zoneId, now)
+      travel(state, command.zoneId)
       return `Traveled to ${ZONES[command.zoneId].name}.`
     case 'unlockZone':
       unlockZone(state, command.zoneId)
       return `${ZONES[command.zoneId].name} unlocked.`
     case 'buyUpgrade': {
+      requireRule(command.upgrade !== 'remote', 'Remote access is automatic. No relay is needed.')
       const upgrade = UPGRADES[command.upgrade]
       const current = state.upgrades[command.upgrade]
       requireRule(current < upgrade.maxLevel, 'This upgrade is at its limit.')
@@ -59,6 +56,7 @@ export function executeCommand(state: GameState, command: GameCommand, now: numb
     case 'equip': {
       ensureBattleIdle(state)
       if (command.gearId === null) {
+        requireRule(!state.loadout[command.slot] || canReceiveGear(state), 'Free an inventory slot before unequipping.')
         delete state.loadout[command.slot]
         return 'Gear unequipped.'
       }

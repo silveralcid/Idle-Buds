@@ -10,6 +10,16 @@ Before introducing an asset into a shipping path, record its source, creator whe
 
 Use stable content IDs and simple project-relative asset paths. Keep editable source material distinguishable from optimized runtime exports when both exist. Validate missing references and load failures in the real packaged application. Measure bundle impact before adding compression, atlases or a more elaborate loading pipeline. No external asset service or generator is required merely to establish these conventions.
 
+### Current runtime asset inventory
+
+| Asset | Source and creator | Rights and shipped notices | Production use |
+| --- | --- | --- | --- |
+| Archivo Variable 5.3.0 | `@fontsource-variable/archivo`; Archivo Project Authors | Unmodified Fontsource package, SIL OFL 1.1; full notice in [`src/assets/font-licenses.txt`](../../src/assets/font-licenses.txt), bundled and linked from Settings | Body/interface typography; self-hosted font files |
+| Dela Gothic One 5.3.0 | `@fontsource/dela-gothic-one`; Dela Gothic Project Authors | Unmodified Fontsource package, SIL OFL 1.1; same bundled notice | Display typography; self-hosted Latin font |
+| Item and Bud interface drawings | Original source-authored SVG in [`production-elements.tsx`](../../src/ui/production-elements.tsx) and [`battle-replay.tsx`](../../src/ui/battle-replay.tsx), authored for the Experience MVP | Project source; no extracted or copied reference-game artwork | Functional provisional resource, equipment, Tender and Bud visuals |
+
+The preserved H / Neon Frontier board supplies the selected palette and typography direction. Reference-game screenshots supply functional layout guidance. Their original art, logos, renderer and code remain outside the runtime build. Final species artwork and audio remain separate follow-up work.
+
 ## Save boundaries when implemented
 
 Define one owning save contract when the first approved persistent behavior is built. Use an explicit schema version, stable IDs and a data-only payload. Validate untrusted saved data before changing live state: shape, supported versions, identifiers, finite values and relevant bounds. Choose actual limits from the contract, not copied starter constants.

@@ -2,40 +2,42 @@ import { useState } from 'react'
 import { AFFINITIES, CAPTURE_ITEMS, COMBAT_SKILLS, GEAR_DEFINITIONS, SPECIES, ZONES } from '../data/index.ts'
 import { buildFormation, isBudCommitted, levelForXp, MAX_CAPTURE_RULES, TENDER_ID } from '../game/index.ts'
 import { activityAssigned } from '../game/breeding.ts'
-import type { BattleResult, CaptureFilter, GearSlot, ZoneId } from '../game/types.ts'
-import { OrderControls } from './activities.tsx'
+import type { CaptureFilter, GearSlot, ZoneId } from '../game/types.ts'
+import { BattleReplay } from './battle-replay.tsx'
 import { Empty } from './shared.tsx'
 import { budName, duration, itemName, number, speciesName, zoneEligibility } from './view-model.ts'
 import type { GamePanelProps } from './shared.tsx'
 
-export function BattleLog({ result }: { result: BattleResult }) {
-  return <details><summary>Battle log · {number(result.rounds)} rounds</summary>
-    <ol className="event-log">{result.events.map((event, index) => <li key={index}>{event.text}</li>)}</ol>
-  </details>
-}
+export { BattleLog } from './battle-replay.tsx'
 
 export function CombatPanel(props: GamePanelProps) {
-  const { state, disabled, run } = props
+  const { state, now, disabled, run } = props
   const encounter = state.lastEncounter
+  const activity = state.activities[TENDER_ID]
+  const patrol = activity?.order.kind === 'battle' ? activity : undefined
   return <div className="stack">
-    <header className="section-heading"><h1 tabIndex={-1}>Combat</h1><p>Send your Tender and formation on automatic patrols.</p></header>
-    <section className="surface"><dl className="stat-line">{COMBAT_SKILLS.map((skill) => <div key={skill}><dt>{skill}</dt><dd>Lv {levelForXp(state.xp[skill])} · {number(state.xp[skill])} XP</dd></div>)}</dl></section>
+    <header className="section-heading spread"><h1 tabIndex={-1}>Combat</h1><a href="#formation">Manage formation</a></header>
+    <section className="surface"><dl className="stat-line">{COMBAT_SKILLS.map((skill) => <div key={skill}><dt>{skill}</dt><dd>Lv {levelForXp(state.xp[skill])}</dd></div>)}</dl></section>
+    {patrol && <section className="surface combat-status" aria-label="Active patrol">
+      <div><strong>{patrol.order.kind === 'battle' && ZONES[patrol.order.zoneId].name}</strong><small className="muted"> · {patrol.nextAt === null ? patrol.stopReason : `Next encounter in ${duration(patrol.nextAt - now)}`}</small></div>
+      <div className="row">{patrol.nextAt === null && <button disabled={disabled} onClick={() => void run({ type: 'resumeActivity' })}>Resume patrol</button>}<button disabled={disabled} onClick={() => void run({ type: 'stopActivity' })}>Stop patrol</button></div>
+    </section>}
     {encounter && <article className="surface line stack tight" aria-label="Latest encounter">
-      <div className="spread"><h2>{encounter.battle.winner === 'left' ? 'Victory' : encounter.battle.winner === 'draw' ? 'Draw' : 'Defeat'} · {speciesName(encounter.speciesId)}</h2><span className="tag">{ZONES[encounter.zoneId].name}</span></div>
-      <p>{encounter.capture.reason}{encounter.capture.chance !== undefined && ` · ${Math.round(encounter.capture.chance)}% capture chance`}</p>
-      <BattleLog result={encounter.battle} />
+      <BattleReplay result={encounter.battle} battleId={encounter.id ?? `legacy-${state.stats.battles}`} leftLabel={state.name} rightLabel={ZONES[encounter.zoneId].name} />
+      <small className="muted">Latest capture: {encounter.capture.reason}</small>
     </article>}
+    {!encounter && <section className="surface stack"><Empty>Choose a patrol to begin. Your Tender can fight solo.</Empty><p className="muted">Your formation battles automatically. Watch each clash here.</p></section>}
     <h2>Patrols</h2>
-    <div className="grid">{(Object.entries(ZONES) as [ZoneId, typeof ZONES[ZoneId]][]).map(([zoneId, zone]) => {
+    <div className="patrol-list">{(Object.entries(ZONES) as [ZoneId, typeof ZONES[ZoneId]][]).map(([zoneId, zone]) => {
       const access = zoneEligibility(state, zoneId)
       const weight = Object.values(zone.encounters).reduce((sum, value) => sum + value, 0)
-      return <article className="surface stack" key={zoneId} aria-label={`${zone.name} patrol`}>
-        <div className="spread"><h3>{zone.name}</h3><span className="tag">Tier {zone.tier}</span></div>
-        <p className="muted">{zone.description}</p>
+      const active = patrol?.order.kind === 'battle' && patrol.order.zoneId === zoneId && patrol.nextAt !== null
+      return <article className="surface stack patrol-option" key={zoneId} aria-label={`${zone.name} patrol`}>
+        <h3>{zone.name}</h3>
+        {!access.unlocked && <small className="shortfall">{access.requirement}</small>}
         <small>{duration(zone.durationMs)} per battle · {state.stats.zoneWins[zoneId]} wins</small>
         <details><summary>Encounter pool</summary><ul className="list">{Object.entries(zone.encounters).map(([id, odds]) => <li className="spread" key={id}>{speciesName(id)} <small>{Math.round(100 * odds / weight)}%</small></li>)}</ul></details>
-        {!access.unlocked && access.eligible && <button onClick={() => void run({ type: 'unlockZone', zoneId })} disabled={disabled}>Unlock {zone.name}</button>}
-        <OrderControls {...props} order={{ kind: 'battle', zoneId }} startLabel={`Patrol ${zone.name}`} locked={access.unlocked ? undefined : access.requirement} />
+        <button className={active ? '' : 'primary'} disabled={disabled || !access.unlocked || active} onClick={() => void run({ type: 'startActivity', order: { kind: 'battle', zoneId } })}>{active ? 'Patrolling' : `Patrol ${zone.name}`}</button>
       </article>
     })}</div>
     <CapturePanel {...props} />
@@ -113,7 +115,7 @@ export function FormationPanel({ state, disabled, run }: GamePanelProps) {
 
   return <div className="stack">
     <header className="section-heading"><h1 tabIndex={-1}>Formation</h1><p>Order up to five Buds from the frontline back. The Tender joins the fight once the frontline Buds fall.</p></header>
-    {inCombat && <p className="banner">Stop the active patrol before changing your formation or gear.</p>}
+    {inCombat && <div className="banner spread"><span>Your formation is on patrol.</span><button disabled={disabled} onClick={() => void run({ type: 'stopActivity' })}>Stop patrol to edit</button></div>}
     <section className="surface stack" aria-label="Lineup">
       <div className="spread"><h2>Lineup</h2><span className="tag">{active.length}/5 Buds</span></div>
       {active.length === 0 && <Empty>Your Tender is fighting solo.</Empty>}

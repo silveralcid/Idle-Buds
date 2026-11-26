@@ -53,6 +53,7 @@ describe('the shared battle engine', () => {
     addBud(state, 'pebbleback', { trait: 'Stalwart', sex: 'Female', ivs: { attack: 6, health: 10, gather: 0, craft: 0 } })
     addBud(state, 'spriglet', { trait: 'Diligent', sex: 'Male', ivs: { attack: 0, health: 1, gather: 0, craft: 0 } })
     state = applyCommand(state, { type: 'setFormation', budIds: state.buds.map((bud) => bud.id) }, 0).state
+    const startingTeam = buildFormation(state)
     state = battle(state)
     expect(buildFormation(state).buds.map((bud) => bud.id)).toEqual(state.formation)
     expect(() => applyCommand(state, { type: 'setFormation', budIds: [] }, 1)).toThrow('Stop the current battle order')
@@ -60,6 +61,8 @@ describe('the shared battle engine', () => {
     expect(after.buds.map((bud) => bud.xp)).toEqual([12, 12])
     expect(after.xp.Melee).toBe(12)
     expect(after.xp.Vitality).toBe(6)
+    expect(after.lastEncounter?.battle.initial?.left).toEqual(startingTeam)
+    expect(after.lastEncounter).toMatchObject({ id: 'encounter-1', completedAt: 12_000 })
   })
 })
 

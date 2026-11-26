@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import type { Dispatch, SetStateAction } from 'react'
 import type { WorldView } from '../../server/world-types.ts'
-import { BattleLog } from './combat.tsx'
+import { BattleReplay } from './battle-replay.tsx'
 import { Empty, Modal } from './shared.tsx'
 import { itemName, number } from './view-model.ts'
 import type { GamePanelProps } from './shared.tsx'
@@ -11,37 +12,56 @@ function Clock({ at }: { at: number }) {
   return <time className="muted" dateTime={new Date(at).toISOString()}>{timestamp.format(at)} UTC</time>
 }
 
-export function CommunityPanel({ world, ...props }: GamePanelProps & { world: WorldView }) {
+export function CommunityPanel({ world, openChat, ...props }: GamePanelProps & { world: WorldView; openChat: () => void }) {
   return <div className="stack">
     <header className="section-heading"><h1 tabIndex={-1}>Community</h1><p>Talk with other Tenders, find friends, and work toward a shared clan goal.</p></header>
     {!world.communityUnlocked && <p className="banner">Gather five items or finish a recipe to unlock sending messages, friend requests, and clan membership.</p>}
-    <Chat world={world} {...props} />
+    <button className="chat-open-link" onClick={openChat}>Open global chat</button>
     <div className="grid"><Friends world={world} {...props} /><Clan world={world} {...props} /></div>
   </div>
 }
 
-function Chat({ world, state, disabled, run }: GamePanelProps & { world: WorldView }) {
+export type ChatMode = 'closed' | 'minimized' | 'expanded'
+
+export function ChatDock({ world, mode, setMode, ...props }: GamePanelProps & {
+  world: WorldView | null; mode: ChatMode; setMode: (mode: ChatMode) => void
+}) {
   const [text, setText] = useState('')
+  if (mode === 'closed') return null
+  const latest = world?.chat.at(-1)
+  return <aside className={`chat-dock ${mode}`} aria-label="Chat panel">
+    <header className="chat-dock-heading"><button className="quiet chat-title" aria-expanded={mode === 'expanded'} onClick={() => setMode(mode === 'expanded' ? 'minimized' : 'expanded')}>◌ <strong>Global chat</strong><span aria-hidden="true">{mode === 'expanded' ? '⌄' : '⌃'}</span></button><button className="icon-button quiet" aria-label="Close chat" onClick={() => setMode('closed')}>×</button></header>
+    {mode === 'minimized' ? <button className="chat-preview quiet" aria-label="Expand chat" onClick={() => setMode('expanded')}>{latest ? `${latest.username}: ${latest.text}` : 'No messages yet'}</button>
+      : world ? <Chat world={world} text={text} setText={setText} {...props} /> : <p className="empty">Connecting to chat…</p>}
+  </aside>
+}
+
+function Chat({ world, state, disabled, run, text, setText }: GamePanelProps & { world: WorldView; text: string; setText: Dispatch<SetStateAction<string>> }) {
   const [report, setReport] = useState<WorldView['chat'][number] | null>(null)
   const [reason, setReason] = useState('')
-  return <section className="surface stack" aria-label="Global chat">
-    <h2>Global chat</h2>
+  const log = useRef<HTMLUListElement>(null)
+  const following = useRef(true)
+  useEffect(() => {
+    if (following.current && log.current) log.current.scrollTop = log.current.scrollHeight
+  }, [world.chat])
+  return <section className="chat-content stack" aria-label="Global chat">
     {world.chat.length === 0 && <Empty>No messages to show.</Empty>}
-    <ul className="list chat-log" aria-label="Recent chat messages">{[...world.chat].reverse().map((message) => <li className="chat-message stack tight" key={message.id}>
-      <div className="spread"><strong>{message.username}</strong><small><Clock at={message.sentAt} /></small></div>
+    <ul className="list chat-log" ref={log} aria-label="Recent chat messages" onScroll={(event) => { const element = event.currentTarget; following.current = element.scrollHeight - element.scrollTop - element.clientHeight < 48 }}>{world.chat.map((message) => <li className="chat-message" key={message.id}>
+      <div className="spread"><strong>{message.username}</strong><small><time dateTime={new Date(message.sentAt).toISOString()}>{new Date(message.sentAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</time></small></div>
       <p>{message.text}</p>
-      {message.username !== state.name && <div className="row">
+      {message.username !== state.name && <details className="chat-message-actions"><summary aria-label={`Actions for ${message.username}'s message`}>•••</summary><div className="row">
         <button className="small quiet" disabled={disabled} onClick={() => { setReason(''); setReport(message) }}>Report</button>
         <button className="small quiet" disabled={disabled} onClick={() => void run({ type: 'social.mute', username: message.username })}>Mute {message.username}</button>
         <button className="small quiet" disabled={disabled} onClick={() => void run({ type: 'social.block', username: message.username })}>Block {message.username}</button>
-      </div>}
+      </div></details>}
     </li>)}</ul>
     <form className="form-grid" onSubmit={async (event) => {
       event.preventDefault()
-      if (await run({ type: 'chat.send', text: text.trim() })) setText('')
+      const submitted = text.trim()
+      if (await run({ type: 'chat.send', text: submitted })) { setText((current) => current.trim() === submitted ? '' : current); following.current = true }
     }}>
-      <label>Message<input required maxLength={240} value={text} onChange={(event) => setText(event.target.value)} /></label>
-      <button className="primary" disabled={disabled || !world.communityUnlocked || !text.trim()}>Send message</button>
+      <label className="chat-message-input"><span className="sr-only">Message</span><input placeholder={world.communityUnlocked ? 'Message…' : 'Gather 5 items to chat'} required maxLength={240} value={text} onChange={(event) => setText(event.target.value)} /></label>
+      <button className="primary" aria-label="Send message" disabled={disabled || !world.communityUnlocked || !text.trim()}>Send</button>
     </form>
     {report && <Modal title={`Report a message from ${report.username}`} close={() => setReport(null)}>
       <form className="stack" onSubmit={async (event) => {
@@ -146,7 +166,7 @@ export function RankedPanel({ world, state, disabled, run }: GamePanelProps & { 
         return <li className="surface subtle stack tight" key={match.id}>
           <div className="spread"><strong>{match.result.winner === 'draw' ? 'Draw' : match.result.winner === victor ? 'Win' : 'Loss'} against {match.opponent}</strong><span className="tag">{match.ratingChange > 0 ? '+' : ''}{match.ratingChange} rating</span></div>
           <small><Clock at={match.playedAt} /> · {match.isAttacker ? 'Challenge' : 'Defense'}</small>
-          <BattleLog result={match.result} />
+          <details><summary>Watch battle</summary><BattleReplay result={match.result} battleId={match.id} viewerSide={match.isAttacker ? 'left' : 'right'} leftLabel={match.isAttacker ? state.name : match.opponent} rightLabel={match.isAttacker ? match.opponent : state.name} autoPlay={false} /></details>
         </li>
       })}</ol>
     </section>

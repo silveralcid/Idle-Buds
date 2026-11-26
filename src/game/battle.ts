@@ -21,6 +21,7 @@ export function budCombatStats(bud: Bud): BattleUnit {
   return {
     id: bud.id,
     name: definition.name,
+    speciesId: definition.id,
     affinity: definition.affinity,
     attack: definition.attack + Math.floor(bud.ivs.attack / 5) + Math.floor(level / 10) + Number(bud.trait === 'Keen'),
     health: definition.health + Math.floor(bud.ivs.health / 3) + Math.floor(level / 5) + 2 * Number(bud.trait === 'Stalwart'),
@@ -92,7 +93,7 @@ export function resolveBattle(
       if (actor.entered) continue
       actor.entered = true
       events.push({ type: 'enter', round, actor: actor.id, text: `${actor.name} enters the frontline.` })
-      if (actor.shield) events.push({ type: 'ability', round, actor: actor.id, amount: actor.shield, text: `${actor.name} braces for the first hit.` })
+      if (actor.shield) events.push({ type: 'ability', round, actor: actor.id, effect: 'Guard', amount: actor.shield, text: `${actor.name} braces for the first hit.` })
     }
 
     // Both frontliners attack using their pre-hit stats, including on a shared defeat.
@@ -101,11 +102,11 @@ export function resolveBattle(
       const actor = actors[index]
       const target = actors[1 - index]
       const damage = Math.max(0, actor.attack + actor.strike - target.shield)
-      if (actor.strike) events.push({ type: 'ability', round, actor: actor.id, amount: actor.strike, text: `${actor.name} uses Strike.` })
+      if (actor.strike) events.push({ type: 'ability', round, actor: actor.id, effect: 'Strike', amount: actor.strike, text: `${actor.name} uses Strike.` })
       actor.strike = 0
       target.shield = 0
       target.hp -= damage
-      events.push({ type: 'hit', round, actor: actor.id, target: target.id, amount: damage, text: `${actor.name} deals ${damage} damage to ${target.name}.` })
+      events.push({ type: 'hit', round, actor: actor.id, target: target.id, amount: damage, health: Math.max(0, target.hp), text: `${actor.name} deals ${damage} damage to ${target.name}.` })
     }
 
     for (const index of [first, 1 - first]) {
@@ -123,7 +124,7 @@ export function resolveBattle(
       if (healing > 0) {
         actor.hp += healing
         healer.mend = 0
-        events.push({ type: 'ability', round, actor: healer.id, target: actor.id, amount: healing, text: `${healer.name} restores ${healing} health to ${actor.name}.` })
+        events.push({ type: 'ability', round, actor: healer.id, target: actor.id, amount: healing, effect: 'Mend', health: actor.hp, text: `${healer.name} restores ${healing} health to ${actor.name}.` })
       }
     }
   }
@@ -132,5 +133,5 @@ export function resolveBattle(
   const winner = remaining[0] === remaining[1] || (remaining[0] > 0 && remaining[1] > 0)
     ? 'draw' : remaining[0] > remaining[1] ? 'left' : 'right'
   events.push({ type: 'end', round: rounds, text: winner === 'draw' ? 'The battle is a draw.' : `${winner === 'left' ? 'Left' : 'Right'} team wins.` })
-  return { version: RULES_VERSION, winner, rounds, events }
+  return { version: RULES_VERSION, winner, rounds, events, initial: structuredClone({ left, right }) }
 }

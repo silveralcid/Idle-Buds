@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { SPECIES } from '../../src/data/catalog.ts'
 import {
-  advance, applyCommand, createPlayer, isBudCommitted, itemCapacity, OFFLINE_CAP_MS, publicState, RuleError,
+  advance, applyCommand, createPlayer, isBudCommitted, OFFLINE_CAP_MS, publicState, RuleError,
 } from '../../src/game/index.ts'
 import { addBud } from '../../src/game/breeding.ts'
 import type { ActivityOrder, GameCommand, GameState } from '../../src/game/types.ts'
@@ -27,7 +27,7 @@ describe('a fresh Tender', () => {
         now += 12_000
         state = start(state, now, { kind: 'craft', recipeId: 'capture-kit' })
         now += 5_000
-        state = start(state, now, { kind: 'battle', zoneId: 'earth' })
+        state = start(state, now, { kind: 'battle', zoneId: 'earth', count: 1 })
         now += 12_000
         state = advance(state, now).state
         expect(state.lastEncounter?.battle.winner).toBe('left')
@@ -128,18 +128,14 @@ describe('shared activity clock', () => {
     expect(() => advance(state, 40_000, OFFLINE_CAP_MS + 1)).toThrow('simulation budget')
   })
 
-  it('halts on capacity and resumes without carrying discarded progress', () => {
+  it('keeps existing stacks growing beyond the old per-resource cap', () => {
     let state = starter('full-storage')
-    state.inventory.scrap = itemCapacity(state) - 1
+    state.inventory.scrap = 10_000
     state = start(state, 0, { kind: 'gather', nodeId: 'earth-scrap' })
     const completed = advance(state, 9_999)
-    expect(completed.state.inventory.scrap).toBe(itemCapacity(state))
-    expect(completed.summary.cycles).toBe(1)
-    expect(completed.summary.stopped).toEqual([{ workerId: 'tender', reason: 'Storage is full for this resource.' }])
-    completed.state.inventory.scrap -= 1
-    state = applyCommand(completed.state, { type: 'resumeActivity' }, 9_999).state
-    expect(advance(state, 13_998).summary.cycles).toBe(0)
-    expect(advance(state, 13_999).summary.cycles).toBe(1)
+    expect(completed.state.inventory.scrap).toBe(10_002)
+    expect(completed.summary.cycles).toBe(2)
+    expect(completed.state.activities.tender.status).toBe('running')
   })
 
   it('rechecks shared inputs when concurrent jobs complete and stops the blocked order', () => {
@@ -174,6 +170,7 @@ describe('shared activity clock', () => {
     }
     expect(() => advance(starter(), NaN)).toThrow(RuleError)
     expect(() => advance(starter(), Number.MAX_SAFE_INTEGER)).toThrow(RuleError)
-    expect(() => start(starter(), 0, { kind: 'craft', recipeId: 'capture-kit' })).toThrow('Missing required inputs.')
+    expect(start(starter(), 0, { kind: 'craft', recipeId: 'capture-kit' }).activities.tender)
+      .toMatchObject({ status: 'blocked', stopReason: 'Missing required inputs.' })
   })
 })

@@ -1,7 +1,7 @@
 import { randomUUID } from 'node:crypto'
 import type { PoolClient } from 'pg'
 import { ITEM_DEFINITIONS } from '../src/data/index.ts'
-import { isBudCommitted, itemCapacity, MAX_BUDS, MAX_COINS, MAX_GEAR } from '../src/game/index.ts'
+import { isBudCommitted, canReceiveItems, canReceiveGear, budSlotsUsed, MAX_BUDS, MAX_COINS } from '../src/game/index.ts'
 import type { Bud, GameState, Gear } from '../src/game/types.ts'
 import { lockRawPlayer, reconcilePlayer, savePlayer } from './db.ts'
 import { requireRule } from './errors.ts'
@@ -35,12 +35,13 @@ export function takeItem(state: GameState, itemId: string, quantity: number) {
   requireRule(Object.hasOwn(ITEM_DEFINITIONS, itemId), 'Unknown item.', 400)
   const have = state.inventory[itemId] ?? 0
   requireRule(have >= quantity, 'You do not have enough of this item.')
-  state.inventory[itemId] = have - quantity
+  if (have === quantity) delete state.inventory[itemId]
+  else state.inventory[itemId] = have - quantity
 }
 
 function addItem(state: GameState, itemId: string, quantity: number) {
   const next = (state.inventory[itemId] ?? 0) + quantity
-  requireRule(next <= itemCapacity(state), 'There is not enough storage space for this item.')
+  requireRule(canReceiveItems(state, { [itemId]: quantity }), 'Free an inventory slot for this item.')
   state.inventory[itemId] = next
 }
 
@@ -72,10 +73,10 @@ function giveEscrow(state: GameState, listing: ListingRow, quantity: number) {
   if (listing.asset_kind === 'item' && listing.item_id) {
     addItem(state, listing.item_id, quantity)
   } else if (listing.asset_kind === 'bud' && listing.instance) {
-    requireRule(state.buds.length < MAX_BUDS, 'Your Bud collection is full.')
+    requireRule(budSlotsUsed(state) < MAX_BUDS, 'Your Bud collection is full.')
     state.buds.push(listing.instance as Bud)
   } else if (listing.asset_kind === 'gear' && listing.instance) {
-    requireRule(state.equipment.length < MAX_GEAR, 'Your equipment collection is full.')
+    requireRule(canReceiveGear(state), 'Free an inventory slot for this equipment.')
     state.equipment.push(listing.instance as Gear)
   } else {
     throw new Error('Market escrow does not match the asset.')
@@ -127,11 +128,15 @@ export async function marketCommand(
       instance = takeUnique(state, asset)
     }
 
+    const listingId = randomUUID()
+    if (command.type === 'market.list') {
+      state.storageReservations[listingId] = asset.kind === 'item' ? { kind: 'item', itemId: asset.itemId } : { kind: asset.kind }
+    }
     await db.query(
       `INSERT INTO market_listings
         (id, owner_id, side, asset_kind, item_id, instance_id, instance, remaining, unit_price, created_at)
         VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)`,
-      [randomUUID(), playerId, command.type === 'market.order' ? 'buy' : 'sell', asset.kind,
+      [listingId, playerId, command.type === 'market.order' ? 'buy' : 'sell', asset.kind,
         asset.kind === 'item' ? asset.itemId : null, asset.kind === 'item' ? null : asset.instanceId,
         instance, quantity, unitPrice, new Date(now)],
     )
@@ -148,7 +153,17 @@ export async function marketCommand(
   if (command.type === 'market.cancel') {
     requireRule(listing.owner_id === playerId, 'Only the listing owner can cancel it.', 403)
     if (listing.side === 'buy') addCoins(state, listing.remaining * listing.unit_price)
-    else giveEscrow(state, listing, listing.remaining)
+    else {
+      // The slot remained reserved while listed. Returning legacy overfull escrow is lossless.
+      delete state.storageReservations[listing.id]
+      if (listing.asset_kind === 'item' && listing.item_id) {
+        const total = (state.inventory[listing.item_id] ?? 0) + listing.remaining
+        requireRule(Number.isSafeInteger(total), 'This item stack has reached the numeric limit.')
+        state.inventory[listing.item_id] = total
+      } else if (listing.asset_kind === 'gear' && listing.instance) state.equipment.push(listing.instance as Gear)
+      else if (listing.asset_kind === 'bud' && listing.instance) state.buds.push(listing.instance as Bud)
+      else giveEscrow(state, listing, listing.remaining)
+    }
     await db.query('UPDATE market_listings SET remaining = 0 WHERE id = $1', [listing.id])
     return 'Listing cancelled. Remaining goods or credits were returned.'
   }
@@ -175,6 +190,7 @@ export async function marketCommand(
   }
   giveEscrow(buyer, listing, command.quantity)
   addCoins(seller, gross - tax)
+  if (buying && command.quantity === listing.remaining) delete counterpart.state.storageReservations[listing.id]
   await savePlayer(db, listing.owner_id, counterpart.state, counterpart.foregroundAt, counterpart.summary)
   await db.query('UPDATE market_listings SET remaining = remaining - $2 WHERE id = $1', [listing.id, command.quantity])
   await db.query(

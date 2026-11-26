@@ -10,6 +10,12 @@
 
 The [Current Release Specification](../project/CURRENT-RELEASE.md) records the owner-authorized local/private MVP envelope. Implementation authorization and measured acceptance remain separate: merged code does not establish that every engineering gate has passed.
 
+## Owner-authorized Experience MVP (November 26, 2026)
+
+After playing the initial candidate and confirming the production, inventory, combat and UI decisions, the owner instructed: “skip the issue creation, in ONE PR go on and implement this RIGHT NOW. You can merge when done.” This authorizes the agreed Experience MVP, its owning documentation, necessary dependencies, local verification, one PR and merge of the verified head. No issues or subissues are requested. The earlier planning-only boundary for this feedback is superseded.
+
+The current decisions in Bible sections [production](bible/06-progression-and-production.md), [combat](bible/08-combat.md), [economy](bible/09-multiplayer-and-economy.md) and [presentation](bible/10-presentation.md) supersede historical node exclusivity, travel/relay restrictions, individual item caps and log-only battle presentation. The [release specification](../project/CURRENT-RELEASE.md) owns this bounded milestone; its [execution plan](../plans/completed/experience-mvp.md) records lane ownership. Final assets, economic tuning, native platforms and public deployment remain separate work.
+
 ## Owner-authorized MVP implementation (November 26, 2026)
 
 The owner explicitly instructed: “Build and implement this now. This is not audit or research. Implement to your fullest capacity within chat mode. Merge straightaway with a clear finished and what’s left and what was done report merged to repo.” The supplied scope is MVP Execution Blueprint v2. The owner also requested a durable continuation for Miyu in Cloud Work or the server rig using Sol at Extra High effort.

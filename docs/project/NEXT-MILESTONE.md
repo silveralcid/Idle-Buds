@@ -1,8 +1,8 @@
 # Next milestone
 
-Status: Blueprint v2 gameplay implementation is authorized and implemented as a local candidate. The [implementation report](../evidence/mvp-implementation-2026-11-26.md) owns observed passes and remaining gaps; the [Miyu handoff](MIYU-HANDOFF.md) gives exact continuation with Sol Extra High on Cloud Work or the server rig.
+Status: the Blueprint v2 candidate now includes the owner-approved Experience MVP. The [experience report](../evidence/experience-mvp-2026-11-26.md) owns the latest observed passes and limits; the [original implementation report](../evidence/mvp-implementation-2026-11-26.md) preserves system/balance baselines. The [Miyu handoff](MIYU-HANDOFF.md) gives continuation context.
 
-Finish any outstanding verification, then play the actual fresh/progressed/two-account game. Use the recorded baselines, address measured combat-style dominance with one bounded tuning/retest cycle, and qualify the intended devices. Do not reopen the broad planning interview or build extra infrastructure. Human enjoyment and retention remain unmeasured until actual sessions occur.
+First inspect the Experience MVP PR's current verification and merge state. Then play the actual fresh/progressed/two-account game, concentrating on direct activity replacement, independent one-Bud-per-skill work, compact inventory, visible combat turns, and chat/navigation on a physical phone and controller. Unlimited-stack economics and the provisional slot allowance need observation before tuning. Use the recorded baselines for later bounded combat-balance work. Do not reopen the broad planning interview or build extra infrastructure. Human enjoyment and retention remain unmeasured until actual sessions occur.
 
 Scope stays fixed at [Current Release Specification](CURRENT-RELEASE.md). Public deployment and commercial launch are separate decisions. The later owner authorization is recorded in [authority](../design/AUTHORITY.md); no BEAT BAES release claim is implied.
 

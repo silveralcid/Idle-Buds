@@ -1,13 +1,19 @@
 import { ITEM_DEFINITIONS, RECIPES, NODES, PRODUCTION_SKILLS, SPECIES, ZONES } from '../data/index.ts'
 import { TENDER_ID } from '../game/limits.ts'
-import { levelForXp } from '../game/progression.ts'
-import type { ActivityOrder, PlayerView, ProductionSkill, ZoneId } from '../game/types.ts'
+import { budLevelForXp, levelForXp } from '../game/progression.ts'
+import type { ActivityOrder, Bud, PlayerView, ProductionSkill, ZoneId } from '../game/types.ts'
 
 const numbers = new Intl.NumberFormat('en-US')
 export const number = (value: number) => numbers.format(value)
-export const itemName = (id: string) => ITEM_DEFINITIONS[id]?.name ?? id
+const resourceNames: Record<string, string> = {
+  scrap: 'Scrap', fiber: 'Fiber', minnow: 'Copperfin', greens: 'Greens', quartz: 'Quartz',
+  resin: 'Resin', skater: 'Glass Skater', 'mirror-bloom': 'Mirror Bloom', basalt: 'Basalt',
+  driftwood: 'Wood', eel: 'Lantern Eel', 'tide-kelp': 'Kelp',
+}
+export const itemName = (id: string) => resourceNames[id] ?? ITEM_DEFINITIONS[id]?.name ?? id
 export const speciesName = (id: string) => SPECIES[id]?.name ?? id
 export const budName = (state: PlayerView, id: string) => id === TENDER_ID ? 'Tender' : speciesName(state.buds.find((bud) => bud.id === id)?.speciesId ?? id)
+export const budOptionLabel = (state: PlayerView, bud: Bud) => `${speciesName(bud.speciesId)} · Lv ${budLevelForXp(bud.xp)}${state.buds.filter((entry) => entry.speciesId === bud.speciesId).length > 1 ? ` · #${bud.id.slice(-4)}` : ''}`
 
 export function duration(ms: number) {
   const seconds = Math.ceil(Math.max(0, ms) / 1_000)
@@ -20,7 +26,7 @@ export function duration(ms: number) {
 
 export function activityName(order: ActivityOrder) {
   switch (order.kind) {
-    case 'gather': return NODES[order.nodeId]?.name ?? order.nodeId
+    case 'gather': return NODES[order.nodeId] ? itemName(NODES[order.nodeId].itemId) : order.nodeId
     case 'craft': return RECIPES[order.recipeId]?.name ?? order.recipeId
     case 'battle': return `Patrol · ${ZONES[order.zoneId].name}`
   }
@@ -34,7 +40,7 @@ export function zoneEligibility(state: PlayerView, zoneId: ZoneId) {
   return {
     unlocked: false,
     eligible: previous && (state.stats.zoneWins[access.previous] >= access.wins || level >= access.productionLevel),
-    requirement: `Unlock ${ZONES[access.previous].name}, then win ${access.wins} battles there or reach level ${access.productionLevel} in a production skill.`,
+    requirement: previous ? `Production Lv ${access.productionLevel} or ${access.wins} ${ZONES[access.previous].name} wins` : `${ZONES[access.previous].name} access`,
   }
 }
 

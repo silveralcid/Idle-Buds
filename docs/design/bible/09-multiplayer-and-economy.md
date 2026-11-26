@@ -1,5 +1,13 @@
 > Migrated source text, November 25, 2026. Approved intent, provisional choices and open questions retain their original status. Read the [current authority and scope](../AUTHORITY.md) before implementation.
 
+## Current owner decision: convenient storage, economy follow-up (November 26, 2026)
+
+The owner prioritizes game feel and player ease: shared item-type slots with unlimited fungible stacks, unique unequipped gear using individual slots, and separate Bud/egg storage. See [production](06-progression-and-production.md) for the current rules. **Pin the economic effect of unlimited stacks for later evaluation**: stockpiling, material supply, NPC buyback, storage-upgrade value and market liquidity must be measured after playtesting; this milestone does not retune the economy.
+
+Keep market ownership and settlement atomic under the new rules. Open sell escrow reserves its return slot (item type, gear instance, or Bud collection position), so listing does not manufacture capacity and cancellation cannot trap the seller's asset. Existing stacks may receive purchased quantities without using another slot. A new item or unique equipment purchase must respect shared capacity. Preserve exact completed output and gear identity through retries, restarts and storage recovery.
+
+Global chat is a persistent bottom dock available while visiting other screens. Sending is visible in the conversation, without a redundant success notification. Keep current friend, mute, block, report and clan functions; do not add a new messaging service.
+
 # 4\. Multiplayer, economy and competitive play
 
 ## Open sandbox, meaningful interdependence
