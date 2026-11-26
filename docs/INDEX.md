@@ -96,5 +96,6 @@ Generated rows point to canonical specifications and never duplicate their conte
 |---|---|
 | Bounded game work and playtests | [Development lifecycle](game/development-lifecycle.md) |
 | Game-specific tests and performance evidence | [Game testing](game/testing.md) |
+| Local experiments, replay and agent tools | [Experiment lab](engineering/EXPERIMENT-LAB.md) |
 | Asset provenance and save safety | [Assets and saves](game/assets-and-saves.md) |
 | Release preparation | [Game release](game/release.md) |

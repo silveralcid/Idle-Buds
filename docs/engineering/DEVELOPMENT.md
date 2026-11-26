@@ -73,9 +73,11 @@ npm audit --audit-level=high
 
 `test:restore` creates a fresh disposable cluster, seeds three accounts, stops PostgreSQL, makes a cold filesystem backup, removes the original temporary data directory, restores the backup, restarts and verifies complete player states and migration history. This proves the local cold-restore procedure, not production online backups or cross-host failover.
 
-`experiments` runs fixed-budget seeded onboarding, equal-strength paired combat styles, offline boundaries, inheritance, 1/7/30-day production policies and 100 synthetic ranked formations using the same rules as the server. Full raw outcomes go to ignored `.repo-local/experiments.json`.
+`experiments` runs fixed-budget seeded onboarding, equal-strength paired combat styles, offline boundaries, inheritance, current 24-hour independent-Bud production scenarios and 100 synthetic ranked formations using the same rules as the server. The production section uses the shared lab’s five-seed daily/frequent/paused variants, with unlimited item stacks and automatic blocked-work recovery. Full aggregate outcomes go to ignored `.repo-local/experiments.json`; production runs also retain their individual lab artifacts. The fixed aggregate filename is retained for compatibility.
 
 `experiments:world` creates its own disposable real PostgreSQL database and exercises Fastify commands with an injected gameplay clock. Empty, low-volume and active-market cohorts record daily wallet/resource/escrow conservation, tax, NPC stock and 7/30-day source/sink flows in ignored `.repo-local/world-experiments.json`. Fixed fixtures and scripted prices measure accounting and behavior, not live equilibrium. Neither experiment command proves human retention.
+
+For the API-first lab, use `npm run lab -- list`, `npm run lab -- smoke`, and `npm run lab -- run <scenario>`. Per-run reports, comparisons, replay, content validation and local stdio MCP setup are documented in [Experiment Lab](EXPERIMENT-LAB.md). Configure an MCP client to launch `node --env-file-if-exists=.env tools/mcp.ts` directly from the repository root; npm banners must not enter its protocol stream.
 
 ## Build, rights and recovery
 

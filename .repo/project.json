@@ -71,7 +71,27 @@
       "cwd": ".",
       "timeout_seconds": 120,
       "mutates_external": false
+    },
+    "lab": {
+      "argv": [
+        "npm",
+        "run",
+        "lab:smoke"
+      ],
+      "cwd": ".",
+      "timeout_seconds": 180,
+      "mutates_external": false
+    },
+    "content": {
+      "argv": [
+        "npm",
+        "run",
+        "lab:content"
+      ],
+      "cwd": ".",
+      "timeout_seconds": 60,
+      "mutates_external": false
     }
   },
-  "notes": "MVP implementation. npm test starts isolated real PostgreSQL (or requires an explicit loopback idle_buds_test DATABASE_URL), migrates, runs deterministic rules/database tests, builds and exercises the real server in Chromium. Browser install is a local prerequisite. No deployment or production database mutation. Hosted CI results are reported separately."
+  "notes": "MVP implementation. npm test starts isolated real PostgreSQL (or requires an explicit loopback idle_buds_test DATABASE_URL), migrates, runs deterministic rules/database tests, builds and exercises the real server in Chromium. Browser install is a local prerequisite. No deployment or production database mutation. Hosted CI results are reported separately. Local Lab API/CLI and stdio MCP reuse authoritative rules and normal player routes. Lab checks use synthetic fixtures and ignored per-run artifacts; no model calls or extra service."
 }

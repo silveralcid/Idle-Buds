@@ -1,18 +1,20 @@
 import assert from 'node:assert/strict'
 import { performance } from 'node:perf_hooks'
 import { writeFile, mkdir } from 'node:fs/promises'
-import { advance, applyCommand, buildFormation, createPlayer, MAX_BATTLE_ROUNDS, OFFLINE_CAP_MS, resolveBattle, RuleError } from '../src/game/index.ts'
-import { NODES, PRODUCTION_SKILLS, SPECIES } from '../src/data/catalog.ts'
+import { advance, applyCommand, buildFormation, createPlayer, MAX_BATTLE_ROUNDS, resolveBattle } from '../src/game/index.ts'
+import { NODES, SPECIES } from '../src/data/catalog.ts'
 import { addBud, rollGenetics } from '../src/game/breeding.ts'
 import { sourceFor } from '../src/game/random.ts'
 import type { ActivityOrder, BattleResult, BattleTeam, GameState, Gear } from '../src/game/types.ts'
 import { progressedFixture } from './fixtures.ts'
+import { runScenario } from './lab/runner.ts'
 
 // Bounded original-content baselines, using the exact game code run by the server.
 // These synthetic observations do not establish human enjoyment or live balance.
 function finish(state: GameState, order: ActivityOrder): GameState {
   let next = applyCommand(state, { type: 'startActivity', order }, state.lastAt).state
-  while (next.activities.tender.nextAt !== null) {
+  for (let events = 0; next.activities.tender.nextAt !== null; events += 1) {
+    assert.ok(events < 10_000, 'Finite experiment order exceeded its event budget')
     next = advance(next, next.activities.tender.nextAt!).state
   }
   return next
@@ -174,86 +176,17 @@ function breeding() {
   return { note: 'Random IVs can equal either parent; these are observed values, not latent inheritance branch counts.', rows }
 }
 
-function gather(nodeId: string, count: number): ActivityOrder {
-  return { kind: 'gather', nodeId, count }
-}
-
-function craft(recipeId: string, count: number): ActivityOrder {
-  return { kind: 'craft', recipeId, count }
-}
-
-function production() {
+async function production() {
   const rows = []
-  for (const path of ['Tender-only', 'Mining specialist', 'Bud-assisted'] as const) {
-    const prepared = progressedFixture('production_lab', 0)
-    prepared.inventory = {}
-    prepared.formation = []
-    let state = prepared
-    let cycles = 0
-    let queued = 0
-    let abandonedOrders = 0
-    const constraints: Record<string, number> = {}
-    const recordConstraint = (reason: string) => { constraints[reason] = (constraints[reason] ?? 0) + 1 }
-
-    function plan(orders: ActivityOrder[], workerId?: string) {
-      let started = false
-      for (const order of orders) {
-        try {
-          state = applyCommand(state, { type: started ? 'queueActivity' : 'startActivity', workerId, order }, state.lastAt).state
-          queued += Number(started)
-          started = true
-        } catch (error) {
-          if (!(error instanceof RuleError)) throw error
-          recordConstraint(error.message)
-        }
-      }
-    }
-
-    for (let day = 1; day <= 30; day += 1) {
-      const finishRecipe = day % 2 ? craft('trail-stew', 6) : craft('portal-compound', 3)
-      switch (path) {
-        case 'Tender-only':
-          plan([
-            gather('earth-scrap', 12), gather('earth-fiber', 5), gather('earth-minnow', 6), gather('earth-greens', 10),
-            craft('capture-kit', 4), finishRecipe,
-          ])
-          break
-        case 'Mining specialist':
-          plan([craft('capture-kit', 12), gather('earth-scrap', 36)])
-          break
-        case 'Bud-assisted':
-          plan([gather('earth-scrap', 24)], state.buds[0].id)
-          plan([gather('earth-minnow', 24)], state.buds[3].id)
-          plan([gather('earth-greens', 24)], state.buds[2].id)
-          plan([gather('earth-fiber', 12), craft('capture-kit', 4), finishRecipe])
-          break
-      }
-
-      const advanced = advance(state, day * OFFLINE_CAP_MS)
-      state = advanced.state
-      cycles += advanced.summary.cycles
-      for (const { workerId, reason } of advanced.summary.stopped) {
-        if (reason === 'Order complete.') continue
-        recordConstraint(reason)
-        const work = state.activities[workerId]
-        abandonedOrders += 1 + work.queue.length
-        state = applyCommand(state, { type: 'stopActivity', workerId }, state.lastAt).state
-      }
-
-      if ([1, 7, 30].includes(day)) {
-        rows.push({
-          path, days: day, cycles, queued, abandonedOrders, creditsEarned: state.coins - prepared.coins,
-          gathered: state.stats.gathered - prepared.stats.gathered, crafted: state.stats.crafted - prepared.stats.crafted,
-          tenderXp: Object.fromEntries(PRODUCTION_SKILLS.map((skill) => [skill, state.xp[skill] - prepared.xp[skill]])),
-          budXp: state.buds.reduce((total, bud) => total + bud.xp, 0), inventory: structuredClone(state.inventory),
-          constraints: { ...constraints },
-        })
-      }
-    }
+  for (const variant of ['daily', 'frequent', 'paused']) {
+    const report = await runScenario({ scenarioId: 'production-recovery', variant, seedSetId: 'baseline' })
+    assert.equal(report.status, 'passed', `Production qualification failed: ${report.runId}`)
+    rows.push({ variant, runId: report.runId, status: report.status, metrics: report.metrics,
+      gameplayDigest: report.gameplayDigest, artifacts: report.artifacts })
   }
   return {
-    note: 'Same prepared fixture and seed per path, with one daily check-in and unchanged rules for queues, tool yield, skill XP, Bud eligibility and 200 units of storage per item. Check-in replans work after real storage or input stops. Consumable crafting spends materials. No simulated sales or stock resets.',
-    disposition: 'The paths expose differences in product mix, worker XP and saturation. The prepared fixtures support playtest comparisons. Monetary or cross-account market balance needs separate evidence.',
+    note: 'Current shared-slot inventory and unlimited item stacks; independent mining and crafting Buds, Tender free. Identical fixture and five seeds per variant over 24 simulated hours. Daily and frequent returns never stop blocked work. Paused is a deliberate-pause control. Full run provenance, traces and reports are retained by the lab.',
+    disposition: 'This qualifies automatic recovery and deliberate pause. It does not establish long-term progression balance, market value or human enjoyment. Use lab policy-progression for explicit public-state policies; do not reuse historical per-item-cap production figures as current economics.',
     rows,
   }
 }
@@ -327,7 +260,7 @@ function rankedCoverage() {
 const started = performance.now()
 const results = {
   rulesVersion: 1, onboarding: onboarding(), offline: offline(), combat: combat(), breeding: breeding(),
-  production: production(), rankedCoverage: rankedCoverage(),
+  production: await production(), rankedCoverage: rankedCoverage(),
 }
 await mkdir('.repo-local', { recursive: true })
 await writeFile('.repo-local/experiments.json', JSON.stringify({ ...results, runtimeMs: performance.now() - started }, null, 2) + '\n')

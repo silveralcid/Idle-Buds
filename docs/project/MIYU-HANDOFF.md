@@ -8,6 +8,8 @@ This file is a durable handoff, not a dispatch receipt. The originating chat can
 
 ## Resume from actual current main
 
+The subsequent owner-authorized [API/MCP lab](../engineering/EXPERIMENT-LAB.md) is implemented with [recorded local evidence](../evidence/experiment-lab-2026-11-26.md). Inspect its current PR/CI state before continuing. Use `npm run lab -- list`, named scenarios and replay for measured questions; do not recreate the harness or treat the old per-item-cap production report as current economics. Remote MCP hosting and paid model play are separate work. Physical phone/controller and combat-comprehension sessions remain the next experience qualifications.
+
 Repository: [silveralcid/Idle-Buds](https://github.com/silveralcid/Idle-Buds). Read `AGENTS.md`, [Current Release Specification](CURRENT-RELEASE.md), the [implementation report](../evidence/mvp-implementation-2026-11-26.md), and only the relevant Blueprint packet. Inspect live Git/PR/CI state and preserve any newer work. The old planning-only restriction is superseded for this specific owner-authorized MVP implementation; do not claim BEAT BAES shipped. Do not restart the plan, foundation, database, rules engine or UI.
 
 Create an isolated continuation branch from fresh main only if work remains. Keep one integration owner; delegate disjoint paths after checking interfaces. Do not force push, reset another workspace, deploy publicly, purchase services or expand content.

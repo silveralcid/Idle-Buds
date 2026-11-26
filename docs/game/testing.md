@@ -17,6 +17,8 @@ Register actual native commands in `.repo/project.json` as they exist. Do not ad
 
 ## Reproducible rules and scenarios
 
+The [experiment lab](../engineering/EXPERIMENT-LAB.md) provides the shared CLI/API/MCP entrypoints, registered scenarios, passive snapshot semantics and replay artifacts. Use its named scenarios and ordinary player API rather than implementing parallel game rules. Lab reports and policy comparisons do not replace real browser or human evidence.
+
 For systems using randomness, record seed, algorithm/content version and scenario inputs. Test both repeatability and required constraints; matching one golden fixture is insufficient. Check invalid or empty inputs and probability-table boundaries when relevant. Review fixture changes against approved intent rather than regenerating them blindly. Preserve exact seeds across JSON/browser boundaries using a representation that avoids numeric precision loss.
 
 Keep rules independent of wall-clock timing where practical. Browser scenarios use real input and robust outcomes rather than exact frame timing. Read-only diagnostic state can support assertions, but should not replace rendered inspection or become a way to set the answer directly. Exercise the distinguishing behavior of the milestone; a startup screenshot or constant title assertion cannot prove it works.

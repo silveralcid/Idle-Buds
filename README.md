@@ -47,6 +47,8 @@ npm audit --audit-level=high
 
 Keep actual check commands registered in [.repo/project.json](.repo/project.json). Test results apply to the source and environment exercised. Checks establish only the behavior actually exercised. Human enjoyment, physical-device compatibility and live economy balance need their own evidence.
 
+For repeatable experiments, run `npm run lab -- list`, then `npm run lab -- smoke`. The [Experiment Lab guide](docs/engineering/EXPERIMENT-LAB.md) covers named scenarios, policy comparisons, replay and the five local MCP tools. Player agents use the existing authenticated API; researchers use isolated synthetic fixtures.
+
 ## Repository map
 
 | Path | Purpose |

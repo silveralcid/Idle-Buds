@@ -36,5 +36,9 @@ jobs:
         run: npm run validate
       - name: Check current dependency advisories
         run: npm audit --audit-level=high
+      - name: Qualify current content and bounded experiment scenarios
+        run: |
+          npm run lab:content
+          npm run lab:smoke
 
 # No deployment, credentials, model calls, scheduled jobs or automatic merge.
