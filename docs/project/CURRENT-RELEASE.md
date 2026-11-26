@@ -4,7 +4,7 @@
 
 Silver explicitly authorized implementation and immediate merge of MVP Execution Blueprint v2 on November 26, 2026. This accepts the supplied bounded scope for a playable experiment candidate. [Authority](../design/AUTHORITY.md) records the exception to historical preimplementation restrictions without claiming the BEAT BAES demo shipped. Public deployment, paid infrastructure and commercial release remain outside this task.
 
-Later that day, after owner playtesting and design clarification, Silver authorized the agreed Experience MVP in **one PR**, with **no issue creation**, and merge after verification. The [Experience execution plan](../plans/active/experience-mvp.md) owns implementation order and disjoint lanes. This is an explicit scope update: usability, responsive/controller interaction, and the selected H visual execution are now required for this pass.
+Later that day, after owner playtesting and design clarification, Silver authorized the agreed Experience MVP in **one PR**, with **no issue creation**, and merge after verification. The [completed Experience execution plan](../plans/completed/experience-mvp.md) records implementation order and disjoint lanes; [PR #9](https://github.com/silveralcid/Idle-Buds/pull/9) owns live integration status. This is an explicit scope update: usability, responsive/controller interaction, and the selected H visual execution are now required for this pass.
 
 ## Must ship
 

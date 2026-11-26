@@ -1,5 +1,6 @@
 import { spawn } from 'node:child_process'
-import { localDatabase, migrate, assertTestDatabase } from './db-local.mjs'
+import { fileURLToPath } from 'node:url'
+import { migrate, assertTestDatabase } from './db-local.mjs'
 import { Pool } from 'pg'
 import { assertLanDatabase, assertLanDatabaseUrl, lanAddresses } from '../server/lan.ts'
 
@@ -14,20 +15,21 @@ if (fixtures && process.env.DATABASE_URL) assertTestDatabase(process.env.DATABAS
 if (fixtures && process.env.HOST && !['127.0.0.1', 'localhost', '::1'].includes(process.env.HOST)) {
   throw new Error('Public fixture accounts must only be served on loopback')
 }
-const local = process.env.DATABASE_URL ? null : await localDatabase({ playtest: fixtures })
-const url = process.env.DATABASE_URL ?? local.url
+let local
 let child
 let stopping = false
 const shutdown = () => {
   if (stopping) return
   stopping = true
-  if (lan && child?.connected) child.send('shutdown', () => {})
+  if (child?.connected) child.send('shutdown', () => {})
   else child?.kill('SIGINT')
 }
 process.on('SIGINT', shutdown)
 process.on('SIGTERM', shutdown)
 if (process.connected) process.on('message', (message) => { if (message === 'shutdown') shutdown() })
 try {
+  local = process.env.DATABASE_URL ? null : await startOwnedDatabase()
+  const url = process.env.DATABASE_URL ?? local.url
   if (fixtures) assertTestDatabase(url)
   if (lan) {
     assertLanDatabaseUrl(url)
@@ -44,16 +46,46 @@ try {
   }
   if (!stopping) {
     child = spawn(process.execPath, ['server/index.ts', ...(lan ? ['--lan'] : [])], {
-      stdio: lan ? ['inherit', 'inherit', 'inherit', 'ipc'] : 'inherit',
+      stdio: ['inherit', 'inherit', 'inherit', 'ipc'],
       env: { ...process.env, DATABASE_URL: url },
     })
     const code = await new Promise((accept, reject) => {
       child.once('error', reject); child.once('exit', (code) => accept(code ?? (stopping ? 0 : 1)))
     })
-    process.exitCode = code
+    process.exitCode = code || process.exitCode || 0
   }
 } finally {
   await local?.stop()
-  if (lan && stopping) console.log('LAN shutdown complete.')
+  if (stopping) console.log(lan ? 'LAN shutdown complete.' : 'Shutdown complete.')
   if (process.connected) process.disconnect?.()
+}
+
+// Keep the embedded package's global exit hooks out of the server supervisor.
+// Its process group is separate so terminal Ctrl+C cannot stop PostgreSQL before HTTP drains.
+async function startOwnedDatabase() {
+  const database = spawn(process.execPath, [fileURLToPath(new URL('./play-db.mjs', import.meta.url)), ...(fixtures ? ['--fixtures'] : [])], {
+    stdio: ['ignore', 'inherit', 'inherit', 'ipc'], detached: true, windowsHide: true,
+    env: process.env,
+  })
+  let ready = false, requestedStop = false
+  const exited = new Promise((resolve) => database.once('exit', (code, signal) => {
+    resolve({ code, signal })
+    if (ready && !requestedStop) { process.exitCode = 1; shutdown() }
+  }))
+  const url = await new Promise((resolve, reject) => {
+    database.once('error', reject)
+    database.once('exit', () => { if (!ready) reject(new Error('Local database helper stopped before startup completed.')) })
+    database.on('message', (message) => {
+      if (message?.type === 'ready' && typeof message.url === 'string') { ready = true; resolve(message.url) }
+    })
+  })
+  return {
+    url,
+    async stop() {
+      requestedStop = true
+      if (database.connected) database.send({ type: 'stop' }, () => {})
+      const result = await exited
+      if (result.code !== 0) throw new Error(`Local database helper failed to close cleanly (${result.code ?? result.signal}).`)
+    },
+  }
 }

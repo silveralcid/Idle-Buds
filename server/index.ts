@@ -47,7 +47,10 @@ try {
   }
   process.on('SIGINT', shutdown)
   process.on('SIGTERM', shutdown)
-  if (lan && process.connected) process.on('message', (message) => { if (message === 'shutdown') shutdown() })
+  if (process.connected) {
+    process.on('message', (message) => { if (message === 'shutdown') shutdown() })
+    process.on('disconnect', shutdown)
+  }
   const address = await app.listen({ host, port })
   if (lan) {
     console.log(['', '========================================', 'IDLE BUDS | LAN PLAYTEST', '========================================',

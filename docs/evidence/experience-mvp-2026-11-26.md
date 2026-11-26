@@ -1,6 +1,6 @@
 # Experience MVP implementation evidence
 
-**Date:** November 26, 2026. **Source:** `feat/experience-mvp`, based on `main` at `742bb33`. This report is part of the single Experience MVP PR; the PR identifies its exact reviewed head, hosted checks and merge result. **Authorization:** Silver explicitly requested immediate implementation in one PR, no issue creation, and merge when verified. See [authority](../design/AUTHORITY.md) and [current release](../project/CURRENT-RELEASE.md).
+**Date:** November 26, 2026. **Source:** `feat/experience-mvp`, based on `main` at `742bb33`; implementation commit `d79e8b3`. This report is part of [Experience MVP PR #9](https://github.com/silveralcid/Idle-Buds/pull/9), which identifies the exact final reviewed head, hosted checks and merge result. **Authorization:** Silver explicitly requested immediate implementation in one PR, no issue creation, and merge when verified. See [authority](../design/AUTHORITY.md) and [current release](../project/CURRENT-RELEASE.md).
 
 ## Delivered experience
 
@@ -17,7 +17,7 @@
 
 Save schema 2 is independent of combat rules version 1. SQL migration 002 accepts both supported save versions; migration 001 is unchanged. Migrating version 1 preserves earned assets, including inventory above the new capacity, and keeps a stable existing Bud assignment where legacy jobs duplicate a skill. Legacy cross-skill Bud queues are filtered to their retained skill so a future queued job cannot recreate that conflict. Only incompatible future/incomplete duplicate work is removed.
 
-The retired remote-work upgrade is refunded once at its recorded catalog costs. Refund value above the wallet cap remains pending until room exists. State validation and database transactions protect the old save until the migrated copy commits. Existing escrow receives reservation metadata before reconciliation. No normal account reset, database replacement, local/LAN launcher change or public deployment is part of this pass.
+The retired remote-work upgrade is refunded once at its recorded catalog costs. Refund value above the wallet cap remains pending until room exists. State validation and database transactions protect the old save until the migrated copy commits. Existing escrow receives reservation metadata before reconciliation. No normal account reset, database replacement or public deployment is part of this pass. The existing local/LAN modes and credentials remain compatible; the same PR repairs the pre-existing launcher shutdown defect exposed by hosted verification.
 
 ## Observed verification
 
@@ -34,6 +34,8 @@ Environment: isolated Linux workspace, Node 24.22.3, npm 11.19.1, real temporary
 | Documentation budget and migration-integrity checks | PASS; final report edits checked again at PR preparation | Source preservation and compact entrypoints |
 | `npm audit --audit-level=high` | PASS at the configured threshold | Three moderate transitive development findings in the existing migration tool chain; no forced major downgrade applied |
 | Full registered `npm run validate`, including LAN | BLOCKED locally at LAN interface enumeration | `os.networkInterfaces()` returned `uv_interface_addresses Unknown system error 1` in this host. LAN tests remain enabled and required in hosted CI; no acceptance check was skipped in the committed pipeline |
+| First hosted run on `d79e8b3` | FAIL at LAN shutdown; 65/65 rules/database tests and 16/18 browser scenarios passed | [Run 45823220348](https://github.com/silveralcid/Idle-Buds/actions/runs/45823220348) reached actual private-IP registration, retries, gathering and chat, then both LAN cases exited 130 instead of completing shutdown. Final post-fix status belongs to PR #9 |
+| Post-fix launcher lifecycle regressions | PASS: 3/3 real-process tests, 7.73 seconds | Supplied database remains running; owned database and saved account survive clean shutdown/restart; both children close on launcher loss. The full rules/database/tool suite now contains 68 tests |
 | Physical phone, Steam Deck and controller | NOT RUN | Viewport tests and synthetic Gamepad API hardware do not establish physical-device compatibility or enjoyment |
 
 Browser checks exercise real UI events, authenticated commands and database state. The Gamepad API device is simulated, while focus movement, option staging, confirmation/cancellation, network calls and resulting equipment are real. The combat test confirms playback submits no commands and remains paused while a newer authoritative patrol result arrives.
@@ -43,5 +45,9 @@ Manual visual inspection covered compact production, inventory and collection at
 ## Failures resolved and evidence limits
 
 Integration caught and fixed the old SQL version-1-only constraint, a duplicate navigation selector in the updated multiplayer browser test, selectors that committed equipment during gamepad browsing, hidden/secondary modal focus candidates, disappearing chat drafts, and legacy cross-skill queued Bud work. No database gate or gameplay assertion was removed to obtain a pass. Initial failure logs and final outputs remain in ignored `.repo-local/`.
+
+The first hosted LAN failure was independently present on the preceding LAN PR's `ad86e53` head ([run 45804186676](https://github.com/silveralcid/Idle-Buds/actions/runs/45804186676)). Source review traced it to `embedded-postgres` registering a process-global `exit-hook` during module import, including when the launcher uses an externally supplied database. That hook forces interrupt exit 130 before the launcher's graceful shutdown completes and intercepts a literal `shutdown` IPC message. A real loopback reproduction confirmed exit 130 before the fix.
+
+The repair lazy-loads that dependency only in a database owner and uses a small detached IPC helper for launcher-owned PostgreSQL. The supervisor closes HTTP first, then requests owned-database shutdown with a private object message. A supplied database stays running. The HTTP child uses IPC in both LAN and loopback modes for Windows-compatible graceful shutdown; HTTP and database children close when their parent disappears. Credentials remain in private IPC, and the exit-zero/shutdown-marker assertions remain required. Focused real-process regressions cover supplied-database survival, saved-state restart with signal/IPC shutdown, and parent-loss cleanup. This Linux qualification does not claim physical Windows acceptance.
 
 Local browser coverage does not establish trusted-LAN enumeration on this host, Windows startup, physical touch/controller behavior, combat balance or long-term economics. Check the PR's hosted status for the exact head before merging. The next human session should use `npm run play:lan` with the existing world, test the compact interface on the phone, and observe whether one-click work, independent helpers, storage and battle readability feel right. Slot costs, unlimited-stack economics, final creature artwork/audio and hardware qualification remain explicit follow-ups.

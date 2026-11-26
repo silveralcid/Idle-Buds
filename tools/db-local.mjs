@@ -1,4 +1,3 @@
-import EmbeddedPostgres from 'embedded-postgres'
 import { randomBytes } from 'node:crypto'
 import { mkdir, readFile, writeFile, access, mkdtemp, rm } from 'node:fs/promises'
 import { resolve, join } from 'node:path'
@@ -9,6 +8,8 @@ export { assertTestDatabase } from './database-guard.ts'
 // Development/test convenience only. Production connects to DATABASE_URL.
 // The package runs an actual local PostgreSQL process, not a database emulator.
 export async function localDatabase({ temporary = false, playtest = false } = {}) {
+  // This dependency installs process-wide exit hooks. Load it only in a database owner.
+  const { default: EmbeddedPostgres } = await import('embedded-postgres')
   const base = resolve('.repo-local')
   await mkdir(base, { recursive: true })
   const directory = temporary ? await mkdtemp(join(base, 'pg-test-')) : join(base, playtest ? 'postgres-playtest' : 'postgres')

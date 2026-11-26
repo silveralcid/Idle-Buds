@@ -1,6 +1,6 @@
 # Experience MVP implementation, November 26, 2026
 
-**Status:** IMPLEMENTED AND LOCALLY VERIFIED; hosted merge checks pending
+**Status:** IMPLEMENTED; final verification and merge status are recorded in [PR #9](https://github.com/silveralcid/Idle-Buds/pull/9)
 **Owner:** integration lead (root)
 **Base:** `main` at `742bb33`; branch `feat/experience-mvp`
 **Authorization:** Owner explicitly requested the agreed playtest improvements in one PR, no issue creation, and authorized merge after verification. This supersedes the earlier planning-only boundary for this scope.
@@ -18,7 +18,7 @@ No new hosting, content expansion, independent Bud skill XP, equipment loadout s
 | Rules and inventory | Production/state/storage/migration rules, market transactions, related unit/integration tests | existing game | conservation, migration, switching, blocked recovery tests | Complete |
 | Production UI | activities, inventory/outpost, collection, production CSS, display names | rules contract | compact resource and inventory flows | Complete |
 | Combat | resolver timeline/snapshots, encounters, PvP, combat UI and replay | existing resolver | same outcome, typed replay, legacy result handling | Complete |
-| Integration | app shell, navigation, input, chat, canonical docs, browser tests | all lanes | lint/types/build, real DB/browser, source review | Local checks passed; hosted checks pending |
+| Integration | app shell, navigation, input, chat, canonical docs, browser tests | all lanes | lint/types/build, real DB/browser, source review | Implemented; exact final checks and merge in PR #9 |
 
 All writers share this isolated checkout with disjoint file ownership. Combat and rules share only explicitly separated type declarations. Integration owns the single commit series and PR. No separate branch PRs or tracker issues.
 
@@ -39,4 +39,4 @@ Keep legacy saves readable via an explicit migration. Preserve assets even above
 
 ## Current position
 
-Implementation, reference inspection and the final legacy-queue compatibility regression are complete. The [experience evidence report](../../evidence/experience-mvp-2026-11-26.md) records local passes, the host-specific LAN enumeration block, source review fixes and physical-device limits. Hosted checks, exact head/base and merge remain the integration lead's final gate.
+Implementation, reference inspection and the legacy-queue compatibility regression are complete. Hosted verification also identified a pre-existing LAN shutdown defect; the same PR repairs database lifecycle ownership and server IPC cleanup. The [experience evidence report](../../evidence/experience-mvp-2026-11-26.md) records observed results and physical-device limits. Use PR #9 for the exact final head/base, hosted checks and merge state rather than treating this archived execution plan as a live status ledger. The next product step is the owner's physical-device playtest under [Next Milestone](../../project/NEXT-MILESTONE.md).

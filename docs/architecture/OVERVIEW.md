@@ -11,7 +11,7 @@ Idle Buds is a single React/TypeScript/Vite application with one authoritative F
 | Persistence | `server/db.ts`, `migrations/` | PostgreSQL transactions, account state, sessions and command receipts |
 | Shared world | `server/market.ts`, `server/social.ts`, `server/pvp.ts` | Escrow, orders/store, social/clans, immutable defense snapshots and ranked outcomes |
 | Tests | `tests/unit/`, `tests/integration/`, `tests/e2e/` | Same rules, real PostgreSQL and browser interactions |
-| Local play | `tools/play.mjs`, `tools/db-local.mjs`, `tools/fixtures.ts` | Loopback database/application startup and isolated test-account setup |
+| Local play | `tools/play.mjs`, `tools/play-db.mjs`, `tools/db-local.mjs`, `tools/fixtures.ts` | Local/LAN application supervision, owned database lifecycle and isolated test-account setup |
 
 ## Four concrete contracts
 
@@ -28,3 +28,5 @@ Idle Buds is a single React/TypeScript/Vite application with one authoritative F
 Bcrypt password hashes, opaque server sessions with stored token hashes, revocation/expiry, HttpOnly SameSite cookies, exact-origin JSON writes and rate limits protect local/private accounts. Future RNG seeds and egg genetics do not enter player views. The explicit trusted-home-LAN mode permits the configured private HTTP origin with ordinary account login; other nonloopback startup retains HTTPS/invite requirements. Fixtures/reset are loopback-only and restricted to the exact `idle_buds_test` database. There is no HTTP time skip or fixture mutation route. Interface preferences persist per account in the browser, while gameplay state remains server-owned.
 
 `dist/` contains only the browser application. Reference art, imported research and archives remain outside the build. The optional embedded-postgres package is development-only and starts real PostgreSQL; an existing database can be provided with `DATABASE_URL`. There are no Redis, microservices, queues, ECS, native shells or external paid services. Read [development](../engineering/DEVELOPMENT.md) for execution and [verification](../engineering/VERIFICATION.md) for evidence limits.
+
+The local launcher supervises HTTP shutdown before stopping a database it owns. Its small IPC database helper isolates the embedded package's process-wide exit hooks from the supervisor and terminal interrupts; parent disconnect also requests database cleanup. An externally supplied database is never owned or stopped by the launcher. Database credentials cross the private IPC channel and are not printed in the startup banner.
