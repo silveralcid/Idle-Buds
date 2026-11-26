@@ -1,8 +1,8 @@
 # Idle Buds
 
-Idle Buds is an idle-first creature-collection MMO concept built around progression at your own pace, meaningful creatures, and a shared player economy and community. This repository is the project's **single source of truth** for design, engineering, research and development.
+Idle Buds is an idle-first creature-collection multiplayer game built around progression at your own pace, meaningful creatures, and a shared player economy and community. This repository is the project's **single source of truth** for design, engineering, research and development.
 
-**Current state:** consolidated project knowledge and a minimal React/TypeScript/Vite development foundation. Gameplay has not been implemented by this migration. No application has been deployed. The [current scope and approvals](docs/design/AUTHORITY.md) preserve the BEAT BAES gate and the owner's limited consolidation exception.
+**Current state:** local multiplayer MVP implementation on React/TypeScript/Vite, Fastify and PostgreSQL. The [implementation report](docs/evidence/mvp-implementation-2026-11-26.md) separates working systems, actual verification and unfinished playtest gates. No public game has been deployed. The owner authorized this MVP implementation and merge on November 26, 2026; see [scope and approvals](docs/design/AUTHORITY.md).
 
 ## Start with the right authority
 
@@ -16,7 +16,7 @@ Idle Buds is an idle-first creature-collection MMO concept built around progress
 | Developer or AI agent onboarding | [START-HERE](START-HERE.md) and [AGENTS](AGENTS.md) |
 | All topic owners | [Documentation index](docs/INDEX.md) |
 
-An approved design decision is not automatically release scope or permission to implement. Research, prototypes, legacy code and art references do not become requirements through migration. No final Current Release Specification is present yet.
+An approved design decision is not automatically release scope or permission to implement. Research, prototypes, legacy code and art references do not become requirements through migration. The [Current Release Specification](docs/project/CURRENT-RELEASE.md) owns the bounded local/private MVP.
 
 ## Develop locally
 
@@ -24,10 +24,10 @@ Use Node.js 24 and npm. Python 3.11+ is required for repository validation only.
 
 ```sh
 npm ci
-npm run dev
+npm run play
 ```
 
-Vite prints the localhost address. The page is a neutral development shell. [Development setup](docs/engineering/DEVELOPMENT.md) includes browser prerequisites and the full command reference.
+Open `http://127.0.0.1:3000`. Register a fresh Tender to gather, craft, catch and deploy your first Bud. `npm run playtest` starts a separate local fixture database with progressed multiplayer accounts. [Development setup](docs/engineering/DEVELOPMENT.md) includes browser prerequisites and the full command reference.
 
 ```sh
 npm run lint
@@ -41,16 +41,16 @@ python3 tools/validate_migration.py
 npm audit --audit-level=high
 ```
 
-Keep actual check commands registered in [.repo/project.json](.repo/project.json). Test results apply to the source and environment exercised. Foundation/browser checks do not prove gameplay, multiplayer, platform compatibility or subjective fun.
+Keep actual check commands registered in [.repo/project.json](.repo/project.json). Test results apply to the source and environment exercised. Checks establish only the behavior actually exercised. Human enjoyment, physical-device compatibility and live economy balance need their own evidence.
 
 ## Repository map
 
 | Path | Purpose |
 |---|---|
-| `src/` | Browser application; documented homes for future game rules and data |
+| `src/` | Browser application, shared deterministic game rules and original data |
 | `public/` | Only rights-cleared production assets; no reference imports |
-| `server/` | Documented boundary for the future authoritative backend |
-| `tests/e2e/` | Browser checks of built output |
+| `server/` | Authoritative account, game, economy, community and ranked server |
+| `tests/` | Rule tests, real PostgreSQL integration and browser gameplay |
 | `docs/design/`, `docs/project/` | Canonical design, governance and scope |
 | `docs/game/`, `docs/engineering/` | Game and engineering standards |
 | `docs/research/`, `docs/reference/` | Attributed, non-authoritative research and visual references |
@@ -59,13 +59,13 @@ Keep actual check commands registered in [.repo/project.json](.repo/project.json
 | `.agents/`, `.codex/`, `.claude/` | Shared AI workflows and thin provider adapters |
 | `.github/` | Review templates and bounded validation workflows |
 
-[Architecture](docs/architecture/OVERVIEW.md) records the approved web stack. The future initial backend is a single Node/TypeScript/Fastify service using PostgreSQL. No server, database, auth system, queue, infrastructure provider or native shell is provisioned by this foundation. Tauri remains a later candidate. No Rust or Bevy implementation is inherited.
+[Architecture](docs/architecture/OVERVIEW.md) records one browser app, one Fastify service, one PostgreSQL database and one pure rules implementation. No Redis, microservices, ECS, native shell or paid provider is required. Local PostgreSQL starts from a development-only package when an existing database is not supplied.
 
 ## Standards and workflow
 
 Follow [code quality](docs/engineering/CODE-QUALITY.md), [risk-based testing](docs/engineering/TESTING.md), [game development](docs/game/development-lifecycle.md), [asset/save safety](docs/game/assets-and-saves.md), and [delivery](docs/agents/delivery.md). Reuse before building, keep scope small, fix concrete failures, and update the existing owner. Use isolated branches and pull requests; respect protections and retain exact verification evidence.
 
-The foundation needs no secrets. Never expose credentials through `VITE_*` variables. Reference art, third-party research and archived source stay outside runtime/build inputs. Review rights before using any material in a production game.
+Server credentials and local database state stay in ignored environment/local files. Never expose credentials through `VITE_*` variables. Reference art, third-party research and archived source stay outside runtime/build inputs. Review rights before using any material in a production game.
 
 ## Sources and recovery
 
@@ -73,6 +73,6 @@ The [Drive migration](docs/migration/google-drive.md) accounts for all five sour
 
 The [legacy archive](docs/archive/README.md) preserves all 50 original branch tips. Main's historical implementation is available at `archive/legacy-2026-11-25`; newer combat work and divergent tips have named archive refs. History has not been rewritten.
 
-## Next milestone
+## Continue implementation and playtesting
 
-Use the existing design to approve one short MVP boundary and measurable acceptance plan, confirm the gameplay gate, then authorize the first integrated onboarding slice. Do not restart exhaustive design interviews. Incremental work should lead toward the small complete ecosystem required for holistic product validation. [The next-milestone note](docs/project/NEXT-MILESTONE.md) preserves the exact boundary between that recommendation and an authorized assignment.
+Read [Miyu handoff](docs/project/MIYU-HANDOFF.md), the [implementation report](docs/evidence/mvp-implementation-2026-11-26.md) and [next milestone](docs/project/NEXT-MILESTONE.md). Continue from verified current main; do not restart planning or replace the application. Remaining work must preserve the fixed Blueprint v2 scope and pass/fail gates. Use Sol at Extra High effort on Cloud Work or the server rig as requested by the owner. Public deployment and commercial release remain separate decisions.

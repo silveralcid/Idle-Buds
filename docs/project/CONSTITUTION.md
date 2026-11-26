@@ -1,4 +1,4 @@
-> Canonical Constitution. Original adopted text is preserved below. The current owner-authorized repository consolidation is a limited exception documented in [authority and scope](../design/AUTHORITY.md); it does not authorize gameplay or lift the BEAT BAES gate.
+> Canonical Constitution. Original adopted text is preserved below. Later scoped owner authorization is documented in [authority and scope](../design/AUTHORITY.md): November 25 consolidation, followed by November 26 MVP gameplay implementation and merge. Neither is a claim that BEAT BAES has released.
 
 # Game Development Constitution
 

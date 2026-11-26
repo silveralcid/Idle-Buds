@@ -8,7 +8,13 @@
 4. The [Idea Incubator](idea-incubator.md) owns captured ideas and qualification/promotion history. A recorded promotion applies only to its explicitly approved portion.
 5. The [design history and research log](../research/design-history.md), [art boards](../reference/art/README.md), imported research and [legacy archive](../archive/README.md) provide evidence and references. They do not create product requirements.
 
-There is no approved Current Release Specification in the migrated folder. Approved design, planning content targets, a release direction, implementation authorization, and measured acceptance are separate states. Do not invent a release commitment to fill that gap.
+The [Current Release Specification](../project/CURRENT-RELEASE.md) records the owner-authorized local/private MVP envelope. Implementation authorization and measured acceptance remain separate: merged code does not establish that every engineering gate has passed.
+
+## Owner-authorized MVP implementation (November 26, 2026)
+
+The owner explicitly instructed: “Build and implement this now. This is not audit or research. Implement to your fullest capacity within chat mode. Merge straightaway with a clear finished and what’s left and what was done report merged to repo.” The supplied scope is MVP Execution Blueprint v2. The owner also requested a durable continuation for Miyu in Cloud Work or the server rig using Sol at Extra High effort.
+
+This is direct authorization for the bounded MVP gameplay, local test database, dependencies, tests, commits, push and merge to `main`, plus the repository handoff. It supersedes the earlier planning-only restriction **for this MVP work**. It is not evidence that BEAT BAES released and does not alter the historical Constitution text. No public deployment, paid infrastructure, commercial launch, extra content or unrelated project changes are authorized. The current integration lead owns shared contracts and verification; delegated writers own disjoint surfaces.
 
 ## Owner-authorized consolidation exception
 

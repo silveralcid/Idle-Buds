@@ -40,7 +40,7 @@
         "test"
       ],
       "cwd": ".",
-      "timeout_seconds": 180,
+      "timeout_seconds": 600,
       "mutates_external": false
     },
     "build": {
@@ -73,5 +73,5 @@
       "mutates_external": false
     }
   },
-  "notes": "Foundation only. Browser tests build and verify actual production output; setup:browser is a separate local prerequisite. No pure game rules, backend, persistence or gameplay exists, so Vitest/database integration/formatting commands are not yet applicable. npm audit reads registry advisories; no external mutation. No deployments."
+  "notes": "MVP implementation. npm test starts isolated real PostgreSQL (or requires an explicit loopback idle_buds_test DATABASE_URL), migrates, runs deterministic rules/database tests, builds and exercises the real server in Chromium. Browser install is a local prerequisite. No deployment or production database mutation. Hosted CI results are reported separately."
 }

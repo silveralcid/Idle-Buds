@@ -1,46 +1,64 @@
-# Local development and checks
+# Local development and verification
 
-## Prerequisites
+## Start a fresh game
 
-Use Node.js 24 (the repository version file is authoritative), npm and Git. Python 3.11+ runs the inherited repository tools. No cloud account, database, API key, Rust toolchain or Docker is needed for the foundation. Review package scripts before installation; dependencies are exact in the committed lockfile.
+Use the pinned Node.js 24/npm runtime and a nonroot account. Python 3.11+ is needed only for repository checks. Review package scripts, then:
 
 ```sh
 npm ci
-npm run dev
+npm run play
 ```
 
-Open the loopback URL printed by Vite. The page is a non-game development shell. It contains no gameplay, persistence or connected backend. The [architecture overview](../architecture/OVERVIEW.md) explains approved future boundaries.
+Open `http://127.0.0.1:3000`. Register a username and a password of 12+ characters (at most 72 UTF-8 bytes). The launcher builds the app, starts a project-local **real PostgreSQL** instance, applies versioned migrations and runs Fastify serving the app. Default saves remain under ignored `.repo-local/postgres/`. Stop with Ctrl+C, then use the same command to resume saved accounts. No Docker or cloud service is required. Optional package platform support follows the locked embedded-postgres distribution; the current verification host is Linux x64. Windows/macOS are not automatically qualified by that fact.
+
+The PostgreSQL distribution needs local library symlinks; the reviewed package recreates them through `autoRehydrateSymlinks` on startup. No global database package, OS user or service is installed. The local database listens only on loopback and uses SCRAM authentication with a random local password. Do not copy its files while the database is running.
+
+## Seeded multiplayer playtest
+
+```sh
+npm run playtest
+```
+
+This uses a **separate** local `idle_buds_test` database on port 55434. Accounts `alpha` and `beta` have midgame inventories, compatible parents, unlocked zones and formations; `fresh` starts empty. All use the clearly test-only password `Local-playtest-only-2026`. Use separate browser profiles/private windows for simultaneous accounts. The shared server performs real trades, clan changes and ranked battles. Existing fixture progress is preserved on relaunch.
+
+```sh
+npm run playtest:reset
+```
+
+The reset command explicitly clears only the loopback `idle_buds_test` database, then recreates those fixtures. It refuses other database names or remote hosts. Never use these public fixture credentials for a deployed service. No browser/API endpoint can seed players or skip time.
+
+## Existing PostgreSQL and hot reload
+
+Copy `.env.example` to ignored `.env` only when configuration is needed. Set `DATABASE_URL` to the intended development database. `npm run db:migrate` applies migrations; `npm start` runs the server against an existing migrated database. `npm run play` can also launch with an existing `DATABASE_URL` and will not start a second database. No scripts erase an external database automatically.
+
+For UI hot reload use two terminals: `npm run dev:server` and `npm run dev`. The Vite origin is `http://127.0.0.1:5173`, proxied to Fastify on port 3000. Set `ALLOWED_ORIGIN` to the actual browser origin if customizing it. Default local origins include both standard ports. Every `VITE_*` variable is public: secrets belong only in server environment configuration. Nonloopback binding requires a private invite and HTTPS origin; this does not itself authorize deployment.
 
 ## Verification
 
 ```sh
 npm run lint
 npm run typecheck
-npm run build
 npm run setup:browser
 npm test
+npm run test:restore
+npm run experiments
+npm run experiments:world
 python3 tools/repo.py check --tests
 python3 tools/repo.py docs budget --strict
 python3 tools/validate_migration.py
 npm audit --audit-level=high
 ```
 
-Use `py -3` in place of `python3` on Windows if needed. Linux browser dependencies may be needed on a new machine; use that machine's approved setup process. `npm test` builds, then serves and checks the production output through localhost. `npm run setup:browser` keeps downloaded browsers in ignored `.repo-local/browsers`. `PLAYWRIGHT_EXECUTABLE_PATH` can select an installed compatible browser when the normal CDN is unavailable; record that qualification environment. Browser installation is a development setup step, not a runtime requirement.
+`npm test` creates a disposable real PostgreSQL cluster, applies migrations, runs Vitest rule/database tests, builds production output and drives that output through Fastify with Playwright at desktop and narrow mobile viewports. It closes/removes its owned database afterward. To use an existing test service, explicitly provide a loopback `DATABASE_URL` named exactly `idle_buds_test`; its test data is disposable. `npm run test:unit`, `npm run test:integration` and `npm run test:browser` select narrower checks. The browser install uses ignored `.repo-local/browsers`; `PLAYWRIGHT_EXECUTABLE_PATH` may select an existing compatible Chromium. Record that environment in test evidence.
 
-The browser suite verifies this foundation only. There are no game-rule unit tests or database integration tests yet because those behaviors are absent. Add Vitest with the first real deterministic game rules and transaction/concurrency coverage with the first authoritative persistence feature. Do not report the Python helper suite as gameplay tests.
+`test:restore` creates a fresh disposable cluster, seeds three accounts, stops PostgreSQL, makes a cold filesystem backup, removes the original temporary data directory, restores the backup, restarts and verifies complete player states and migration history. This proves the local cold-restore procedure, not production online backups or cross-host failover.
 
-The repository-health and web-validation GitHub workflows run bounded checks without deployments, stored credentials or paid model calls. A workflow file is not evidence that it ran successfully; inspect the actual head commit's jobs.
+`experiments` runs fixed-budget seeded onboarding, equal-strength paired combat styles, offline boundaries, inheritance, 1/7/30-day production policies and 100 synthetic ranked formations using the same rules as the server. Full raw outcomes go to ignored `.repo-local/experiments.json`.
 
-## Environment and dependencies
+`experiments:world` creates its own disposable real PostgreSQL database and exercises Fastify commands with an injected gameplay clock. Empty, low-volume and active-market cohorts record daily wallet/resource/escrow conservation, tax, NPC stock and 7/30-day source/sink flows in ignored `.repo-local/world-experiments.json`. Fixed fixtures and scripted prices measure accounting and behavior, not live equilibrium. Neither experiment command proves human retention.
 
-The current app needs no environment variables. `.env.example` records that fact. Keep real `.env*` files and credentials ignored. Every `VITE_*` value is public in the browser bundle; server secrets must never use that prefix or enter frontend imports. Add real environment names and validation alongside their first owning integration.
+## Build, rights and recovery
 
-Use one npm lockfile and `npm ci` for reproduction. Review direct/transitive upgrades, supported runtime requirements, license notices, audit output and affected behavior. Do not use `npm audit fix --force` or broaden the stack automatically. Prefer an applicable patch, then rerun affected checks. Dependency tools are development dependencies unless runtime use is demonstrated.
+`npm run build` produces the browser `dist/`; server source executes through Node 24's native erasable TypeScript support. Publish neither repository root nor private `.repo-local` contents. Locked package licenses and original content provenance are recorded in the implementation report. `publicDir` stays disabled; reference boards and donor code do not enter runtime. Source version `0.1.0-dev.1` denotes an unreleased candidate.
 
-## Production preparation
-
-`npm run build` creates `dist/`; `npm run preview` serves the result locally. Only that reviewed build output is a potential frontend deployment artifact. Never deploy the repository root, Drive exports, art references, research, legacy snapshots or private evidence. No hosting provider or deployment is configured, and this shell is not a game release.
-
-Before a real release, follow [game release preparation](../game/release.md): approve scope, verify actual server/persistence boundaries, review asset/dependency rights, validate browser inputs and save migrations, inspect the exact artifact, establish backup/rollback procedures and obtain applicable release/deployment authorization. Version `0.0.0` denotes this unreleased foundation, not an announced game version.
-
-`publicDir` is disabled until an approved feature needs public assets. Existing `public/` guidance and reference materials are not copied into `dist/`. Add approved assets through explicit imports or enable the public directory only with rights-reviewed contents.
+Keep future save changes behind explicit migrations and content/rules versions. Back up a local database only after clean shutdown or with normal PostgreSQL backup tooling. Never reset real accounts to resolve a migration problem. The [implementation report](../evidence/mvp-implementation-2026-11-26.md) owns actual verification and unfinished acceptance; the [Miyu handoff](../project/MIYU-HANDOFF.md) owns next actions.

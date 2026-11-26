@@ -12,6 +12,7 @@ One **canonical owner per topic**. This is a pointer table, not a duplicate spec
 | Source coverage and migration provenance | [Drive migration](migration/google-drive.md), [universal standards](migration/universal-standards.md), [game standards](migration/game-standards.md), [research migration](migration/research.md) |
 | Imported game and engineering research | [Source snapshot and qualifications](research/upstream/README.md) |
 | Project purpose, scope, audience, success criteria | [Project brief](project/BRIEF.md) |
+| Authorized MVP scope and execution | [Current release](project/CURRENT-RELEASE.md), [implementation report](evidence/mvp-implementation-2026-11-26.md), [Miyu handoff](project/MIYU-HANDOFF.md) |
 | Architectural boundaries and interface owners | [Architecture overview](architecture/OVERVIEW.md) |
 | Shared Codex and Claude operating rules | [AGENTS.md](../AGENTS.md) |
 | Core build philosophies and reuse-first default | [AGENTS.md](../AGENTS.md#core-build-philosophies) |
