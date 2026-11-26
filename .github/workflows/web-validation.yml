@@ -15,9 +15,9 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  web-foundation:
+  mvp-verification:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - name: Check out reviewed source
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -32,7 +32,7 @@ jobs:
         run: npm ci
       - name: Install Chromium and required runner libraries
         run: npm run setup:browser -- --with-deps
-      - name: Lint, typecheck, build and exercise the foundation
+      - name: Lint, typecheck, real PostgreSQL and desktop/mobile gameplay
         run: npm run validate
       - name: Check current dependency advisories
         run: npm audit --audit-level=high

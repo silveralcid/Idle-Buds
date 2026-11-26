@@ -1,8 +1,8 @@
 {
   "name": "idle-buds",
   "private": true,
-  "version": "0.0.0",
-  "description": "Idle Buds web development foundation. Gameplay is not implemented.",
+  "version": "0.1.0-dev.1",
+  "description": "Idle Buds local multiplayer MVP implementation and deterministic playtest harness.",
   "type": "module",
   "engines": {
     "node": ">=24.22.3 <25",
@@ -13,25 +13,49 @@
     "dev": "vite --host 127.0.0.1",
     "build": "tsc -b && vite build",
     "typecheck": "tsc -b",
-    "lint": "oxlint --deny-warnings src vite.config.ts playwright.config.ts tests/e2e",
+    "lint": "oxlint --deny-warnings src server tools/*.mjs tools/*.ts vite.config.ts vitest.config.ts playwright.config.ts tests",
     "preview": "vite preview --host 127.0.0.1 --port 4173 --strictPort",
-    "test": "npm run build && node tests/e2e/playwright.mjs test",
+    "test": "node tools/test.mjs",
     "smoke": "npm test",
     "setup:browser": "node tests/e2e/playwright.mjs install chromium",
-    "validate": "npm run lint && npm test"
+    "validate": "npm run lint && npm run typecheck && npm test",
+    "dev:server": "node --env-file-if-exists=.env tools/play.mjs",
+    "start": "node --env-file-if-exists=.env server/index.ts",
+    "play": "npm run build && node --env-file-if-exists=.env tools/play.mjs",
+    "db:migrate": "node --env-file-if-exists=.env tools/migrate.mjs",
+    "test:unit": "vitest run tests/unit",
+    "test:integration": "node tools/test.mjs integration",
+    "test:browser": "node tools/test.mjs browser",
+    "playtest": "npm run build && node --env-file-if-exists=.env tools/play.mjs --fixtures",
+    "playtest:reset": "npm run build && node --env-file-if-exists=.env tools/play.mjs --fixtures --reset",
+    "test:restore": "node tools/restore-check.mjs",
+    "experiments": "node tools/experiments.ts",
+    "experiments:world": "node tools/world-experiments.mjs"
   },
   "dependencies": {
+    "@fastify/cookie": "11.1.5",
+    "@fastify/rate-limit": "11.3.0",
+    "@fastify/static": "10.1.12",
+    "bcryptjs": "3.0.3",
+    "fastify": "5.12.8",
+    "pg": "8.23.1",
     "react": "19.3.1",
-    "react-dom": "19.3.1"
+    "react-dom": "19.3.1",
+    "seedrandom": "3.0.5"
   },
   "devDependencies": {
     "@playwright/test": "1.65.1",
     "@types/node": "24.19.4",
+    "@types/pg": "8.23.1",
     "@types/react": "19.3.3",
     "@types/react-dom": "19.3.0",
+    "@types/seedrandom": "3.0.8",
     "@vitejs/plugin-react": "6.3.0",
+    "embedded-postgres": "18.7.0-beta.19",
+    "node-pg-migrate": "9.0.0",
     "oxlint": "1.95.0",
     "typescript": "7.0.2",
-    "vite": "8.3.8"
+    "vite": "8.3.8",
+    "vitest": "5.1.2"
   }
 }

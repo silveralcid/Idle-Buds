@@ -6,11 +6,11 @@ Compact shared router for humans, Codex and Claude. Detailed rules have one owne
 
 Inspect live Git state and relevant files. Read [START-HERE](START-HERE.md), [authority and scope](docs/design/AUTHORITY.md), and the applicable owner in [docs/INDEX](docs/INDEX.md). For routine tasks, load only the affected sections. `python3 tools/repo.py context --topic implementation` prints paths, not document bodies. Inspect nested instructions before editing a new subtree.
 
-The [Constitution](docs/project/CONSTITUTION.md) governs work. The current consolidation explicitly authorizes repository migration and a non-game web foundation only. It does not establish that the BEAT BAES demo gate has been met. Do not implement gameplay, functional game prototypes, production assets or deployments without applicable owner authorization. Never infer permission from design enthusiasm or imported research.
+The [Constitution](docs/project/CONSTITUTION.md) governs work. The owner's November 26, 2026 instruction explicitly authorizes Blueprint v2 MVP gameplay implementation, local verification and merge to main; see [Current Release Specification](docs/project/CURRENT-RELEASE.md) and authority. This scoped authorization does not assert that BEAT BAES shipped or authorize public deployment, paid services or added release scope.
 
 ## Authority
 
-The [Bible](docs/design/design-bible.md) owns current design intent, including provisional decisions and open questions. The [Idea Incubator](docs/design/idea-incubator.md) owns capture, qualification and promotion. Design promotion, release scope, implementation and release are separate decisions. No final Current Release Specification exists yet. Historical research, archive code and art boards are reference material, not requirements. Preserve source attribution and approval status. Apply explicit later decisions over stale checkpoints as described in [authority](docs/design/AUTHORITY.md).
+The [Bible](docs/design/design-bible.md) owns current design intent, including provisional decisions and open questions. The [Idea Incubator](docs/design/idea-incubator.md) owns capture, qualification and promotion. Design promotion, release scope, implementation and release are separate decisions. The Current Release Specification owns the authorized MVP envelope; current implementation evidence is recorded separately. Historical research, archive code and art boards are reference material, not requirements. Preserve source attribution and approval status. Apply explicit later decisions over stale checkpoints as described in [authority](docs/design/AUTHORITY.md).
 
 The repository is the source of truth. Drive originals are historical backups; ongoing work must not require Drive or upstream checkouts. Never load the whole design/research corpus for a small task.
 
@@ -25,13 +25,13 @@ The repository is the source of truth. Drive originals are historical backups; o
 
 ## Web and game boundaries
 
-[Architecture](docs/architecture/OVERVIEW.md) records the approved React/TypeScript/Vite direction and future Node/Fastify/PostgreSQL authority. Keep future pure rules separate from UI and external I/O. No Rust, Bevy, Cargo, state framework, database service or native shell is needed by this foundation. Add dependencies only for an authorized current requirement.
+[Architecture](docs/architecture/OVERVIEW.md) records the implemented React/TypeScript/Vite client and Node/Fastify/PostgreSQL authority. Keep pure rules separate from UI and external I/O. Use one React/Vite app, one Fastify server and PostgreSQL. No Rust, Bevy, Cargo, state framework, microservices or native shell. Add dependencies only for an authorized current requirement.
 
 Use [game lifecycle](docs/game/development-lifecycle.md), [game testing](docs/game/testing.md), [assets/saves](docs/game/assets-and-saves.md) and [release preparation](docs/game/release.md) when relevant. Real browser input and matching source/artifact evidence are necessary for behavioral claims; compilation and foundation smoke checks do not prove gameplay or fun.
 
 ## Delivery and quality
 
-Follow [delivery](docs/agents/delivery.md), [code quality](docs/engineering/CODE-QUALITY.md), [testing](docs/engineering/TESTING.md) and [definition of done](docs/agents/definition-of-done.md). Use an isolated branch/worktree, preserve unrelated work, avoid force pushes/history rewrites, and respect protections. This consolidation already has explicit commit/push/conditional-merge authorization; it does not authorize future unrelated merges.
+Follow [delivery](docs/agents/delivery.md), [code quality](docs/engineering/CODE-QUALITY.md), [testing](docs/engineering/TESTING.md) and [definition of done](docs/agents/definition-of-done.md). Use an isolated branch/worktree, preserve unrelated work, avoid force pushes/history rewrites, and respect protections. The current MVP task has explicit commit/push/merge authorization. Respect branch protections and relevant verification; unrelated merges still require their own authorization.
 
 Run the narrowest useful checks during edits and all relevant registered checks before delivery. [Verification](docs/engineering/VERIFICATION.md) and `.repo/project.json` own the commands. Report exact local results, hosted CI, human acceptance and unavailable coverage separately. Null/unrun checks are not passes. Fix concrete failures without weakening acceptance.
 
