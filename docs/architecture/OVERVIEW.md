@@ -23,6 +23,10 @@ Idle Buds is a single React/TypeScript/Vite application with one authoritative F
 
 **Commands:** a strict command union, account identity and UUID key produce a canonical request fingerprint. Player lock, reconciliation, command effects, state and result receipt commit together. Replaying a key returns its receipt; different payloads with the same key are rejected. Savepoints preserve legitimate elapsed progress while rolling back rejected command effects. A single PostgreSQL transaction advisory lock serializes current shared-world writes. This is deliberately conservative for a small test cohort; replace it only for a measured bottleneck.
 
+## Local experiment and agent boundary
+
+`tools/lab/` provides bounded synthetic scenarios over the same game rules, with cloned public policy observations, private assertion snapshots, controlled foreground/background time and per-run replay evidence. `tools/lab.ts` is the CLI; `tools/mcp.ts` exposes the same lab operations and a typed player HTTP client through local stdio. The player adapter uses existing sessions, command validation and receipts. It does not mutate game-state rows or calculate rewards. See [Experiment Lab](../engineering/EXPERIMENT-LAB.md) for actual commands, profiles and evidence limits. No HTTP fixture or time route is added.
+
 ## Security and deployment boundary
 
 Bcrypt password hashes, opaque server sessions with stored token hashes, revocation/expiry, HttpOnly SameSite cookies, exact-origin JSON writes and rate limits protect local/private accounts. Future RNG seeds and egg genetics do not enter player views. The explicit trusted-home-LAN mode permits the configured private HTTP origin with ordinary account login; other nonloopback startup retains HTTPS/invite requirements. Fixtures/reset are loopback-only and restricted to the exact `idle_buds_test` database. There is no HTTP time skip or fixture mutation route. Interface preferences persist per account in the browser, while gameplay state remains server-owned.

@@ -10,6 +10,10 @@
 
 The [Current Release Specification](../project/CURRENT-RELEASE.md) records the owner-authorized local/private MVP envelope. Implementation authorization and measured acceptance remain separate: merged code does not establish that every engineering gate has passed.
 
+## Owner-authorized experiment lab (November 26, 2026)
+
+After reviewing the API-first testing plan and thin MCP approach, the owner instructed: “Implement all you can directly to repo, merge right away.” This authorizes the local typed lab and player client, MCP adapter, corrected scenarios and bounded policies, reports/replay/comparisons, relevant dependencies and verification, documentation, PR and merge. The [execution plan](../plans/completed/experiment-lab.md) owns delivery scope. Existing game rules and the normal account flow remain authoritative; no new gameplay balance, paid model runs, scheduled jobs or remote deployment is implied. Physical-device usability and human enjoyment remain separate observed evidence.
+
 ## Owner-authorized Experience MVP (November 26, 2026)
 
 After playing the initial candidate and confirming the production, inventory, combat and UI decisions, the owner instructed: “skip the issue creation, in ONE PR go on and implement this RIGHT NOW. You can merge when done.” This authorizes the agreed Experience MVP, its owning documentation, necessary dependencies, local verification, one PR and merge of the verified head. No issues or subissues are requested. The earlier planning-only boundary for this feedback is superseded.
