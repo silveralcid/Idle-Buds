@@ -1,8 +1,8 @@
-> **Imported research, not approved Idle Buds design.** [Source snapshot](https://github.com/silveralcid/research/blob/88163607cfd407230512650a5c6750e1b7a96f98/projects/game-dev/idle-game-reverse-engineering/README.md); [scope, corrections and rights](README.md). Upstream evidence labels and reported test results are preserved, not newly reproduced. Counts and commands may refer to excluded upstream artifacts.
+> **Imported research, not approved Idle Buds design.** [Source snapshot](https://github.com/silveralcid/research/blob/3629e5eaec87049d38a0c0f4269135b90beea5d3/projects/game-dev/idle-game-reverse-engineering/README.md); [scope, corrections and rights](README.md). Upstream evidence labels and reported test results are preserved, not newly reproduced. Counts and commands may refer to excluded upstream artifacts.
 
 # Idle game reverse-engineering program
 
-Status: **active** (11 targets concluded and independently reviewed or under review; RimWorld in progress). Domain: game-dev. Local working copy: `E:\AI Agent\IdleBuds-ReverseEngineer\research\` on the owner's machine (game installs in sibling folders, never modified).
+Status: **active** (11 targets concluded and independently reviewed; RimWorld drafted, independent review in progress). Domain: game-dev. Local working copy: `E:\AI Agent\IdleBuds-ReverseEngineer\research\` on the owner's machine (game installs in sibling folders, never modified).
 
 ## Question
 How do these idle, incremental and simulation games actually work (engine, data, formulas, progression, economy, offline/tick architecture, AI), what can be verified from the shipped build alone, and which design and engineering lessons transfer to our own games?
@@ -29,8 +29,8 @@ Each target gets a full pass under one governing brief ("Autonomous Game Reverse
 | Koltera 2 (v5.4.0) | [koltera-2/5.4.0](studies/koltera-2/5.4.0/README.md) | Electron 23 + React/TypeScript | Concluded, independently reviewed | Original TypeScript from the source map; content tables dumped via esbuild, almost entirely VERIFIED; save key redacted |
 | Melvor Idle (v1.3.1, base game) | [melvor-idle/1.3.1](studies/melvor-idle/1.3.1/README.md) | NW.js wrapper → TypeScript web client (50 ms tick) | Concluded, independently reviewed | Official client scripts and base data packages, VERIFIED with file/line refs; paid expansions not downloaded |
 | Melvor Idle 2 (0.11.7 alpha) | [melvor-idle-2/0.11.7-alpha](studies/melvor-idle-2/0.11.7-alpha/README.md) | Godot 4.7.2 + C# (.NET 10) | Concluded, independently reviewed | Assembly decompiled and embedded PCK read; online namespaces stubbed |
-| Legends of Idleon (client build 144) | [legends-of-idleon/build-144](studies/legends-of-idleon/build-144/README.md) | Electron 11 → Stencyl/Haxe/OpenFL HTML5; Firebase backend | Drafted, independent review in progress | Beautified client script and data classes evaluated offline; Firebase bridge read, no service contacted |
-| RimWorld (1.6.4871) | rimworld/1.6.4871 (not yet backed up) | Unity Mono | In progress (deep pass on simulation, performance and AI) | — |
+| Legends of Idleon (client build 144) | [legends-of-idleon/build-144](studies/legends-of-idleon/build-144/README.md) | Electron 11 → Stencyl/Haxe/OpenFL HTML5; Firebase backend | Concluded, independently reviewed | Beautified client script and data classes evaluated offline; Firebase bridge read, no service contacted; review corrected four formula rows and the clock, sign-in and purchase descriptions, and found one OAuth client secret (now redacted) |
+| RimWorld (1.6.4871, Core + 5 DLCs) | [rimworld/1.6.4871](studies/rimworld/1.6.4871/README.md) | Unity 2022.3.35f1 Mono + Burst; XML defs | Drafted, independent review in progress (deep pass on simulation, performance and AI) | Assembly decompiled (9 217 files) and 13 159 defs parsed after inheritance; tick loop, interval LOD, async Burst pathfinding, think trees, lords and storyteller read in code; exact storyteller RNG ported and cross-checked against C# |
 
 Cross-game comparison: [COMPARATIVE_NOTES.md](comparative-notes.md).
 
@@ -38,7 +38,7 @@ Cross-game comparison: [COMPARATIVE_NOTES.md](comparative-notes.md).
 README, FINAL_REPORT (§1 executive summary … §14 unknowns, §15 checklist, §16 independent review), `architecture/`, `gameplay/`, `progression/`, `economy/`, `mathematics/`, `content/`, `user-experience/`, `development-lessons/`, `experiments/`, `simulations/`, `prototypes/`, `tools/` (study-specific scripts) and `evidence/` (raw and derived evidence). `MANIFEST.md` and `SHA256SUMS` were added at backup time. The studies keep the internal layout they were written with, so their relative links still work.
 
 ## Shared tooling and environment
-[tooling/](https://github.com/silveralcid/research/tree/88163607cfd407230512650a5c6750e1b7a96f98/projects/game-dev/idle-game-reverse-engineering/tooling) holds the reusable toolkits (in the local workspace they are `research/tools/…`; references to `research/tools/<name>/` inside the studies mean `tooling/<name>/` here):
+[tooling/](https://github.com/silveralcid/research/tree/3629e5eaec87049d38a0c0f4269135b90beea5d3/projects/game-dev/idle-game-reverse-engineering/tooling) holds the reusable toolkits (in the local workspace they are `research/tools/…`; references to `research/tools/<name>/` inside the studies mean `tooling/<name>/` here):
 - `ue-pak-export/` — Unreal pak/usmap toolkit for Linux (CUE4Parse exporter, ooz-based Oodle shim, usmap class-model dump, pak index reader); Palworld.
 - `gamemaker-yyc/` — GameMaker YYC toolkit (data.win parser, exe script/string/variable maps, database decoder, PyGhidra decompile-by-name, pseudo-GML lifter); Siralim Ultimate.
 - `unity-mono-assets/` — Unity Mono asset extraction (UnityPy + generated type trees, Odin binary reader); Kadomon.
@@ -47,7 +47,7 @@ README, FINAL_REPORT (§1 executive summary … §14 unknowns, §15 checklist, �
 - `il2cpp-deep-re/` — IL2CPP decompilation toolkit (Il2CppInspectorRedux → Ghidra/PyGhidra pipeline, xref finders); Super Auto Pets, reusable for any IL2CPP target.
 - `vm-snapshot/` — the analysis VM's own copies of scripts at backup time (some newer than the toolkit copies).
 
-The analysis environment is described in [ENVIRONMENT.md](https://github.com/silveralcid/research/blob/88163607cfd407230512650a5c6750e1b7a96f98/projects/game-dev/idle-game-reverse-engineering/ENVIRONMENT.md).
+The analysis environment is described in [ENVIRONMENT.md](https://github.com/silveralcid/research/blob/3629e5eaec87049d38a0c0f4269135b90beea5d3/projects/game-dev/idle-game-reverse-engineering/ENVIRONMENT.md).
 
 ## Next action
-Finish RimWorld (decompilation done: 9 217 C# files, 928 k lines; Defs surveyed: 13 213 defs in 250 types), apply the Legends of Idleon review, then back up again.
+Apply the RimWorld independent review, mark it concluded, add its comparative column, and back up again. All 12 folders of the local workspace (except Pokemon, done separately) will then be complete.

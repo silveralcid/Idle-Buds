@@ -2,54 +2,53 @@
   "schema_version": 1,
   "source_repository": "silveralcid/research",
   "source_ref": "main",
-  "source_commit": "88163607cfd407230512650a5c6750e1b7a96f98",
-  "snapshot_fetched_utc": "2026-11-26T04:36:16Z",
+  "source_commit": "3629e5eaec87049d38a0c0f4269135b90beea5d3",
+  "snapshot_fetched_utc": "2026-11-26T04:47:00Z",
   "classification": "Research/reference only. No approval of design, architecture, implementation or release scope.",
   "branches": [
     {
-      "name": "main",
-      "sha": "88163607cfd407230512650a5c6750e1b7a96f98",
-      "selection": "Selected current merged source"
+      "name": "backup/idle-game-re-2026-11-26-pass2",
+      "sha": "5986d2f1570abb0e39a0878687fe4746e6a2b003",
+      "selection": "Merged into main; no unique commits at selected snapshot"
     },
     {
       "name": "backup/idle-game-re-2026-11-26",
       "sha": "bd413b3107778aa532c62404a4e45ad92aadf7cf",
-      "ahead_of_main": 0,
-      "behind_main": 1,
-      "pull_request": 2,
-      "state": "merged"
+      "selection": "Merged into main; no unique commits at selected snapshot"
     },
     {
       "name": "docs/game-research-handoffs-20261021",
       "sha": "4e3ef1550be6ad32879370b51202b954267dd78c",
-      "ahead_of_main": 0,
-      "behind_main": 12,
-      "pull_request": 1,
-      "state": "merged"
+      "selection": "Merged into main; no unique commits at selected snapshot"
+    },
+    {
+      "name": "main",
+      "sha": "3629e5eaec87049d38a0c0f4269135b90beea5d3",
+      "selection": "Selected current merged source"
     }
   ],
   "historical_engineering_catalog_commit": "04bf510b60e46a5a937a7e660851df9de5c4aa69",
-  "source_scope": "All three branch tips, program and eleven study inventories, all non-evidence/non-tool study subtrees, older catalog and evidence audit covering 35 packages; selected authored material only.",
-  "transformations": "Markdown receives a status/provenance prefix and relative Markdown links are localized when selected, otherwise pinned to upstream. Other selected artifacts are byte-identical. Source SHA-256 and Git blob IDs identify original bytes.",
+  "source_scope": "Initial scope: all three branch tips, program and eleven study inventories, all non-evidence/non-tool study subtrees, older catalog and evidence audit covering 35 packages; selected authored material only. Refresh: all four branch tips, comparison with initial snapshot, updated Idleon reports and aggregate output, program/overview and new RimWorld non-evidence subtree inventory.",
+  "transformations": "Markdown receives a status/provenance prefix and relative Markdown links are localized when selected, otherwise pinned to upstream. Other selected artifacts are byte-identical. Source SHA-256 and Git blob IDs identify original bytes. Unchanged copies retain their original pinned provenance; revised and new copies use the refreshed commit.",
   "files": [
     {
       "source_path": "projects/game-dev/idle-game-reverse-engineering/COMPARATIVE_NOTES.md",
-      "source_blob_sha": "947fc9baae9ccaa100ef7b2e6c4d3d223bb7ea3c",
-      "source_sha256": "703be6f425ef94a55e67734f9edcc31816863afa1f9e7e5c621f4ab9e1d8d170",
-      "source_bytes": 17885,
+      "source_blob_sha": "2acc6fead51980d3377800801890ca91a0acd699",
+      "source_sha256": "42e09a144df1ea2310fe87f233ef4408de157877c8991411ddc49fba8a2506fb",
+      "source_bytes": 20156,
       "destination": "docs/research/upstream/comparative-notes.md",
-      "destination_sha256": "126dbb28ba5068ff0312b633856e86271d96877de5adf39a56dab55e3162fcb3",
-      "destination_bytes": 18311,
+      "destination_sha256": "ecf89ad01e7fa56b339cd395ff3f0fe1377a6bcc540432875287b7cf0151365b",
+      "destination_bytes": 20582,
       "classification": "authored research narrative"
     },
     {
       "source_path": "projects/game-dev/idle-game-reverse-engineering/README.md",
-      "source_blob_sha": "3e2494e5f1a1107c7a008b2f2931fc6f1865336c",
-      "source_sha256": "096fefd6f5127f7c0e24d12734f4061806ec2f0d43d47d92c933a518fb3ec02a",
-      "source_bytes": 7581,
+      "source_blob_sha": "15269a5feeb24b91b07508d1f2c53f29d609346e",
+      "source_sha256": "2682f7cfc6eeddc6677a4a9075cf0545309e1ee4cbefc94bcd6770c07e662cd6",
+      "source_bytes": 8109,
       "destination": "docs/research/upstream/program-source.md",
-      "destination_sha256": "125c3c999a5f280b27fd9c30d43d2a8dfc420e6a28854d7da6a34848bc6720ae",
-      "destination_bytes": 7933,
+      "destination_sha256": "f015fa1e8d40f02944b63439b7952e3ae864590da19712318fb6ceb502417ce9",
+      "destination_bytes": 8431,
       "classification": "authored research narrative"
     },
     {
@@ -2049,8 +2048,7 @@
       "Whole-study SHA256SUMS for excluded private artifacts"
     ],
     "unavailable": [
-      "RimWorld study not backed up at the selected source commit.",
-      "Legends of Idleon independent review pending upstream."
+      "RimWorld independent review is still pending in the selected source; do not claim reviewed or game-runtime verified."
     ],
     "files": [
       {
@@ -2110,12 +2108,12 @@
       },
       {
         "source_path": "reverse-engineering/game-dev/legends-of-idleon/build-144/prototypes/idleon_workbench.html",
-        "source_blob_sha": "52770c1347d01cdcfae52f1810ce6439e716cbde",
+        "source_blob_sha": "848ae65528fad13b479ade65841bda0b9eab5cba",
         "reason": "Prototype embeds bulk extracted game data; original narrative retained."
       },
       {
         "source_path": "reverse-engineering/game-dev/legends-of-idleon/build-144/simulations/idleon_model.py",
-        "source_blob_sha": "043ea3db6beb0e37a942ed6ee66861f948e15b5a",
+        "source_blob_sha": "a76dbee2101e9f374ec45f708c8e3b62ed4a0c60",
         "reason": "Model requires excluded proprietary evidence; results and analysis retained."
       },
       {
@@ -2172,7 +2170,33 @@
         "source_path": "reverse-engineering/game-dev/siralim-ultimate/2.0-gms-2024.14/simulations/siralim_model.py",
         "source_blob_sha": "46608c321d800788c7e13e4e79612a364f8e383c",
         "reason": "Model requires excluded proprietary evidence; results and analysis retained."
+      },
+      {
+        "source_path": "reverse-engineering/game-dev/rimworld/1.6.4871/prototypes/rimworld_workbench.html",
+        "source_blob_sha": "90ab6c40d63adb3c11cfb508f818cc0a5c6ed268",
+        "reason": "Executable research workbench with exact donor scheduler/RNG reproduction; leave upstream pending scope and independent review; analysis retained."
+      },
+      {
+        "source_path": "reverse-engineering/game-dev/rimworld/1.6.4871/simulations/rimworld_model.py",
+        "source_blob_sha": "711144b282b10c8b1cb377583b793c80e2b6715e",
+        "reason": "Model requires excluded proprietary evidence; aggregate results and analysis retained."
+      },
+      {
+        "source_path": "reverse-engineering/game-dev/rimworld/1.6.4871/experiments/protocheck/run.js",
+        "source_blob_sha": "97ab9f6376713f4517b7b1388f9464a7fac9439e",
+        "reason": "Research-only donor workbench test; not applicable to active web foundation."
+      },
+      {
+        "source_path": "reverse-engineering/game-dev/rimworld/1.6.4871/experiments/rngcheck/Program.cs",
+        "source_blob_sha": "f8b66cb24be3fdcd6ec5e998bb37766cd2def54a",
+        "reason": "Research-only donor runtime check; not applicable to active web foundation."
+      },
+      {
+        "source_path": "reverse-engineering/game-dev/rimworld/1.6.4871/experiments/rngcheck/rngcheck.csproj",
+        "source_blob_sha": "ed9781c223ab97571e13f98c401aa0e9a1b55a4b",
+        "reason": "Research-only donor runtime check; not applicable to active web foundation."
       }
     ]
-  }
+  },
+  "initial_source_commit": "88163607cfd407230512650a5c6750e1b7a96f98"
 }
