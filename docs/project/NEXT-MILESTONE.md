@@ -1,9 +1,9 @@
 # Recommended next milestone
 
-Status: MVP execution plan drafted; release scope, BEAT BAES gate and gameplay authorization still require owner confirmation.
+Status: MVP execution blueprint v2 drafted; release scope, BEAT BAES gate and gameplay authorization still require owner confirmation.
 
-The [active end-to-end MVP plan](../plans/active/mvp-execution-plan.md) provides a proposed must-ship/nice-to-have/excluded boundary, dependency-ordered implementation milestones, measurable acceptance, content/engineering workstreams and release/recovery gates. Use that plan instead of restarting granular interviews; no parallel competing spec or backlog.
+Use the [active end-to-end MVP execution plan](../plans/active/mvp-execution-plan.md), including its reference-first playbook, concrete implementation packets, reusable component candidates, bounded experiments and binary ready-to-playtest gate. Immediate endpoint is an integrated testable local/private multiplayer MVP, not public beta or commercial launch. No competing backlog or further broad design interviews.
 
-Next action: confirm BEAT BAES demo officially public and playable, explicitly approve the Current Release Specification based on the proposed envelope and acceptance, and authorize M1. Then build the integrated onboarding slice: gathering and crafting → earned first catch → Bud assignment → persisted/offline progression. Test server-owned time/rewards and save integrity at the real boundaries. This is not permission to implement now.
+Next action: confirm BEAT BAES demo officially public and playable, explicitly approve the Current Release Specification and proposed gates, designate integration lead and authorize M1. Then implement one real integrated onboarding slice: gather and craft → earn first catch → Bud assignment → persisted/offline progression. Validate real browser and database behavior. No gameplay work is authorized by this planning merge.
 
-The full small ecosystem remains required for holistic product validation; incremental slices establish mechanics and integration, not overall product appeal. See [release direction](../design/bible/12-release-direction.md), [open decisions](../design/bible/13-open-decisions.md), [authority](../design/AUTHORITY.md), and the [Constitution](CONSTITUTION.md).
+Full breadth remains necessary for holistic playtesting; subsystem passes are not proof of fun. See [release direction](../design/bible/12-release-direction.md), [open decisions](../design/bible/13-open-decisions.md), [authority](../design/AUTHORITY.md) and [Constitution](CONSTITUTION.md).
