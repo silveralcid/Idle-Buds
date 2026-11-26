@@ -1,0 +1,44 @@
+:root {
+  font-family: system-ui, sans-serif;
+  color: #202124;
+  background: #f7f8fa;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+main {
+  max-width: 44rem;
+  margin: clamp(2rem, 10vh, 7rem) auto;
+  padding: 1.5rem;
+  overflow-wrap: anywhere;
+}
+
+h1 {
+  margin: 0 0 1.25rem;
+  font-size: clamp(2.5rem, 8vw, 3.5rem);
+  line-height: 1.1;
+}
+
+p {
+  line-height: 1.65;
+}
+
+.eyebrow {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.status {
+  padding-top: 1rem;
+  border-top: 1px solid #c7cbd2;
+  color: #4b515b;
+}

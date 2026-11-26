@@ -1,0 +1,502 @@
+[
+  {
+    "branch": "1-implement-side-bar",
+    "sha": "6691c2eab7768b06455392a2b0fb84486932d8c7",
+    "ahead_main": 0,
+    "behind_main": 363,
+    "outside_latest": 0,
+    "tree": "888fce93df8c1dda865eb0ace1a675bf54bb8276",
+    "file_count": 22,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  },
+  {
+    "branch": "2-implement-basic-layout",
+    "sha": "5996c7894432888de4e93412b58ecb1fa6ca672a",
+    "ahead_main": 0,
+    "behind_main": 353,
+    "outside_latest": 0,
+    "tree": "56075ed77f2997e9a8d6b56377b35650d5dd3d49",
+    "file_count": 26,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  },
+  {
+    "branch": "3-implement-page-gathering-skill",
+    "sha": "b9719aa380ea0b53c07ab9b7589390e650b15151",
+    "ahead_main": 1,
+    "behind_main": 346,
+    "outside_latest": 1,
+    "tree": "520e232276e17ab920332cee5298c5625c3f1338",
+    "file_count": 32,
+    "archive_ref": "refs/heads/archive/2026-11-25-3-implement-page-gathering-skill"
+  },
+  {
+    "branch": "4-fix-layout-bugs",
+    "sha": "243015b9a2c92848c965ae8c6287c88edc17017b",
+    "ahead_main": 0,
+    "behind_main": 338,
+    "outside_latest": 0,
+    "tree": "8ad618ecb8fa2ea7507fb2640b24ad1560365481",
+    "file_count": 32,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  },
+  {
+    "branch": "5-implement-page-crafting-activity",
+    "sha": "bb50f352b9591ce0371bb1c06215b5eea53772f6",
+    "ahead_main": 0,
+    "behind_main": 328,
+    "outside_latest": 0,
+    "tree": "44aac9811e8f10c1b225210394e718a2025a1a8c",
+    "file_count": 49,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  },
+  {
+    "branch": "6-implement-state-management",
+    "sha": "2eec50e7ed6b181c8319a4eedc961b70ac9e1b56",
+    "ahead_main": 0,
+    "behind_main": 318,
+    "outside_latest": 0,
+    "tree": "5d7ae64ee709a99fdeef4b79f21656e149e96b73",
+    "file_count": 61,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  },
+  {
+    "branch": "7-implement-progress-since-last-online",
+    "sha": "5d4cd611a107c59ea7c8a11cb77f05cc8d2e9b39",
+    "ahead_main": 0,
+    "behind_main": 309,
+    "outside_latest": 0,
+    "tree": "420d4fa2d1e86fc3354e62d5a9f8e61564d9558f",
+    "file_count": 73,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  },
+  {
+    "branch": "8-general-refactor-clean-folders",
+    "sha": "f827c88007d7517338b62e80c7342d035d17bd8f",
+    "ahead_main": 0,
+    "behind_main": 310,
+    "outside_latest": 0,
+    "tree": "9e963841cd93c70bdb20eae1b2d6e75063784e0b",
+    "file_count": 73,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  },
+  {
+    "branch": "Combat-Foundations-Equipment",
+    "sha": "13c9ab555e4eadb0127f63ca80704611cfbab876",
+    "ahead_main": 1,
+    "behind_main": 0,
+    "outside_latest": 1,
+    "tree": "ba61c42ee246a1a7a43d3b8e286d916cd1a4ccd5",
+    "file_count": 181,
+    "archive_ref": "refs/heads/archive/2026-11-25-Combat-Foundations-Equipment"
+  },
+  {
+    "branch": "apply-offliine-progress",
+    "sha": "a672bdb26696fe99bdac8b9ac2981fb55d0854dd",
+    "ahead_main": 0,
+    "behind_main": 217,
+    "outside_latest": 0,
+    "tree": "5891cadb9b694e0c5df5de39d72e789e4c025ba9",
+    "file_count": 133,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  },
+  {
+    "branch": "basic-shop-setup",
+    "sha": "d1c27e22a6e7d3178f673df79c6628ff8d38c07d",
+    "ahead_main": 0,
+    "behind_main": 54,
+    "outside_latest": 0,
+    "tree": "9b957ba9a19da09da6a4a23934435409ca462ad7",
+    "file_count": 171,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  },
+  {
+    "branch": "basic-states-and-lumbering",
+    "sha": "d060dc24d18d27ff878caceee9c7820cb607b17c",
+    "ahead_main": 0,
+    "behind_main": 295,
+    "outside_latest": 0,
+    "tree": "f89640c64daa61585b3737c50fb8a5c2ef083b12",
+    "file_count": 54,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  },
+  {
+    "branch": "basic-ticks-loop-setup",
+    "sha": "ab6fd898ee93b621cf6d59218f6aa2280435c12e",
+    "ahead_main": 0,
+    "behind_main": 273,
+    "outside_latest": 0,
+    "tree": "548d84b522f7635f013bcca6698efd871bc41e93",
+    "file_count": 108,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  },
+  {
+    "branch": "bud-crafting",
+    "sha": "e5dca0df9f0496f60591eb49f0b9680813b8cc94",
+    "ahead_main": 0,
+    "behind_main": 21,
+    "outside_latest": 0,
+    "tree": "0f973c53bf46129beeb6ad99501009499f6ce655",
+    "file_count": 174,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  },
+  {
+    "branch": "bud-generation",
+    "sha": "f77750d9ee480fce45bdf53a1f1c1d1ac0863aa5",
+    "ahead_main": 0,
+    "behind_main": 75,
+    "outside_latest": 0,
+    "tree": "0d43b63fddacd47ebfe173561c3b3b6082e17165",
+    "file_count": 160,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  },
+  {
+    "branch": "bud-task-assignment",
+    "sha": "e9c801c9e199d76704da83e1f8c067bc47243836",
+    "ahead_main": 0,
+    "behind_main": 39,
+    "outside_latest": 0,
+    "tree": "df3e768ab44e905a1ff16c07ee4f7f7e8e51572b",
+    "file_count": 174,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  },
+  {
+    "branch": "change-gathering-to-per-hit",
+    "sha": "27b307909cb11c01c24374b449ddc4e5565d11c8",
+    "ahead_main": 0,
+    "behind_main": 85,
+    "outside_latest": 0,
+    "tree": "880d8b61ce6e00715ee94304e68395c915b9c16c",
+    "file_count": 155,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  },
+  {
+    "branch": "change-resource-calc-to-ticks",
+    "sha": "7c5928830ba60a33cfb73c9f0990e31d2d420b87",
+    "ahead_main": 0,
+    "behind_main": 220,
+    "outside_latest": 0,
+    "tree": "4682b28f652cd76afa5abbbf12702be41a7838dd",
+    "file_count": 133,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  },
+  {
+    "branch": "combat-foundations-equipment-setup",
+    "sha": "0c6593af21ca064c929dd32f2bb3a4e3dca78c9b",
+    "ahead_main": 22,
+    "behind_main": 0,
+    "outside_latest": 0,
+    "tree": "084f765cd5ec773cce896892cc82f8f927f8bb6a",
+    "file_count": 194,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  },
+  {
+    "branch": "fix-offline-progression-overload",
+    "sha": "af69a08de68bba8fd1d858f7afbcf8e47170dff8",
+    "ahead_main": 0,
+    "behind_main": 127,
+    "outside_latest": 0,
+    "tree": "81829967d4d5b276dd70a932fc85d27521642e0a",
+    "file_count": 152,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  },
+  {
+    "branch": "fresh-start",
+    "sha": "c17d9a7bf85501bcb3b57247a6b1c690bde43d14",
+    "ahead_main": 0,
+    "behind_main": 179,
+    "outside_latest": 0,
+    "tree": "4dbd13eeea602f2e2fe33042ab54b90de7237169",
+    "file_count": 125,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  },
+  {
+    "branch": "game-state-management",
+    "sha": "8db2e2bcb3ce8bd05a80bd0a866a948dc6c9a774",
+    "ahead_main": 0,
+    "behind_main": 154,
+    "outside_latest": 0,
+    "tree": "8ba94dc9e73ed43ea257788fb450f8c730d72451",
+    "file_count": 133,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  },
+  {
+    "branch": "handle-fractional-yields",
+    "sha": "f237c980e55c6512b43898e903b9947a3b509303",
+    "ahead_main": 0,
+    "behind_main": 270,
+    "outside_latest": 0,
+    "tree": "9b4ec5eb697af8f3db484b948a2f6f22d3a0edaa",
+    "file_count": 108,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  },
+  {
+    "branch": "hunter-focus-seperate-concerns",
+    "sha": "deef672a98dd48585a3d0819388e225702f2a136",
+    "ahead_main": 0,
+    "behind_main": 175,
+    "outside_latest": 0,
+    "tree": "6084b8cd7055dbf6ec9873b213d8186259c94048",
+    "file_count": 131,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  },
+  {
+    "branch": "implement-activity-limit",
+    "sha": "e9fd3e97de5375d42c2a5ca4e5f3cd86e6c9624a",
+    "ahead_main": 0,
+    "behind_main": 115,
+    "outside_latest": 0,
+    "tree": "e245b27b9f7995db6f456f2ea039ea1934bfb198",
+    "file_count": 152,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  },
+  {
+    "branch": "implement-bud-crafting",
+    "sha": "311bc7acf97954544bb3f1f24ce806321645d03b",
+    "ahead_main": 0,
+    "behind_main": 197,
+    "outside_latest": 0,
+    "tree": "3f0dc5b15d570a80ad5d5d70d291a35abf963598",
+    "file_count": 148,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  },
+  {
+    "branch": "implement-bud-gathering",
+    "sha": "292c654feeb3e683e14c3ebb9dc63177dbe856e6",
+    "ahead_main": 0,
+    "behind_main": 250,
+    "outside_latest": 0,
+    "tree": "bda30ada5c3ee9c22206a1ffd32e2f65fb6a2827",
+    "file_count": 118,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  },
+  {
+    "branch": "implement-inventory-store",
+    "sha": "21d8bfaf9741c914b5c46d3bcb9c0f2572c5debf",
+    "ahead_main": 1,
+    "behind_main": 280,
+    "outside_latest": 1,
+    "tree": "8165672cf84855fc13bb0f194b95fa50f24c0dd2",
+    "file_count": 58,
+    "archive_ref": "refs/heads/archive/2026-11-25-implement-inventory-store"
+  },
+  {
+    "branch": "implement-lumbering",
+    "sha": "97e7872026a6c6648a407b2cffcd1318cc1a5e61",
+    "ahead_main": 0,
+    "behind_main": 118,
+    "outside_latest": 0,
+    "tree": "8b3f2e5a5a4cfa3d7a6b6471151ff11125f4951f",
+    "file_count": 151,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  },
+  {
+    "branch": "implement-mining",
+    "sha": "2248c2179f90e7721b3a6754ad6513be48572f12",
+    "ahead_main": 0,
+    "behind_main": 214,
+    "outside_latest": 0,
+    "tree": "7f97ae627ca3ea7ea4754192285c3a9aa47677e7",
+    "file_count": 135,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  },
+  {
+    "branch": "implement-saves",
+    "sha": "7c889529b3c54e8160c9f20971f5184d820f64c8",
+    "ahead_main": 0,
+    "behind_main": 243,
+    "outside_latest": 0,
+    "tree": "f1df8cf390f2e1f55a4e9870a34e465b961bf25b",
+    "file_count": 128,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  },
+  {
+    "branch": "implement-smelting",
+    "sha": "4e928d426ba87860d111fef6b0c8dc9f8e72e799",
+    "ahead_main": 9,
+    "behind_main": 200,
+    "outside_latest": 9,
+    "tree": "103c6af2a46eed1ec3118023280bcd85700013a7",
+    "file_count": 149,
+    "archive_ref": "refs/heads/archive/2026-11-25-implement-smelting"
+  },
+  {
+    "branch": "implement-smithing",
+    "sha": "66d1288d1963b92149927834f01d78d4c60f5907",
+    "ahead_main": 0,
+    "behind_main": 88,
+    "outside_latest": 0,
+    "tree": "92467dc0bbc31df321b07b69e307cbb3f5cf410a",
+    "file_count": 155,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  },
+  {
+    "branch": "main",
+    "sha": "665a7c267894e4d67f6a575a157e7e452e128356",
+    "ahead_main": 0,
+    "behind_main": 0,
+    "outside_latest": 0,
+    "tree": "0ded8b47612bf5d0546ca02b2ae88add702319d5",
+    "file_count": 181,
+    "archive_ref": "refs/heads/archive/legacy-2026-11-25"
+  },
+  {
+    "branch": "max-level-cap",
+    "sha": "2df43b03af6925e9fd964a2a44b416d83e129aae",
+    "ahead_main": 0,
+    "behind_main": 5,
+    "outside_latest": 0,
+    "tree": "d45e096f934f1c5206c753acc72b2bc88c9ccccf",
+    "file_count": 174,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  },
+  {
+    "branch": "mining-setup",
+    "sha": "ad18df5a67878800ededed9e754a5fc9455c4bb1",
+    "ahead_main": 0,
+    "behind_main": 166,
+    "outside_latest": 0,
+    "tree": "90d5a44de0f4ff342543d736a0177dd70f610477",
+    "file_count": 132,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  },
+  {
+    "branch": "node-health-management",
+    "sha": "3b5a5ac54637c011e94fa669126490718a8e9589",
+    "ahead_main": 0,
+    "behind_main": 18,
+    "outside_latest": 0,
+    "tree": "27e65828fee97572a86c0113a14092dc87d2871d",
+    "file_count": 175,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  },
+  {
+    "branch": "offline-progress-save-management",
+    "sha": "c91c3f8b8c7d127bc4b2bc36a5769f796386e661",
+    "ahead_main": 17,
+    "behind_main": 164,
+    "outside_latest": 17,
+    "tree": "d8e826c930e8c4a22305280be733ddb952784414",
+    "file_count": 140,
+    "archive_ref": "refs/heads/archive/2026-11-25-offline-progress-save-management"
+  },
+  {
+    "branch": "offline-progression",
+    "sha": "3fca7ff2fa1193b0e7b854a4bdd0405f62aa0f39",
+    "ahead_main": 0,
+    "behind_main": 224,
+    "outside_latest": 0,
+    "tree": "eca15c0cb2de71272643f39c3b7d8214b5630835",
+    "file_count": 133,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  },
+  {
+    "branch": "offline-progression-again-again",
+    "sha": "24bf2a6fa628d8d7492ee67ab4f5357608e2b07a",
+    "ahead_main": 0,
+    "behind_main": 145,
+    "outside_latest": 0,
+    "tree": "fbb5de7b392a3e01e13b90eaa54d7df7b08045b3",
+    "file_count": 138,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  },
+  {
+    "branch": "refactor-after-gathering-implementation",
+    "sha": "43a11bde9754ef0b4be8ea6cdf52ae98a68e6bf9",
+    "ahead_main": 0,
+    "behind_main": 248,
+    "outside_latest": 0,
+    "tree": "7f3ade42835dcbd4c4d6eb6a3a4baf9f27231992",
+    "file_count": 125,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  },
+  {
+    "branch": "refactor-bud-stores",
+    "sha": "0b97e992d073cb3d20d4a40c66d66af55b80dd4a",
+    "ahead_main": 0,
+    "behind_main": 180,
+    "outside_latest": 0,
+    "tree": "e98edf6afd43bdb173c77237f150e129f8f0496c",
+    "file_count": 154,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  },
+  {
+    "branch": "refactor-divide-hunter-bud-systems",
+    "sha": "5c00850e860f13d1a8f7c9d07bb5d914f137d9af",
+    "ahead_main": 0,
+    "behind_main": 186,
+    "outside_latest": 0,
+    "tree": "77c45f429ad24d31a37c7de128a2957055484829",
+    "file_count": 155,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  },
+  {
+    "branch": "refactor-resource-nodes-items-split",
+    "sha": "1b745295953a1ec8c957761e5799eb12ca9f6b52",
+    "ahead_main": 0,
+    "behind_main": 200,
+    "outside_latest": 0,
+    "tree": "6bff46bc25bbe99e09488759c1d8122a7164a676",
+    "file_count": 139,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  },
+  {
+    "branch": "reset-to-hunter-only-focus",
+    "sha": "62ac97ab71ee1673c8f851a221aa777e166a9de1",
+    "ahead_main": 10,
+    "behind_main": 180,
+    "outside_latest": 10,
+    "tree": "35d7bcd4faa87ff086c513883571a8e1a75bf2d8",
+    "file_count": 139,
+    "archive_ref": "refs/heads/archive/2026-11-25-reset-to-hunter-only-focus"
+  },
+  {
+    "branch": "restart-again-include-events",
+    "sha": "372b4dd9bf43b202d131e3c76f9af6632346f9da",
+    "ahead_main": 0,
+    "behind_main": 166,
+    "outside_latest": 0,
+    "tree": "ac62ff85ed797e2b66e7cacceb548206de94be20",
+    "file_count": 139,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  },
+  {
+    "branch": "restructure-data-driven",
+    "sha": "05ae99e68ef6792c2fb7fed61e118c8717ac2f1b",
+    "ahead_main": 0,
+    "behind_main": 274,
+    "outside_latest": 0,
+    "tree": "f8ce4a494e23652cac6c05188d5560d34452dc5d",
+    "file_count": 104,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  },
+  {
+    "branch": "setup-types-enums",
+    "sha": "b51b9ac83c110fed2889b59c30a1554f020bd08c",
+    "ahead_main": 0,
+    "behind_main": 299,
+    "outside_latest": 0,
+    "tree": "9bfaa93453125f7b0c515006a4fe7ff4f7758e6d",
+    "file_count": 50,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  },
+  {
+    "branch": "soft-restart-cleanup",
+    "sha": "3b2ca01508d2821787c37edf1c104d234dc69b1d",
+    "ahead_main": 0,
+    "behind_main": 304,
+    "outside_latest": 0,
+    "tree": "82d5ce5f7e4f789bd87c3ae63c3eb4edc4b57f4a",
+    "file_count": 35,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  },
+  {
+    "branch": "tending-skill-foundation",
+    "sha": "86743eb858acfa5709404355bed6cc31edb7c3f5",
+    "ahead_main": 0,
+    "behind_main": 55,
+    "outside_latest": 0,
+    "tree": "4c62718cfc8cf7d417bc343501554c1d6a17b65c",
+    "file_count": 167,
+    "archive_ref": "refs/heads/archive/2026-11-25-combat-foundations-equipment-setup"
+  }
+]

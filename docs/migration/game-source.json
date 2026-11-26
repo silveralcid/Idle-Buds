@@ -1,0 +1,83 @@
+{
+  "repository": "https://github.com/silveralcid/template-bevy-starter",
+  "branch": "main",
+  "commit": "a3ed97e9428fab65f09471d10a91489ed8b8516e",
+  "other_branch": {
+    "name": "feat/agent-mvp-factory-20261120",
+    "commit": "5ece9617f1f20b9a3427e12fad55e83b3de24dad",
+    "ahead": 0,
+    "behind": 1,
+    "merged_pull_request": 2
+  },
+  "sources": [
+    {
+      "path": "AGENTS.md",
+      "git_blob_sha": "1aaedb438d77378e2193f23d67a420926118c09c",
+      "size": 5826,
+      "disposition": "adapt applicable technology-agnostic guidance"
+    },
+    {
+      "path": "LICENSE-MIT",
+      "git_blob_sha": "72d835313986cecf524a173bfa3c846a9ac3bc0c",
+      "size": 1069,
+      "disposition": "preserve notice"
+    },
+    {
+      "path": "NOTICE.md",
+      "git_blob_sha": "1c6d12db4b094367b659c7aade574e4ab1797777",
+      "size": 1089,
+      "disposition": "adapt applicable technology-agnostic guidance"
+    },
+    {
+      "path": "docs/architecture/OVERVIEW.md",
+      "git_blob_sha": "843cc2bf133ae9ac74be076b0cf3bda0ce6be9b9",
+      "size": 3362,
+      "disposition": "adapt applicable technology-agnostic guidance"
+    },
+    {
+      "path": "docs/game/agents.md",
+      "git_blob_sha": "2c395419dca96c318b293b38f306f9c0dc4f6570",
+      "size": 5648,
+      "disposition": "adapt applicable technology-agnostic guidance"
+    },
+    {
+      "path": "docs/game/ci.md",
+      "git_blob_sha": "b3ef4ecf766b187fe994a935baa14897c34e04a4",
+      "size": 4432,
+      "disposition": "adapt applicable technology-agnostic guidance"
+    },
+    {
+      "path": "docs/game/development.md",
+      "git_blob_sha": "225b342184af626aec59312055fde079f95f05dc",
+      "size": 6431,
+      "disposition": "adapt applicable technology-agnostic guidance"
+    },
+    {
+      "path": "docs/game/mvp-sop.md",
+      "git_blob_sha": "cce848a1804fc8cbac5d868c43bb848134d6784d",
+      "size": 8965,
+      "disposition": "adapt applicable technology-agnostic guidance"
+    },
+    {
+      "path": "docs/game/runtime.md",
+      "git_blob_sha": "0dc8bfdfa3885299ea45466f964336bd2e0e91e0",
+      "size": 5833,
+      "disposition": "adapt applicable technology-agnostic guidance"
+    },
+    {
+      "path": "docs/game/testing.md",
+      "git_blob_sha": "966b1db1984c32ae47358e75dd9b565250299d98",
+      "size": 6366,
+      "disposition": "adapt applicable technology-agnostic guidance"
+    }
+  ],
+  "excluded_groups": [
+    "Rust/Cargo/Bevy/runtime and archetype implementations",
+    "Starter game factory, scenario DSL, optional MCP and upstream-sync automation",
+    "Source-specific 90 minute / three-attempt / three-mechanic limits",
+    "Source-repository no-hosted-CI preference (not a global Idle Buds policy)",
+    "Bevy assets and fonts; no assets imported",
+    "Duplicate older universal policies (newer universal main retained)",
+    "Other-game compiled/browser evidence (not Idle Buds evidence)"
+  ]
+}

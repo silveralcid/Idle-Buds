@@ -1,0 +1,8 @@
+> **Imported research, not approved Idle Buds design.** [Source snapshot](https://github.com/silveralcid/research/blob/88163607cfd407230512650a5c6750e1b7a96f98/reverse-engineering/game-dev/milky-way-idle/steam-3224420/user-experience/UX_ANALYSIS.md); [scope, corrections and rights](../../../../README.md). Upstream evidence labels and reported test results are preserved, not newly reproduced. Counts and commands may refer to excluded upstream artifacts.
+
+# UX analysis (STRONG INFERENCE)
+- **Transparency as a feature**: the client publishes its own formulas (guide "Formulas" sections, tooltips showing buffs), a public market API and an official userscript manager in the Steam client — the community builds simulators and calculators, and the developer leans into it rather than fighting it.
+- **One action, many multipliers**: progress per hour is the product of action speed, efficiency, wisdom, gathering, rare find, house rooms, teas, community buffs — every system feeds one number, so every purchase has a visible XP/h effect.
+- **Social pressure without PvP**: a single global market and chat, leaderboards and community buffs make other players the economy; the cowbell bag bridges money and coins.
+- **Long tail by curve, not content**: content ends near level 106 but XP to 200 is 10 000× XP to 100; enhancing to +20 costs millions of attempts — this is what keeps veterans busy and what makes the market deep.
+- **Friction**: the XP and enhancement curves are opaque until you open a calculator; the 21-state (+0…+20) enhancement chain has extreme variance, which the FAQ addresses head-on: a regular failure under the optimal method never qualifies for compensation, and reversing a confirmed loss costs 500 M coins.

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Prototype: data-driven tasks + shared predictor</title>
+<style>body{font-family:system-ui;background:#141820;color:#e8e8e8;margin:0;padding:16px;display:grid;grid-template-columns:380px 1fr;gap:16px}.box{background:#1e2533;border-radius:8px;padding:12px;margin-bottom:12px}h1,h2{font-size:15px;color:#ffd166;margin:4px 0 8px}button{background:#2d3b55;color:#fff;border:0;border-radius:6px;padding:6px 10px;margin:2px;cursor:pointer}.row{display:flex;justify-content:space-between;font-size:13px;margin:3px 0}.bar{height:6px;background:#2a3142;border-radius:3px}.bar>div{height:100%;background:#3dd598}small{color:#9aa4b2}code{color:#7fd7ff}</style></head>
+<body>
+<div><div class="box"><h1>Educational prototype (original)</h1><small>Demonstrates three Idle Clans ideas with invented content: (1) all balance lives in a data document, (2) the same pure <code>sim</code> module predicts a task's XP/h in the UI and executes it in the "server" loop, (3) an XP table whose increment doubles every 7 levels with percentage boosts that never go obsolete.</small></div>
+<div class="box"><h2>Character</h2><div id="char"></div></div>
+<div class="box"><h2>Boosts (percent, stack additively)</h2><label>tool <input id="tool" type="range" min="0" max="25" value="0"></label> <label>house XP <input id="house" type="range" min="0" max="25" value="0"></label><div id="boosts"></div></div></div>
+<div><div class="box"><h2>Tasks (from the data document)</h2><div id="tasks"></div></div><div class="box"><h2>Log</h2><div id="log" style="font-size:12px;height:140px;overflow:auto"></div></div></div>
+<script>
+// ---- data document (would be fetched from a server in a real game) ----
+const DATA={skill:'Quarrying',tasks:[{id:0,name:'Pebbles',lvl:1,baseMs:3000,xp:7},{id:1,name:'Slate',lvl:10,baseMs:5000,xp:16},{id:2,name:'Marble',lvl:20,baseMs:6000,xp:22},{id:3,name:'Basalt',lvl:35,baseMs:8000,xp:40},{id:4,name:'Obsidian',lvl:50,baseMs:12000,xp:70}]};
+// ---- shared pure simulation module: used by UI prediction AND the task runner ----
+const sim={
+  xpTable(L){let t=0;for(let l=2;l<=L;l++)t+=Math.round(75*Math.pow(2,Math.floor(l/7))+0.25*l);return t},
+  levelFor(xp){let L=1;while(L<120&&xp>=sim.xpTable(L+1))L++;return L},
+  effectiveMs(task,b){return task.baseMs/(1+b.speed/100)},           // speed boost divides time
+  xpPer(task,b){return task.xp*(1+b.xp/100)},                        // xp boost multiplies xp
+  xpPerHour(task,b){return sim.xpPer(task,b)/sim.effectiveMs(task,b)*3.6e6}
+};
+let S={xp:0,active:null,progress:0,last:performance.now()};
+const boosts=()=>({speed:+tool.value,xp:+house.value});
+function log(t){const l=document.getElementById('log');l.innerHTML=`<div>${t}</div>`+l.innerHTML}
+function render(){const b=boosts();const L=sim.levelFor(S.xp);const next=sim.xpTable(L+1),cur=sim.xpTable(L);
+ document.getElementById('char').innerHTML=`<div class=row><span>Level</span><b>${L}</b></div><div class=row><span>XP</span><b>${Math.floor(S.xp).toLocaleString()}</b></div><div class=row><span>Next level</span><b>${next.toLocaleString()} (+${(next-cur).toLocaleString()})</b></div><div class=bar><div style="width:${100*(S.xp-cur)/(next-cur)}%"></div></div>`;
+ document.getElementById('boosts').innerHTML=`<div class=row><span>speed +${b.speed}% → time ×${(1/(1+b.speed/100)).toFixed(2)}</span><span>xp +${b.xp}%</span></div>`;
+ document.getElementById('tasks').innerHTML=DATA.tasks.map(t=>{const ok=L>=t.lvl;const act=S.active===t.id;return `<div class=row><span>${t.name} <small>L${t.lvl} · ${(sim.effectiveMs(t,b)/1000).toFixed(1)}s · predicted ${Math.round(sim.xpPerHour(t,b)).toLocaleString()} xp/h</small></span><button ${ok?'':'disabled'} onclick="start(${t.id})" style="${act?'outline:2px solid #ffd166':''}">${act?'running':'start'}</button></div>`+(act?`<div class=bar><div style="width:${100*S.progress}%"></div></div>`:'')}).join('')}
+function start(id){S.active=id;S.progress=0;log('Started '+DATA.tasks[id].name)}
+// ---- "server" loop: advances the active task with the same sim module ----
+setInterval(()=>{const now=performance.now();const dt=now-S.last;S.last=now;if(S.active===null){render();return}
+ const t=DATA.tasks[S.active],b=boosts();S.progress+=dt/sim.effectiveMs(t,b);
+ while(S.progress>=1){S.progress-=1;const before=sim.levelFor(S.xp);S.xp+=sim.xpPer(t,b);const after=sim.levelFor(S.xp);if(after>before)log(`Level up → ${after}`)}
+ render()},100);
+render();
+</script></body></html>

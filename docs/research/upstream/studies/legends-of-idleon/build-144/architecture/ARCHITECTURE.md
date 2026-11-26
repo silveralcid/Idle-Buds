@@ -1,0 +1,41 @@
+> **Imported research, not approved Idle Buds design.** [Source snapshot](https://github.com/silveralcid/research/blob/88163607cfd407230512650a5c6750e1b7a96f98/reverse-engineering/game-dev/legends-of-idleon/build-144/architecture/ARCHITECTURE.md); [scope, corrections and rights](../../../../README.md). Upstream evidence labels and reported test results are preserved, not newly reproduced. Counts and commands may refer to excluded upstream artifacts.
+
+# Architecture
+
+Build examined: Steam app 1476970, `LegendsOfIdleon.exe` (Electron 11.5.0, Chrome 87), `resources/app.asar` (126 MB). Client game build 144 (it accepts server `GameVERSION` 143 or 144; 9999 shows a maintenance popup, `N.pretty.js` 153456–153555). Nothing was run, no account was used and no Firebase endpoint was contacted; everything below is read from the shipped files.
+
+## Layers (VERIFIED)
+| Layer | Files | Role |
+|---|---|---|
+| Electron main process | `src/main/index.js`, `steam.js`, `preload.js`, `MenuButtons.js`, `config.js` (`evidence/wrapper/`) | frameless 960×572 window (1280×800 on Steam Deck), `contextIsolation`, `sandbox`, `backgroundThrottling: false`, `disable-renderer-backgrounding`, `incrementCapturerCount()` "so the game can run fine when minimized"; external links limited to an allow-list (Discord, wiki, YouTube …); Steamworks through greenworks (login ticket, achievements, rich presence, Steam Deck keyboard, microtransaction authorisation callback) |
+| React launcher | `distBuild/app.html`, `bundle.js` (React 17; source map without sources: `MenuBar.jsx`, `index.jsx`) | strict CSP (`script-src *.legendsofidleon.com 'self' 'nonce-…'`), custom title bar, one full-size `iframe` pointing at `static/game/index.html` |
+| Game page | `static/game/index.html`, `lib/firebase.js` (33 KB, game-owned), FirebaseUI from gstatic, `extra/extra.js`, `extra/steam.js` | sign-in UI (Google, Apple, email, Steam custom token), touch and DPI handling, the bridge to Firebase |
+| Game | `static/game/N.js` (25.4 MB, SHA-256 `0e47e87b…9771ba4`) + `lib/default.pak` (46 MB assets, not copied) | Stencyl game compiled through Haxe to OpenFL/Lime HTML5 and Closure Compiler; Box2D, Stencyl behaviours, 253 game script classes |
+
+## The game as a Stencyl project
+- **Behaviours and scenes.** Game logic lives in 64 `ActorEvents_N` behaviour classes, 162 `SceneEvents_N` classes and `Design_23_23_EveryScene`; names are Stencyl's numeric ids, not descriptive.
+- **Custom blocks as the rule library.** 235 static functions named `_customBlock_<Name>` (e.g. `DamageDealed`, `AFKgainrates`, `IncreaseExpREQ`, `StampCostss`) hold the formulas. Most take a **string selector** and branch on it (`SkillStats("MiningEfficiency")`, `ArbitraryCode("HitChancePCT")` with 70 selectors, `EtcBonuses("47")` with 102), so one function is many formulas.
+- **Game attributes as the state store.** All state is in Stencyl game attributes read with `a.engine.getGameAttribute("Name")` (character levels `Lv0`, `ExpReq0`, `TimeAway`, `OptionsListAccount`, `GemsOwned`, `DNSM` scratch map …). Temporary results are written into scratch maps (`DNSM`, `DummyNumbersStatManager`) and read back, which is how visual scripts pass values.
+- **Data as code.** Content is not loaded from files: `ItemDefinitions` … `ItemDefinitions6` build 2 480 items through `addNewEquip`/`addNewConsumable` calls, `MonsterDefinitions.make()` adds 418 monsters and resources, and `CustomLists`, `CustomLists2`, `CustomLists3`, `CustomMaps(REAL)` are 260 zero-argument functions that return the tables (maps, talents, bubbles, stamps, cards, gem-shop pages …). `tools/dump.js` evaluates these classes alone in a `vm` sandbox with a one-line stub for Haxe's `StringMap` and gets every table without running the game.
+- **Haxe/Stencyl idioms** recognisable in the output: `StringMap` as `new l` with `.h`, `Std.string` as `h.string`, Stencyl `c.asNumber`, `Y.thrown`, `A["scripts.X"] = X` class registration.
+
+## Online backend (VERIFIED from client code; server side not observed)
+- **Firebase project `idlemmo`**: Firebase Auth; Cloud Firestore for saves (`_data/{uid}`), server variables (`_vars/_vars`), tournaments (`_T_…`) and raids (`_RD_…`); Realtime Database (two instances, the second for parties) for presence (`_usersOnline`), movement, chat, friends, guild and party events; Cloud Functions called through `firebase.functions().httpsCallable`.
+- **The bridge.** The game never touches Firebase directly. `FirebaseStorage` (`N.pretty.js` 335–) calls `window.React.createElement(name, args)`; `firebase.js` replaces `window.React.createElement` with a dispatcher that reverses the command name, base64-encodes it and looks it up in a table of 174 handlers (`init`, `beginSave`, `commitSave`, `requestTime`, `getServerVarLoad`, `buyCompanionBox`, `sendTradeOffer`, `registerForTournament`, `purchaseLevelUp` …). Cloud Function names are two- to five-letter codes (54, e.g. `ttg`, `sil`, `ptc`, `ptf`, `gc`, `pkab`), called through a function renamed `useState`. The naming is camouflage, not protection: it is plain JavaScript in the shipped file.
+- **Saves are written by the client.** `commitSave` does `firestore.collection("_data").doc(uid).set({...entries}, {merge: true})`; the game assembles 177 save keys (levels, inventories, bank, `GemsOwned`, `GemItemsPurchased`, `BundlesReceived`, `TimeAway` …) in `CloudSAVE`/`SaveGamee` (`N.pretty.js` 74365, 67319). What the server validates (Firestore rules, functions) is not visible.
+- **Server-authoritative pieces.** Time (`ttg` → `TimeAway.GlobalTime`, the clock used for all AFK and timers), purchases (Steam microtransaction → `ptf`; other platforms `ptc`), gem and bundle grants (server-set `ServerGems` and `bun_*` flags that the client turns into currency and items), loot rolls for some enemies (`getLoot`), companions (gacha boxes, raffle tickets, trades), tournaments, raids, votes, guilds, friends, chat.
+- **Live tuning.** 66 server variables (`getServerVarLoad`): `GameVERSION`, happy hours, event flags, gem-bundle offers, research EXP scaling `A_ResXP`, arcade rotation, vote categories, Twitch-live flag …
+- **Multiple sign-in guard.** Presence entries carry a random `deviceId`; a `DUP_LOG` server message from another device greys the game out and stops saving ("MultipleSignIn: Cancel saving data").
+
+## Time, ticks and offline
+- The game runs on Stencyl's frame loop (OpenFL `requestAnimationFrame`); per-second work happens in `1second`/`5sec` custom blocks; timers count down `TimeAway` fields and per-monster respawn arrays.
+- **Offline is a formula, not a replay.** On returning, each character's away time (server time − its `TimeAway.Player` stamp) is fed to `AFKgains` for the activity it was left on (fighting, mining, choppin, fishing, catching, cooking, lab, divinity, spelunking, worship charge …), using analytic hourly rates × AFK gain rate; account-wide systems (anvil production, refinery, traps, cauldrons, construction, printer, shop restock …) are advanced by `AFKcode`/`AwayTimers` with the same elapsed time. There is no batch replay of ticks.
+- **Clock trust** comes from the server time callable; the local clock is not used for away time.
+
+## Persistence details
+- 177 key names; lists saved through `addSaveEntryList`/`JsonList`/`SparseList`/`Map`; per-character keys get the character slot appended (`"Lv0" + DummyText3`, `"AFKtarget" + …`), account keys are unsuffixed.
+- Saving is driven by game events (character switch, play button, purchases …) that run `CloudSAVE` then `SaveGamee` and bump a `CloudsaveTimer` counter; the exact cadence was not traced.
+
+## Observations
+- The architecture is a visual-scripting game scaled far beyond its tool: one 25 MB script, string-dispatched formula blocks with hundreds of additive terms, and content as executable code. It works, and it ships a very large game from a small team, but every formula is a long chain of named lookups (see `evidence/blocks/DamageDealed`: about 150 sources in one function).
+- Responsibility is split unusually: the server owns time, money in, loot for some enemies and social state, while the client computes and writes progress. That keeps server cost low for an idle MMO with millions of characters, at the price of trusting the client for most progression (INTERPRETATION; server-side checks unknown).

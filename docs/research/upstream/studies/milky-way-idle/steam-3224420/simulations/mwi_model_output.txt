@@ -1,0 +1,62 @@
+== XP curve
+L 10:             791  step x1.123
+L 25:           6,805  step x1.103
+L 50:          93,311  step x1.104
+L 75:       1,065,351  step x1.094
+L 90:       4,179,145  step x1.089
+L 99:       9,176,537  step x1.086
+L100:      10,000,000  step x1.706
+L101:      11,404,976  step x1.067
+L110:      29,574,787  step x1.071
+L120:      68,429,670  step x1.068
+L124:      92,832,214  step x1.068
+L125:     100,000,000  step x2.010
+L126:     114,406,130  step x1.091
+L150:   1,376,277,458  step x1.091
+L175:  12,390,995,728  step x1.087
+L199:  92,125,192,822  step x1.084
+L200: 100,000,000,000
+cumulative XP at 125 and 200 relative to 100 (XP, not time): 10.0 10000.0 ; XP for 100->125 relative to 1->100: 9.0
+== skilling: base XP/hour by skill at requirement level and +20 levels (no gear)
+brewing         70 actions, level req 1-95, base time 8.0-60.0 s; highest non-star action Expert Coffee Crate: 60,000 XP/h at req (time-only; production is input-bound), 72,000 at +20
+cheesesmithing 205 actions, level req 1-106, base time 6.0-135.0 s; highest non-star action Knights Aegis: 9,000,000 XP/h at req (time-only; production is input-bound), 10,800,000 at +20
+cooking         31 actions, level req 1-80, base time 6.0-60.0 s; highest non-star action Expert Food Crate: 60,000 XP/h at req (time-only; production is input-bound), 72,000 at +20
+crafting       198 actions, level req 1-106, base time 6.0-135.0 s; highest non-star action Crushed Philosopher's Stone: 7,200,000 XP/h at req (time-only; production is input-bound), 8,640,000 at +20
+foraging        33 actions, level req 1-80, base time 6.0-30.0 s; highest non-star action Asteroid Belt: 6,600 XP/h at req (time-only; production is input-bound), 7,920 at +20
+milking          7 actions, level req 1-80, base time 6.0-30.0 s; highest non-star action Holy Cow: 6,600 XP/h at req (time-only; production is input-bound), 7,920 at +20
+tailoring      143 actions, level req 1-106, base time 6.0-117.0 s; highest non-star action Royal Fire Robe Top: 12,000,000 XP/h at req (time-only; production is input-bound), 14,400,000 at +20
+woodcutting      7 actions, level req 1-80, base time 6.0-30.0 s; highest non-star action Arcane Tree: 6,600 XP/h at req (time-only; production is input-bound), 7,920 at +20
+production/gathering level requirements: max 106 distinct 98
+== hours to level, gathering skills (input-free; best unlocked action each level, 1 %/level efficiency, no gear/tea/wisdom)
+woodcutting {50: '18 h', 80: '227 h', 100: '1,136 h', 125: '9,466 h', 150: '110,171 h', 200: '6,260,748 h'}
+foraging {50: '18 h', 80: '227 h', 100: '1,136 h', 125: '9,466 h', 150: '110,171 h', 200: '6,260,748 h'}
+milking {50: '18 h', 80: '227 h', 100: '1,136 h', 125: '9,466 h', 150: '110,171 h', 200: '6,260,748 h'}
+== production (thin-market prices are noisy): input cost per XP at market average price, else top ask, else top bid (snapshot 1795655160 )
+brewing         70 priced recipes; median input cost/XP 103.2 coins; 56 sell above input cost (pre-tax); median (output-input)/XP 18.1
+cheesesmithing 205 priced recipes; median input cost/XP 945.8 coins; 59 sell above input cost (pre-tax); median (output-input)/XP -11.1
+cooking         31 priced recipes; median input cost/XP 36.5 coins; 28 sell above input cost (pre-tax); median (output-input)/XP 32.8
+crafting       183 priced recipes; median input cost/XP 2,511.0 coins; 32 sell above input cost (pre-tax); median (output-input)/XP -177.7
+tailoring      137 priced recipes; median input cost/XP 659.8 coins; 45 sell above input cost (pre-tax); median (output-input)/XP -28.9
+== enhancing: expected attempts from +0 (enhancing level = item level, no tool) / with protection from +2 (attempts, protections used)
++ 5: no protection            115  | protection>=+2:         53 attempts,        11 protection items
++ 8: no protection          2,383  | protection>=+2:        308 attempts,        89 protection items
++10: no protection         19,465  | protection>=+2:      1,069 attempts,       330 protection items
++12: no protection        216,290  | protection>=+2:      4,939 attempts,     1,565 protection items
++15: no protection      8,010,804  | protection>=+2:     60,495 attempts,    19,310 protection items
++20: no protection  3,296,628,044  | protection>=+2:  4,171,551 attempts, 1,332,624 protection items
++10 at enhancing 50 on item level 100: 26,482 attempts, 4,538 protections (success x0.750)
++10 at enhancing 100 on item level 100: 1,069 attempts, 330 protections (success x1.000)
++10 at enhancing 150 on item level 100: 829 attempts, 267 protections (success x1.025)
+enhancement stat bonus % at +N: {1: 2, 5: 12, 10: 29.0, 15: 57.0, 20: 100} (accessories/back/trinket x5)
+== combat: hit chance vs accuracy/evasion ratio
+{0.5: 0.275, 0.75: 0.401, 1: 0.5, 1.25: 0.577, 1.5: 0.638, 2: 0.725, 3: 0.823}
+== monster roster: combat level range 3.1 3576 xp 0 18000
+Fly T0: stamina -5 -> HP 50, defense 1, xp 10, drop x1.0
+Fly T1: stamina 19 -> HP 287, defense 24, xp 22, drop x1.1
+Fly T3: stamina 96 -> HP 1,062, defense 88, xp 62, drop x1.3
+Fly T5: stamina 214 -> HP 2,237, defense 177, xp 122, drop x1.5
+Abyssal Imp T0: stamina 170 -> HP 1,800, defense 120, xp 240, drop x1.0
+Abyssal Imp T1: stamina 238 -> HP 2,475, defense 161, xp 368, drop x1.1
+Abyssal Imp T3: stamina 402 -> HP 4,125, defense 261, xp 638, drop x1.3
+Abyssal Imp T5: stamina 608 -> HP 6,175, defense 385, xp 928, drop x1.5
+market tax 4 % (18 % on Bag of 10 Cowbells); combat level = floor(0.1*(Sta+Int+Atk+Def+max(Mel,Rng,Mag)) + 0.5*max(Atk,Def,Mel,Rng,Mag))

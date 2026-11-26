@@ -1,0 +1,9 @@
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Exact SHA-256 of the upstream CSS design-token file in the preserved template manifest; not a credential."
+condition = "AND"
+paths = ['''^\.repo/template-manifest\.json$''']
+regexTarget = "line"
+regexes = ['''^\s*"packages/ui-theme/tokens\.css": "94af8c01e20b7fcc247d6d8baec55b4600226bb7e15e66194b40d5428a4090a3",$''']

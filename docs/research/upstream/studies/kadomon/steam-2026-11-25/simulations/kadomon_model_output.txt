@@ -1,0 +1,29 @@
+87 dex-visible Common/Rare/Epic Kadomon; 140 definitions total
+
+level  n   HP mean  ATK mean  SPD mean  NRG mean  DPT=ATK/SPD  HP*DPT  supers/100 ticks
+    0  29     26.1       5.7      13.9      23.3        0.46     10.3       4.3
+    1  29     40.6       8.5      13.9      23.3        0.69     24.1       4.3
+    2  29     54.6      10.9      13.9      23.3        0.88     41.8       4.3
+
+29 evolution lines with >=2 stages: mean HP +28.4, ATK +5.2, SPD +0.00, NRG +0.00 from first to last stage
+speed changes on evolution: Counter({0: 29})
+energy changes on evolution: Counter({0: 29})
+
+stats-only 1v1 among 29 level-1 units (no supers/passives/items): top/bottom by win rate
+  Freezard     100.0%   32hp 15atk  8spd 21nrg ICE/DUSK
+  Beetemup     85.7%   30hp  9atk  9spd 19nrg BUG/PHYSICAL
+  Snymea       82.1%   30hp  9atk  9spd 19nrg GRASS/FIRE/TOXIC
+  Pegusto      78.6%   45hp  9atk 13spd 17nrg AIR/PHYSICAL
+  Gatapote     78.6%   27hp 13atk 10spd 23nrg DUSK/FIRE
+  Chimpyre     75.0%   27hp 13atk 10spd 23nrg FIRE/EARTH
+  Stagnent     75.0%   45hp  9atk 13spd 17nrg GRASS/BUG
+  Blizzacean   71.4%   72hp  6atk 16spd 26nrg WATER/ICE
+  Sparkka      25.0%   60hp  5atk 20spd 30nrg LIGHTNING/GRASS
+  Choocean     21.4%   38hp  7atk 13spd 27nrg FIRE/WATER
+  Luchalor     21.4%   60hp  5atk 20spd 30nrg FIRE/PHYSICAL
+  Squiraffe    17.9%   23hp  7atk 12spd 25nrg PHYSICAL/GRASS
+  Fitiki        7.1%   23hp 11atk 21spd 25nrg TOXIC/PHYSICAL
+
+when exactly one side has a type edge, the advantaged side wins 80.3% of 157 stats-only duels
+
+Fatigue clock: once the round counter exceeds 150, every 10th round (160, 170, ...) all units gain 1 FATIGUE (+1 damage taken per hit per stack) -> stalemates end

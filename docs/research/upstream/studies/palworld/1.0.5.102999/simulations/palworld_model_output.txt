@@ -1,0 +1,31 @@
+288 Paldeck entries (204 base + 84 subspecies); 260 in the generic breeding pool; 258 unique combinations
+pair outcomes: {'same': 183, 'rank': 18044, 'tie': 15551, 'unique': 152}
+species never produced by any pair (self-pairs included): 0 -> []
+species never produced by two DIFFERENT species via the rank rule: 1 -> ['Aegidron']
+most common children: [('Sweepa', 603), ('Dazemu', 581), ('Helzephyr Lux', 380), ('Fenglope Lux', 351), ('Tarantriss', 335), ('Slowatt', 332), ('Azurobe', 319), ('Sibelyx', 319)]
+species only obtainable by breeding itself (or unique combo): 1 e.g. ['Aegidron']
+rank range 30 3080 distinct 260 duplicate ranks 0
+Lamball base 70 70 70 L50 0IV (2500, 362, 312) L65 30%IV (3782, 544, 494)
+Chikipi base 60 60 60 L50 0IV (2250, 325, 275) L65 30%IV (3360, 480, 430)
+Anubis base 120 130 100 L50 0IV (3750, 588, 425) L65 30%IV (5895, 924, 684)
+Jetragon base 115 140 120 L50 0IV (3625, 625, 500) L65 30%IV (5684, 987, 810)
+Frostallion base 140 140 120 L50 0IV (4250, 625, 500) L65 30%IV (6740, 987, 810)
+species scaling: HP 60 95.7 200 ATK 50 97.0 200 DEF 50 93.5 200
+L10: player total 5,510 pal total 843 (pal/player 0.15x, PalNextEXP 227)
+L20: player total 56,840 pal total 9,555 (pal/player 0.17x, PalNextEXP 1,808)
+L30: player total 273,624 pal total 67,524 (pal/player 0.25x, PalNextEXP 11,599)
+L40: player total 840,233 pal total 430,475 (pal/player 0.51x, PalNextEXP 72,220)
+L50: player total 2,378,134 pal total 2,681,807 (pal/player 1.13x, PalNextEXP 447,571)
+L60: player total 6,498,533 pal total 16,625,481 (pal/player 2.56x, PalNextEXP 2,771,646)
+L65: player total 10,582,213 pal total 41,376,365 (pal/player 3.91x, PalNextEXP 6,896,858)
+L70: player total 17,202,587 pal total 75,860,655 (pal/player 4.41x, PalNextEXP 6,896,858)
+L80: player total 45,859,908 pal total 144,829,235 (pal/player 3.16x, PalNextEXP 6,896,858)
+L90: player total 89,417,545 pal total 213,797,815 (pal/player 2.39x, PalNextEXP 6,896,858)
+L100: player total 382,451,548 pal total 282,766,395 (pal/player 0.74x, PalNextEXP 6,896,858)
+PalNextEXP is constant (6,896,858) from L65 to L100
+spawner FieldBoss 140 rows, level 1 - 79
+spawner ImprisonmentBoss 22 rows, level 10 - 66
+spawner Common 1403 rows, level 1 - 80
+spawner RandomDungeonBoss 264 rows, level 6 - 69
+distinct wild-spawn character IDs 483 in 413 spawner groups; dex entries with an exact-id wild spawn 263 ; counting BOSS_/PREDATOR_ variants 273
+dex entries with no wild spawn at all: ['Pengullet Lux', 'Blazamut Ryu', 'Penking Lux', 'Bellanoir', 'Bellanoir Libero', 'Xenovader', 'Xenogard', 'Xenolord', 'Panthalus', 'Ghangler Ignis', 'Hartalis', 'Finsider Ignis', 'Silvance', 'Dandilord', 'Astralym']

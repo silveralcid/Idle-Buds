@@ -1,0 +1,217 @@
+## 1. Skill XP table (modules/skilling/helpers.ts)
+entries=147; equal to RuneScape formula for 125 entries; first non-RS level index = 127 (value 200,000,000 vs RS 208,545,572)
+post-RS tail ratios: [1.1]
+L99 needs 13,034,431 XP; addExperience (skilling/functions.ts) adds XP without any limit, so XP is unbounded past 99;
+  getMaxXp() (last entry 1,480,049,989) and getXpForLevel() exist but have no callers; getXpForLevel is off by one (returns xpTable[L-1] = XP for L+1)
+  at level 99 the progress bar (getXpProgress) is measured between the last two table entries (1,345,499,990 -> 1,480,049,989)
+only 98 of 147 entries are reachable as levels (cap 99)
+
+## 2. Player level and its XP bonus
+player level = floor(sum of 9 skill levels / 9), cap 99; bonus % = level*0.25 + 0.25
+  player level  1: +0.50% XP
+  player level 10: +2.75% XP
+  player level 50: +12.75% XP
+  player level 99: +25.00% XP
+
+## 3. Bonus stacks at their maxima (modules/bonuses/helpers.ts, content/configs/sanctuary.ts, tools, upgrades)
+sanctuary T5: XP +120%, duration -20%, yield +1  (source comments say +20%/+40% XP; the numbers are 40 and 80 -> +120% total)
+upgrade tree per gathering skill: XP +60.0%, duration -20.0%, yield +2.0
+tool L10: +50% XP; player L99: +25%
+=> max gathering XP multiplier 3.55x, duration multiplier 0.60, +3 items on every successful drop
+
+## 4. Gathering: XP/h and time to 99 (content/configs/gathering-progression.ts, modules/skilling/updates.ts)
+tier  req  xp  dur  base XP/h   max-bonus XP/h   max cycle(s)
+        1    2    8        900          5,325      4.8
+        5    3    9      1,200          7,100      5.4
+       10    4   10      1,440          8,520      6.0
+       15    6   11      1,964         11,618      6.6
+       20    8   12      2,400         14,200      7.2
+       30   10   13      2,769         16,385      7.8
+       40   14   14      3,600         21,300      8.4
+       50   20   16      4,500         26,625      9.6
+       60   30   20      5,400         31,950     12.0
+       70   50   25      7,200         42,600     15.0
+       80   90   35      9,257         54,771     21.0
+       90  220   45     17,600        104,133     27.0
+  time 1->99, no bonuses (theoretical)                  :    1,131 h  (to 50: 33.1 h, to 90: 694 h)
+  time 1->99, player level 1 (+0.5 %, in-game minimum)  :    1,125 h  (to 50: 33.0 h, to 90: 690 h)
+  time 1->99, first skill, player level <= 11 (+3 %)    :    1,098 h  (to 50: 32.2 h, to 90: 674 h)
+  time 1->99, player-level only (avg +12.5%)            :    1,005 h  (to 50: 29.4 h, to 90: 617 h)
+  time 1->99, all maxima except player level 11         :      204 h  (to 50: 6.0 h, to 90: 125 h)
+  time 1->99, all maxima (needs player level 99)        :      191 h  (to 50: 5.6 h, to 90: 117 h)
+  note: the best XP/s activity is always the newest tier, so the time model picks it at each level
+
+## 5. Universal drops (content/data/skills/skilling/*.ts, universalDrops())
+  per skill (common 0.2, uncommon 0.1, container 0.01, each x duration/8): {'Chopping': ['leaf', 'feather', 'pouch'], 'Digging': ['dirt', 'bone', 'burried-chest'], 'Exploring': ['meat', 'hide', 'backpack'], 'Farming': ['weeds', 'caterpillar', 'herb-pouch'], 'Fishing': ['trash', 'seaweed', 'treasure-chest'], 'Mining': ['dirt', 'relic', 'crate']}
+  dur  8s: chances 0.200/0.100/0.0100 per cycle -> base per hour 90/45/4.5; at 0.6 duration 150/75/7.5
+  dur  9s: chances 0.225/0.113/0.0112 per cycle -> base per hour 90/45/4.5; at 0.6 duration 150/75/7.5
+  dur 10s: chances 0.250/0.125/0.0125 per cycle -> base per hour 90/45/4.5; at 0.6 duration 150/75/7.5
+  dur 11s: chances 0.275/0.138/0.0138 per cycle -> base per hour 90/45/4.5; at 0.6 duration 150/75/7.5
+  dur 12s: chances 0.300/0.150/0.0150 per cycle -> base per hour 90/45/4.5; at 0.6 duration 150/75/7.5
+  dur 13s: chances 0.325/0.163/0.0163 per cycle -> base per hour 90/45/4.5; at 0.6 duration 150/75/7.5
+  dur 14s: chances 0.350/0.175/0.0175 per cycle -> base per hour 90/45/4.5; at 0.6 duration 150/75/7.5
+  dur 16s: chances 0.400/0.200/0.0200 per cycle -> base per hour 90/45/4.5; at 0.6 duration 150/75/7.5
+  dur 20s: chances 0.500/0.250/0.0250 per cycle -> base per hour 90/45/4.5; at 0.6 duration 150/75/7.5
+  dur 25s: chances 0.625/0.312/0.0312 per cycle -> base per hour 90/45/4.5; at 0.6 duration 150/75/7.5
+  dur 35s: chances 0.875/0.438/0.0438 per cycle -> base per hour 90/45/4.5; at 0.6 duration 150/75/7.5
+  dur 45s: chances 1.000/0.562/0.0563 per cycle -> base per hour 80/45/4.5; at 0.6 duration 133/75/7.5
+  the chance scales with BASE duration/8, so the per-hour rate is the same (90/45/4.5) at every rung except the L90 rung, where the common drop chance 1.125 acts as certainty (80/h base, 133/h maxed);
+  duration reductions do not lower the chance, so at the 0.60 duration multiplier the rate is 150/75/7.5 drops/h, and +3 yield makes each drop 4 items
+  -> containers (which hold the skill charm) at all maxima: 30/h per gathering skill, vs 4.5/h at base
+
+## 6. Helpers (creature assigned to a gathering activity)
+  job level  0: duration x 12.92
+  job level  1: duration x 10.00
+  job level  2: duration x  7.74
+  job level  3: duration x  5.99
+  job level  4: duration x  4.64
+  job level  5: duration x  3.59
+  job level  6: duration x  2.78
+  job level  7: duration x  2.15
+  job level  8: duration x  1.67
+  job level  9: duration x  1.29
+  job level 10: duration x  1.00
+  creature XP while helping = (0.4 + 0.05*activityIndex)/s * (1 + (sanctuary + upgrades + skill tool + staff tool)/100); no player-level term
+    activity  0: base 0.40 XP/s, max-bonus (x3.80) 1.52 XP/s
+    activity 11: base 0.95 XP/s, max-bonus (x3.80) 3.61 XP/s
+  helper creature to L70: 18.9 h on the top activity at maxima; expedition creature XP x(1 + sword tool/100), max x1.5 (modules/bonuses/helpers.ts getExpeditionXpBonus)
+  no helper cap: addHelper() rejects only duplicates, sanctuary members, creatures on expeditions/dungeons and locked tabs;
+  getHelperSlots() exists in modules/upgrades/helpers.ts but nothing calls it and no upgrade has a helper_slot effect
+    tier 0: mean best-job value 1.1; 20 helpers on their best job = 2.0 player-equivalents of throughput
+    tier 1: mean best-job value 3.0; 20 helpers on their best job = 3.3 player-equivalents of throughput
+    tier 2: mean best-job value 5.0; 20 helpers on their best job = 5.6 player-equivalents of throughput
+    tier 3: mean best-job value 7.0; 20 helpers on their best job = 9.3 player-equivalents of throughput
+    tier 4: mean best-job value 9.0; 20 helpers on their best job = 15.5 player-equivalents of throughput
+    tier 5: mean best-job value 10.0; 20 helpers on their best job = 20.0 player-equivalents of throughput
+  all 120 as helpers on their best job = 55.7 player-equivalents (each also gets the full +yield bonus per drop)
+
+## 7. Creatures (content/configs/creatures.ts, modules/creatures/helpers.ts)
+  L10  needs     5,000 XP -> at 0.5 XP/s (machine-assigned)     2.8 h; at 0.95 XP/s base helper    1.5 h; at 1.8 XP/s (tier-5 expedition type 1)    0.8 h
+  L50  needs   125,000 XP -> at 0.5 XP/s (machine-assigned)    69.4 h; at 0.95 XP/s base helper   36.5 h; at 1.8 XP/s (tier-5 expedition type 1)   19.3 h
+  L70  needs   245,000 XP -> at 0.5 XP/s (machine-assigned)   136.1 h; at 0.95 XP/s base helper   71.6 h; at 1.8 XP/s (tier-5 expedition type 1)   37.8 h
+  L120 needs   720,000 XP -> at 0.5 XP/s (machine-assigned)   400.0 h; at 0.95 XP/s base helper  210.5 h; at 1.8 XP/s (tier-5 expedition type 1)  111.1 h
+  only awakened creatures may enter the sanctuary (modules/sanctuary/functions.ts: "Only awakened creatures can be in sanctuary"), so pre-awakening XP comes from machines, helpers, expeditions and dungeons
+  awaken at L70 resets XP to 0 and grants 1 awaken point; prestige at awakened L120 grants 1 prestige point
+  creatures: 120; upgrade nodes: 120 costing 120 awaken points total
+  -> buying the whole tree = 120 awakenings = 29,400,000 creature XP = 1,815 h with all nine machine slots at 0.5 XP/s; expedition XP is split by party size and the UI runs one expedition per type at a time,
+     so one solo tier-5 type-1 loop levels one creature to L70 in 37.8 h; parallel levelling uses helpers (uncapped), machines, dungeons (flat XP per creature) and other expedition types
+  tier counts: {0: 20, 1: 20, 2: 20, 3: 20, 4: 20, 5: 20}  main jobs: {'All': 1, 'Mining': 19, 'Chopping': 19, 'Farming': 20, 'Digging': 20, 'Fishing': 20, 'Exploring': 21}
+  stat totals by tier: {0: 40.8, 1: 62.8, 2: 97.8, 3: 171.5, 4: 286.6, 5: 388.1}
+  job totals by tier: {0: 1.6, 1: 4.6, 2: 10.3, 3: 13.3, 4: 22.1, 5: 30.9}
+
+## 8. Sanctuary tiers (modules/sanctuary/helpers.ts)
+  score = sum of job values of up to 8 creatures; tier thresholds at [6.0, 18.0, 30.0, 42.0, 54.0] points
+  best 8 for chopping : [10, 10, 10, 10, 9, 9, 9, 8] =  75 -> tier 5
+  best 8 for mining   : [10, 10, 10, 9, 9, 9, 9, 8] =  74 -> tier 5
+  best 8 for digging  : [10, 10, 10, 9, 9, 9, 8, 8] =  73 -> tier 5
+  best 8 for exploring: [10, 10, 10, 10, 9, 9, 9, 8] =  75 -> tier 5
+  best 8 for fishing  : [10, 10, 10, 9, 9, 9, 8, 8] =  73 -> tier 5
+  best 8 for farming  : [10, 10, 10, 9, 9, 9, 9, 9] =  75 -> tier 5
+  max sum of tiers found: 25 -> {'chopping': 4, 'mining': 4, 'digging': 4, 'exploring': 4, 'fishing': 4, 'farming': 5} scores [42, 45, 42, 44, 43, 54] (['Blitz', 'Rusty', 'Kragg', 'Rocket', 'Clad', 'Ivan', 'Firebelly', 'Pippy'])
+  point budget: the 8 highest job totals sum to 271; a tier sum of 26 needs >= 276 points (e.g. 5,5,4,4,4,4), so 25 is the ceiling and the search reaches it
+  max simultaneous tier-5 jobs found: 3 -> scores [54, 58, 54, 26, 38, 36] (['Tooth', 'Clad', 'Ravager', 'Firebelly', 'Kragg', 'Rusty', 'Ivan', 'Quill'])
+
+## 9. Expeditions (modules/expeditions/helpers.ts, content/configs/expeditions.ts)
+  difficulty = floor(baseRating * tierDifficultyModifier); party score = sum floor(statScore * biome * trait)
+  statScore = floor(sum stat*weight*level) using creature stats (grit=toughness, smarts=intelligence, looting=gathering)
+  duration = clamp(3600 - min(score/difficulty, 1)*(3600-300), 300, 3600) s; no failure state; XP = floor(baseXP*xpMod*(1+loopBonus)/partySize)
+  tier modifiers: {'1': (1, 1, 1), '2': (1.5, 1.2, 2), '3': (2, 1.4, 3), '4': (2.5, 1.6, 4), '5': (3, 1.8, 5)} (difficulty, xp, loot)
+  expedition-type-1    baseRating     1 baseXP   300 trait learner      biome plains
+  expedition-type-5    baseRating   500 baseXP   550 trait water-breathing biome lake
+  expedition-type-9    baseRating  1500 baseXP   750 trait water-breathing biome lake
+  expedition-type-13   baseRating  2900 baseXP   950 trait tracking     biome desert
+  expedition-type-17   baseRating  4600 baseXP  1150 trait night-vision biome cave
+    loop    0: XP bonus +0%
+    loop   10: XP bonus +1%
+    loop  100: XP bonus +10%
+    loop  200: XP bonus +20%
+    loop 1000: XP bonus +20%
+  biome multipliers are applied per creature type; every shipped creature has exactly one type, so the factor is 1.5, 1 or 0.5
+  creature XP from expeditions: type 1 has baseRating 1 so difficulty <= 3 at every tier and any party gets the 300 s minimum;
+    tier 1: 300 XP per 300 s solo = 1.00 XP/s; with +20 % loop bonus and a level-10 sword (x1.5) = 1.80 XP/s
+    tier 2: 360 XP per 300 s solo = 1.20 XP/s; with +20 % loop bonus and a level-10 sword (x1.5) = 2.16 XP/s
+    tier 3: 420 XP per 300 s solo = 1.40 XP/s; with +20 % loop bonus and a level-10 sword (x1.5) = 2.52 XP/s
+    tier 4: 480 XP per 300 s solo = 1.60 XP/s; with +20 % loop bonus and a level-10 sword (x1.5) = 2.88 XP/s
+    tier 5: 540 XP per 300 s solo = 1.80 XP/s; with +20 % loop bonus and a level-10 sword (x1.5) = 3.24 XP/s
+  tier t of a type unlocks after {'1': 0, '2': 5, '3': 10, '4': 15, '5': 20} completions of tier t-1: 50 runs = 4.2 h to reach tier 5 of type 1
+
+## 10. Dungeons (content/configs/dungeons.ts)
+  duration 900 s, max 3 creatures; grade by party/baseRating ratio: [('S', 2, 2), ('A', 1, 1.5), ('B', 0.6, 1), ('C', 0.3, 0.5), ('F', 0, 0.25)]
+    tier 1: rating   2000, xp   450 per creature (flat, not scaled by grade) = 0.5 XP/s each -> S needs 4,000 party score
+    tier 2: rating   4000, xp   900 per creature (flat, not scaled by grade) = 1.0 XP/s each -> S needs 8,000 party score
+    tier 3: rating   6000, xp  1350 per creature (flat, not scaled by grade) = 1.5 XP/s each -> S needs 12,000 party score
+    tier 4: rating   8000, xp  1800 per creature (flat, not scaled by grade) = 2.0 XP/s each -> S needs 16,000 party score
+    tier 5: rating  10000, xp  2250 per creature (flat, not scaled by grade) = 2.5 XP/s each -> S needs 20,000 party score
+  every run consumes one armor-set per creature (dungeons/functions.ts), refunded only on cancel; dungeon runes per combat run 2/4/6/8/12 x grade
+  tier 4-5 summons need 48,000 dungeon runes = at least 2,000 S-grade tier-5 runs (24 runes each) and as many armor sets (one creature per run minimum)
+
+## 11. Machines (content/configs/machines.ts; greenhouse is a 60 s processor)
+  speed multipliers by level: [1, 0.9, 0.8, 0.72, 0.64, 0.56, 0.5, 0.44, 0.38, 0.33, 0.28]  interval = max(1, floor(baseInterval*mult)) fixed-update ticks (1 s each)
+    stone-quarry       cost  100000 type generator base   60s -> max level 16s  per hour 225
+    stick-finder       cost  100000 type generator base   60s -> max level 16s  per hour 225
+    coal-miner         cost  200000 type generator base   60s -> max level 16s  per hour 225
+    smelter            cost  400000 type processor base  120s -> max level 33s  per hour 109
+    sawmill            cost  400000 type processor base  120s -> max level 33s  per hour 109
+    cooker             cost  400000 type processor base  120s -> max level 33s  per hour 109
+    greenhouse         cost  200000 type processor base   60s -> max level 16s  per hour 225
+    bakery             cost  600000 type processor base  120s -> max level 33s  per hour 109
+    refinery           cost  800000 type processor base  120s -> max level 33s  per hour 109
+
+## 12. Garden (modules/garden/dispatch.ts, helpers.ts, updates.ts)
+  25 rocks on a 5x5 grid: first 750, last 50,000, all 307,532 gold (code comment says 1000*1.5^n)
+  flower yield per 60 s = flower level (max 6); level-up costs `level` fertilizer -> 15 fertilizer per flower to L6
+  full garden of gold flowers at L6 = 150 gold/min = 9,000 gold/h; rocks alone repay in 34.2 h;
+  with merchant-bought flowers (2500) and fertilizer (1250 each, 15 per flower) the full build is 838,782 gold, repaid in 93 h
+
+## 13. Taskboard, milestones, fabrication, gold
+  tasks: [(50, 2000, 2), (100, 4000, 2), (200, 8000, 2), (400, 16000, 2)] cooldown 20 h per task
+  -> max 60,000 gold per 20 h cycle
+  awakened creature gold: 1/min each (+awaken_gold upgrades, +5 max) -> 120 awakened = 120..720 gold/min
+  fabrication: each prestige point allocated to an item yields 1 of it every 180 s (max 5 points per item)
+
+## 14. Crafting (recipes.csv)
+  Furnace  :  51 recipes, XP/s min 0.50 median 3.60 max 7.00; max level req 60
+  Stove    :  32 recipes, XP/s min 0.50 median 1.88 max 6.00; max level req 90
+  Workbench:  61 recipes, XP/s min 1.00 median 3.30 max 8.00; max level req 80
+  speed: craftTime * max(0.01, 1-(upgrade 60 + tool-in-speed-mode 2*toolLevel)/100); tool either +5%/lvl XP or +2%/lvl speed, not both
+
+## 15. Summoning costs (content/configs/creatures.ts, content/data/creatures/tier*.ts)
+  per-creature amounts by tier: resource [100,1000,5000,10000,20000,30000], charms [5,25,100,200,400,800], expedition items [0,25,50,200,600,800], refined [0,0,600,1000,1300,1500], dungeon runes [0,0,0,0,600,1800], essence 128 raw / 64 pure (x2 at T3) / 32 stones / 16 infinity stones
+  charms needed to summon all 120: {'chopping-charm': 5391, 'mining-charm': 4990, 'farming-charm': 4995, 'digging-charm': 4890, 'fishing-charm': 4815, 'exploring-charm': 5515} = 30,596
+  tier 0: main-output gathered inputs for all 20 =        5 h at base,       1 h at all maxima (player gathering only)
+  tier 1: main-output gathered inputs for all 20 =       66 h at base,      10 h at all maxima (player gathering only)
+  tier 2: main-output gathered inputs for all 20 =      419 h at base,      63 h at all maxima (player gathering only)
+  tier 3: main-output gathered inputs for all 20 =    1,222 h at base,     183 h at all maxima (player gathering only)
+  tier 4: main-output gathered inputs for all 20 =    3,889 h at base,     583 h at all maxima (player gathering only)
+  tier 5: main-output gathered inputs for all 20 =    7,500 h at base,   1,125 h at all maxima (player gathering only)
+  all tiers: 13,101 h base / 1,965 h maxed (before helpers, machines, refining and charms)
+  snowball estimate (player + all previously summoned creatures as helpers on their best job; ignores job/resource matching):
+    tier 0: throughput x  1.0 ->     4.8 h base /    0.7 h maxed (cumulative 5 / 1 h)
+    tier 1: throughput x  3.0 ->    21.8 h base /    3.3 h maxed (cumulative 27 / 4 h)
+    tier 2: throughput x  6.4 ->    65.9 h base /    9.9 h maxed (cumulative 92 / 14 h)
+    tier 3: throughput x 11.9 ->   102.4 h base /   15.4 h maxed (cumulative 195 / 29 h)
+    tier 4: throughput x 21.2 ->   183.3 h base /   27.5 h maxed (cumulative 378 / 57 h)
+    tier 5: throughput x 36.7 ->   204.4 h base /   30.7 h maxed (cumulative 583 / 87 h)
+  charms: 30,596 total; from containers at 30/h per skill (maxed) that is 1,020 gathering hours, or about 41.4 M gold of charm crates (7 500 gold for 1 expected charm of each type; the scarcest type, exploring-charm, binds)
+  tier 3 gathered inputs come from rungs [60, 70]
+  tier 4 gathered inputs come from rungs [80]
+  tier 5 gathered inputs come from rungs [90]
+  so tier-5 summons need the player at L90 in the skills involved: 674 h per skill at base (player level <= 11) and 117 h at maxima;
+  for all six gathering skills about 4,041 h base / 704 h maxed of player time, which bounds the roster pace more than raw input volume
+  the snowball counts all owned creatures as helpers; 8 sanctuary members cannot help, and in parallel work at most three jobs are tier 5 (+3 yield), the rest +2
+
+## 16. Loop timing and offline (views/GameWrapper.tsx, utils/offline-progress.ts)
+  requestAnimationFrame loop; per-frame delta clamped to 1 s; fixed update every 1 s via accumulator; state dispatch throttled to 33 ms
+  activities complete when Date.now()-startTime >= duration, then startTime = now -> residual time is dropped each cycle
+    duration  4.8s: mean loss ~16.5 ms/cycle (half the 33 ms dispatch) = 0.34% slower than nominal
+    duration    8s: mean loss ~16.5 ms/cycle (half the 33 ms dispatch) = 0.21% slower than nominal
+    duration   45s: mean loss ~16.5 ms/cycle (half the 33 ms dispatch) = 0.04% slower than nominal
+    the shortest reachable cycle is 8 s x 0.6 = 4.8 s (player and job-10 helpers), so the largest drift is ~0.34 %; 72 h offline replays at most 72*3600/4.8 = 54 000 cycles per gatherer
+  frame gaps between 1 s and 10 s: each frame is clamped to 1 s, so fixed-update systems and helper XP lose time while wall-clock systems do not
+  sleep >= 10 s detected by wall clock -> offline calculator; offline cap 72 h
+  offline vs online divergences (utils/offline-progress.ts):
+    gathering XP floored per cycle offline (xpRate 2 at +12.5 %: 2 vs 2.25 online); crafting XP floored per job offline, rounded online
+    processors consume only their primary input offline (bakery leather/egg, refinery stone are never taken)
+    machine creatures gain 0.5 XP/s offline whether or not the machine runs; online only while it operates
+    a not-yet-completed gathering/helper cycle subtracts the simulated time from startTime a second time
+    the garden discards partial progress when no cycle completes; the sleep path starts from lastSaveTime, up to 30 s stale, re-crediting time already simulated

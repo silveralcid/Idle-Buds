@@ -1,0 +1,77 @@
+{
+  "schema_version": 2,
+  "project_name": "Idle Buds",
+  "project_kind": "web-game",
+  "integration_branch": "main",
+  "release_branch": null,
+  "commands": {
+    "setup": {
+      "argv": [
+        "npm",
+        "ci"
+      ],
+      "cwd": ".",
+      "timeout_seconds": 300,
+      "mutates_external": false
+    },
+    "lint": {
+      "argv": [
+        "npm",
+        "run",
+        "lint"
+      ],
+      "cwd": ".",
+      "timeout_seconds": 120,
+      "mutates_external": false
+    },
+    "typecheck": {
+      "argv": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "cwd": ".",
+      "timeout_seconds": 120,
+      "mutates_external": false
+    },
+    "test": {
+      "argv": [
+        "npm",
+        "test"
+      ],
+      "cwd": ".",
+      "timeout_seconds": 180,
+      "mutates_external": false
+    },
+    "build": {
+      "argv": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "cwd": ".",
+      "timeout_seconds": 180,
+      "mutates_external": false
+    },
+    "security": {
+      "argv": [
+        "npm",
+        "audit",
+        "--audit-level=high"
+      ],
+      "cwd": ".",
+      "timeout_seconds": 120,
+      "mutates_external": false
+    },
+    "migration": {
+      "argv": [
+        "{python}",
+        "tools/validate_migration.py"
+      ],
+      "cwd": ".",
+      "timeout_seconds": 120,
+      "mutates_external": false
+    }
+  },
+  "notes": "Foundation only. Browser tests build and verify actual production output; setup:browser is a separate local prerequisite. No pure game rules, backend, persistence or gameplay exists, so Vitest/database integration/formatting commands are not yet applicable. npm audit reads registry advisories; no external mutation. No deployments."
+}

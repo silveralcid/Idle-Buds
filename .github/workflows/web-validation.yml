@@ -1,0 +1,40 @@
+name: Web validation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: web-validation-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  web-foundation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out reviewed source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set up pinned Node runtime
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Install Chromium and required runner libraries
+        run: npm run setup:browser -- --with-deps
+      - name: Lint, typecheck, build and exercise the foundation
+        run: npm run validate
+      - name: Check current dependency advisories
+        run: npm audit --audit-level=high
+
+# No deployment, credentials, model calls, scheduled jobs or automatic merge.

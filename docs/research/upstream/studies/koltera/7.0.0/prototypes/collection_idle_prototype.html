@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Prototype: job-routed creatures + one collection grid</title>
+<style>
+body{font-family:system-ui,sans-serif;background:#10141c;color:#e6e6e6;margin:0;padding:16px;display:grid;grid-template-columns:360px 1fr;gap:16px}
+h1,h2{margin:4px 0 8px;font-size:16px;color:#ffd166} .box{background:#1b2230;border-radius:8px;padding:12px;margin-bottom:12px}
+button{background:#2c3a52;color:#fff;border:0;border-radius:6px;padding:6px 10px;margin:2px;cursor:pointer}button:disabled{opacity:.35}
+.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}.cell{height:26px;border-radius:4px;background:#2a3142;font-size:11px;display:flex;align-items:center;justify-content:center}
+.c{background:#3dd598;color:#10141c}.c.q{background:#ffd166}.row{display:flex;justify-content:space-between;font-size:13px;margin:2px 0}
+.bar{height:6px;background:#2a3142;border-radius:3px;overflow:hidden}.bar>div{height:100%;background:#3dd598}
+small{color:#9aa4b2}
+</style></head><body>
+<div>
+ <div class="box"><h1>Educational prototype (original content)</h1><small>Demonstrates: pure-state 1 s tick, creatures routed to jobs by stats with a stamina duty cycle, one collection grid as the goal, deterministic shards, and a "targeted summon" that always fills a missing cell. All names/numbers invented.</small></div>
+ <div class="box"><h2>Resources</h2><div id="res"></div></div>
+ <div class="box"><h2>Roster</h2><div id="roster"></div><button onclick="act('hatch')">Hatch random (50 ore)</button> <button id="tsum" onclick="act('targeted')">Targeted summon (3 essence)</button></div>
+</div>
+<div>
+ <div class="box"><h2>Collection grid — 7 species × 5 variants</h2><div class="grid" id="grid"></div><div class="row"><span id="prog"></span><span id="done"></span></div></div>
+ <div class="box"><h2>Log</h2><div id="log" style="font-size:12px;height:160px;overflow:auto"></div></div>
+</div>
+<script>
+// ---- data (original) ----
+const SPECIES=['Mossling','Pyrit','Gullwisp','Tidepup','Bramblox','Cinderbat','Quartzel'];
+const VARIANTS=['Plain','Amber','Cobalt','Verdant','Onyx'];
+const JOBS={quarry:{stat:'might',out:'ore',rate:1},scout:{stat:'swift',out:'essence',rate:0.02}};
+// ---- pure state ----
+let S={tick:0,ore:60,essence:0,shards:0,roster:[],grid:{}};
+const rnd=n=>Math.floor(Math.random()*n);
+function make(sp,v){return{id:Math.random().toString(36).slice(2),sp,v,might:20+rnd(80),swift:20+rnd(80),sta:100,resting:false,job:null}}
+function cell(sp,v){return sp+'|'+v}
+function add(c){S.roster.push(c);S.grid[cell(c.sp,c.v)]=true;log(`Obtained ${c.sp} (${c.v}) might ${c.might} swift ${c.swift}`)}
+function missing(){const m=[];for(const s of SPECIES)for(const v of VARIANTS)if(!S.grid[cell(s,v)])m.push([s,v]);return m}
+// ---- actions (reducer-style) ----
+function act(type,p){
+  if(type==='hatch'&&S.ore>=50){S.ore-=50;add(make(SPECIES[rnd(7)],VARIANTS[rnd(5)]))}
+  if(type==='targeted'&&S.essence>=3){const m=missing();if(m.length){S.essence-=3;const [s,v]=m[rnd(m.length)];add(make(s,v))}}
+  if(type==='job'){const c=S.roster.find(x=>x.id===p.id);c.job=c.job===p.job?null:p.job}
+  render()}
+// ---- tick: every system updates from the same state ----
+function tick(){S.tick++;
+  for(const c of S.roster){ if(!c.job)continue; const j=JOBS[c.job];
+    if(c.resting){c.sta=Math.min(100,c.sta+5);if(c.sta>=100)c.resting=false;continue}
+    const cost=Math.pow((1-c[j.stat]/200)*2,2); c.sta-=cost; if(c.sta<=0){c.sta=0;c.resting=true}
+    S[j.out]+=j.rate*(c[j.stat]/50); if(c.job==='quarry'&&Math.random()<0.02){S.shards++;}
+  }
+  if(S.shards>=10){S.shards-=10;add(make(SPECIES[rnd(7)],'Plain'));log('10 shards → guaranteed Plain creature (pity path)')}
+  render()}
+// ---- view ----
+function log(t){const l=document.getElementById('log');l.innerHTML=`<div>[${S.tick}s] ${t}</div>`+l.innerHTML}
+function render(){
+  document.getElementById('res').innerHTML=`<div class=row><span>Ore</span><b>${S.ore.toFixed(1)}</b></div><div class=row><span>Essence</span><b>${S.essence.toFixed(2)}</b></div><div class=row><span>Shards (10 → creature)</span><b>${S.shards}</b></div>`;
+  document.getElementById('roster').innerHTML=S.roster.map(c=>`<div class=row><span>${c.sp} <small>${c.v} m${c.might} s${c.swift} ${c.resting?'😴':''}</small></span><span><button onclick="act('job',{id:'${c.id}',job:'quarry'})" style="${c.job==='quarry'?'outline:2px solid #ffd166':''}">quarry</button><button onclick="act('job',{id:'${c.id}',job:'scout'})" style="${c.job==='scout'?'outline:2px solid #ffd166':''}">scout</button></span></div><div class=bar><div style="width:${c.sta}%"></div></div>`).join('');
+  document.getElementById('grid').innerHTML=SPECIES.map(s=>VARIANTS.map(v=>`<div class="cell ${S.grid[cell(s,v)]?'c':''}" title="${s} / ${v}">${s.slice(0,4)}·${v[0]}</div>`).join('')).join('');
+  const have=Object.keys(S.grid).length,total=35;document.getElementById('prog').textContent=`${have}/${total}`;document.getElementById('done').textContent=have===total?'COMPLETE 🎉':'';
+  document.getElementById('tsum').disabled=S.essence<3||have===total;}
+add(make('Mossling','Plain'));render();setInterval(tick,1000);
+</script></body></html>

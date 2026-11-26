@@ -1,0 +1,11 @@
+> **Imported research, not approved Idle Buds design.** [Source snapshot](https://github.com/silveralcid/research/blob/88163607cfd407230512650a5c6750e1b7a96f98/projects/game-dev/cross-game-research-handoffs/dump/causal-scenario-sensitivity-results/docs/CONTRACT.md); [scope, corrections and rights](../../../README.md). Upstream evidence labels and reported test results are preserved, not newly reproduced. Counts and commands may refer to excluded upstream artifacts.
+
+# Data and statistical contract
+
+Manifest schema version is `1.0`; the working TypeScript definition is in `src/experiment.ts`. It includes an id, unique non-negative integer seeds, stage count, an ordered treatment list and parameter triple in `[0,1]`, volatility in `[0,1]`, and at least 100 bootstrap replicates. The first treatment is the baseline. Change the schema version for incompatible changes.
+
+Every outcome is keyed by `(seed, treatmentId)`. Tie-breaks are deterministic: treatments are processed in manifest order, seeds in manifest order, random values come from the local 32-bit integer PRNG, and bootstrap index ties use the stable numeric sort. Checkpoints include a SHA-256 hash of the serialized manifest. Resume validates the schema, hash, key uniqueness, key/outcome agreement, outcome bounds and score-to-stage consistency. Each checkpoint update writes a temporary sibling file and atomically renames it. A partial valid checkpoint can resume, but summaries require the full planned seed-by-treatment matrix.
+
+Estimand: for each candidate, the average of `candidate.score - baseline.score` on seeds present in both arms. Positive is favorable. The percentile interval resamples paired differences with replacement. `adverse` counts candidate outcomes with failures at least `ceil(stages * .3)`; it is a diagnostic count, not a causal severity model. `score` averages stage-level bounded rewards derived from demand, queue, failures, and quality.
+
+The causal interpretation is conditional on the fully specified synthetic simulator, seed set, stage horizon and environment volatility. Seeds are blocks of common exogenous random inputs in this implementation. Randomization of treatment assignment, interference, observational estimators and production generalization are outside the contract.

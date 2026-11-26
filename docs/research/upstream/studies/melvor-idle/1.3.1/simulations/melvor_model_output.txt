@@ -1,0 +1,103 @@
+## 1. Experience table (utils.js ExperienceCalculator)
+  L2              83
+  L10          1,154
+  L50        101,333
+  L92      6,517,253
+  L99     13,034,431
+  L100    14,391,160
+  L110    38,737,661
+  L120   104,273,167
+  L92 is half of L99 (0.500); L120 = 8.0x L99
+  abyssal levels: abyssalLevelToXP(L) = levelToXP(L + 98) - levelToXP(99)  -> ['A2: 1,356,729', 'A20: 72,504,651', 'A60: 4,477,846,601']
+
+## 2. Skilling base rates (base intervals from data or class constructors; no mastery, gear, pets or modifiers)
+  Cooking        32 actions, levels 1-99; base XP/h min    5,850 median   72,000 max  317,314 (Chicken_Soup)
+  Crafting       57 actions, levels 1-90; base XP/h min   15,600 median  100,800 max  480,000 (Ring_Of_Spirit_Power)
+  Farming        24 crops: XP per harvest scales with growth time (masteryXPDivider), not comparable as XP/h here
+  Firemaking      9 actions, levels 1-90; base XP/h min   34,200 median   75,600 max  105,120 (Magic_Logs)
+  Fishing        23 actions, levels 1-95; base XP/h min    3,000 median   32,727 max  118,286 (Raw_Whale)
+  Fletching      57 actions, levels 1-95; base XP/h min    1,800 median  120,600 max  630,000 (Jadestone_Bolts)
+  Herblore       30 actions, levels 1-90; base XP/h min    9,000 median   81,000 max  324,000 (Damage_Reduction_Potion)
+  Magic          14 actions, levels 1-95; base XP/h min    9,000 median   43,200 max   99,000 (HolyInvocationII)
+  Mining         11 actions, levels 1-95; base XP/h min    6,000 median   30,000 max  121,200 (Dragonite_Ore)
+  Runecrafting   84 actions, levels 1-95; base XP/h min    7,200 median   81,000 max  810,000 (Fire_Imbued_Wand)
+  Smithing      115 actions, levels 1-99; base XP/h min    9,000 median  135,000 max  900,000 (Dragon_Platebody)
+  Summoning      20 actions, levels 1-90; base XP/h min    3,600 median   16,560 max   29,520 (Devil)
+  Thieving       23 actions, levels 1-95; base XP/h min    6,000 median   55,200 max  159,600 (KING)
+  Woodcutting     9 actions, levels 1-90; base XP/h min   12,000 median   18,000 max   43,200 (Redwood)
+  woodcutting 1->99 with the best unlocked tree, base interval, one tree: 404 h
+  fishing 1->99 with the best unlocked fish (mean of min/max interval): 134 h
+  corrections to the per-action rates above (base values, no mastery or modifiers):
+    Fishing with junk (5-29 % per area): best Raw_Whale 106,478 XP/h (junk 10 %)
+    Fishing 1->99 with junk: 175.3 h (all areas); 177.5 h without the secret and Barbarian areas
+    Mining sustained (5 HP, regen +1/10 s, respawn; this 50 ms event simulation; an independent review simulation gave ~19 200 XP/h and ~319 h, timing assumptions differ slightly): Dragonite 17,422 XP/h at 5 HP (respawn 120 s; it also needs 270 total Mining mastery), 96,910 XP/h with +99 HP from mastery
+    Mining 1->99 sustained, best rock without a mastery requirement: 338 h
+    Thieving King at stealth 95: success 18.6 %, 16,337 XP/h with Continue-on-Stun enabled (default setting stops thieving after the first stun)
+    Thieving King at stealth 99: success 19.0 %, 16,707 XP/h with Continue-on-Stun enabled (default setting stops thieving after the first stun)
+    artisan skills: Smithing up to 900 000 XP/h, Runecrafting 810 000, Fletching 630 000, Crafting 480 000, Herblore 324 000, Cooking 317 000, Firemaking 105 000, Summoning 29 500 (all input-bound)
+
+## 3. Mastery (skill.js getBaseMasteryXPToAddForAction, getMasteryXPToAddToPool, getBaseMasteryPoolCap, masteryTokenChance)
+  mastery XP per action = ((unlocked * totalCurrentMastery / trueMax) + masteryLevel * (trueTotal/10)) * (interval_s) / 2
+  pool gets xp/4 of every mastery XP gained (xp/2 once the skill is 99); pool cap = actions * 500 000; token chance = unlockedActions/185 % per action
+  interval_s is the skill's masteryModifiedInterval: the real action interval for gathering skills and Thieving, but fixed 1.7 s Smithing/Runecrafting/Herblore, 1.3 s Fletching, 1.65 s Crafting, 4.85 s Summoning, 0.85 x base Cooking, 0.6 x base Firemaking
+  for interval-based gathering skills mastery per HOUR does not depend on the interval (XP per action scales with it)
+    Woodcutting n=  9 actions, interval 3s, action mastery  1, total mastery     9:      1.5 MXP/action
+    Woodcutting n=  9 actions, interval 3s, action mastery 99, total mastery   450:    140.5 MXP/action
+    Woodcutting n=  9 actions, interval 3s, action mastery 99, total mastery   891:    147.2 MXP/action
+    Woodcutting pool cap 4,500,000 mastery XP
+    Fishing    n= 23 actions, interval 3s, action mastery  1, total mastery    23:      3.8 MXP/action
+    Fishing    n= 23 actions, interval 3s, action mastery 99, total mastery  1150:    359.0 MXP/action
+    Fishing    n= 23 actions, interval 3s, action mastery 99, total mastery  2277:    376.0 MXP/action
+    Fishing    pool cap 11,500,000 mastery XP
+    Smithing   n=115 actions, interval 3s, action mastery  1, total mastery   115:     19.0 MXP/action
+    Smithing   n=115 actions, interval 3s, action mastery 99, total mastery  5750:   1794.9 MXP/action
+    Smithing   n=115 actions, interval 3s, action mastery 99, total mastery 11385:   1880.2 MXP/action
+    Smithing   pool cap 57,500,000 mastery XP
+      9 actions all unlocked, 3 s mastery interval, action interval 3 s, one action to mastery 99 with others at 1:   91.8 h; with others at 99:   83.1 h
+     23 actions all unlocked, 3 s mastery interval, action interval 3 s, one action to mastery 99 with others at 1:   36.2 h; with others at 99:   32.5 h
+    115 actions all unlocked, 1.7 s mastery interval, action interval 2.0 s, one action to mastery 99 with others at 1:    8.5 h; with others at 99:    7.6 h
+
+## 4. Combat (character.js)
+  accuracy/evasion = (effectiveLevel + 9) * (bonus + 64); magic evasion uses floor(0.3*Def + 0.7*Mag); melee/ranged max hit = floor(10*(1.3 + e/10 + str/80 + e*str/640)), e = level + 9
+  hit chance = 50*acc/eva % if acc < eva else (1 - 0.5*eva/acc)*100 %; damage *= 1 - resistance/100 (Normal cap 95 %); min hit 1; attack interval >= 250 ms, floored to 50 ms ticks; HP = 10 * Hitpoints level
+  combat triangle (Standard set): player damage x 0.85-1.10 and player damage reduction x 0.75-1.25 by style matchup (combatTriangle.js 23-80; Hardcore set harsher)
+    level  1, bonus   0: accuracy     640  melee max hit (strength bonus = bonus)   23
+    level 50, bonus  50: accuracy   6,726  melee max hit (strength bonus = bonus)  124
+    level 99, bonus 150: accuracy  23,112  melee max hit (strength bonus = bonus)  392
+    level 99, bonus 250: accuracy  33,912  melee max hit (strength bonus = bonus)  574
+    accuracy/evasion = 0.5: hit 25.0 %
+    accuracy/evasion = 1: hit 50.0 %
+    accuracy/evasion = 2: hit 75.0 %
+    accuracy/evasion = 4: hit 87.5 %
+  monsters: 172 (base game); combat levels 1-1300, median 120; attack types {'melee': 97, 'ranged': 33, 'magic': 39, 'random': 3}
+  combat level = floor(0.25*(Def + HP + floor(1/2)) + max(0.325*(Atk+Str), 0.325*floor(1.5*Rng), 0.325*floor(1.5*Mag)))  (monsters.js, prayer fixed at 1)
+
+## 5. Thieving (thieving2.js)
+  success % = min(100, 100*(100 + stealth)/(100 + perception)), stealth = level + modifiers; failure stuns 3 s; base interval 3 s
+    Man                    lvl   1 perception   110: success at its level  48.1 %, at 99  94.8 %, stun damage max 2.2 x numberMultiplier
+    Fisherman              lvl  54 perception   400: success at its level  30.8 %, at 99  39.8 %, stun damage max 10.1 x numberMultiplier
+    Woman                  lvl   4 perception   140: success at its level  43.3 %, at 99  82.9 %, stun damage max 3.2 x numberMultiplier
+    Merchant               lvl  31 perception   300: success at its level  32.8 %, at 99  49.8 %, stun damage max 9.7 x numberMultiplier
+    Cyclops                lvl  57 perception   520: success at its level  25.3 %, at 99  32.1 %, stun damage max 17.3 x numberMultiplier
+    Court Jester           lvl  79 perception   715: success at its level  22.0 %, at 99  24.4 %, stun damage max 19.8 x numberMultiplier
+
+## 6. Loop and offline (game.js, combatManager.js, package.json)
+  TICK_INTERVAL 50 ms; setInterval(loop, 50); processTime runs floor(elapsed/50) ticks, capped at MAX_PROCESS_TICKS = 20*60*60*24 = 1 728 000
+  a loop gap >= 60 s (MIN_OFFLINE_TIME) enters the offline loop: the same tick() is run in batches sized to ~95 % of a 50 ms frame (OFFLINE_GC_RATIO), up to 24 h (MAX_OFFLINE_TIME)
+  offline replays the same tick() for whatever keeps running, up to 24 h (1 728 000 ticks), with unseeded Math.random;
+  but enterOfflineLoop stops combat unless settings.enableOfflineCombat is on (default off, five confirmations; game.js 2107-2114, settings.js 282-289) and Golbin Raid never runs offline
+  the NW.js wrapper launches Chromium with --disable-raf-throttling and --disable-background-timer-throttling so the 50 ms interval keeps running when minimised
+  autosave every 10 s; cloud check every 10 s (PlayFab auto cloud save default 23 h); client rich-presence update every 10 s, wrapper pushes to Discord every 15 s
+
+## 7. Content counts (base game: Demo + Full packages)
+  items 1406, monsters 172, combat areas/slayer/dungeons/strongholds {'combatAreas': 12, 'slayerAreas': 13, 'dungeons': 17, 'strongholds': 4}, pets 62, shop purchases 201, prayers 31, attack spells 29, agility obstacles 51
+  item sell values: 1280 priced, median 250 GP, max 60,000,000 GP
+  agility obstacles: 51 across 10 slots; GP build cost median 1,000,000, max 20,000,000
+  township: 54 buildings, 10 biomes, 13 resources, 6 seasons, 6 worships, 110 tasks + 170 casual tasks
+
+## 8. Bank slots (shop.js BankSlot cost type, NewNewBankUpgradeCost)
+  slot n costs floor(2654570*50*(n+2) / 142015^(163/(122+n))) GP, at most 5 000 000; first 34, 10th 566, 50th 83,031, 100th 2,123,966; the 5 M cap is reached at slot 119
+    first  50 slots:        878,565 GP
+    first 100 slots:     37,531,507 GP
+    first 200 slots:    508,870,826 GP
+    first 500 slots:  2,008,870,826 GP
