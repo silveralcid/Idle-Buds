@@ -6,6 +6,8 @@ Current game implementation: [Experience MVP, November 26](experience-mvp-2026-1
 
 Current experiment tooling: [API/MCP lab, November 26](experiment-lab-2026-11-26.md), including current production comparisons, protocol/HTTP qualification and replay limits.
 
+Current repository assessment: [High-ROI audit, November 26](audits/high-roi-audit-2026-11-26.md), including the store storage correction, verified evidence and explicitly deferred work.
+
 - [`tests/`](tests/): unit, integration, end-to-end, regression, and test-suite runs.
 - [`benchmarks/`](benchmarks/): performance measurements with pinned baseline, workload and environment.
 - [`manual-qa/`](manual-qa/): human observations, UI/UX checklists and visual inspection.
