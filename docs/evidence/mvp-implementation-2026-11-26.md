@@ -2,7 +2,7 @@
 
 ## Delivery status
 
-Blueprint v2 is now implemented as a local multiplayer game candidate. This report records actual behavior and verification, not a public deployment or a claim that the first human playtest happened. Base: `23425be`; implementation branch: `feat/mvp-implementation-20261126`. Source identity and hosted CI will be recorded at the merge boundary.
+Blueprint v2 is now implemented as a local multiplayer game candidate. This report records actual behavior and verification, not a public deployment or a claim that the first human playtest happened. Base: `23425be`; published implementation: `f15e3ee15564ead63b56099360c6b840da542076`; branch: `feat/mvp-implementation-20261126`. Published and locally verified commit `1ff62eb25383c2486ed6b192931c9d68b10806e7` have the identical Git tree `16ad2596a219c30ff378a9c18464cd13ae5bcc4b`. The GitHub connector was used because terminal push credentials were unavailable. Later evidence-only commits record final results without changing game behavior.
 
 The owner explicitly authorized implementation and merging in the November 26 instruction. [Current Release Specification](../project/CURRENT-RELEASE.md) records that scope. The old planning-only restriction is superseded for this MVP; no claim is made that BEAT BAES shipped.
 
@@ -35,20 +35,24 @@ Implementation is split into small domain modules under `src/game`, `src/data`, 
 
 ## Verification evidence
 
-All evidence below describes the local Linux x64 environment with Node 24.22.3 and actual PostgreSQL 18.7. The final aggregate run and browser/hosted status are recorded below when completed.
+All evidence below describes the local Linux x64 environment with Node 24.22.3 and actual PostgreSQL 18.7. The final aggregate `PLAYWRIGHT_EXECUTABLE_PATH=/tmp/chromium npm run validate` passed lint, strict types, all 39 Vitest tests and all four real browser scenarios. Hosted status is reported separately.
 
 | Check | Latest observed result |
 |---|---|
 | Pure game rules | 23/23 tests passed, including 100 seeded fresh starts, 7,200 full-day battle completions, timing partitions, capture/hatch/commitment constraints and inheritance |
 | Real database integration | 14/14 tests passed, including 100 competing purchases for one Bud, auth/restart/receipt checks, market/clan conservation, remote offline cap and moderation |
+| Fixture destination guards | 2/2 tests passed, including remote/normal targets and connection-string host/database override rejection |
 | Strict TypeScript and lint | Passed after interface integration |
 | Cold database recovery | Passed: three accounts and complete states restored after deleting only a newly created temporary cluster's data directory; migration history retained |
-| Browser gameplay | Targeted fresh-account runs passed at 1280×800 and 390×844, with an 844×390 landscape check. The desktop two-account flow passed breeding/hatching, partial trades/cancellation, funded orders, chat/friends, clan completion and ranked history. Final aggregate run pending |
+| Clean installation and actual launcher restart | Passed on implementation commit `1ff62eb`: fresh worktree, `npm ci`, `npm run play`, new account, three earned Scrap, clean process/database stop, relaunch and exact inventory/XP preservation |
+| Browser gameplay | 4/4 passed, no skips: fresh-account loop and two-account full flow at both 1280×800 and 390×844, plus 844×390 landscape. Breeding/hatching, partial trades/cancellation, funded orders, chat/friends, clan completion and ranked history passed; populated screens have no horizontal overflow. Browser portion: 2.0 minutes |
 | Repository checks | 75/75 infrastructure regressions passed; links/configuration, strict context budget and original-source migration integrity passed |
 | Dependency audit | `npm audit --audit-level=high` passed. Three moderate development-chain findings remain in node-pg-migrate/glob/minimatch; no high/critical findings reported. The offered automatic fix is a breaking migration-library downgrade and was not applied |
 | Hosted CI | Pending publication of the tested branch |
 
 The environment's system Chromium wrapper pointed to a missing executable and the official Playwright CDN returned HTTP 403. An isolated packaged Chromium 158.0.8127.0 was qualified through actual browser play; no game dependency was added for that fallback. The standard Playwright download remains the documented default and CI route.
+
+The aggregate run first exposed browser fixture state leaking from earlier integration tests. The E2E fixture now explicitly resets its guarded disposable database and checks initial ranked state; the complete combined suite then passed. Normal playtest startup continues to preserve player progress unless reset is explicitly requested.
 
 Unrun work is not a pass. Viewport emulation is not physical iPhone/Android/Steam Deck qualification. A successful test suite is not proof that arbitrary inputs, adversarial traffic or production-scale load are safe.
 
@@ -82,7 +86,7 @@ Provisional parameters include original content names, capture percentages, XP/I
 
 ## What remains
 
-1. Complete the final browser/source/CI verification and fix observed blockers; preserve exact evidence.
+1. Confirm hosted checks at the merge boundary and preserve their exact source/result. Local implementation and aggregate verification are complete.
 2. Observe the owner playing a fresh account, a progressed account and two-account multiplayer. Record confusing, tedious and enjoyable moments separately from defects.
 3. Address the measured combat-style dominance with one bounded tuning/retest cycle. Use production, economy and ranked baselines to make explicit keep/revise/defer decisions after observed play. Do not mistake fixed-cohort conservation for market sustainability or static matching for live fairness.
 4. Verify installation and actual browser/touch behavior on the intended Cloud Work/server rig and target devices. Decide any private remote serving separately from implementation.

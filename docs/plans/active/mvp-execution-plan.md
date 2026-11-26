@@ -1,6 +1,6 @@
 # Execution plan: Idle Buds initial playable MVP (v0.1 working label)
 
-**Status:** AUTHORIZED and IN IMPLEMENTATION. Target: the integrated local/private testable MVP, not commercial launch.
+**Status:** IMPLEMENTED and LOCALLY VERIFIED as a testable MVP candidate. The [implementation report](../../evidence/mvp-implementation-2026-11-26.md) records the actual source, checks and remaining human/balance work. This is not commercial launch.
 **Owner:** Silver (scope/release); current implementing session is integration lead, with disjoint rules/server/UI writers.
 **Implementation base:** main at `23425be` (Blueprint v2).
 **Authorization:** November 26, 2026 explicit owner instruction to build, implement and merge this blueprint. See [Current Release Specification](../../project/CURRENT-RELEASE.md) and [authority](../../design/AUTHORITY.md). Historical planning language below is retained for provenance; it no longer blocks this authorized scope. Actual completed/remaining checks belong to the implementation report, not this plan.
