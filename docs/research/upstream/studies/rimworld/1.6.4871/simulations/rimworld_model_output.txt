@@ -1,0 +1,188 @@
+
+## 1. Time scale and tick budget (Verse/TickManager.cs, Verse/GenTicks.cs)
+60 ticks per real second at x1; 2 500 ticks per hour, 60 000 per day, 900 000 per quadrum (15 days), 3 600 000 per year (60 days).
+speed                         | x  | target ticks/s | max ticks per frame | tick budget per frame
+Normal                        |   1 |             60 |                   2 | 45.45 ms (1000/22, WorstAllowedFPS)
+Fast                          |   3 |            180 |                   6 | 45.45 ms (1000/22, WorstAllowedFPS)
+Superfast                     |   6 |            360 |                  12 | 45.45 ms (1000/22, WorstAllowedFPS)
+Superfast, nothing happening  |  12 |            720 |                  24 | 45.45 ms (1000/22, WorstAllowedFPS)
+Ultrafast (dev)               |  15 |            900 |                  30 | 45.45 ms (1000/22, WorstAllowedFPS)
+Ultrafast boost / no maps     | 150 |           9000 |                 300 | 45.45 ms (1000/22, WorstAllowedFPS)
+
+Achieved simulation speed (ILLUSTRATIVE per-tick cost; render cost 8 ms per frame, no vsync):
+tick cost |   x1 (60)   |   x3 (180)  |   x6 (360)  |  x15 (900)
+   0.1 ms |    60 t/s 124fps |   180 t/s 123fps |   360 t/s 120fps |   901 t/s 114fps
+   0.5 ms |    60 t/s 121fps |   180 t/s 114fps |   360 t/s 102fps |   900 t/s  69fps
+   1.0 ms |    60 t/s 117fps |   180 t/s 102fps |   360 t/s  80fps |   789 t/s  26fps
+   2.0 ms |    60 t/s 110fps |   180 t/s  80fps |   360 t/s  35fps |   426 t/s  19fps
+   4.0 ms |    60 t/s  95fps |   180 t/s  35fps |   214 t/s  18fps |   214 t/s  18fps
+   8.0 ms |    62 t/s  62fps |   107 t/s  18fps |   107 t/s  18fps |   107 t/s  18fps
+  16.0 ms |    50 t/s  25fps |    54 t/s  18fps |    54 t/s  18fps |    54 t/s  18fps
+A frame never runs more than 2 x speed ticks and stops adding ticks after 45 ms, and leftover real time is dropped,
+so a slow colony runs slower than its nominal speed instead of stuttering through catch-up bursts.
+
+## 2. Bucketed tick lists (Verse/TickList.cs, Verse/Thing.cs DoTick)
+Normal things tick every tick; Rare things are hashed into 250 buckets and Long things into 2 000 buckets by GetHashCode(),
+and each tick runs one bucket. Per-tick work for N things (ILLUSTRATIVE counts):
+    1000 rare things:    4.0 TickRare() calls per tick on average (instead of 1000 every 250th tick)
+    5000 rare things:   20.0 TickRare() calls per tick on average (instead of 5000 every 250th tick)
+   20000 rare things:   80.0 TickRare() calls per tick on average (instead of 20000 every 250th tick)
+  5 000 random hashes into 250 buckets: min 9, mean 20, max 33 per tick
+Since 1.6, Normal-ticker things also get TickInterval(delta) at a camera-dependent rate (GenTicks.GetCameraUpdateRate):
+  on screen in the current map: every (zoom + 1) ticks; off screen or another map: every 15 ticks, clamped to [1, 15].
+  closest zoom    : TickInterval every  1 ticks ->  60.0 interval updates per second, 100.0 % of per-tick cost
+  mid zoom        : TickInterval every  3 ticks ->  20.0 interval updates per second,  33.3 % of per-tick cost
+  far / off screen: TickInterval every 15 ticks ->   4.0 interval updates per second,   6.7 % of per-tick cost
+Pawns split their work: every tick = pathing, verbs, stances, job driver, health, equipment, abilities, sound;
+TickInterval(delta) = job checks, health interval, mind state, needs (every 150 ticks via IsHashIntervalTick(150, delta)),
+apparel, social interactions, skills, relations, psychic entropy … (Verse/Pawn.cs Tick 1538-1617, TickInterval 1618-).
+
+## 3. A* pathfinding as in Verse/PathFinderJob.cs (Burst job), heuristic strength experiment
+Costs: cardinal step = pawn TicksPerMoveCardinal (default 13), diagonal = TicksPerMoveDiagonal (default 18), plus cell cost;
+cells cost >= 10 000 are impassable, blocked cells +175; diagonals may not cut corners; octile heuristic x 13 x strength;
+a closed node is reopened only if the new cost beats it by more than ceil(0.8 x 13) = 11.
+Strength: colonists 1 (1.5 in unnatural darkness), animals 1.75, other AI pawns round(curve(40 -> 1, 120 -> 2)) by distance (PathFinder.cs 535-555).
+30 random 90x90 maps, 28 % walls (ILLUSTRATIVE): path cost and nodes expanded relative to strength 1
+  strength 1.00: cost x1.000 (worst x1.000), nodes expanded x1.00
+  strength 1.50: cost x1.043 (worst x1.155), nodes expanded x0.16
+  strength 1.75: cost x1.063 (worst x1.155), nodes expanded x0.14
+  strength 2.00: cost x1.075 (worst x1.189), nodes expanded x0.13
+  note: 13 x 1.41421 = 18.38 > 18, so even strength 1 slightly overestimates diagonal moves (weighted A*, not strictly optimal).
+Requests are asynchronous: PathRequest objects are queued, gathered at MapPreTick, solved as Burst jobs (a parallel grid job per
+distinct cost-grid request, then one path job per request) and resolved at the start of the next tick; FindPathNow is the synchronous path.
+
+## 4. Regions, reachability and closest-thing search (Verse/Region*.cs, Reachability.cs, GenClosest.cs)
+  map 200x200:  40000 cells,  289 12x12 region grid squares (regions never span a square, so >= this many on open ground)
+  map 250x250:  62500 cells,  441 12x12 region grid squares (regions never span a square, so >= this many on open ground)
+  map 325x325: 105625 cells,  784 12x12 region grid squares (regions never span a square, so >= this many on open ground)
+  ClosestThingReachable: breadth-first over regions up to 30 regions (about 4 300 cells if full squares), then a global scan of the
+  lister with a reachability check; reachability uses an immediate check, a same-district shortcut, then region flood fill with a
+  cache keyed by (district pair, traverse parms). Regions and rooms are rebuilt lazily from dirty cells in MapUpdate.
+
+## 5. Needs (RimWorld/Need_Food.cs, Need_Rest.cs, Pawn_NeedsTracker.cs)
+  Human   : nutrition fall 1.600/day when fed (baseHungerRate 1.0, life-stage factor 1); x0.5 hungry, x0.25 urgently hungry, 0 starving
+  Muffalo : nutrition fall 0.856/day when fed (baseHungerRate 0.535, life-stage factor 1); x0.5 hungry, x0.25 urgently hungry, 0 starving
+  Thrumbo : nutrition fall 2.800/day when fed (baseHungerRate 1.75, life-stage factor 1); x0.5 hungry, x0.25 urgently hungry, 0 starving
+  Alpaca  : nutrition fall 0.440/day when fed (baseHungerRate 0.275, life-stage factor 1); x0.5 hungry, x0.25 urgently hungry, 0 starving
+  rest: falls 0.950/day rested (x0.7 tired, x0.3 very tired), sleep gains 2.286/day -> a full night is 10.5 h
+  needs update every 150 ticks, so each update applies 150 ticks of change at once.
+
+## 6. Mental breaks (Verse.AI/MentalBreaker.cs)
+Thresholds from stat MentalBreakThreshold (base 0.35): minor 35 %, major 35 x 4/7 = 20 %, extreme 35/7 = 5 % mood.
+Checked every 150 ticks; mood must stay below a threshold for more than 2 000 ticks, then MTB 4 / 0.8 / 0.5 days.
+Rand.MTBEventOccurs uses p = check / (mtb x unit) per check (linear, not 1 - e^-x).
+  minor  : P(break) after 6 h below   5.2 %, 24 h  21.4 %, 72 h  52.4 %
+  major  : P(break) after 6 h below  23.6 %, 24 h  70.1 %, 72 h  97.6 %
+  extreme: P(break) after 6 h below  35.0 %, 24 h  85.6 %, 72 h  99.7 %
+  recovery from one break blocks a new random break for 15 000 ticks (6 h).
+
+## 7. Social interactions (RimWorld/Pawn_InteractionsTracker.cs)
+  quiet       : MTB 22000 ticks checked every 60 ticks after 320 -> about 0.11 random interactions per hour per pawn (upper bound; needs a valid partner)
+  normal      : MTB 6600 ticks checked every 60 ticks after 320 -> about 0.36 random interactions per hour per pawn (upper bound; needs a valid partner)
+  super active: MTB 550 ticks checked every 60 ticks after 320 -> about 2.87 random interactions per hour per pawn (upper bound; needs a valid partner)
+
+## 8. Threat points (RimWorld/StorytellerUtility.cs DefaultThreatPointsNow)
+wealth = items + 0.5 x buildings + pawns. Points = (wealthCurve + sum colonist points) x lerp(1, adaptation, effectFactor) x threatScale x daysCurve, clamped [min, 10 000]
+wealth     | 3 col | 6 col | 10 col | 15 col   (Rough difficulty, day 60, adaptDays 30, healthy)
+    20,000 |    92 |   147 |   219 |   310
+    50,000 |   307 |   391 |   502 |   641
+   100,000 |   666 |   798 |   973 |  1192
+   200,000 |  1384 |  1612 |  1915 |  2295
+   400,000 |  2820 |  3240 |  3800 |  4500
+   700,000 |  4110 |  4620 |  5300 |  6150
+ 1,000,000 |  4800 |  5400 |  6200 |  7200
+difficulty threatScale: Peaceful 0.10, Easy 0.30, Medium 0.60, Rough 1, Hard 1.55, Extreme 2.2
+the minimum is a seeded random value in [35, ceiling]; the ceiling comes from the difficulty curve by days passed.
+
+## 9. Adaptation (RimWorld/StoryWatcher_Adaptation.cs + StorytellerDef curves)
+half-day steps, Rough (growth factor 1); ILLUSTRATIVE losses at day 70 (death, -30) and 75 (downed, -6):
+  d0:0  d20:0  d40:10  d60:30  d70:10  d75:10  d80:14  d100:34  d120:54  d140:67  d160:77  d180:87  d200:97  d220:100  d240:100  d260:100
+  adaptDays -> points factor: -30: x0.40, 0: x0.80, 30: x1.00, 60: x1.20, 100: x1.47
+  growth is 0.5 day per half day (1 per day) below 60 adapt days, then halves; nothing grows in the first 30 days unless negative.
+
+## 10. Incident cadence with the exact on/off-cycle scheduler (RimWorld/IncidentCycleUtility.cs, Storytellers.xml)
+  Cassandra ThreatBig                         :  8.5 per 60-day year (300 seeds), gap median  8.1 d, min  1.9 d
+  Phoebe ThreatBig                            :  3.8 per 60-day year (300 seeds), gap median 16.0 d, min  8.2 d
+  Cassandra ThreatSmall (before points filter):  3.4 per 60-day year (300 seeds), gap median 12.3 d, min  6.1 d
+  the schedule is a pure function of (world seed, target seed, comp index, cycle index): reloading a save does not move threats in time.
+  Randy RandomMain (MTB 1.35 d, weights Misc 3.5, ThreatBig 1.4, OrbitalVisitor 1.1, FactionArrival 2.4, ThreatSmall 0.6, ShipChunkDrop 0.22): ThreatBig share 15.2%
+    simulated ThreatBig per year 8.4 (assumes every chosen category has a usable incident; 13-day forced ThreatBig rule included)
+
+## 11. Raid lord (Verse.AI.Group/Lord.cs, RimWorld/LordJob_AssaultColony.cs, FactionDef.cs)
+  every toil of a non-player auto-flee faction gets a high-priority transition to PanicFlee when the fraction of pawns lost
+  reaches a value drawn once per lord, seeded by its loadID, from attackersDownPercentageRangeForAutoFlee (default 0.4-0.7).
+  assault gives up after 26 000-38 000 ticks (10.4-15.2 h), sappers/breachers after 33 000-38 000; leaves "satisfied" once
+  25-35 % of colony value is damaged; kidnap and steal subgraphs trigger on downed colonists or valuables nearby.
+  the lord graph is built under Rand seeded with loadID x 193, so a given lord rebuilds identically.
+
+## 12. Ranged hit chance (Verse/ShotReport.cs + ShootingAccuracyPawn curve)
+Aim chance = accuracy(skill)^distance x weapon accuracy (touch <=3, short <=12, medium <=25, long <=40 cells, interpolated) x ...,
+min 2.01 %, then x (1 - cover block). Skill sets the per-cell accuracy: L0 0.890, L5 0.945, L10 0.970, L15 0.982, L20 0.990
+  revolver       (range 26) skill 5/10/20 at 5, 15, 30 cells:  59/ 68/ 75 |  30/ 45/ 61 |   9/ 20/ 37 %
+  assault rifle  (range 31) skill 5/10/20 at 5, 15, 30 cells:  47/ 53/ 59 |  29/ 44/ 59 |  11/ 25/ 46 %
+  sniper rifle   (range 45) skill 5/10/20 at 5, 15, 30 cells:  41/ 47/ 52 |  32/ 47/ 64 |  16/ 36/ 66 %
+  minigun        (range 31) skill 5/10/20 at 5, 15, 30 cells:  16/ 18/ 20 |  11/ 16/ 22 |   4/  9/ 17 %
+
+## 13. Job choice (Data/Core/Defs/ThinkTreeDefs/Humanlike.xml, ThinkNode_PrioritySorter.cs, JobGiver_*.cs)
+Main tree is a strict priority list (downed, burning, critical mental states, close melee threat, mental states, queued job,
+drafted orders, self-tend, lord duty, prisoner logic, seek allowed area/safe temperature, ...) ending in MainColonistBehaviorCore,
+whose ThinkNode_PrioritySorter shuffles its children (random tie-break) and tries them in order of GetPriority():
+  giver   | condition                                   | Anything | Work | Joy | Sleep
+  GetFood | food < race want-eat level                  |      9.5 |  9.5 | 9.5 | 9.5
+  GetRest | rest < 0.30 (Sleep slot: always)            |        8 |    0 |   8 | 8
+  GetJoy  | joy < 0.35 (Joy slot: < 0.95; Sleep slot: < 0.95) |        6 |    0 |   7 | 2
+  Work    | -                                           |      5.5 |    9 |   2 | 3
+  (GetRest in the Joy slot: 8 if rest < 0.3; Meditate slot: rest < 0.16 -> 8, work 2.) The constant think tree (flee explosions,
+  find oxygen, hostility response, lord constant duty) is evaluated every 30 ticks and may interrupt the current job.
+JobGiver_Work walks work givers in (player priority, work type natural priority, priorityInType) order and stops at the first
+priorityInType tier that yields a target; scanners search region-wise for the closest reachable thing, or globally by priority.
+
+## 14. Content (Defs XML, Core + 5 DLCs, after inheritance)
+  ThingDef 1811, SoundDef 1231, ThoughtDef 923, BackstoryDef 845, RulePackDef 339, HediffDef 324, JobDef 320, FleckDef 316, EffecterDef 283, PawnKindDef 282, StatDef 244, PreceptDef 215, RecipeDef 190, PrefabDef 176, HistoryEventDef 172, GeneDef 169, GenStepDef 167, ResearchProjectDef 164
+  def types 250, defs 13159; think trees 61
+
+## 15. Skills and crafted quality (RimWorld/SkillRecord.cs, Pawn_SkillTracker.cs, QualityUtility.cs)
+XP to level up from L: L0 1000, L4 5000, L9 10000, L14 20000, L19 30000; total L0->L20 265,000
+learn factor: passion none 0.35, minor 1.0, major 1.5, x GlobalLearningFactor; after 4 000 XP in a day x0.2 (saturation).
+decay every 200 ticks above L9 (x0.5 with Great Memory): L10 30/day, L14 300/day, L17 1200/day, L20 3600/day
+  L10: offsetting decay needs 0.12 h/day of research-rate (0.1 XP/tick) work at passion minor
+  L14: offsetting decay needs 1.20 h/day of research-rate (0.1 XP/tick) work at passion minor
+  L17: offsetting decay needs 4.80 h/day of research-rate (0.1 XP/tick) work at passion minor
+  L20: offsetting decay needs 14.40 h/day of research-rate (0.1 XP/tick) work at passion minor
+crafted quality without inspiration or role (Legendary only via Inspired Creativity +2 or an Ideology role offset):
+  skill |      awful |       poor |     normal |       good |  excellent | masterwork
+  L 0   |      64.6% |      30.2% |       5.0% |       0.2% |       0.0% |       0.0%
+  L 4   |       4.8% |      45.2% |      39.4% |       9.9% |       0.6% |       0.0%
+  L 8   |       0.1% |       9.0% |      50.8% |      33.5% |       6.4% |       0.2%
+  L10   |       0.0% |       3.3% |      40.2% |      43.8% |      12.2% |       0.4%
+  L12   |       0.0% |       1.0% |      24.5% |      52.6% |      20.6% |       1.2%
+  L14   |       0.0% |       0.4% |      15.8% |      54.3% |      27.4% |       2.1%
+  L16   |       0.0% |       0.1% |       9.3% |      52.4% |      34.5% |       3.7%
+  L18   |       0.0% |       0.0% |       5.0% |      47.6% |      41.3% |       6.1%
+  L20   |       0.0% |       0.0% |       2.4% |      37.4% |      50.6% |       9.5%
+a masterwork roll is kept only half the time; otherwise it re-rolls with a wider upper tail (0.95), which can land lower.
+
+## 16. Market value, trade prices and research time (StatWorker_MarketValue.cs, TradeUtility.cs, Tradeable.cs, ResearchManager.cs)
+crafted value = sum(ingredients) + work x 0.0036: assault rifle 60 steel + 7 components + 40 000 work = 482; revolver 135
+quality factors on market value: awful 0.5, poor 0.75, normal 1, good 1.25 (gain <= 500), excellent 1.5 (<= 1000), masterwork 2.5 (<= 2000), legendary 5 (<= 3000)
+player sells at MV x 0.6 x (1 + negotiator); buys at MV x 1.4 x (1 - negotiator); sell is clamped to <= buy; Hard/Extreme also cut sell and raise buy by 10/20 %.
+negotiator = TradePriceImprovement = 0.015 x Social level x talking/hearing capacity (max 0.395)
+  Social | gain  | buy x MV | sell x MV | round-trip loss
+  L 0    | 0.000 |    1.400 |     0.600 |  57.1 %
+  L 5    | 0.075 |    1.295 |     0.645 |  50.2 %
+  L10    | 0.150 |    1.190 |     0.690 |  42.0 %
+  L15    | 0.225 |    1.085 |     0.735 |  32.3 %
+  L20    | 0.300 |    0.980 |     0.780 |  20.4 %
+  at the 0.395 cap: buy 0.847, sell 0.837 -> the gap never closes, so trade cannot be a loop by itself
+research points per tick = ResearchSpeed x bench factor x 0.00825 x difficulty factor / cost factor;
+ResearchSpeed = (0.08 + 0.115 x Intellectual) x WorkSpeedGlobal x capacities; benches: simple 0.75, hi-tech 1.0 (x multi-analyzer etc.)
+cost factor: 1 + 0.5 per tech level the project is above the colony, with the project tech capped at Industrial
+  project              cost | hours at the bench: L6 simple / L10 hi-tech / L15 hi-tech (industrial colony; tribal x factor)
+  Electricity          1600 |    134 /     63 /     43 h  (Industrial; tribal start x2.0)
+  Gunsmithing           500 |     42 /     20 /     13 h  (Industrial; tribal start x2.0)
+  MicroelectronicsBasics   3000 |    252 /    118 /     81 h  (Industrial; tribal start x2.0)
+  MultiAnalyzer        4000 |    336 /    158 /    107 h  (Industrial; tribal start x2.0)
+  Fabrication          4000 |    336 /    158 /    107 h  (Industrial; tribal start x2.0)
+  ShipBasics           4000 |    336 /    158 /    107 h  (Spacer; tribal start x2.0)
+  ShipReactor          6000 |    504 /    237 /    161 h  (Spacer; tribal start x2.0)
+research also trains Intellectual at 0.1 XP per tick (250 XP per hour before passion).

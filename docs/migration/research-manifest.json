@@ -1881,6 +1881,156 @@
       "destination_sha256": "7d23cef0bda861188a54517a48d38a12b4081cf99aae788799c4ddd948dd7a87",
       "destination_bytes": 1828,
       "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/rimworld/1.6.4871/FINAL_REPORT.md",
+      "destination": "docs/research/upstream/studies/rimworld/1.6.4871/FINAL_REPORT.md",
+      "classification": "authored research narrative",
+      "source_blob_sha": "5a3284b73e4a82305188e6d01e7eaf79c142f70c",
+      "source_sha256": "b08a8a98c699ad0676e01bdfa92d99b37ec0b52196249afd26f2a32fe69944e6",
+      "source_bytes": 6255,
+      "destination_sha256": "a9ecdcad7792d2a82524930237436f1d39b6b91aea740e8aff4107b16f19c5fe",
+      "destination_bytes": 6684
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/rimworld/1.6.4871/MANIFEST.md",
+      "destination": "docs/research/upstream/studies/rimworld/1.6.4871/MANIFEST.md",
+      "classification": "authored research narrative",
+      "source_blob_sha": "8317e89e573e5b0b5367c549360edaa9db75edad",
+      "source_sha256": "b772971c1b34d57c101322b2907ea13d66061b80f39e12ffd778e3c08161dabd",
+      "source_bytes": 1632,
+      "destination_sha256": "598828635a7e90aa336985853f7fd49e253c221ddcaab39dbf0e981b314bffd8",
+      "destination_bytes": 2057
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/rimworld/1.6.4871/README.md",
+      "destination": "docs/research/upstream/studies/rimworld/1.6.4871/README.md",
+      "classification": "authored research narrative",
+      "source_blob_sha": "ce9377b02e922b669bc937a72231bcd50820dcc9",
+      "source_sha256": "a347f28e00673de1053fba749c85e61148156ae07d303f36c023a3a89acffeb2",
+      "source_bytes": 2430,
+      "destination_sha256": "63da5711178ef9352f8f4cc6d868dfda0517b58e3924c773438ef0e5bfa3af4b",
+      "destination_bytes": 2853
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/rimworld/1.6.4871/ai/AI_ARCHITECTURE.md",
+      "destination": "docs/research/upstream/studies/rimworld/1.6.4871/ai/AI_ARCHITECTURE.md",
+      "classification": "authored research narrative",
+      "source_blob_sha": "0051fd9bc425e33c714df1bb5fc9eaeb7732c4f6",
+      "source_sha256": "7bd511eb447a9db5bc3153ba07e7b5893c4ddca659fae34c7f9d2edea8d07724",
+      "source_bytes": 18882,
+      "destination_sha256": "4e1f46caaa8bef22133e7cee046ec86df60f3fb75b15c7e9ce3ca0a9b749daae",
+      "destination_bytes": 19320
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/rimworld/1.6.4871/architecture/ARCHITECTURE.md",
+      "destination": "docs/research/upstream/studies/rimworld/1.6.4871/architecture/ARCHITECTURE.md",
+      "classification": "authored research narrative",
+      "source_blob_sha": "ececb6451412b22294a8ad5857c3e0dfe0b8b75e",
+      "source_sha256": "1303fd029723cb4272e86d246e11fcbc50272a97e268846eb488228a83765066",
+      "source_bytes": 7767,
+      "destination_sha256": "835b3d160d44e84d56bc7db9707ddacc3c0624f7bb6b41140240174e16a8c56d",
+      "destination_bytes": 8212
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/rimworld/1.6.4871/content/CONTENT.md",
+      "destination": "docs/research/upstream/studies/rimworld/1.6.4871/content/CONTENT.md",
+      "classification": "authored research narrative",
+      "source_blob_sha": "b5d8273c7e477db0e4a0eae61c3c5a893e32bc08",
+      "source_sha256": "578a119efc59d6bffa31fff6f634675ac4dc19b361ca340e7db09fb1b534cecf",
+      "source_bytes": 4387,
+      "destination_sha256": "3cf28edd1ca90ad3e981035c648ec09246bcf87117236b13817ab8f06b30b43c",
+      "destination_bytes": 4822
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/rimworld/1.6.4871/development-lessons/DEVELOPMENT_LESSONS.md",
+      "destination": "docs/research/upstream/studies/rimworld/1.6.4871/development-lessons/DEVELOPMENT_LESSONS.md",
+      "classification": "authored research narrative",
+      "source_blob_sha": "af8f00e2663baeae7242eb8fcacbc67e0ca4333f",
+      "source_sha256": "227bfeb1f5673fca42f9dc544e6ec9319c43aa14a1d62d6b21b480a7a648fa8d",
+      "source_bytes": 4689,
+      "destination_sha256": "3edf82313935d7a5a02edb2654f0a0388ce4607017189e4a3b6d1020f48e7857",
+      "destination_bytes": 5148
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/rimworld/1.6.4871/economy/ECONOMY.md",
+      "destination": "docs/research/upstream/studies/rimworld/1.6.4871/economy/ECONOMY.md",
+      "classification": "authored research narrative",
+      "source_blob_sha": "591bb585e5e0785098900363f4f7d5af605e9ea2",
+      "source_sha256": "8adfcc076ed47a043d7bd37537ed2e662f3aabb722973b137d8272730615f1de",
+      "source_bytes": 3961,
+      "destination_sha256": "cc96c3ecc16bc682c599c1951d694a100bab27c363042bd50c8efd198290aeae",
+      "destination_bytes": 4396
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/rimworld/1.6.4871/experiments/EXPERIMENT_LOG.md",
+      "destination": "docs/research/upstream/studies/rimworld/1.6.4871/experiments/EXPERIMENT_LOG.md",
+      "classification": "authored research narrative",
+      "source_blob_sha": "661320b1cf635da38ac7ad2d370cfc4d4bef0500",
+      "source_sha256": "cd58d550304b4218f7290643161e279f3560b0f90338527c26269d9f1d402c79",
+      "source_bytes": 3746,
+      "destination_sha256": "43cf865852236891d53c418b5f09b45ed2989a7541d544f73fb68174a72e82f3",
+      "destination_bytes": 4192
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/rimworld/1.6.4871/gameplay/GAMEPLAY_SYSTEMS.md",
+      "destination": "docs/research/upstream/studies/rimworld/1.6.4871/gameplay/GAMEPLAY_SYSTEMS.md",
+      "classification": "authored research narrative",
+      "source_blob_sha": "548580a8bc590cd09ff515bbfbf3948960cdafde",
+      "source_sha256": "bcfe109477c73707b045065bdd120f2a9e1ecab245b449071684b449287b42c2",
+      "source_bytes": 6204,
+      "destination_sha256": "d15d16afddfd22e25c539da07379003395b3c360a02a248fe24c27d2255a0356",
+      "destination_bytes": 6649
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/rimworld/1.6.4871/mathematics/FORMULAS.md",
+      "destination": "docs/research/upstream/studies/rimworld/1.6.4871/mathematics/FORMULAS.md",
+      "classification": "authored research narrative",
+      "source_blob_sha": "fdacc3dca8533ef08053e420e8e259f110f8da04",
+      "source_sha256": "9ee2a2a4c96cb96a7a128653a631f3f061a425d7f8a3947493eb8bade2eb2237",
+      "source_bytes": 10706,
+      "destination_sha256": "a79756441e2b601263617e802ca4d55fc2e4c29703a2e2f07ab0aac020a43946",
+      "destination_bytes": 11146
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/rimworld/1.6.4871/performance/PERFORMANCE_ARCHITECTURE.md",
+      "destination": "docs/research/upstream/studies/rimworld/1.6.4871/performance/PERFORMANCE_ARCHITECTURE.md",
+      "classification": "authored research narrative",
+      "source_blob_sha": "0fde04b223b00c2b74f8d82fdbd24ece085d9686",
+      "source_sha256": "26ac20e32800b03fa9afa60789184fd737d2bf35a54aeb5ada19cba4cb12182b",
+      "source_bytes": 11759,
+      "destination_sha256": "249d55c239af2f23b3396d87e47f94f91a5713524c4e6bd466b784ccdf9e3963",
+      "destination_bytes": 12215
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/rimworld/1.6.4871/progression/PROGRESSION.md",
+      "destination": "docs/research/upstream/studies/rimworld/1.6.4871/progression/PROGRESSION.md",
+      "classification": "authored research narrative",
+      "source_blob_sha": "f8f2be22bcd8382ec0fe86db71a8e0c0007cc943",
+      "source_sha256": "632d902774d49de9d056e7d45fe53ce3a11b57628ba011aff9b3645f3be2b0a9",
+      "source_bytes": 4581,
+      "destination_sha256": "79d915b9a4e59b20583caa36c5c08470a124239035c1455bd0a4f980704bcd13",
+      "destination_bytes": 5024
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/rimworld/1.6.4871/user-experience/UX_ANALYSIS.md",
+      "destination": "docs/research/upstream/studies/rimworld/1.6.4871/user-experience/UX_ANALYSIS.md",
+      "classification": "authored research narrative",
+      "source_blob_sha": "e65a9f8b5efa9cd707d258bf63f31efdbae8aa12",
+      "source_sha256": "7da39052065fbaa6f4473d829c3e1e42be895136ede9914e74039cdb838135d3",
+      "source_bytes": 3949,
+      "destination_sha256": "5eef3b535c02060e18f020598928c41f758535bfaf413312161cbb805dc50f3f",
+      "destination_bytes": 4396
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/rimworld/1.6.4871/simulations/rimworld_model_output.txt",
+      "destination": "docs/research/upstream/studies/rimworld/1.6.4871/simulations/rimworld_model_output.txt",
+      "classification": "upstream-reported aggregate simulation output; not rerun",
+      "source_blob_sha": "c326261a702c8e43ca6013df70bbbfc8fc4c6bed",
+      "source_sha256": "86784c22724242566735c51d4e2b9b1abbb289ffbd114f7e10e87db459cfc55d",
+      "source_bytes": 17418,
+      "destination_sha256": "86784c22724242566735c51d4e2b9b1abbb289ffbd114f7e10e87db459cfc55d",
+      "destination_bytes": 17418
     }
   ],
   "generated_docs": [
