@@ -4,7 +4,7 @@ Optional high-signal inventory. Keep each item a one-line pointer to its sole re
 
 | Topic | Record | Status | Last verified | Recheck when |
 |---|---|---|---|---|
-| Idle/incremental and creature-game findings | [Imported snapshot](upstream/README.md) | Source-reported; per-study review limits | File identity checked November 25, 2026 | Source changes or an approved decision depends on a finding |
+| Idle/incremental, creature-game and simulation findings | [Imported snapshot](upstream/README.md) | Source-reported; per-study review limits | File identity checked November 25, 2026 | Source changes or an approved decision depends on a finding |
 | Numeric, save, time, protocol and economy invariants | [Earlier engineering studies](upstream/engineering/README.md) | Historical donor research; not reproduced locally | File identity checked November 25, 2026 | Target behavior and current runtime require a scoped experiment |
 | Project design discussion | [Historical log](design-history.md) | Historical record; Bible owns current intent | Complete native export checked November 25, 2026 | Reconcile an approved decision or trace its origin |
 
