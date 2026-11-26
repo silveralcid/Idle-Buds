@@ -1,0 +1,7 @@
+> **Imported research, not approved Idle Buds design.** [Source snapshot](https://github.com/silveralcid/research/blob/88163607cfd407230512650a5c6750e1b7a96f98/reverse-engineering/game-dev/palworld/1.0.5.102999/user-experience/UX_ANALYSIS.md); [scope, corrections and rights](../../../../README.md). Upstream evidence labels and reported test results are preserved, not newly reproduced. Counts and commands may refer to excluded upstream artifacts.
+
+# Palworld — UX and Design Psychology (static analysis)
+- **Three hooks in one loop**: collection (288-entry Paldeck with capture-count bonus EXP), survival-crafting (588 techs, work-suitability base automation) and creature RPG (IVs, passives, condensing, breeding funnel). Each has a visible ladder; the hidden ones (IVs, CombiRank, capture formula) became community meta — the game rewards out-of-game knowledge.
+- **Capture feedback**: the capture percentage is shown before the throw; sphere tiers are a crafting ladder, effigies a world-exploration ladder, so "catch rate" is the integrating stat across systems.
+- **Player-tunable economy**: four presets and ~60 rates (EXP, capture, damage, hatch time, drops, death penalty, hardcore/pal-loss) let groups pick their grind; design cost: balance claims are preset-relative.
+- **Friction/risks**: late EXP tail (L65→100 = 36× L65 total), breeding ties decided by a hidden priority, enemy variants with ×2 damage/×0.4 taken, large procedural placement tables (11 778-row foliage lists) hint at world-streaming complexity.

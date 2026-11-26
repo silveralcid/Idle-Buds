@@ -1,0 +1,282 @@
+{
+  "source_folder": "https://drive.google.com/drive/folders/1w4zPtxCDCE8KrqCmZIxu98A7DT3LO9kQ",
+  "retrieved_at": "2026-11-25T23:12:52.254364-05:00",
+  "folders": [
+    {
+      "id": "1w4zPtxCDCE8KrqCmZIxu98A7DT3LO9kQ",
+      "title": "Idle Buds - Planning",
+      "direct_children": 5,
+      "subfolders": 0,
+      "pages_read": 1,
+      "continuation_token": null
+    }
+  ],
+  "files": [
+    {
+      "id": "11NvR8ouc-iAUTqfhoV6FndwED86pWtCi38FcEQmE7mc",
+      "title": "Idle Buds | Living Game Design & Research Log",
+      "mime_type": "application/vnd.google-apps.document",
+      "url": "https://docs.google.com/document/d/11NvR8ouc-iAUTqfhoV6FndwED86pWtCi38FcEQmE7mc/edit?usp=drivesdk",
+      "modified_time": "2026-11-26T03:53:19.976Z",
+      "created_time": "2026-11-25T10:55:25.637Z",
+      "export_size": 159573,
+      "revision_id": "AHj4eMTv229AQqV69xCJtYcHpWrShHTYFGPcIDp_Hj_70i4a397G2UNMnCicCfB3mOEPpPtDh_ILnrMY-PaVEZYQBEb5ZN3OePje-3M3zRk",
+      "tabs": [
+        {
+          "id": "t.0",
+          "title": "Tab 1"
+        }
+      ],
+      "source_sha256": "340ca21ecdb1e1b0431a823fbb18696d3c04801eb691c24f5a8e8db6d352c178",
+      "original_export": "docs/archive/drive/2026-11-25-native-markdown-exports.zip#11NvR8ouc-iAUTqfhoV6FndwED86pWtCi38FcEQmE7mc.md",
+      "destinations": [
+        "docs/research/design-history.md"
+      ],
+      "classification": "historical research/decision evidence, not duplicate active authority",
+      "comments_checked": {
+        "include_deleted": true,
+        "threads": 0,
+        "continuation_token": null
+      }
+    },
+    {
+      "id": "12OrAAun6-rQix1oPuxSCr71mWEsEIZdIedhX7J62OrM",
+      "title": "01 | Idle Buds Game Design Bible v0.1",
+      "mime_type": "application/vnd.google-apps.document",
+      "url": "https://docs.google.com/document/d/12OrAAun6-rQix1oPuxSCr71mWEsEIZdIedhX7J62OrM/edit?usp=drivesdk",
+      "modified_time": "2026-11-26T03:53:18.956Z",
+      "created_time": "2026-11-25T12:52:15.680Z",
+      "export_size": 122624,
+      "revision_id": "AHj4eMR5P_91ik00MFmOgsN9gAlKsKaaHliz1qX0F_GV6hKN_6uMpxYmW9tcoHndNwqSRHrw_VgpFpIYSXe8i29r0Xp3UryxO0ALzplHzE0",
+      "tabs": [
+        {
+          "id": "t.0",
+          "title": "Tab 1"
+        }
+      ],
+      "source_sha256": "de3e5da1a22eb34f9e4d803aaab279f1acb56824bf57faa4064e7f8ec7138e8b",
+      "original_export": "docs/archive/drive/2026-11-25-native-markdown-exports.zip#12OrAAun6-rQix1oPuxSCr71mWEsEIZdIedhX7J62OrM.md",
+      "destinations": [
+        "docs/design/design-bible.md",
+        "docs/design/bible/01-identity.md",
+        "docs/design/bible/02-player-experience.md",
+        "docs/design/bible/03-core-loop.md",
+        "docs/design/bible/04-catching.md",
+        "docs/design/bible/05-creature-identity.md",
+        "docs/design/bible/06-progression-and-production.md",
+        "docs/design/bible/07-breeding.md",
+        "docs/design/bible/08-combat.md",
+        "docs/design/bible/09-multiplayer-and-economy.md",
+        "docs/design/bible/10-presentation.md",
+        "docs/design/bible/11-commercial-design.md",
+        "docs/design/bible/12-release-direction.md",
+        "docs/design/bible/13-open-decisions.md",
+        "docs/design/bible/14-governance-references.md"
+      ],
+      "segments": [
+        {
+          "path": "docs/design/design-bible.md",
+          "source_character_range": [
+            0,
+            6410
+          ],
+          "source_fragment_sha256": "571beaf04130881f74716dd4bdca8a199174221b7b5dc3aaf0fc454ac3760b38"
+        },
+        {
+          "path": "docs/design/bible/01-identity.md",
+          "source_character_range": [
+            6410,
+            8766
+          ],
+          "source_fragment_sha256": "7fce337abc80f255284528addd4ef19dc2d885727b3df811f33c2681aad47a89"
+        },
+        {
+          "path": "docs/design/bible/02-player-experience.md",
+          "source_character_range": [
+            8766,
+            13840
+          ],
+          "source_fragment_sha256": "09df5c6c1a985d6c54d60ae27e780959269a440e34592adea4e3de0a512e56e4"
+        },
+        {
+          "path": "docs/design/bible/03-core-loop.md",
+          "source_character_range": [
+            13840,
+            14269
+          ],
+          "source_fragment_sha256": "6ef6ccdbfd313fab22302a111233fd332781a722e55739057e21aa473fcf4f17"
+        },
+        {
+          "path": "docs/design/bible/04-catching.md",
+          "source_character_range": [
+            14269,
+            22561
+          ],
+          "source_fragment_sha256": "2133fb6ff640764f21d3726d4db2d633b0b4fe87376876a3c8c03ed4a06d3802"
+        },
+        {
+          "path": "docs/design/bible/05-creature-identity.md",
+          "source_character_range": [
+            22561,
+            25347
+          ],
+          "source_fragment_sha256": "b0113c93fba71c7bcd064716d7b5f7441c6972aea90cb584d54a47e6d6f07834"
+        },
+        {
+          "path": "docs/design/bible/06-progression-and-production.md",
+          "source_character_range": [
+            25347,
+            43664
+          ],
+          "source_fragment_sha256": "9a6722c52b8bec6244d61fd327fb680de3ad73be4c3bdd69719efb2a5db5d647"
+        },
+        {
+          "path": "docs/design/bible/07-breeding.md",
+          "source_character_range": [
+            43664,
+            48249
+          ],
+          "source_fragment_sha256": "bb399a79527a53c279abf5b569f293fb84d847467859badb37af02edee66de92"
+        },
+        {
+          "path": "docs/design/bible/08-combat.md",
+          "source_character_range": [
+            48249,
+            67391
+          ],
+          "source_fragment_sha256": "802d21ecd05c875be0284ac207c6101be4f5fb46c1093df92270c8e9678881e1"
+        },
+        {
+          "path": "docs/design/bible/09-multiplayer-and-economy.md",
+          "source_character_range": [
+            67391,
+            74633
+          ],
+          "source_fragment_sha256": "6ff0ce8ea962ecf1279e2dab681d5dabcfccfb6897054a0480f2d82613bd9838"
+        },
+        {
+          "path": "docs/design/bible/10-presentation.md",
+          "source_character_range": [
+            74633,
+            89558
+          ],
+          "source_fragment_sha256": "b6c6bda0dbf62cb0b37cc2e4bd41b22a54a21cbca92dbb15b263b7b3590cacaf"
+        },
+        {
+          "path": "docs/design/bible/11-commercial-design.md",
+          "source_character_range": [
+            89558,
+            92252
+          ],
+          "source_fragment_sha256": "241b32fec6a82569e8c476e0777943002cb4047954b6215759a30c24f0c547c5"
+        },
+        {
+          "path": "docs/design/bible/12-release-direction.md",
+          "source_character_range": [
+            92252,
+            96951
+          ],
+          "source_fragment_sha256": "1c8fe7d90d3bb273bd685d672673b678c1b3c4daf116d127df9d48b95a98517b"
+        },
+        {
+          "path": "docs/design/bible/13-open-decisions.md",
+          "source_character_range": [
+            96951,
+            119509
+          ],
+          "source_fragment_sha256": "e895e6e9935eba412602958a34e8632a0d803c5af346507063a1ef386a6bbee4"
+        },
+        {
+          "path": "docs/design/bible/14-governance-references.md",
+          "source_character_range": [
+            119509,
+            122524
+          ],
+          "source_fragment_sha256": "b129a142bf460abf8afbe945a88a7e52874a2e2162ae413ce4fdb79f25d08888"
+        }
+      ],
+      "classification": "approved design intent with explicitly provisional/open matters retained",
+      "comments_checked": {
+        "include_deleted": true,
+        "threads": 0,
+        "continuation_token": null
+      }
+    },
+    {
+      "id": "1RjGXglfYPLjBFNs7EnYaWKl7bXlsFFJswBRArwG9bsw",
+      "title": "03 | Idle Buds Idea Incubator",
+      "mime_type": "application/vnd.google-apps.document",
+      "url": "https://docs.google.com/document/d/1RjGXglfYPLjBFNs7EnYaWKl7bXlsFFJswBRArwG9bsw/edit?usp=drivesdk",
+      "modified_time": "2026-11-26T03:50:11.451Z",
+      "created_time": "2026-11-25T11:10:14.218Z",
+      "export_size": 60998,
+      "revision_id": "AHj4eMQbkfFHIydxaNnz_4oJ5f3hkCht7pleeQbN4PBWqR2fVwrjpkZaAqT3_H1RmpF84BjWE_8BNkV2oqC7eYhW7uK0VTx-LIJBonIAFtA",
+      "tabs": [
+        {
+          "id": "t.0",
+          "title": "Tab 1"
+        }
+      ],
+      "source_sha256": "90ee485b2f638e1280186321645ec17044375eaaca31e07745fdbdb027f78bb2",
+      "original_export": "docs/archive/drive/2026-11-25-native-markdown-exports.zip#1RjGXglfYPLjBFNs7EnYaWKl7bXlsFFJswBRArwG9bsw.md",
+      "destinations": [
+        "docs/design/idea-incubator.md"
+      ],
+      "classification": "ideas/proposals/holds and recorded promotions, not automatic scope",
+      "comments_checked": {
+        "include_deleted": true,
+        "threads": 0,
+        "continuation_token": null
+      }
+    },
+    {
+      "id": "1FKS0BHinMzYHBzwYaiCsARc_heHfordH",
+      "title": "Idle Buds \u00b7 Art Direction (Rounds 1\u20132).html",
+      "mime_type": "text/html",
+      "url": "https://drive.google.com/file/d/1FKS0BHinMzYHBzwYaiCsARc_heHfordH/view?usp=drivesdk",
+      "modified_time": "2026-11-25T17:36:58.260Z",
+      "created_time": "2026-11-25T17:36:58.260Z",
+      "export_size": 9622317,
+      "source_sha256": "66d1efdf49ad9b1021a06574171d240b1222b10d2e7e0dd8b737ec95e5ef617c",
+      "original_export": "docs/reference/art/rounds-1-2.html",
+      "destinations": [
+        "docs/reference/art/rounds-1-2.html"
+      ],
+      "classification": "reference: nonfunctional art studies, not production assets",
+      "comments_checked": {
+        "include_deleted": true,
+        "threads": 0,
+        "continuation_token": null
+      }
+    },
+    {
+      "id": "1tpGUTN2fIbHChcpLMvO6n5kpx3WXa2T70sijuEE1nk4",
+      "title": "00 | Game Development Constitution",
+      "mime_type": "application/vnd.google-apps.document",
+      "url": "https://docs.google.com/document/d/1tpGUTN2fIbHChcpLMvO6n5kpx3WXa2T70sijuEE1nk4/edit?usp=drivesdk",
+      "modified_time": "2026-11-25T11:10:56.587Z",
+      "created_time": "2026-11-25T11:10:11.635Z",
+      "export_size": 7005,
+      "revision_id": "AHj4eMSwHme-82CH2Z7aE-c_KmbZfoLii4U486q9GjX1ZYOBJDfVfe7Jh4d_GvnoSr6gZv59DpMae1Xa5TVHINT5SkDtEhUUh8MqA_UHTJA",
+      "tabs": [
+        {
+          "id": "t.0",
+          "title": "Tab 1"
+        }
+      ],
+      "source_sha256": "a3fdeecf494aba6b947875ee7451ef933f363faa7a66e8d897feb3765b9f73c4",
+      "original_export": "docs/archive/drive/2026-11-25-native-markdown-exports.zip#1tpGUTN2fIbHChcpLMvO6n5kpx3WXa2T70sijuEE1nk4.md",
+      "destinations": [
+        "docs/project/CONSTITUTION.md"
+      ],
+      "classification": "authoritative governance with current scoped owner exception",
+      "comments_checked": {
+        "include_deleted": true,
+        "threads": 0,
+        "continuation_token": null
+      }
+    }
+  ],
+  "all_items_accounted_for": true,
+  "originals_modified": false
+}

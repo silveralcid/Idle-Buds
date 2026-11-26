@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Prototype: composable ability DSL + seeded replayable auto-battle</title>
+<style>body{font-family:system-ui;background:#151a22;color:#eee;margin:0;padding:16px;display:grid;grid-template-columns:420px 1fr;gap:16px}.box{background:#1f2633;border-radius:8px;padding:12px;margin-bottom:12px}h1,h2{font-size:15px;color:#ffd166;margin:4px 0 8px}button{background:#2e3c57;color:#fff;border:0;border-radius:6px;padding:6px 10px;margin:2px;cursor:pointer}.pet{display:inline-block;background:#2a3346;border-radius:8px;padding:6px 8px;margin:3px;min-width:84px;text-align:center;font-size:12px}small{color:#9aa4b2}#log{font-size:12px;height:260px;overflow:auto;white-space:pre}</style></head>
+<body>
+<div><div class="box"><h1>Educational prototype (original)</h1><small>Demonstrates: (1) creatures defined by composing a trigger with an effect from a tiny DSL (text is generated from the composition), (2) a battle that is a pure function of (teamA, teamB, seed) producing an event log, (3) replay determinism: same seed → same log. Content is invented.</small></div>
+<div class="box"><h2>Seed</h2><input id="seed" type="number" value="42"> <button onclick="run()">Battle</button> <button onclick="document.getElementById('seed').value=Math.floor(Math.random()*1e6);run()">Random seed</button><div id="verdict"></div></div>
+<div class="box"><h2>Roster (generated text)</h2><div id="roster"></div></div></div>
+<div><div class="box"><h2>Teams</h2><div id="teams"></div></div><div class="box"><h2>Event log</h2><div id="log"></div></div></div>
+<script>
+// ---- DSL primitives ----
+const Triggers={start:'Start of battle',faint:'Faint',hurt:'Hurt',friendFaint:'Friend faints'};
+const Effects={
+  buff:(n,a,h)=>({kind:'buff',n,a,h,text:`give ${n} random friend${n>1?'s':''} +${a}/+${h}`}),
+  snipe:(d)=>({kind:'snipe',d,text:`deal ${d} damage to a random enemy`}),
+  summon:(a,h)=>({kind:'summon',a,h,text:`summon a ${a}/${h} Sprout`}),
+  self:(a,h)=>({kind:'self',a,h,text:`gain +${a}/+${h}`})};
+const def=(name,atk,hp,trigger,effect)=>({name,atk,hp,trigger,effect,about:`${Triggers[trigger]} → ${effect.text}.`});
+const ROSTER=[def('Pebblet',2,1,'faint',Effects.buff(1,1,1)),def('Glimmerfin',1,3,'start',Effects.snipe(2)),def('Mossback',3,3,'hurt',Effects.self(2,0)),def('Seedling',1,2,'faint',Effects.summon(1,1)),def('Howler',2,2,'friendFaint',Effects.self(1,1)),def('Bramble',3,2,'start',Effects.buff(2,0,2))];
+// ---- seeded RNG (mulberry32) ----
+function rng(seed){let s=seed>>>0;return()=>{s+=0x6D2B79F5;let t=s;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296}}
+// ---- pure battle: (A,B,seed) -> {events, winner} ----
+function battle(A,B,seed){const r=rng(seed),ev=[];const T=[A.map(p=>({...p,hp:p.hp})),B.map(p=>({...p,hp:p.hp}))];
+  const alive=t=>T[t].filter(p=>p.hp>0);
+  function fire(t,p,trig){if(p.trigger!==trig)return;const e=p.effect,me=alive(t).filter(x=>x!==p),foe=alive(1-t);
+    if(e.kind==='buff'){const pool=[...me];for(let i=0;i<e.n&&pool.length;i++){const x=pool.splice(Math.floor(r()*pool.length),1)[0];x.atk+=e.a;x.hp+=e.h;ev.push(`${p.name} buffs ${x.name} +${e.a}/+${e.h}`)}}
+    if(e.kind==='snipe'&&foe.length){const x=foe[Math.floor(r()*foe.length)];x.hp-=e.d;ev.push(`${p.name} snipes ${x.name} for ${e.d}`);if(x.hp<=0)die(1-t,x)}
+    if(e.kind==='self'){p.atk+=e.a;p.hp+=e.h;ev.push(`${p.name} gains +${e.a}/+${e.h}`)}
+    if(e.kind==='summon'){const i=T[t].indexOf(p);T[t].splice(i+1,0,{name:'Sprout',atk:e.a,hp:e.h,trigger:'',effect:{}});ev.push(`${p.name} summons a Sprout`)}}
+  function die(t,x){if(x.dead)return;x.dead=true;ev.push(`${x.name} faints`);fire(t,x,'faint');for(const q of alive(t))fire(t,q,'friendFaint')}
+  // start of battle: higher attack first, seeded tie-break
+  const starters=[...T[0].map(p=>[0,p]),...T[1].map(p=>[1,p])].filter(([,p])=>p.trigger==='start').sort((a,b)=>b[1].atk-a[1].atk||r()-0.5);
+  for(const [t,p] of starters)fire(t,p,'start');
+  let guard=0;while(alive(0).length&&alive(1).length&&guard++<200){const a=alive(0)[0],b=alive(1)[0];a.hp-=b.atk;b.hp-=a.atk;ev.push(`${a.name}(${a.atk}) ⚔ ${b.name}(${b.atk})`);
+    if(a.hp>0)fire(0,a,'hurt');if(b.hp>0)fire(1,b,'hurt');if(a.hp<=0)die(0,a);if(b.hp<=0)die(1,b)}
+  const w=alive(0).length?(alive(1).length?'draw':'A'):(alive(1).length?'B':'draw');return{events:ev,winner:w}}
+// ---- UI ----
+let A,B;function pick(r){const pool=[...ROSTER];return Array.from({length:4},()=>pool.splice(Math.floor(r()*pool.length),1)[0])}
+function run(){const seed=+document.getElementById('seed').value;const r=rng(seed^0x9e37);A=pick(r);B=pick(r);const res=battle(A,B,seed);const res2=battle(A,B,seed);
+  document.getElementById('teams').innerHTML='<b>A</b> '+A.map(p=>`<span class=pet>${p.name}<br>${p.atk}/${p.hp}</span>`).join('')+'<br><b>B</b> '+B.map(p=>`<span class=pet>${p.name}<br>${p.atk}/${p.hp}</span>`).join('');
+  document.getElementById('log').textContent=res.events.join('\n');
+  document.getElementById('verdict').innerHTML=`Winner: <b>${res.winner}</b> · replay identical: <b>${JSON.stringify(res)===JSON.stringify(res2)}</b> · ${res.events.length} events`}
+document.getElementById('roster').innerHTML=ROSTER.map(p=>`<div><b>${p.name}</b> ${p.atk}/${p.hp} <small>${p.about}</small></div>`).join('');run();
+</script></body></html>

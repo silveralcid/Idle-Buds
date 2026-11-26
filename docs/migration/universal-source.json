@@ -1,0 +1,862 @@
+{
+  "repository": "https://github.com/silveralcid/universal-repo-template",
+  "branch": "main",
+  "commit": "239d08996fa8f23e4f35f423521538afadd222f5",
+  "files": [
+    {
+      "source_path": ".agents/README.md",
+      "disposition": "inherited",
+      "source_sha256": "f6bde62861c43e9f55283f0a985dec25110a24146b46975318fa74b1213effc7"
+    },
+    {
+      "source_path": ".agents/skills/README.md",
+      "disposition": "inherited",
+      "source_sha256": "e2ac0278764f9a9a216ecaac98ff3d8f286cf08c35c2251e9e589717ef033fc2"
+    },
+    {
+      "source_path": ".agents/skills/docs-steward/SKILL.md",
+      "disposition": "inherited",
+      "source_sha256": "60e5bb04bae88e331def8f27575c352ed5cbae0bc4b558dbf0cb2888e2174d0b"
+    },
+    {
+      "source_path": ".agents/skills/evidence-reporter/SKILL.md",
+      "disposition": "inherited",
+      "source_sha256": "6406591bbf0cd19c0b62aa96c0298c9b1596dcded81f2ad3cab4de2ba172ed2d"
+    },
+    {
+      "source_path": ".agents/skills/implement-task/SKILL.md",
+      "disposition": "inherited",
+      "source_sha256": "f91dcc9e9ba6e480aa44742f961c01b1b8e086a64cea4ed8c837509935bb8afd"
+    },
+    {
+      "source_path": ".agents/skills/project-bootstrap/SKILL.md",
+      "disposition": "inherited",
+      "source_sha256": "c05435421775031cdbba79468c03c1025fb7aab76a5c6eb63ce4de65113cf790"
+    },
+    {
+      "source_path": ".agents/skills/research-scout/SKILL.md",
+      "disposition": "inherited",
+      "source_sha256": "93eac472a8073c9d6a99d6a0e763c49031511cbfab42c58ae80e5bec3f7abd6a"
+    },
+    {
+      "source_path": ".agents/skills/review-change/SKILL.md",
+      "disposition": "inherited",
+      "source_sha256": "2afaa021f3db83ef1b4a8bf9255421d33a0a9ab88902b2dc3410220298cb45f2"
+    },
+    {
+      "source_path": ".agents/skills/work-handoff/SKILL.md",
+      "disposition": "inherited",
+      "source_sha256": "eac70ceb8ec227f674552f7a07b318bcc61c1345d124861ca03d7a8f46ddb7ae"
+    },
+    {
+      "source_path": ".claude/README.md",
+      "disposition": "inherited",
+      "source_sha256": "0a68244e76d136761ff97d2cb7f132cfd5ea455366e7cc9a77783b253e5ca178"
+    },
+    {
+      "source_path": ".claude/agents/research-scout.md",
+      "disposition": "inherited",
+      "source_sha256": "98e0c318b21c019bc70def97eba7484525b7e7bb19ad6acd2a972f4d98468528"
+    },
+    {
+      "source_path": ".claude/agents/verification-reviewer.md",
+      "disposition": "inherited",
+      "source_sha256": "3e5e8baebccf6d3d9d5e68a046f1c7d8e32c079335190db0f786083f000996dd"
+    },
+    {
+      "source_path": ".claude/hooks/README.md",
+      "disposition": "inherited",
+      "source_sha256": "f4c159c13905b224f727a4d82c2a116ecf48628e8a94abedf8da0d2eccd3bc14"
+    },
+    {
+      "source_path": ".claude/rules/documentation.md",
+      "disposition": "inherited",
+      "source_sha256": "dad0e68b8731c1122795e8d61c3cd24b33e8ac6dc93070447b8a2ed3b52095ec"
+    },
+    {
+      "source_path": ".claude/settings.json",
+      "disposition": "inherited",
+      "source_sha256": "8e4aa8e4a0f900633afd96cf95cd36db6876dce0cb6e4f84efd6e1a5fd6bf545"
+    },
+    {
+      "source_path": ".claude/skills/docs-steward/SKILL.md",
+      "disposition": "inherited",
+      "source_sha256": "f9d2c690e9cfadc5182ff4085ae15be32ffba464c941a171f0e591096f5ed6f5"
+    },
+    {
+      "source_path": ".claude/skills/evidence-reporter/SKILL.md",
+      "disposition": "inherited",
+      "source_sha256": "5cf246670e5fb69fefe357b0bad21bcb18e331a6e27813ec7aaeac40caad51d9"
+    },
+    {
+      "source_path": ".claude/skills/implement-task/SKILL.md",
+      "disposition": "inherited",
+      "source_sha256": "0d57e4837160724a10eda909359f0d5bce01b2ae48a4bed43ef7d34d6ad5836e"
+    },
+    {
+      "source_path": ".claude/skills/project-bootstrap/SKILL.md",
+      "disposition": "inherited",
+      "source_sha256": "ba0d968f06fc4bfb4cef2488a28095850c04aa1ba707058bf82e186ce73aeb99"
+    },
+    {
+      "source_path": ".claude/skills/research-scout/SKILL.md",
+      "disposition": "inherited",
+      "source_sha256": "a89b7699741f219cf67973e5f90d379fe4aa1677fda6830ae9f3077b34ae73ed"
+    },
+    {
+      "source_path": ".claude/skills/review-change/SKILL.md",
+      "disposition": "inherited",
+      "source_sha256": "84e47483c90dbaeae4fbcbd785aa9cb9f669299510fd5bf64e85ed37f996376e"
+    },
+    {
+      "source_path": ".claude/skills/work-handoff/SKILL.md",
+      "disposition": "inherited",
+      "source_sha256": "1363651b08b172d2fb2cabe6cad21fec4412e672df51597825babb529d5fa1c7"
+    },
+    {
+      "source_path": ".codex/README.md",
+      "disposition": "inherited",
+      "source_sha256": "58b7ed45bf413415b643dcd7db96bff5090ff616f799eb7875e8ed8ed36f4b3f"
+    },
+    {
+      "source_path": ".codex/agents/research-scout.toml",
+      "disposition": "inherited",
+      "source_sha256": "b083c72dcb07685c3bb4b8bf3273f5f149b391729c0b1e138b06e8d46a32fefb"
+    },
+    {
+      "source_path": ".codex/agents/verification-reviewer.toml",
+      "disposition": "inherited",
+      "source_sha256": "c1723efc04e3b066826a1fcd3237964e4f4e4f25f0fb95054fa874fc93d45359"
+    },
+    {
+      "source_path": ".codex/config.toml",
+      "disposition": "inherited",
+      "source_sha256": "34dd9d39b723b9286d5de71379b4d8721fe3d48f748635d8273e6d2c7ee9380d"
+    },
+    {
+      "source_path": ".codex/rules/.gitkeep",
+      "disposition": "inherited",
+      "source_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "source_path": ".editorconfig",
+      "disposition": "inherited",
+      "source_sha256": "ac26dc477144dcb8599f25e8eb55e30cdca4dcceb5b991d8c32dc27cec8613b6"
+    },
+    {
+      "source_path": ".env.example",
+      "disposition": "inherited",
+      "source_sha256": "8fa7b79f7f4f460626fe8e94c82e38401190bd94ca97e967d65b5d9f5b499043"
+    },
+    {
+      "source_path": ".gitattributes",
+      "disposition": "inherited",
+      "source_sha256": "a40b580660e2fbec67643cdf04de56f764bbb99c35754b14c1da0f9541cf6210"
+    },
+    {
+      "source_path": ".github/ISSUE_TEMPLATE/bug.md",
+      "disposition": "inherited",
+      "source_sha256": "1ebfc507b7092f4d24e95089a8a42bb96c3411e011b50331d61e430e1d145d32"
+    },
+    {
+      "source_path": ".github/ISSUE_TEMPLATE/feature.md",
+      "disposition": "inherited",
+      "source_sha256": "afcc631819819cc809448d762db3a6029804bda921f1a6a74608260eadc11b9f"
+    },
+    {
+      "source_path": ".github/ISSUE_TEMPLATE/investigation.md",
+      "disposition": "inherited",
+      "source_sha256": "59ec35509936ccbda6071e34a5c466d0597374a20f4dcc4d76aca22050e12a39"
+    },
+    {
+      "source_path": ".github/pull_request_template.md",
+      "disposition": "inherited",
+      "source_sha256": "76820b7abf305ec1b14b5c462006751193dd4b7f0e5fb4cdf083a2aa24508565"
+    },
+    {
+      "source_path": ".github/workflows/repo-health.yml",
+      "disposition": "inherited",
+      "source_sha256": "21542f08f695f46656264591b712c92c657c71d55cc257e3f9219c7c02c686c6"
+    },
+    {
+      "source_path": ".github/workflows/ui-theme-ci.yml",
+      "disposition": "excluded",
+      "source_sha256": "4a4e62bd6583efe14f912c2171d57802449d793ef6972670e27f5b73d1f561f2"
+    },
+    {
+      "source_path": ".gitignore",
+      "disposition": "inherited",
+      "source_sha256": "86d92ce5726abd5403ebe2eedb64b4f1e353a2d363e2b4721e72d3a3301eb0b2"
+    },
+    {
+      "source_path": ".repo/README.md",
+      "disposition": "inherited",
+      "source_sha256": "d38882aa8ffd39eb68889e475b2e2ae4a84ee9bf7fa1a2051d0842b9b0b3370b"
+    },
+    {
+      "source_path": ".repo/areas.json",
+      "disposition": "inherited",
+      "source_sha256": "fda940e701e790fdf3cd8ae7aa467329a655ae389cb32b23f9dd0b1ab7f6e515"
+    },
+    {
+      "source_path": ".repo/context-budgets.json",
+      "disposition": "inherited",
+      "source_sha256": "59c6043c4921acc4b615f2a870fa92f6d6c7e731066ae8c8df1b7327ae5c4972"
+    },
+    {
+      "source_path": ".repo/project.json",
+      "disposition": "inherited",
+      "source_sha256": "6469689e1889da110168b0826f046a82b1bf17b9a70d54a8e77c0112c5854fa5"
+    },
+    {
+      "source_path": ".repo/template-manifest.json",
+      "disposition": "inherited",
+      "source_sha256": "3141807b96ec4351137f41229ea8a583588a0c2795d96037c8c89e4775cf39f1"
+    },
+    {
+      "source_path": "AGENTS.md",
+      "disposition": "inherited",
+      "source_sha256": "9e3eb68991e3f9f85f4d3345d7b054f9c1024634cbf10946ce488bd974686d9b"
+    },
+    {
+      "source_path": "CHANGELOG.md",
+      "disposition": "inherited",
+      "source_sha256": "22b06251c7b560ffc4f201b12bb3d961a4c0621607e78a3d6c705cff68f39b67"
+    },
+    {
+      "source_path": "CLAUDE.md",
+      "disposition": "inherited",
+      "source_sha256": "1e5363c64d6f8fa96de91e08652cb37679582685bcaccb6fc1154f5aa127da40"
+    },
+    {
+      "source_path": "CONTRIBUTING.md",
+      "disposition": "inherited",
+      "source_sha256": "dce84df668298f56f34632ef28a9454e1410de4a636bdbc0c958396aeb65a0d8"
+    },
+    {
+      "source_path": "PLANS.md",
+      "disposition": "inherited",
+      "source_sha256": "88995887df7e4b36e523c2d411d59ac6ef37fa0fc68a6badfd05be743d24bc01"
+    },
+    {
+      "source_path": "README.md",
+      "disposition": "excluded",
+      "source_sha256": "2e653c7d44cb9ce979a54416716e7e75f91a962c7c5eb84c50b9e225c62dd36b"
+    },
+    {
+      "source_path": "SECURITY.md",
+      "disposition": "inherited",
+      "source_sha256": "e29ed2f6786892e54cad9670c57e033db0239e67efbc4e59b306562041e25ec3"
+    },
+    {
+      "source_path": "START-HERE.md",
+      "disposition": "inherited",
+      "source_sha256": "ad9eb47c82b8e20ae7ebd25fbf30b1117c406bba402bd0afb47a0c28cc5759d3"
+    },
+    {
+      "source_path": "artifacts/README.md",
+      "disposition": "inherited",
+      "source_sha256": "b0e4d552e98a4fbfd073bf9cf66ed718c40442d33362db9ae98f5f5073290ac7"
+    },
+    {
+      "source_path": "docs/INDEX.md",
+      "disposition": "inherited",
+      "source_sha256": "1be54fec87d2d122fe9840b1442b7f13e30d1dc7a7aa33a8561d6de57b5c9317"
+    },
+    {
+      "source_path": "docs/adr/README.md",
+      "disposition": "inherited",
+      "source_sha256": "6ecfb17a69352146caac76b767cfd1223899056afe15eedbf10c8f60cbec6784"
+    },
+    {
+      "source_path": "docs/agents/README.md",
+      "disposition": "inherited",
+      "source_sha256": "574b90fbffb901ce36b52d1649a6d375b115f6e63025ef11b992fa3e2440868b"
+    },
+    {
+      "source_path": "docs/agents/adoption-and-upgrades.md",
+      "disposition": "inherited",
+      "source_sha256": "f3c654b3b7853a5b32d069056f17241ebc392735dd1e6f89950ff2fb968a8826"
+    },
+    {
+      "source_path": "docs/agents/agent-evaluation.md",
+      "disposition": "inherited",
+      "source_sha256": "bd6b3705bb76221e065c68be138831baf15da7c56a099df0ef87739e7f70d1e5"
+    },
+    {
+      "source_path": "docs/agents/agent-setup-validation.md",
+      "disposition": "inherited",
+      "source_sha256": "3b8d58e49ef4ffc2664d7aad9ad605c81804182a58452f6898d738e7b545978e"
+    },
+    {
+      "source_path": "docs/agents/areas/README.md",
+      "disposition": "inherited",
+      "source_sha256": "4366330fafe87037103d4bd3bc47d9f0a678112292b054cd816ef44013c34dd7"
+    },
+    {
+      "source_path": "docs/agents/commands.md",
+      "disposition": "inherited",
+      "source_sha256": "c5a58c82f7ea3b933ef3d0df2ea909c5a42a1cfe5caa051b0b5358c39232accc"
+    },
+    {
+      "source_path": "docs/agents/coordination.md",
+      "disposition": "inherited",
+      "source_sha256": "9ba8802df3520e0581748d4a22a85d610a6df6d5ca9d2c77c57d60bd6d4ebbfd"
+    },
+    {
+      "source_path": "docs/agents/definition-of-done.md",
+      "disposition": "inherited",
+      "source_sha256": "a5d1a188657f4f619733e21f24c003d49c524a019cfc3abd9f30eb7a60a7c683"
+    },
+    {
+      "source_path": "docs/agents/delivery.md",
+      "disposition": "inherited",
+      "source_sha256": "a32102c925378cbe0235c2118e7a7ef496ead2e52951a51a12e204c59759c967"
+    },
+    {
+      "source_path": "docs/agents/documentation.md",
+      "disposition": "inherited",
+      "source_sha256": "5dc3fd7a191a94b138960988cba3982c4133daf83da77929e6eb74632dc50c07"
+    },
+    {
+      "source_path": "docs/agents/handoff.md",
+      "disposition": "inherited",
+      "source_sha256": "6a129e3b3d39d980f333f66909223a35df169cc53ccfa90c76745d029e36a436"
+    },
+    {
+      "source_path": "docs/agents/knowledge-navigation.md",
+      "disposition": "inherited",
+      "source_sha256": "d32bd7da837c68fc46ea0d6a5f87de7a7569d04fb12e00b610395df82f7d31dc"
+    },
+    {
+      "source_path": "docs/agents/operating-cost.md",
+      "disposition": "inherited",
+      "source_sha256": "a3f8c225408cdaf4af4bd75cce17d7b5bd34daf762290ff0f7f641a0b1d94405"
+    },
+    {
+      "source_path": "docs/agents/provider-matrix.md",
+      "disposition": "inherited",
+      "source_sha256": "28987cd17e579ae667360d94ada52e11f46b91d27f89533008d5cd676225fd25"
+    },
+    {
+      "source_path": "docs/agents/research-and-evidence.md",
+      "disposition": "inherited",
+      "source_sha256": "a66522435e5f3503cbe8b70a0d2830a1a805fe5d673052daa09c93a6480cbdde"
+    },
+    {
+      "source_path": "docs/agents/startup.md",
+      "disposition": "inherited",
+      "source_sha256": "ad98d14407aa1104e2b6a2d8a423a5692a724b5127fdf8c34dfad06036e788ae"
+    },
+    {
+      "source_path": "docs/agents/trust-boundaries.md",
+      "disposition": "inherited",
+      "source_sha256": "ea06b32d65bd8d736b405af0e4baad20ba5dc59d5cb611ea58bd581b98dc52f5"
+    },
+    {
+      "source_path": "docs/architecture/OVERVIEW.md",
+      "disposition": "inherited",
+      "source_sha256": "3d718a9369fa38efc85952578fab58014fbc6de0592ce1c43d7f9939bf72c62e"
+    },
+    {
+      "source_path": "docs/archive/README.md",
+      "disposition": "excluded",
+      "source_sha256": "19c938d35776dea52b7f4d861f0410c68e7fc8008d6431fb751c878558dfdfb6"
+    },
+    {
+      "source_path": "docs/areas/README.md",
+      "disposition": "inherited",
+      "source_sha256": "c328ac22978e7e4179d6741fc9ad409bc04320e6b94e0e300638822746b23a5c"
+    },
+    {
+      "source_path": "docs/context/README.md",
+      "disposition": "inherited",
+      "source_sha256": "429929bfc52ba1a4b74d93e83b928c7efc89e1005c72d36b612761a8f8e0a043"
+    },
+    {
+      "source_path": "docs/context/routes.json",
+      "disposition": "inherited",
+      "source_sha256": "a557d1b680f5ec41db5e472ea06fcfb0ef87a8ee875be1a9912a34a3e2bf968c"
+    },
+    {
+      "source_path": "docs/contracts/README.md",
+      "disposition": "inherited",
+      "source_sha256": "fbd55b2d0fe3b5285c24b8519d3990536415173fc788d62837705f433b1e2d67"
+    },
+    {
+      "source_path": "docs/decisions/README.md",
+      "disposition": "inherited",
+      "source_sha256": "a869dddd8e533ccc8b97e725ad33673f7f7ff765a780e26cc68d4e3515f25f44"
+    },
+    {
+      "source_path": "docs/design/agent-surfaces.md",
+      "disposition": "inherited",
+      "source_sha256": "3218ce3683354784a7fdea328ccb1bbf62a2778c3201fc55754478c42171bf9a"
+    },
+    {
+      "source_path": "docs/design/data-display.md",
+      "disposition": "inherited",
+      "source_sha256": "cb36426f3cf323ef6d83f72155aa585a53be3c45261631543acd9ff0bfef4d10"
+    },
+    {
+      "source_path": "docs/design/markdown-standard.md",
+      "disposition": "inherited",
+      "source_sha256": "ba8d08a2272f56e7c7e5c91fba5fa352016cee2bc805bd60f0300423b8270cc2"
+    },
+    {
+      "source_path": "docs/design/ui-standard.md",
+      "disposition": "inherited",
+      "source_sha256": "8396b6b6acfb05ba38130f3828c7424bc87dae7a107775b39a181ab764190f20"
+    },
+    {
+      "source_path": "docs/design/ux-sop.md",
+      "disposition": "inherited",
+      "source_sha256": "d82a955007feeba7036b0667dc13ce12cd6f1e8d74b494767f752f4156dba8db"
+    },
+    {
+      "source_path": "docs/design/ux-standard.md",
+      "disposition": "inherited",
+      "source_sha256": "38890200ba642f442e70801ee902ed40c5edb4d76f50c67269cbbd1d09bb90a5"
+    },
+    {
+      "source_path": "docs/engineering/CODE-QUALITY.md",
+      "disposition": "inherited",
+      "source_sha256": "27a2418f0297087ef20d3a1cc62cadb13bc87c6c405e3be44317c25b7fa3539c"
+    },
+    {
+      "source_path": "docs/engineering/SECURITY.md",
+      "disposition": "inherited",
+      "source_sha256": "8b4a4d7391b3068d3587620a986d5c386c0948565863ea4e4d018d87f92395cc"
+    },
+    {
+      "source_path": "docs/engineering/SHARING.md",
+      "disposition": "inherited",
+      "source_sha256": "a3ab6ce21c79946ac433ab62b4121594ef57df7e0be10ddbbc7471eead800619"
+    },
+    {
+      "source_path": "docs/engineering/TESTING.md",
+      "disposition": "inherited",
+      "source_sha256": "65a587763b09b81da79488e6d2af8e56a4a51365710aa0351ea3295a577ee0fd"
+    },
+    {
+      "source_path": "docs/engineering/VERIFICATION.md",
+      "disposition": "inherited",
+      "source_sha256": "2e91eed56407bc2a9da2924582dc07a29092bd5d9ecd0f12c6cad1f5fe1a1c57"
+    },
+    {
+      "source_path": "docs/evidence/ARTIFACTS.md",
+      "disposition": "inherited",
+      "source_sha256": "50a59e58e74ae6b928332e12e60a2c14011609651f62934091d95ad74ba9a0c0"
+    },
+    {
+      "source_path": "docs/evidence/README.md",
+      "disposition": "inherited",
+      "source_sha256": "fb689ade25042490c4a85a14b5539bfa9231ccd23cffefbc83b24c5b937b6c23"
+    },
+    {
+      "source_path": "docs/evidence/agent-evals/README.md",
+      "disposition": "inherited",
+      "source_sha256": "408d313140b67b97af17b4fdfbeda076fb32b35bdff487928b792efaf3c391a9"
+    },
+    {
+      "source_path": "docs/evidence/audits/README.md",
+      "disposition": "inherited",
+      "source_sha256": "667d95a9ca35779f8d16de43f887da8987001c9e7ff4ef92b634ae8574184767"
+    },
+    {
+      "source_path": "docs/evidence/benchmarks/README.md",
+      "disposition": "inherited",
+      "source_sha256": "08c1a99fc13886c7206621a6325d9b54b5b25316ef2361a63b0fb066dd12e921"
+    },
+    {
+      "source_path": "docs/evidence/manual-qa/README.md",
+      "disposition": "inherited",
+      "source_sha256": "4bb877c529b6eae547884b64d29a37fc7b32071a74197fa20c09051c4fda11d7"
+    },
+    {
+      "source_path": "docs/evidence/reproductions/README.md",
+      "disposition": "inherited",
+      "source_sha256": "9848a1b548d29a8b00ae0f5132b8c006d705ee57ddc12bf1a9a2a6f9aa2f3183"
+    },
+    {
+      "source_path": "docs/evidence/tests/2026-11-23-engineering-quality.md",
+      "disposition": "excluded",
+      "source_sha256": "b3e617b784eb517000796d94fb4e4ff8d0cb80a4ed7ab3acadfd508444c17499"
+    },
+    {
+      "source_path": "docs/evidence/tests/README.md",
+      "disposition": "inherited",
+      "source_sha256": "763a844142727957a21d1248446ee64e9c699d6f91f5d12c3e07f9df8a29f908"
+    },
+    {
+      "source_path": "docs/experiments/README.md",
+      "disposition": "inherited",
+      "source_sha256": "4deee6d95ff65482d926bc8972167dd8834d2eaee147f5c674de536b47d45536"
+    },
+    {
+      "source_path": "docs/experiments/active/README.md",
+      "disposition": "inherited",
+      "source_sha256": "552f61723fb5ce76d59cac847ad4c68a64819157a5d8ed5ae9cf877b048826bf"
+    },
+    {
+      "source_path": "docs/experiments/completed/README.md",
+      "disposition": "inherited",
+      "source_sha256": "ce182bba9e470eac3a8f1798059762b9c42b0fadf258c8c3a981df76ae548313"
+    },
+    {
+      "source_path": "docs/experiments/proposed/README.md",
+      "disposition": "inherited",
+      "source_sha256": "89ecf08f26f3840c4271156a9bcf551a978d337f20340ca6add0d9f8952b2266"
+    },
+    {
+      "source_path": "docs/handoffs/README.md",
+      "disposition": "inherited",
+      "source_sha256": "03c87eb3f9624ea56293e4a7f654e47528dbe5feef83895dee9491ad84adb3c8"
+    },
+    {
+      "source_path": "docs/handoffs/active/README.md",
+      "disposition": "inherited",
+      "source_sha256": "00c656721f2bb852ccb23e9525abed69de3f2be93d8ef214c77c731e27f3ea87"
+    },
+    {
+      "source_path": "docs/handoffs/completed/README.md",
+      "disposition": "inherited",
+      "source_sha256": "7c1a4125de09a9af89b6cb755757f9306a105e09967afd072e4e76748792daf9"
+    },
+    {
+      "source_path": "docs/incidents/README.md",
+      "disposition": "inherited",
+      "source_sha256": "f3b97729e3ccc25a953992321ee483a75061b282dfe08dcdf3da9c38fb3e4087"
+    },
+    {
+      "source_path": "docs/incidents/reports/README.md",
+      "disposition": "inherited",
+      "source_sha256": "1670a5d705b17b9395728559a9f9bf246b484fb9d9454cd6704fde1075132678"
+    },
+    {
+      "source_path": "docs/plans/README.md",
+      "disposition": "inherited",
+      "source_sha256": "07f92c7a5145c783b36413297aa6fb7dfc713101ca5b1fea0b1269eebbcc10e9"
+    },
+    {
+      "source_path": "docs/plans/active/README.md",
+      "disposition": "inherited",
+      "source_sha256": "054a6b8af91776d5c1d7c8edf2c2b200ef5e89edb23ba39da7b601e8ee5b4cb0"
+    },
+    {
+      "source_path": "docs/plans/completed/README.md",
+      "disposition": "inherited",
+      "source_sha256": "072a83e2db858bfaa0bededb32ce46992a2a9297a1119cb3c191b77e823c7727"
+    },
+    {
+      "source_path": "docs/plans/completed/engineering-quality-testing.md",
+      "disposition": "excluded",
+      "source_sha256": "5a8954d194e4b7410562ccd593ce23e7f2c89b571db8d37732959c44ad906b1b"
+    },
+    {
+      "source_path": "docs/project/BRIEF.md",
+      "disposition": "inherited",
+      "source_sha256": "7cb0b191b8cd766c5d3b2b536fa5020406bb5a506c6171a21a911fd30ecf45f0"
+    },
+    {
+      "source_path": "docs/prompts/README.md",
+      "disposition": "inherited",
+      "source_sha256": "c8764495200be5bca5db864a4d0b4dbfd869a602bf6ef476efac76d1a31314d4"
+    },
+    {
+      "source_path": "docs/prompts/apply-ui-standard.md",
+      "disposition": "inherited",
+      "source_sha256": "c154819533b7db547bd102453ad667dd585cc7d947ac4485a45cca2b8c6d13a5"
+    },
+    {
+      "source_path": "docs/prompts/bugfix.md",
+      "disposition": "inherited",
+      "source_sha256": "90732c2ee1ce4c95070ea4812ba5e10d78c4f902b5ace6f4aa1fd14ad1d02f22"
+    },
+    {
+      "source_path": "docs/prompts/continuation.md",
+      "disposition": "inherited",
+      "source_sha256": "aaf71a752e1dc6a82d1e8962ebc5e713d2e8b19e2b7fc8d3d0ee2e0fa4fb665a"
+    },
+    {
+      "source_path": "docs/prompts/implement.md",
+      "disposition": "inherited",
+      "source_sha256": "fcd9944c90f3166f632e87286a2adc4772ef5846570ac0d5060423512a1b5f04"
+    },
+    {
+      "source_path": "docs/prompts/integration.md",
+      "disposition": "inherited",
+      "source_sha256": "3e740c3e6ef1e74d5777f4094a6dea06b7564bad8f0cd051930d0dc9e0a42346"
+    },
+    {
+      "source_path": "docs/prompts/investigate.md",
+      "disposition": "inherited",
+      "source_sha256": "cf03546a0227fb9b5d7da5fde533f57910a1337fe01d848743c8294836e1171c"
+    },
+    {
+      "source_path": "docs/prompts/qa-review.md",
+      "disposition": "inherited",
+      "source_sha256": "b81d4b9efd7eb8f0b838ebd33337afaa14ee0022061888becfa8d7f74fe0f35b"
+    },
+    {
+      "source_path": "docs/prompts/research.md",
+      "disposition": "inherited",
+      "source_sha256": "1b63146970f5dbfedcd15570bd5d384a76a5d784f7614180a6af010d9d4ebdab"
+    },
+    {
+      "source_path": "docs/prompts/sequential-build.md",
+      "disposition": "inherited",
+      "source_sha256": "bda66bc26f0e9f7fbc083b42599c250c2f9e94e7f5c86ee6a5bfe33a5c47f7c6"
+    },
+    {
+      "source_path": "docs/reference/PROVIDER-SOURCES.md",
+      "disposition": "inherited",
+      "source_sha256": "02c1d05a1a3c50900a76ea45ee4a4a9fbcad6f1a85d52a81fbcd528c30bd5a1a"
+    },
+    {
+      "source_path": "docs/research/INDEX.md",
+      "disposition": "inherited",
+      "source_sha256": "b08938ba3e54f52c8ff7fd3f47b5e83743d09dc2839309b339622d87f8269bc5"
+    },
+    {
+      "source_path": "docs/research/README.md",
+      "disposition": "inherited",
+      "source_sha256": "1125f6dbdd3a2e5bcfbb12f1ab8c7fbd50b1370652c5cf68992f849f980f6908"
+    },
+    {
+      "source_path": "docs/research/archive/README.md",
+      "disposition": "inherited",
+      "source_sha256": "4efa00cd20dcda52bc5943ad76bd2ee7ce27a390e14477a78a76c84fe3539fc8"
+    },
+    {
+      "source_path": "docs/research/candidates/README.md",
+      "disposition": "inherited",
+      "source_sha256": "e7a2d0fd4902c3b1366b05122dd6c00efc966fa80d3aa560eacd92d3d22b231f"
+    },
+    {
+      "source_path": "docs/research/exploratory/README.md",
+      "disposition": "inherited",
+      "source_sha256": "45526689d2bf90037cbe80ee8a79786a0d645b719a7df54c69913691cef2189f"
+    },
+    {
+      "source_path": "docs/research/inbox/README.md",
+      "disposition": "inherited",
+      "source_sha256": "5ca5065261c8da001370651d7a3aa3fbc43261b64a30dbeace37890e330ecc90"
+    },
+    {
+      "source_path": "docs/research/validated/README.md",
+      "disposition": "inherited",
+      "source_sha256": "fdc01f5e53a164f454d0832149ebeab1bf6fc28a243561c9aff3d52dc31fb975"
+    },
+    {
+      "source_path": "docs/runbooks/README.md",
+      "disposition": "inherited",
+      "source_sha256": "06d105aa5f4d4d54af292257a2dbaed76316b9cea60f252e02166fc0830b4cf5"
+    },
+    {
+      "source_path": "docs/tasks/README.md",
+      "disposition": "inherited",
+      "source_sha256": "3f412174ff8cb90b31b8f1a2ede3352d0c0e6874120c78f511a985a9f9fc749e"
+    },
+    {
+      "source_path": "docs/tasks/completed/README.md",
+      "disposition": "inherited",
+      "source_sha256": "45efaf45e8752ea1aaf3292506b53a48baa802c18d412e1eb338260518ac2353"
+    },
+    {
+      "source_path": "docs/tasks/inbox/README.md",
+      "disposition": "inherited",
+      "source_sha256": "9e1833a13752feec0a649f0b62bb3b9c2618a955ee77f7a5b2b096d2914ad816"
+    },
+    {
+      "source_path": "docs/tasks/ready/README.md",
+      "disposition": "inherited",
+      "source_sha256": "f9e70fb2f1a455a51e4bd49045f9bfd69ec58a4a9d27ebba741e2fd2136509f9"
+    },
+    {
+      "source_path": "docs/templates/adr.md",
+      "disposition": "inherited",
+      "source_sha256": "0a5ce9a6e66caf61953e76ea3fca71f27146bcb0a24a512bd82ed3e959d21bdd"
+    },
+    {
+      "source_path": "docs/templates/agent-eval.md",
+      "disposition": "inherited",
+      "source_sha256": "5b2209725cbc0b6c208d02fe4295f509fe536c4eb5f2af2d85d4977842ddbdfa"
+    },
+    {
+      "source_path": "docs/templates/area-guide.md",
+      "disposition": "inherited",
+      "source_sha256": "4126eb1f918fed7c33578ab68efecbc4b1e1f604b0e280ce0189234e7cb2420b"
+    },
+    {
+      "source_path": "docs/templates/artifact-manifest.md",
+      "disposition": "inherited",
+      "source_sha256": "932ca3a91d283c7d4407b6536976b45d551c95752f71f44547f80df0aed54245"
+    },
+    {
+      "source_path": "docs/templates/benchmark-report.md",
+      "disposition": "inherited",
+      "source_sha256": "30d3d6173f952e8e2ca6068c15683463d3f4431c613735b172c5a43c31f8a7e6"
+    },
+    {
+      "source_path": "docs/templates/contract.md",
+      "disposition": "inherited",
+      "source_sha256": "e74150cbb03c945c9a6701e15076cb4273327ddd2e46cf3329bcf484bf4cc81b"
+    },
+    {
+      "source_path": "docs/templates/decision.md",
+      "disposition": "inherited",
+      "source_sha256": "c8322e28fe32baa62f555e8e8c6fb6effd18231f9cf3b82c0565287540b18088"
+    },
+    {
+      "source_path": "docs/templates/evidence-record.md",
+      "disposition": "inherited",
+      "source_sha256": "2f9517bb634bf658ad6d58c577a4262fd708210f11eeab6240d23f8800406cad"
+    },
+    {
+      "source_path": "docs/templates/execution-plan.md",
+      "disposition": "inherited",
+      "source_sha256": "59f851036218b9dca49e958d61b93eb91d479e6358af5bbf40e44579a0d8fec4"
+    },
+    {
+      "source_path": "docs/templates/experiment-record.md",
+      "disposition": "inherited",
+      "source_sha256": "9f4110792532052952f28fb17b66f7c797e04832036c81b99fde13f147f37187"
+    },
+    {
+      "source_path": "docs/templates/handoff.md",
+      "disposition": "inherited",
+      "source_sha256": "30ed28c07854eb4a28d76023ddbedb15fd93b8409db83c4845b63c98ba661489"
+    },
+    {
+      "source_path": "docs/templates/incident-report.md",
+      "disposition": "inherited",
+      "source_sha256": "3a4c9d7ed7d64d0544b1a23fbe7f627c7ea21a714b069f7c158cd3571c0b7dc7"
+    },
+    {
+      "source_path": "docs/templates/investigation.md",
+      "disposition": "inherited",
+      "source_sha256": "4d349274272cb40c8e451dd3787dbcadc834bb5a29eb64ffa51387706162ef71"
+    },
+    {
+      "source_path": "docs/templates/ready-packet.md",
+      "disposition": "inherited",
+      "source_sha256": "f3b4290a37c9d4fc6c6fe0fb5ada09822cd00e857fdfdffe4aa2c96353f4235c"
+    },
+    {
+      "source_path": "docs/templates/research-note.md",
+      "disposition": "inherited",
+      "source_sha256": "115f5f019ffa7d0268429d9b023c1e4173c110f92fd866494144dceeb9ea9438"
+    },
+    {
+      "source_path": "docs/templates/test-report.md",
+      "disposition": "inherited",
+      "source_sha256": "8b072b94b8a72bb323eb983edb19127ee229ece19225ebff0d2a1dcb21b048d4"
+    },
+    {
+      "source_path": "packages/ui-theme/LICENSE",
+      "disposition": "excluded",
+      "source_sha256": "976c778b1d2d034a6abe5154a9b98ab6b107d68bf13547d252d6f92c4d754479"
+    },
+    {
+      "source_path": "packages/ui-theme/README.md",
+      "disposition": "excluded",
+      "source_sha256": "e7e4cff6dc20bb1f764fa1aadc2052a943c996f9babf30633a61f78a555840af"
+    },
+    {
+      "source_path": "packages/ui-theme/base.css",
+      "disposition": "excluded",
+      "source_sha256": "cdc7a5616be1806650a7c040188df1962a0d570dcc9b7225291798b69222c452"
+    },
+    {
+      "source_path": "packages/ui-theme/package.json",
+      "disposition": "excluded",
+      "source_sha256": "23a571dab6315e7590feb86007b97e52c890b221a8bf0baeff81020c03417876"
+    },
+    {
+      "source_path": "packages/ui-theme/src/index.ts",
+      "disposition": "excluded",
+      "source_sha256": "8e439b30b5702321ebef41c95ae9092cecb82b3ad7689acd9fbf55b4c5f8d378"
+    },
+    {
+      "source_path": "packages/ui-theme/src/theme.ts",
+      "disposition": "excluded",
+      "source_sha256": "b321729ae3a8e82b611991a17b8395494261d17b62178c15746e5f8005a9ba69"
+    },
+    {
+      "source_path": "packages/ui-theme/tokens.css",
+      "disposition": "excluded",
+      "source_sha256": "94af8c01e20b7fcc247d6d8baec55b4600226bb7e15e66194b40d5428a4090a3"
+    },
+    {
+      "source_path": "packages/ui-theme/tsconfig.json",
+      "disposition": "excluded",
+      "source_sha256": "5bfdc06b18b6370e57d44b01ee498b64f1f83043e4bcbf391ed4e46d597bf8c5"
+    },
+    {
+      "source_path": "scratch/README.md",
+      "disposition": "inherited",
+      "source_sha256": "079013c1da27b8ee26016891c26e60e1cc228480103d342e927e9096bae3acae"
+    },
+    {
+      "source_path": "tools/README.md",
+      "disposition": "inherited",
+      "source_sha256": "863e1ecf7b611dca87c2794d122e27a4a7c2174d505483b0af5382c0354f2900"
+    },
+    {
+      "source_path": "tools/export_source.py",
+      "disposition": "excluded",
+      "source_sha256": "fb7254443adb26a7cf03368950b30ee9df57d22000963c7aeffbc70fa03c23e9"
+    },
+    {
+      "source_path": "tools/repo.py",
+      "disposition": "inherited",
+      "source_sha256": "16a2d0ac6428bc3a5edd304d35d40e4e9bc94e4e75c916aa5a39fbd39f2d3963"
+    },
+    {
+      "source_path": "tools/repo_support/__init__.py",
+      "disposition": "inherited",
+      "source_sha256": "2b9145f9a3fa286d92b7f7d5a7ed6d9a2e5638611e4a50411c69e9769ac5f746"
+    },
+    {
+      "source_path": "tools/repo_support/areas.py",
+      "disposition": "inherited",
+      "source_sha256": "7c3d3dacf544c8c31aff2e0af76918cf9a43a5858f135fe0830d3f70985876c1"
+    },
+    {
+      "source_path": "tools/repo_support/budgets.py",
+      "disposition": "inherited",
+      "source_sha256": "707dad1fbc585b5939e4cd24ec62c4c898a35f288d4f544e6b77ab522ca7076a"
+    },
+    {
+      "source_path": "tools/repo_support/core.py",
+      "disposition": "inherited",
+      "source_sha256": "6b2990559883797b8d09fd4d07b474f84192fa15ddf594bb561da4968682eed6"
+    },
+    {
+      "source_path": "tools/repo_support/knowledge.py",
+      "disposition": "inherited",
+      "source_sha256": "f2acd707551e25144d9e877148687386cecc1bce050b4f877f1de988ce4131a0"
+    },
+    {
+      "source_path": "tools/repo_support/validation.py",
+      "disposition": "inherited",
+      "source_sha256": "81499092cee1b8bff0829245df22ac99f7ca54c0d5b7f99dbe9b331a0fbba6b5"
+    },
+    {
+      "source_path": "tools/repo_support/workflow.py",
+      "disposition": "inherited",
+      "source_sha256": "7017a3ef7090cce2ce51d64272504910d24f99cf52f81729aeb2f7f138f50ebd"
+    },
+    {
+      "source_path": "tools/tests/test_export_source.py",
+      "disposition": "excluded",
+      "source_sha256": "58632534642d1b2f884ba7ab5f9ece1f25181bb41416d820ca273770472477a8"
+    },
+    {
+      "source_path": "tools/tests/test_repo_tool.py",
+      "disposition": "inherited",
+      "source_sha256": "5ee99a079d23c2541d54137d7a1cb710c77066c8b5d1c7c158b04f46ae309f3b"
+    }
+  ]
+}

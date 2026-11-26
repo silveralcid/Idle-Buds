@@ -1,0 +1,133 @@
+## 1. Tick (Core/Constants.cs, GameDriver.cs, Core.TickTimer/TickTimer.cs)
+  Game.PropagateTick() runs in GameDriver._PhysicsProcess -> 60 ticks/s, TickInterval 16.667 ms; TickTimer waits round(ms/TickInterval) ticks
+    1000 ms -> 60 ticks = 1000.0 ms (rounding error +0.00 ms)
+    1500 ms -> 90 ticks = 1500.0 ms (rounding error +0.00 ms)
+    2000 ms -> 120 ticks = 2000.0 ms (rounding error +0.00 ms)
+    2400 ms -> 144 ticks = 2400.0 ms (rounding error +0.00 ms)
+    3000 ms -> 180 ticks = 3000.0 ms (rounding error +0.00 ms)
+
+## 2. Experience (Components.Experience/StandardExperienceTable.cs: scaling 0.25, 300, base 2^(1/7))
+  Melvor 2 values: {2: '83', 50: '101,331', 99: '13,034,427', 120: '104,273,162'}
+  Melvor 1 (2^(L/7)) gives L99 13,034,431, L120 104,273,167; Base^7 is ~5 ulp below 2, so terms at i = 7, 14, 21 ... floor one lower:
+  100 of levels 2-120 differ, by 1-5 XP (Melvor 2 lower)
+  the skill level cap is hard-coded at 99 (ExperienceComponent.cs 39; SetLevelCap is never called); XP keeps accumulating past it (BaseExperience.cs 120)
+  agility technique table (AgilityTechniqueExperienceTable.cs; technique level cap 40 in data): {2: '124', 10: '3,043', 20: '29,493', 30: '252,356', 40: '2,132,329'}
+  hunting journal table, per HuntingAnimal (44, 41 log to the journal), capped at level 25 (HuntingAnimalJournalEntry.cs 17, 126): {2: '30', 10: '499', 20: '4,146', 25: '11,275'}
+
+## 3. Woodcutting (Entities.Woodcutting/WoodcuttingActionComponent.cs): trees have health; every hit deals 1 (weak spot 3 + 10 % max HP, double damage x2, instant cut); XP and the log only when the tree falls
+    Normal Tree      L  1 hp   3 hit 1.00s ->    3.0 s/log,    3,600 XP/h
+    Flax Bush        L  5 hp   2 hit 1.00s ->    2.0 s/log,    5,400 XP/h
+    Oak Tree         L  5 hp   4 hit 1.00s ->    4.0 s/log,    7,200 XP/h
+    Ambervine Bush   L 20 hp   2 hit 1.00s ->    2.0 s/log,    7,200 XP/h
+    Willow Tree      L 25 hp   5 hit 1.00s ->    5.0 s/log,   12,240 XP/h
+    Teak Tree        L 35 hp   6 hit 1.00s ->    6.0 s/log,   13,200 XP/h
+    Maple Tree       L 45 hp   8 hit 1.00s ->    8.0 s/log,   15,750 XP/h
+    Spikemoss Shrub  L 50 hp   2 hit 1.00s ->    2.0 s/log,   14,400 XP/h
+    Mahogany Tree    L 55 hp  10 hit 1.00s ->   10.0 s/log,   18,360 XP/h
+    Yew Tree         L 60 hp  14 hit 1.00s ->   14.0 s/log,   21,343 XP/h
+    Magic Tree       L 75 hp  20 hit 1.00s ->   20.0 s/log,   24,300 XP/h
+    Duskleaf Bush    L 80 hp   2 hit 1.00s ->    2.0 s/log,   21,600 XP/h
+    Ashen Tree       L 80 hp  14 hit 1.00s ->   14.0 s/log,   31,114 XP/h
+    Hard Oak Tree    L 85 hp  22 hit 1.00s ->   22.0 s/log,   23,891 XP/h
+    Redwood Tree     L 90 hp  26 hit 1.00s ->   26.0 s/log,   23,262 XP/h
+
+## 4. Mining (Entities.Mining/MiningActionComponent.cs, MiningActionStats.cs): each hit breaks the rock with chance p; otherwise progress += p; at progress >= 0.9999 it breaks -> at most ceil(1/p) hits
+    Stone            L  1 p 0.40 interval 1.50s: expected hits 1.96 (cap 3, 1/p 2.50) ->    3,673 XP/h
+    Rune Essence     L  8 p 0.33 interval 1.50s: expected hits 2.11 (cap 3, 1/p 3.00) ->    5,684 XP/h
+    Topaz Vein       L 12 p 0.08 interval 1.50s: expected hits 8.27 (cap 13, 1/p 12.50) ->    8,414 XP/h
+    Coal             L 25 p 0.33 interval 1.50s: expected hits 2.42 (cap 4, 1/p 3.03) ->    9,919 XP/h
+    Mithril Ore      L 35 p 0.15 interval 1.50s: expected hits 4.53 (cap 7, 1/p 6.67) ->   11,657 XP/h
+    Adamantite Ore   L 45 p 0.12 interval 1.50s: expected hits 5.25 (cap 8, 1/p 8.00) ->   15,540 XP/h
+    Runite Ore       L 55 p 0.10 interval 1.50s: expected hits 6.51 (cap 10, 1/p 10.00) ->   18,424 XP/h
+    Dawnsteel Ore    L 70 p 0.09 interval 1.50s: expected hits 7.53 (cap 12, 1/p 11.11) ->   19,766 XP/h
+    Dense Coal       L 80 p 0.24 interval 1.50s: expected hits 3.11 (cap 5, 1/p 4.17) ->   37,811 XP/h
+    Jadestone Vein   L 97 p 0.02 interval 1.50s: expected hits 31.79 (cap 50, 1/p 50.00) ->   25,139 XP/h
+
+## 5. Thieving (Entities.Thieving/ThievingActionStats.cs): success = min(1, (100 + stealth)/(100 + perception)), stealth = floor((level + flat)(1 + %))
+  XP is awarded only when a target is completed: CurrentStage > MaxStages (ActiveThievingRecipe.cs 47; ThievingActionComponent.cs 235-249); a failure does not reset the stage
+  steady state: one XP award per Stages successful attempts (the stage restarts at 1); XP/h below ignores stuns and the skip-stage chance
+    Citizen                perception   32 stages  1: success at 1  76.5 %, at 50 100.0 %, at 99 100.0 %; XP/h at 99    8,400
+    Thug                   perception   40 stages  1: success at 1  72.1 %, at 50 100.0 %, at 99 100.0 %; XP/h at 99   10,800
+    Cooking Stall          perception   60 stages  1: success at 1  63.1 %, at 50  93.8 %, at 99 100.0 %; XP/h at 99    6,000
+    Thug Chief             perception  120 stages  1: success at 1  45.9 %, at 50  68.2 %, at 99  90.5 %; XP/h at 99   14,111
+    Craftsman              perception  124 stages  1: success at 1  45.1 %, at 50  67.0 %, at 99  88.8 %; XP/h at 99   14,925
+    Market Seed Stall      perception  164 stages  1: success at 1  38.3 %, at 50  56.8 %, at 99  75.4 %; XP/h at 99    9,045
+    Fisherman              perception  177 stages  1: success at 1  36.5 %, at 50  54.2 %, at 99  71.8 %; XP/h at 99   14,656
+    Farmer                 perception  185 stages  1: success at 1  35.4 %, at 50  52.6 %, at 99  69.8 %; XP/h at 99   15,920
+    Wizard Scholar         perception  189 stages  1: success at 1  34.9 %, at 50  51.9 %, at 99  68.9 %; XP/h at 99   16,526
+    Locked Thug Chest      perception  203 stages  1: success at 1  33.3 %, at 50  49.5 %, at 99  65.7 %; XP/h at 99   11,231
+    Chef                   perception  238 stages  1: success at 1  29.9 %, at 50  44.4 %, at 99  58.9 %; XP/h at 99   15,543
+    Bandit                 perception  243 stages  1: success at 1  29.4 %, at 50  43.7 %, at 99  58.0 %; XP/h at 99   15,317
+    Astrologer             perception  248 stages  1: success at 1  29.0 %, at 50  43.1 %, at 99  57.2 %; XP/h at 99   17,155
+    Herbalist              perception  251 stages  1: success at 1  28.8 %, at 50  42.7 %, at 99  56.7 %; XP/h at 99   17,009
+    Crafting Stall         perception  339 stages  1: success at 1  23.0 %, at 50  34.2 %, at 99  45.3 %; XP/h at 99   10,607
+    Bandit Fletcher        perception  349 stages  1: success at 1  22.5 %, at 50  33.4 %, at 99  44.3 %; XP/h at 99   15,955
+    Runecrafter            perception  357 stages  1: success at 1  22.1 %, at 50  32.8 %, at 99  43.5 %; XP/h at 99   18,289
+    Capital Guard          perception  414 stages  1: success at 1  19.6 %, at 50  29.2 %, at 99  38.7 %; XP/h at 99    7,898
+    Bandit Woodcutter      perception  454 stages  1: success at 1  18.2 %, at 50  27.1 %, at 99  35.9 %; XP/h at 99   17,673
+    Wizard                 perception  458 stages  1: success at 1  18.1 %, at 50  26.9 %, at 99  35.7 %; XP/h at 99   17,974
+    Blacksmith             perception  458 stages  1: success at 1  18.1 %, at 50  26.9 %, at 99  35.7 %; XP/h at 99   17,974
+    Bandit Leader          perception  465 stages  1: success at 1  17.9 %, at 50  26.5 %, at 99  35.2 %; XP/h at 99   19,865
+    Locked Ranchers Chest  perception  480 stages  1: success at 1  17.4 %, at 50  25.9 %, at 99  34.3 %; XP/h at 99   11,425
+    Archivist              perception  550 stages  1: success at 1  15.5 %, at 50  23.1 %, at 99  30.6 %; XP/h at 99   17,634
+    Capital Seed Stall     perception  583 stages  1: success at 1  14.8 %, at 50  22.0 %, at 99  29.1 %; XP/h at 99    9,965
+    Miner                  perception  594 stages  1: success at 1  14.6 %, at 50  21.6 %, at 99  28.7 %; XP/h at 99   18,581
+    Capital Citizen        perception  600 stages  1: success at 1  14.4 %, at 50  21.4 %, at 99  28.4 %; XP/h at 99   20,810
+    Stone Mason            perception  602 stages  1: success at 1  14.4 %, at 50  21.4 %, at 99  28.3 %; XP/h at 99   21,091
+    Ore Stall              perception  739 stages  1: success at 1  12.0 %, at 50  17.9 %, at 99  23.7 %; XP/h at 99   10,104
+    Carpenter              perception  765 stages  1: success at 1  11.7 %, at 50  17.3 %, at 99  23.0 %; XP/h at 99   12,975
+    Gem Stall              perception  873 stages  1: success at 1  10.4 %, at 50  15.4 %, at 99  20.5 %; XP/h at 99    9,326
+    Palace Citizen         perception  946 stages  1: success at 1   9.7 %, at 50  14.3 %, at 99  19.0 %; XP/h at 99   12,100
+    Palace Guard           perception  960 stages  1: success at 1   9.5 %, at 50  14.2 %, at 99  18.8 %; XP/h at 99   18,698
+    Abyssal Vault Door     perception 1100 stages  1: success at 1   8.4 %, at 50  12.5 %, at 99  16.6 %; XP/h at 99   10,224
+    Palace Battlemage      perception 1118 stages  1: success at 1   8.3 %, at 50  12.3 %, at 99  16.3 %; XP/h at 99   21,959
+    Hunter                 perception 1122 stages  1: success at 1   8.3 %, at 50  12.3 %, at 99  16.3 %; XP/h at 99   17,001
+    Chieftain              perception 1126 stages  1: success at 1   8.2 %, at 50  12.2 %, at 99  16.2 %; XP/h at 99   18,309
+    Locked Bank Chest      perception 1247 stages  1: success at 1   7.5 %, at 50  11.1 %, at 99  14.8 %; XP/h at 99   12,432
+    Forbidden Library      perception 1420 stages 10: success at 1   6.6 %, at 50   9.9 %, at 99  13.1 %; XP/h at 99   14,293
+    Lower Floors           perception 1420 stages 30: success at 1   6.6 %, at 50   9.9 %, at 99  13.1 %; XP/h at 99   20,947
+    Stolen Goods           perception 1870 stages 15: success at 1   5.1 %, at 50   7.6 %, at 99  10.1 %; XP/h at 99   15,243
+    Locked Beast Chest     perception 2370 stages  1: success at 1   4.1 %, at 50   6.1 %, at 99   8.1 %; XP/h at 99   13,741
+    Deep Mine              perception 2420 stages 15: success at 1   4.0 %, at 50   6.0 %, at 99   7.9 %; XP/h at 99   11,201
+    Palace Vault           perception 3580 stages 25: success at 1   2.7 %, at 50   4.1 %, at 99   5.4 %; XP/h at 99   10,030
+
+## 6. Combat (Components.Characters/CharacterStats.cs, Entities.Combat/*MaxHitFormula.cs, TargetCharacterStats.cs)
+  accuracy/evasion = floor((weighted level + 9)(stat + 64)) x (1 + %) [+ flat], then for the player only x (1 - 0.05 x clamp(area darkness, 0, 20)), truncated, min 1 (PlayerComponent.cs 243-246)
+  hit chance = 1 - E/(2A) if A >= E else A/(2E), + flat, clamp 0..1  (same as Melvor 1)
+  melee/ranged max hit = floor(22 + L + (L + 17)*S/64), algebraically equal to Melvor 1's floor(10*(1.3 + e/10 + S/80 + e*S/640)) with e = L + 9;
+    over L 1-120, S 0-299 (36 000 pairs) they differ in 89: Melvor 1's float form floors 1 too low in 89 cases (e.g. L1 S32 -> 31 vs exact 32), Melvor 2's form is exact in all but 0
+  magic max hit = floor(spellMaxHit x (1 + damageBonus) x (1 + (Magic + 1)/200)); HP = 10 x Hitpoints level; attack interval >= 250 ms
+  resistance = clamp(clamp((protection/(power + protection) + flat) x (1 + %), 0, 0.70) x (1 + triangle), 0, 1) -> capped at 70 % before the combat triangle
+    protection 100 vs power 100: base resistance 50 %
+    protection 300 vs power 100: base resistance 70 %
+    protection 1000 vs power 100: base resistance 70 %
+    protection 100 vs power 300: base resistance 25 %
+  combat level = max(1, floor(sum ratio x level)) per style (CombatStyle.cs ComputeCombatLevel): melee 0.325 Atk + 0.325 Str + 0.25 Def; ranged/magic 0.4875 x level + 0.25 Def; Hitpoints is not included (Melvor 1 added 0.25 x HP)
+  enemies: 192; HP levels 1-2800
+
+## 7. Mastery Guild (data: MasteryGuildRank/Task/Bonus; Components.MasteryGuild)
+  3403 tasks, 175 ranks, 150 rank bonuses across skills; ranks unlock at a percentage of the skill's task points
+  rank thresholds (PointPercentRequired, distinct): [0.0, 0.05, 0.1, 0.2, 0.4, 0.65, 1.0]
+  tasks wired through EntityConfig (what MasteryGuildComponent.cs 157-171 reads): 3251 of 3403 objects: {'Herblore': 209, 'Defence': 204, 'Ranged': 187, 'Magic': 184, 'Thieving': 170, 'Attack': 159, 'Cooking': 144, 'Ranching': 136, 'Strength': 135, 'Astrology': 135, 'Crafting': 133, 'Prayer': 133, 'Hunting': 129, 'Farming': 122, 'Fletching': 120, 'Fishing': 116, 'Woodcutting': 113, 'Hitpoints': 112, 'Beastcrafting': 111, 'Slayer': 103, 'Mining': 98, 'Smithing': 86, 'Runecrafting': 77, 'Agility': 72, 'Firemaking': 63}
+  rank threshold = ceil(TotalTaskPoints x pct) (MasteryGuildComponent.cs 226-238); points per band: Novice 1, Easy 2, Adept 3, Intermediate 5, Hard 8, Expert 12
+  quests wired: 17 of 37 objects (QuestsComponent.cs 253 iterates Config.Quests)
+  task categories: {'Novice': 796, 'Easy': 859, 'Adept': 772, 'Intermediate': 512, 'Hard': 358, 'Expert': 106}
+
+## 8. Offline, catch-up, sleep (Main.cs, Core.SleepDetection/SleepDetector.cs, Entities.OfflineProgress/OfflineProgressComponent.cs)
+  load: if the save timestamp is >= 10 s old, run offline for the difference
+  sleep detector: every 5 s compare wall clock with accumulated physics time; drift >= 10 s fires Wake
+  drift <= 60 s -> Catchup mode; > 60 s -> Offline mode (snapshot + summary modal); both run the same PropagateTick() in a background Task, one tick per TickInterval of missing time
+  max offline time = max(base, base + FlatOfflineTime), base 86 400 000 ms (24 h): modifiers can only raise it (OfflineProgressStats.cs 59-64)
+  the IsOffline flag (Game.OnOfflineProgressStart) is set only on the sleep-wake path over 60 s (Main.cs 414, 426), not for load-time replays
+  24 h = 5,184,000 ticks at 60 Hz (Melvor 1: 1 728 000 at 20 Hz)
+  saves: 5 save files, autosave every 10 s (Constants.MaxSaveFiles, AutoSaveInterval)
+
+## 9. Content counts (MelvorBase.json)
+   {'MasteryGuildTask': 3403, 'Item': 1811, 'ArtisanRecipe': 723, 'ShopPurchase': 499, 'AgilityObstacle': 370, 'AstrologyNode': 280, 'AstrologyStarNode': 240, 'Attack': 198, 'Enemy': 192, 'MasteryGuildRank': 175, 'ToolbeltSlot': 175, 'RecipeSubcategory': 173, 'RanchingAnimalVariant': 165, 'ToolbeltSlotType': 157, 'HerbloreRecipe': 155, 'MasteryGuildBonus': 150, 'ItemUpgrade': 124, 'AstrologyObservationEvent': 86, 'CookingRecipe': 77, 'HuntingAnimalSpecies': 71, 'RecipeCategory': 68, 'CombatArea': 64, 'AgilityCoursePath': 61, 'ShopSubcategory': 55, 'HerblorePotionGroup': 55, 'RanchingEnclosure': 53, 'TurnCountingEffect': 52, 'CombatPassive': 51, 'FarmingRecipe': 49, 'MagicSpell': 48, 'FarmingPlot': 47, 'HuntingAnimal': 44, 'ThievingRecipe': 44, 'EquipmentSetBonus': 42, 'Prayer': 41, 'AgilityCourse': 38, 'Quest': 37, 'Pet': 36, 'ThievingDistraction': 36, 'NPC': 35, 'Imbuement': 32, 'MiningRecipe': 28, 'FiremakingRecipe': 27, 'CombatStat': 26, 'LegacySkillNavigationOption': 25, 'FishingRecipe': 24, 'HuntingJournalBonus': 24, 'ShopCategory': 23, 'BankTagCategory': 23, 'WeaponType': 23, 'EntityPage': 22, 'WoodcuttingRecipe': 22, 'RanchingAnimal': 20}
+  items 1811; artisan recipes 723; shop purchases 499; agility obstacles 370; quests 37
+
+## 10. Pets (Components.Experience/ChancePerExperienceTrigger.cs; Pet data)
+  36 pet objects; 36 use ChancePerExperience: each XP gain rolls (xp gained / ScaleFactor); scale factors seen: [13034431, 104273167]
+  pets wired through EntityConfig (PetsComponent.cs 80): 25; the 104 273 167-scale *MasterPet objects are not wired; a trigger fires at most once (ActivePet.cs 61-82)
+  ScaleFactor 13 034 431 (Melvor 1 L99 XP; Melvor 2 L99 is 13,034,427): P(pet by 99) = 63.2 %; P(by 104.3 M XP) = 99.97 %
+  the chance depends only on XP earned, not on action count or speed, so faster or slower actions do not change pet odds per XP

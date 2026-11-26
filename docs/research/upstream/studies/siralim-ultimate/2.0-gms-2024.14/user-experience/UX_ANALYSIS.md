@@ -1,0 +1,7 @@
+> **Imported research, not approved Idle Buds design.** [Source snapshot](https://github.com/silveralcid/research/blob/88163607cfd407230512650a5c6750e1b7a96f98/reverse-engineering/game-dev/siralim-ultimate/2.0-gms-2024.14/user-experience/UX_ANALYSIS.md); [scope, corrections and rights](../../../../README.md). Upstream evidence labels and reported test results are preserved, not newly reproduced. Counts and commands may refer to excluded upstream artifacts.
+
+# UX analysis (STRONG INFERENCE from content + community reception)
+- **Infinite depth, finite systems**: a gene-strength-driven level cap (50 + 10·gene) and quadratic enemy scaling turn the game into a build puzzle; the UI load is the 2 181-trait vocabulary, mitigated by macro-driven consistent wording and an in-game Codex (341 strings) with game guides.
+- **Collection hooks**: 1 447 creatures but only ~110 base-stat points each — identity is the trait; skins (834), costumes, decorations (2 775 strings) and achievements (10 570 strings) carry the long tail.
+- **Friction**: trait interactions are hand-coded (megabyte hook scripts) so edge cases and "does not stack" clauses are frequent in the text; players rely on the wiki/compendium. 2.0 added hotkeys, favourites, Turbo Mode and difficulty/mode toggles (`global.mode` scaling) to reduce grind.
+- **Accessibility**: full localization (16 languages), Calm/Relaxed modes, Virtual_Joy extension (touch), controller-first menus (`gui_*` objects).

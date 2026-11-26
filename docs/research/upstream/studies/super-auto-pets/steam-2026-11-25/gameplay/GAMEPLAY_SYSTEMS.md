@@ -1,0 +1,41 @@
+> **Imported research, not approved Idle Buds design.** [Source snapshot](https://github.com/silveralcid/research/blob/88163607cfd407230512650a5c6750e1b7a96f98/reverse-engineering/game-dev/super-auto-pets/steam-2026-11-25/gameplay/GAMEPLAY_SYSTEMS.md); [scope, corrections and rights](../../../../README.md). Upstream evidence labels and reported test results are preserved, not newly reproduced. Counts and commands may refer to excluded upstream artifacts.
+
+# Super Auto Pets — Gameplay Systems
+
+Sources: wiki (rules; 428 pets = 366 from the Pets tables + 62 Danger Pack pets parsed from their pages; the wiki itself states ~450 pets, so a few custom-pack exclusives may still be missing; 158 foods; STRONG INFERENCE), client string tables (ability texts, UI rules; VERIFIED), client class model (structure; VERIFIED).
+
+## 0. Core loop
+Turn = **Shop phase** (10 gold: pets/food 3 each, Sleeping Pill 1, reroll 1, freeze free; sell a pet for gold = its level) → **Battle phase** (automatic, front pets attack simultaneously, abilities fire on triggers) → win +1 trophy / loss −lives / draw nothing. **Arena**: 5 lives (7 easy: `ArenaSettingsModal.Easy.Tooltip` "2 extra lives"), win at 10 trophies; a lost life is refunded at turn 3 (and turn 5 in current builds: `RecoverLife.Turn5`); later turns cost 2–3 lives per loss (`ShopUpgrade.LosePerLoss2/3`, with "max lives per loss" variants; the 2022 community DB lists 1,1,2,2,3,3,3,3,4… lives lost by turn). Difficulties per the client `Difficulty` enum: Normal, Hard ("fight stronger teams"), Extreme ("Super Hard"), ToyHard ("Cursed": a toy after every two turns), Classic, Broken. **Versus**: 2–8 players, 6 lives, last standing, turn timers (90 s real-time or 24 h async; 2-player/8-player ranked). **With Friends**: private rooms with custom lives/timer/packs. **Bully Rush**: a PvE mode (constants: lives, turns, chest turn, moustache bonus).
+
+## 1. Shop
+- Tier unlocks on turns 1/3/5/7/9/11 (max tier 6; client strings `ShopOverlay.Tooltip.Turn` "Shop upgrades on 3, 5, 7, 9 and 11", `ShopUpgrade.TierUnlocked2..6`). Pet slots 3 → 4 → 5 (turns 5 and 9) and food slots 1 → 2 (turn 3): from the 2022 community DB `turns` table (`evidence/community`), consistent with `BoardConstants.DefaultShopUpgradeMinionCapacityOnTier` — STRONG INFERENCE. Frozen items persist through rolls and turns.
+- Level-up reward: buying the third copy (level 2) or reaching level 3 offers a choice of two pets from the next tier (not when merging two level-2s).
+- Shop sampling (VERIFIED by decompilation, `mathematics/DECOMPILED_RULES.md` §3): the eligible pool is every pack pet with tier ≤ shop tier (rollable, pack-matched, Unique pets excluded while owned); multi-tribe pets are entered once per tribe; frozen slots are kept and each remaining pet slot is an independent uniform draw (**with replacement** — the same pet can appear twice; Unique pets are removed once drawn); a 0.01 % chance per roll puts a 1/1 Sloth in slot 0; there is **no duplicate penalty** (`DuplicatePenaltyConstant = DuplicatePenaltyAddition = 0`; the price-penalty code path is dead); shop buffs (`MinionShopBonus`, permanent via Canned Food) are applied to the drawn pets. Roll costs 1 gold (hard-coded) unless a free roll is banked; stored gold is capped at 300. Tier upgrades on turns 3/5/7/9/11, pet slots +1 at tiers 3 and 5, food slot +1 at tier 3 (`BoardConstants` static constructor, VERIFIED).
+
+## 2. Pets
+- Base attack/health, tier 1–6, up to 3 ability levels; stats cap at 50 (Behemoth 100); team of 5.
+- **Experience**: 2 XP → level 2, +3 → level 3 (5 total = 3 copies for L2, 6 for L3). Merging keeps the higher stat line and adds +1/+1 per XP gained; temporary (until-end-of-battle) stats are tracked separately.
+- **Trigger taxonomy** (wiki names, case-normalised; client `TriggerEnum` has 234 variants): battle (Faint 86 pets, Start of battle 75, Friend summoned 12, Hurt 12, Before attack 9, Friend faints 7, Empty front space 6, Knock out 5, Friend ahead faints 5, Adjacent friend attacked 5…) vs build-phase (End turn 42, Sell 22, Start of turn 21, Buy 18, Friend transformed 5, Roll 4, Shop tier upgraded, Friend level-up, Friendly ate food, Gains mana, Friend gained perk…). Roughly 240 pets trigger in battle and 132 in the shop (model classification of the common strings; 56 pets have rarer or dual-phase triggers).
+- Archetypes (client enum, 30): Standard, Food, Gold, Summon, Cycle, Hurt, Faint, Guard, Trumpets, Roll, Push, Levels, Toys, Invasive, Strawberry, Perks, Shop, Mana, Copy, Ailments, Rocks, FourTeam, Jump, Apples, Honey, Transform, Buff, Disruption, SelfAilments, Mvp — used by Custom-pack rules ("Standard" packs allow ≤2 pets per archetype per tier; "Wild" packs otherwise).
+- Tokens (Bee 1/1, Zombie Cricket, Ram ×2, Bus 5/5 with Chili, Nest, Lizard Tail…) are tier-1 summons with their own enum entries.
+
+## 3. Food & perks
+158 foods: stat foods (Apple +1/+1, Cupcake +3/+3 temporary, Salad Bowl, Canned Food = permanent shop buff, Chocolate = +1 XP, Sleeping Pill = faint for 1 gold) and **perks** (one per pet; Honey → Bee on faint, Garlic −2 damage, Melon block 20 once, Steak +20 attack once, Chili attack 2nd enemy for 5, Coconut block once, Peanut knock-out, Meat Bone +3, Mushroom revive 1/1, Cheese ≥15 attack once, Pineapple, Lemon, Weak +3 damage taken (ailment)…). Constants are code (`AbilityConstants.ChiliAttack`, `MelonArmor`, `GarlicArmor` …) and surface in the strings.
+
+## 4. Battle resolution (VERIFIED structure, rules STRONG INFERENCE)
+Ordering (VERIFIED, `DECOMPILED_RULES.md` §5): simultaneous triggers are sorted by `MinionModel.Priority` = permanent + temporary attack, +1000 with Churros / −1000 with Macaron, self-sourced triggers before others, ties broken by the seeded per-owner randomizer; which *player* goes first on a tie is a seeded roll-off (`RandomPriority`). Phases: Start of battle triggers (ordered as above), then loop: Before attack → simultaneous front-vs-front damage → Hurt/Knock out/Faint triggers → summons fill the gap → Empty-front-space triggers → repeat until a side is empty. Order of simultaneous triggers follows attack stat (highest first) with the seeded `BoardRandom` for ties; crits can be disabled (`DisableCrits`). Everything is an event stream (`BoardEvents`), replayable from `BattleState(Seed, PlayerSeed, OpponentSeed)`.
+
+## 5. Packs and meta-content (VERIFIED enum + wiki)
+- Static packs: Turtle (free, 61 pets), Puppy ($5, 61), Star ($10, 78), Golden ($10, 64), Unicorn ($10, 88), Danger ($10, 62; released May 2025, v0.39; transform-centric: Friend transformed, Before battle transforms, Adjacent friend attacked); Plus pack; Mini Packs 1–3 (wiki; the shipped enum has slots up to MiniPack20); Weekly pack (9 pets + 2–3 foods per tier, rotates Mon 00:00 UTC: random → user-submitted → random → creator); Custom packs (≤10 pets + 3 foods per tier from owned packs; Standard vs Wild rules); Bullies/Wacky/Challenge pack-enum members plus relic variants (`CreateRelics*`, `CreatePlusRelics`).
+- Each pack has its own ability "colour": Turtle = Faint/Start-of-battle basics; Star = Start-of-battle heavy (14) and Start-of-turn; Golden = Faint-heavy (19) and Sell; Puppy = Buy/End-turn economy; Unicorn = mana/relic mechanics (88 pets, "Gains mana" triggers); Danger = transformation and position ("Friend transformed", "Adjacent friend attacked").
+
+## 6. Progression & monetization surfaces
+No stats or power persist between runs: progression is **cosmetic and access-based** — packs (purchases or gifts), achievements per pet (reach level 3), ribbons (win with L3 pets / hard mode), backgrounds, mascots, entrances, trumpets, cosmetics (139 loc keys), snacks (earned in normal/hard), subscription keys exist (`Subscription.*`, `SubscriptionConstants`), surveys. Ranked versus has leaderboards.
+
+## 7. System interaction map
+```
+ Gold (10/turn) ─► Shop (3 pets + 1–2 foods, reroll 1) ─► Team (5) ─► Battle (deterministic, seeded) ─► Trophies / Lives
+      ▲                 │  merge copies → XP → level 2/3 → stronger ability + next-tier choice       │
+      └── Sell (gold = level) ◄── Buy/Sell/End-turn/Start-of-turn ability economy (scaling pets) ◄──┘
+ Tier clock (turns 1/3/5/7/9/11) paces power; packs define the pool; archetypes define synergies; perks are one-slot modifiers.
+```

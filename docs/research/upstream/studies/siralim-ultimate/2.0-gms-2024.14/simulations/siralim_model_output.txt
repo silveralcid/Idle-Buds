@@ -1,0 +1,51 @@
+== roster
+creatures 1447 classes {'Nature': 319, 'Life': 240, 'Death': 275, 'Chaos': 278, 'Sorcery': 335} races 166
+health        min  21 mean   35.0 max  50
+attack        min   2 mean   19.1 max  30
+intelligence  min   5 mean   19.1 max  28
+defense       min   6 mean   17.8 max  30
+speed         min   7 mean   19.0 max  30
+total         min  99 mean  110.1 max 150
+top health [('Chaos Orb', 50), ('Death Orb', 50), ('Life Orb', 50)]
+top attack [('One-Punch Snowman', 30), ('Fallen Carnage', 28), ('Berserker Fiend', 28)]
+top intelligence [('Djinn Pyromancer', 28), ('Djinn Dreamweaver', 28), ('Djinn Illusionist', 28)]
+top defense [('Benthic Guardian', 30), ('Diamond Paragon', 28), ('Redstone Imler', 28)]
+top speed [('Egg Over Breezy', 30), ('Dust Fairy', 30), ('Diamond Paragon', 28)]
+== stat curve (neutral 0.3 / favoured 0.4 / unfavoured 0.2), base 20 and 50
+L    1: base20     20     20     20 | base50     50     50     50
+L   10: base20     74     92     56 | base50    185    230    140
+L   30: base20    194    252    136 | base50    485    630    340
+L   60: base20    374    492    256 | base50    935   1230    640
+L  100: base20    614    812    416 | base50   1535   2030   1040
+L  300: base20   1814   2412   1216 | base50   4535   6030   3040
+L 1000: base20   6014   8012   4016 | base50  15035  20030  10040
+Ebony Ent L50 [534, 267, 346, 346, 189] L100 [1044, 522, 676, 676, 369]
+Diamond Paragon L50 [597, 48, 205, 440, 440] L100 [1167, 93, 400, 860, 860]
+Imp Bishop L50 [440, 205, 440, 283, 283] L100 [860, 400, 860, 553, 553]
+Razorweb Arachnalisk L50 [566, 252, 252, 252, 409] L100 [1106, 492, 492, 492, 799]
+== experience
+[(1, 20), (2, 80), (5, 500), (10, 2000), (50, 50000), (100, 200000), (500, 5000000), (1000, 20000000)]
+level from 1e6 xp: 223  1e9: 7071
+god favour per level 500+50(L-1): L1..10 total 7250
+== enemy level by realm depth (difficulty 0 normal mode / difficulty 9 / mode x3)
+realm     1: level        1 gene    0 | hard9         3 | x3         1
+realm     5: level        5 gene    0 | hard9        66 | x3         5
+realm    10: level       10 gene    0 | hard9       262 | x3        10
+realm    20: level       20 gene    0 | hard9      1057 | x3        37
+realm    30: level       30 gene    0 | hard9      2401 | x3        84
+realm    50: level       79 gene    3 | hard9      6799 | x3       237
+realm    75: level      182 gene   13 | hard9     15662 | x3       545
+realm   100: level      330 gene   28 | hard9     28491 | x3       991
+realm   200: level     1440 gene  139 | hard9    124320 | x3      4320
+realm   500: level    11250 gene 1120 | hard9    971250 | x3     33750
+realm  1000: level    60000 gene 5995 | hard9   5180000 | x3    180000
+== crit/dodge vs speed ratio (base, before modifiers; both floored at 5 %)
+spdA/spdD 0.50: crit   5.0%  dodge  10.0%
+spdA/spdD 0.80: crit   5.0%  dodge   6.2%
+spdA/spdD 1.00: crit   5.0%  dodge   5.0%
+spdA/spdD 1.25: crit   6.2%  dodge   5.0%
+spdA/spdD 1.50: crit   7.5%  dodge   5.0%
+spdA/spdD 2.00: crit  10.0%  dodge   5.0%
+spdA/spdD 3.00: crit  15.0%  dodge   5.0%
+spdA/spdD 6.00: crit  30.0%  dodge   5.0%
+spdA/spdD 10.00: crit  50.0%  dodge   5.0%

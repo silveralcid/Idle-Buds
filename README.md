@@ -1,34 +1,78 @@
-## Idle Buds - Collect, Train, & Dominate!
+# Idle Buds
 
-In a unique mashup that combines the best of Palworld and Melvor Idle, *Idle Buds*  is inspired by the charm of creature-collecting adventures and the convenience of idle progression games. Drawing influence from timeless RPG mechanics, we envisioned a world that respected players' time and where strategy, resource management, and exciting battles meet the joy of nurturing and evolving unique creatures—*Buds*.
+Idle Buds is an idle-first creature-collection MMO concept built around progression at your own pace, meaningful creatures, and a shared player economy and community. This repository is the project's **single source of truth** for design, engineering, research and development.
 
----
+**Current state:** consolidated project knowledge and a minimal React/TypeScript/Vite development foundation. Gameplay has not been implemented by this migration. No application has been deployed. The [current scope and approvals](docs/design/AUTHORITY.md) preserve the BEAT BAES gate and the owner's limited consolidation exception.
 
-### What Idle Buds is All About
-*Idle Buds* offers a unique gameplay experience where you:  
-- **Collect**: Gather rare eggs, hatch them into adorable and powerful Buds, and explore different regions.
-- **Train**: Level up Buds, unlock evolutions, and specialize their abilities based on affinities and stats.  
-- **Dominate**: Strategically assign Buds to gather resources, craft gear, and defeat bosses to progress through the adventure.  
+## Start with the right authority
 
-Through careful balancing of Bud affinities, passions, and ascension mechanics, we created a deep yet accessible idle game. With idle mechanics and active progression, you can play at your own pace while achieving rewarding milestones. 
+| Need | Read |
+|---|---|
+| Project governance and permitted work | [Constitution](docs/project/CONSTITUTION.md) and [authority/scope](docs/design/AUTHORITY.md) |
+| Approved design, provisional choices and open questions | [Game Design Bible](docs/design/design-bible.md) |
+| New ideas, qualification, holds and promotions | [Idea Incubator](docs/design/idea-incubator.md) |
+| Current development priorities | [Next milestone](docs/project/NEXT-MILESTONE.md) |
+| Imported game and engineering findings | [Research snapshot](docs/research/upstream/README.md) |
+| Developer or AI agent onboarding | [START-HERE](START-HERE.md) and [AGENTS](AGENTS.md) |
+| All topic owners | [Documentation index](docs/INDEX.md) |
 
----
+An approved design decision is not automatically release scope or permission to implement. Research, prototypes, legacy code and art references do not become requirements through migration. No final Current Release Specification is present yet.
 
-### How We Built It  
-We crafted *Idle Buds* using:  
-- **Frontend**: React with TypeScript for modular, scalable UI and Tailwind CSS for streamlined design.  
-- **Backend**: AWS services like DynamoDB for data management and S3 for storage.  
-- **Amazon Q**: Amazon Q allowed this solo developer to progress at an unimaginable speed. From laying the foundation of the game to designing the architecture, debugging errors, and exploring entirely new features, Amazon Q served as an invaluable partner.
+## Develop locally
 
----
+Use Node.js 24 and npm. Python 3.11+ is required for repository validation only.
 
-### What's Next for Idle Buds - Collect, Train, & Dominate!  
-We’re just getting started! Here’s what’s next:
-- **Art & Visual Rework**: We had to work quickly and focus on gameplay due to time constraints. We plan to revisit the art and aesthetics in a big way!
-- **New Regions and Bosses**: Expand the world with new tiers and challenges.  
-- **More Buds**: Variety is the spice of any creature collection game. We want to give players a healthy selection of buds to collect and strategize with.
-- **Advanced Crafting Systems**: Introduce rare resources and specialized Bud gear.  
-- **Multiplayer Features**: Add cooperative challenges and leaderboards for friendly competition.  
-- **Quality of Life Enhancements**: Improve UI/UX and streamline gameplay mechanics based on player feedback.  
+```sh
+npm ci
+npm run dev
+```
 
-Join us on this exciting journey as we continue to grow the *Idle Buds* universe!
+Vite prints the localhost address. The page is a neutral development shell. [Development setup](docs/engineering/DEVELOPMENT.md) includes browser prerequisites and the full command reference.
+
+```sh
+npm run lint
+npm run typecheck
+npm run build
+npm run setup:browser
+npm test
+python3 tools/repo.py check --tests
+python3 tools/repo.py docs budget --strict
+python3 tools/validate_migration.py
+npm audit --audit-level=high
+```
+
+Keep actual check commands registered in [.repo/project.json](.repo/project.json). Test results apply to the source and environment exercised. Foundation/browser checks do not prove gameplay, multiplayer, platform compatibility or subjective fun.
+
+## Repository map
+
+| Path | Purpose |
+|---|---|
+| `src/` | Browser application; documented homes for future game rules and data |
+| `public/` | Only rights-cleared production assets; no reference imports |
+| `server/` | Documented boundary for the future authoritative backend |
+| `tests/e2e/` | Browser checks of built output |
+| `docs/design/`, `docs/project/` | Canonical design, governance and scope |
+| `docs/game/`, `docs/engineering/` | Game and engineering standards |
+| `docs/research/`, `docs/reference/` | Attributed, non-authoritative research and visual references |
+| `docs/migration/`, `docs/archive/` | Source manifests, historical snapshots and recovery instructions |
+| `tools/`, `.repo/` | Reused repository validation and selective context tooling |
+| `.agents/`, `.codex/`, `.claude/` | Shared AI workflows and thin provider adapters |
+| `.github/` | Review templates and bounded validation workflows |
+
+[Architecture](docs/architecture/OVERVIEW.md) records the approved web stack. The future initial backend is a single Node/TypeScript/Fastify service using PostgreSQL. No server, database, auth system, queue, infrastructure provider or native shell is provisioned by this foundation. Tauri remains a later candidate. No Rust or Bevy implementation is inherited.
+
+## Standards and workflow
+
+Follow [code quality](docs/engineering/CODE-QUALITY.md), [risk-based testing](docs/engineering/TESTING.md), [game development](docs/game/development-lifecycle.md), [asset/save safety](docs/game/assets-and-saves.md), and [delivery](docs/agents/delivery.md). Reuse before building, keep scope small, fix concrete failures, and update the existing owner. Use isolated branches and pull requests; respect protections and retain exact verification evidence.
+
+The foundation needs no secrets. Never expose credentials through `VITE_*` variables. Reference art, third-party research and archived source stay outside runtime/build inputs. Review rights before using any material in a production game.
+
+## Sources and recovery
+
+The [Drive migration](docs/migration/google-drive.md) accounts for all five source files and preserves original export bytes. Google Drive remains an untouched historical backup. [Universal standards](docs/migration/universal-standards.md) and [game standards](docs/migration/game-standards.md) record adopted branches, commits and deliberate exclusions. The [research migration](docs/migration/research.md) accounts for 185 permitted files from eleven game studies and seven earlier engineering topics, including source corrections and review limits.
+
+The [legacy archive](docs/archive/README.md) preserves all 50 original branch tips. Main's historical implementation is available at `archive/legacy-2026-11-25`; newer combat work and divergent tips have named archive refs. History has not been rewritten.
+
+## Next milestone
+
+Use the existing design to approve one short MVP boundary and measurable acceptance plan, confirm the gameplay gate, then authorize the first integrated onboarding slice. Do not restart exhaustive design interviews. Incremental work should lead toward the small complete ecosystem required for holistic product validation. [The next-milestone note](docs/project/NEXT-MILESTONE.md) preserves the exact boundary between that recommendation and an authorized assignment.

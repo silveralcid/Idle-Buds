@@ -1,0 +1,2028 @@
+{
+  "schema_version": 1,
+  "source_repository": "silveralcid/research",
+  "source_ref": "main",
+  "source_commit": "88163607cfd407230512650a5c6750e1b7a96f98",
+  "snapshot_fetched_utc": "2026-11-26T04:36:16Z",
+  "classification": "Research/reference only. No approval of design, architecture, implementation or release scope.",
+  "branches": [
+    {
+      "name": "main",
+      "sha": "88163607cfd407230512650a5c6750e1b7a96f98",
+      "selection": "Selected current merged source"
+    },
+    {
+      "name": "backup/idle-game-re-2026-11-26",
+      "sha": "bd413b3107778aa532c62404a4e45ad92aadf7cf",
+      "ahead_of_main": 0,
+      "behind_main": 1,
+      "pull_request": 2,
+      "state": "merged"
+    },
+    {
+      "name": "docs/game-research-handoffs-20261021",
+      "sha": "4e3ef1550be6ad32879370b51202b954267dd78c",
+      "ahead_of_main": 0,
+      "behind_main": 12,
+      "pull_request": 1,
+      "state": "merged"
+    }
+  ],
+  "historical_engineering_catalog_commit": "04bf510b60e46a5a937a7e660851df9de5c4aa69",
+  "source_scope": "All three branch tips, program and eleven study inventories, all non-evidence/non-tool study subtrees, older catalog and evidence audit covering 35 packages; selected authored material only.",
+  "transformations": "Markdown receives a status/provenance prefix and relative Markdown links are localized when selected, otherwise pinned to upstream. Other selected artifacts are byte-identical. Source SHA-256 and Git blob IDs identify original bytes.",
+  "files": [
+    {
+      "source_path": "projects/game-dev/idle-game-reverse-engineering/COMPARATIVE_NOTES.md",
+      "source_blob_sha": "947fc9baae9ccaa100ef7b2e6c4d3d223bb7ea3c",
+      "source_sha256": "703be6f425ef94a55e67734f9edcc31816863afa1f9e7e5c621f4ab9e1d8d170",
+      "source_bytes": 17885,
+      "destination": "docs/research/upstream/comparative-notes.md",
+      "destination_sha256": "126dbb28ba5068ff0312b633856e86271d96877de5adf39a56dab55e3162fcb3",
+      "destination_bytes": 18311,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "projects/game-dev/idle-game-reverse-engineering/README.md",
+      "source_blob_sha": "3e2494e5f1a1107c7a008b2f2931fc6f1865336c",
+      "source_sha256": "096fefd6f5127f7c0e24d12734f4061806ec2f0d43d47d92c933a518fb3ec02a",
+      "source_bytes": 7581,
+      "destination": "docs/research/upstream/program-source.md",
+      "destination_sha256": "125c3c999a5f280b27fd9c30d43d2a8dfc420e6a28854d7da6a34848bc6720ae",
+      "destination_bytes": 7933,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/idle-clans/1.6800/FINAL_REPORT.md",
+      "source_blob_sha": "9361d3a0799b1cf3b4f3a5f5385bdb8fbf8dadc8",
+      "source_sha256": "7e4c9c7ec7e5a276bb648267286f8b76dec8db62483b34d84be0185baec6eade",
+      "source_bytes": 5256,
+      "destination": "docs/research/upstream/studies/idle-clans/1.6800/FINAL_REPORT.md",
+      "destination_sha256": "63a7d61fbb252b69d60d4db338d192fc8b717c36216768c918771876fad2b262",
+      "destination_bytes": 5685,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/idle-clans/1.6800/MANIFEST.md",
+      "source_blob_sha": "a31979ce6c97e736e015c7d8582385686a0a3906",
+      "source_sha256": "1e047e1a3c90082141ef28f2e4b473aca118727e2d637d814e3900f0511b3d61",
+      "source_bytes": 1302,
+      "destination": "docs/research/upstream/studies/idle-clans/1.6800/MANIFEST.md",
+      "destination_sha256": "45e9e55d6ba724c3a265aedc8c2346f58f11a0bcecec88eb844d4b1a28fb3e7c",
+      "destination_bytes": 1727,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/idle-clans/1.6800/README.md",
+      "source_blob_sha": "ed99dd84e1475fdfc1881bb44fa5c5e9bbe6240a",
+      "source_sha256": "bf98670daa53c13898c6383f01d6cbe1263f6965cfb091b03cbdd921e84edb9a",
+      "source_bytes": 1388,
+      "destination": "docs/research/upstream/studies/idle-clans/1.6800/README.md",
+      "destination_sha256": "c3e66f725107200e5946579fe6a4fa1b3d26f538f1adfd0ad1329f8661d1d248",
+      "destination_bytes": 1811,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/idle-clans/1.6800/architecture/TECHNICAL_ARCHITECTURE.md",
+      "source_blob_sha": "ed142d98a78cf698c2725f97443085711d1346e0",
+      "source_sha256": "d19abe34b7a99630c26dcb4e73a1bc234977c9508c6a4e6b72c50b795b74a57b",
+      "source_bytes": 7704,
+      "destination": "docs/research/upstream/studies/idle-clans/1.6800/architecture/TECHNICAL_ARCHITECTURE.md",
+      "destination_sha256": "a9bc084137a0851c7cfc52f36a1059f2c05c53f80ae4bd6434eb710db599dfe3",
+      "destination_bytes": 8159,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/idle-clans/1.6800/content/CONTENT_ARCHITECTURE.md",
+      "source_blob_sha": "73ccc1896b21330fb9b5d1dc752523eca50a0167",
+      "source_sha256": "cc300da133a6f29d5d9e38006e4bc71f358f5c427a55a9a87a5fe5f568fcd42a",
+      "source_bytes": 2234,
+      "destination": "docs/research/upstream/studies/idle-clans/1.6800/content/CONTENT_ARCHITECTURE.md",
+      "destination_sha256": "9e57f198f0014b91eaa9b83422133a23731186ba36e737f37ae17b377abae242",
+      "destination_bytes": 2682,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/idle-clans/1.6800/development-lessons/DEVELOPMENT_LESSONS.md",
+      "source_blob_sha": "e8ad1a205dce3e57add691e8354b19d7b17086ff",
+      "source_sha256": "de54b0f0b664bcfc49db6a6938926854f2985bfe9bc320fea45254763f53030f",
+      "source_bytes": 3461,
+      "destination": "docs/research/upstream/studies/idle-clans/1.6800/development-lessons/DEVELOPMENT_LESSONS.md",
+      "destination_sha256": "73028d548220574cec9ba1924770e4723fc69be8198d0094985e45ab35d4efe4",
+      "destination_bytes": 3920,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/idle-clans/1.6800/economy/ECONOMY.md",
+      "source_blob_sha": "ade899c61d3f862089f3ed8fd4f7e113674035ab",
+      "source_sha256": "0aa9d530b86293d22608e7197252b221804547d5c1723af5525cfb1950292b84",
+      "source_bytes": 3352,
+      "destination": "docs/research/upstream/studies/idle-clans/1.6800/economy/ECONOMY.md",
+      "destination_sha256": "bc79e5f441aa6dd5c82a5c072370d78661ac7777914073038a0c1455bf7a4ea5",
+      "destination_bytes": 3787,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/idle-clans/1.6800/experiments/EXPERIMENT_LOG.md",
+      "source_blob_sha": "110347df21c4dcc81830e94621eade74275e8377",
+      "source_sha256": "1ea30587789c90882c11b97b45f2e3ef0d19d5b0e45248a2085fcb4f9d51b5dc",
+      "source_bytes": 2590,
+      "destination": "docs/research/upstream/studies/idle-clans/1.6800/experiments/EXPERIMENT_LOG.md",
+      "destination_sha256": "e3211c158126d96e1e761c654d2684e27e60f0beef40526fb5b90da03e93117c",
+      "destination_bytes": 3036,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/idle-clans/1.6800/gameplay/DESIGN_AND_PSYCHOLOGY.md",
+      "source_blob_sha": "6a0a5c91b15c828a5724667d05141779f149efbd",
+      "source_sha256": "b7447ed898f620a0fccad7de8e0c769b6f09c1f056fcfbb95c5b586529c97c2c",
+      "source_bytes": 2748,
+      "destination": "docs/research/upstream/studies/idle-clans/1.6800/gameplay/DESIGN_AND_PSYCHOLOGY.md",
+      "destination_sha256": "81239f7e75c00fffb4bdb19b96efaeb66a32ca6a029d41e440a247a789a34996",
+      "destination_bytes": 3198,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/idle-clans/1.6800/gameplay/GAMEPLAY_SYSTEMS.md",
+      "source_blob_sha": "e6605fb12900a595337637cd3469cd05ba046152",
+      "source_sha256": "d16723aa516310fbc2e3e8175a0d5c1d32be7cdce961b416c137ffb226a06f8d",
+      "source_bytes": 10242,
+      "destination": "docs/research/upstream/studies/idle-clans/1.6800/gameplay/GAMEPLAY_SYSTEMS.md",
+      "destination_sha256": "7d35ef707caf443a5b6a2ec642098dcf5b2792db58b52a473d835e050b60168f",
+      "destination_bytes": 10687,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/idle-clans/1.6800/mathematics/FORMULAS.md",
+      "source_blob_sha": "bbc64b4035024a918ca1c50ad5dbfb01589a2375",
+      "source_sha256": "a34e576d44e6bf8706c62b870405552888d5d09d9e709cef787b58c5995c6c9e",
+      "source_bytes": 4286,
+      "destination": "docs/research/upstream/studies/idle-clans/1.6800/mathematics/FORMULAS.md",
+      "destination_sha256": "19451dbb76ba7413639cfacef69da233db1bb763692984e54c3e7c6d01e63e3e",
+      "destination_bytes": 4726,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/idle-clans/1.6800/mathematics/charts/drop_ev_vs_hp.png",
+      "source_blob_sha": "b81247789abbbf652c5841c1dfb7ac8ceb13530f",
+      "source_sha256": "67178792ebf153c7e07bc8fc65243ef87cd4ef14f0d9b9c5b93a2ab404d194cd",
+      "source_bytes": 42998,
+      "destination": "docs/research/upstream/studies/idle-clans/1.6800/mathematics/charts/drop_ev_vs_hp.png",
+      "destination_sha256": "67178792ebf153c7e07bc8fc65243ef87cd4ef14f0d9b9c5b93a2ab404d194cd",
+      "destination_bytes": 42998,
+      "classification": "original analytical chart; upstream-reported"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/idle-clans/1.6800/mathematics/charts/monsters_hp_def.png",
+      "source_blob_sha": "6a32b386f93e6b3c435693ad0aa7bd32c969d098",
+      "source_sha256": "de3a1a1e2b316146af1cde24d9d9f41e55184797422269eef6034cbf3937cd5f",
+      "source_bytes": 52520,
+      "destination": "docs/research/upstream/studies/idle-clans/1.6800/mathematics/charts/monsters_hp_def.png",
+      "destination_sha256": "de3a1a1e2b316146af1cde24d9d9f41e55184797422269eef6034cbf3937cd5f",
+      "destination_bytes": 52520,
+      "classification": "original analytical chart; upstream-reported"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/idle-clans/1.6800/mathematics/charts/skilling_xp_rates.png",
+      "source_blob_sha": "244e4a817e2f8ad20e440b1b9489644f59ba77cd",
+      "source_sha256": "7ba8905986679f1e1926e62c28eb6fb37c79cd90ed89bb1b9ce83d1e3cebc6ad",
+      "source_bytes": 99119,
+      "destination": "docs/research/upstream/studies/idle-clans/1.6800/mathematics/charts/skilling_xp_rates.png",
+      "destination_sha256": "7ba8905986679f1e1926e62c28eb6fb37c79cd90ed89bb1b9ce83d1e3cebc6ad",
+      "destination_bytes": 99119,
+      "classification": "original analytical chart; upstream-reported"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/idle-clans/1.6800/mathematics/charts/upgrade_cost_ladders.png",
+      "source_blob_sha": "e6e7447d30c26055043b6ff07fe85ce8dd9aef3b",
+      "source_sha256": "14ff840a7972a679c05326dddff03815b7bccbee279fdeb549ca82ddd758280c",
+      "source_bytes": 100872,
+      "destination": "docs/research/upstream/studies/idle-clans/1.6800/mathematics/charts/upgrade_cost_ladders.png",
+      "destination_sha256": "14ff840a7972a679c05326dddff03815b7bccbee279fdeb549ca82ddd758280c",
+      "destination_bytes": 100872,
+      "classification": "original analytical chart; upstream-reported"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/idle-clans/1.6800/mathematics/charts/xp_curve.png",
+      "source_blob_sha": "314215d4f60acf2c266cffc60a774a51b8ec5d52",
+      "source_sha256": "2ecc7d1d63f53278c6be08fa1a2969d76270121875c5a48c98568c75ed70caef",
+      "source_bytes": 50590,
+      "destination": "docs/research/upstream/studies/idle-clans/1.6800/mathematics/charts/xp_curve.png",
+      "destination_sha256": "2ecc7d1d63f53278c6be08fa1a2969d76270121875c5a48c98568c75ed70caef",
+      "destination_bytes": 50590,
+      "classification": "original analytical chart; upstream-reported"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/idle-clans/1.6800/mathematics/charts/xp_increment.png",
+      "source_blob_sha": "924138c11849fe29561e62c46b849e86c698938f",
+      "source_sha256": "6080a3c39d5a050a1fc100bbefd120cf3686972258a51f050fb997c2a511d30a",
+      "source_bytes": 34917,
+      "destination": "docs/research/upstream/studies/idle-clans/1.6800/mathematics/charts/xp_increment.png",
+      "destination_sha256": "6080a3c39d5a050a1fc100bbefd120cf3686972258a51f050fb997c2a511d30a",
+      "destination_bytes": 34917,
+      "classification": "original analytical chart; upstream-reported"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/idle-clans/1.6800/progression/PROGRESSION.md",
+      "source_blob_sha": "5ce230e34ccc26d2bcb5d985ab0833e5e5b4646a",
+      "source_sha256": "4a40cf2ce0666978a11ea1783acbe7418bddb6fe7b819d014b5f10905098c9fd",
+      "source_bytes": 3151,
+      "destination": "docs/research/upstream/studies/idle-clans/1.6800/progression/PROGRESSION.md",
+      "destination_sha256": "66ab2b98275e4954e866328709af32446e19d9c5408556d717b74a99a3d8a514",
+      "destination_bytes": 3594,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/idle-clans/1.6800/prototypes/shared_sim_prototype.html",
+      "source_blob_sha": "75f30610ea3a0ca635e8bb45ef427e9d9acd3d64",
+      "source_sha256": "fa3c96c3b5b9c705c3692b4480a49174a6e1ed3ca663ba3ed61df8df694c8193",
+      "source_bytes": 4486,
+      "destination": "docs/research/upstream/studies/idle-clans/1.6800/prototypes/shared_sim_prototype.html",
+      "destination_sha256": "fa3c96c3b5b9c705c3692b4480a49174a6e1ed3ca663ba3ed61df8df694c8193",
+      "destination_bytes": 4486,
+      "classification": "original self-contained research toy with invented content; not the game"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/idle-clans/1.6800/user-experience/UX_ANALYSIS.md",
+      "source_blob_sha": "d705871ce8c5a7b01fd64bb11283766b800d46d9",
+      "source_sha256": "6704521cf28f2c5f5fd51f41b3a453d5d2331f485fb6121bab0d70b1b8634504",
+      "source_bytes": 1527,
+      "destination": "docs/research/upstream/studies/idle-clans/1.6800/user-experience/UX_ANALYSIS.md",
+      "destination_sha256": "2deba3827b2afbae9050d169735b53ba3530074234682216e1ebdcdc07f66826",
+      "destination_bytes": 1974,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/kadomon/steam-2026-11-25/FINAL_REPORT.md",
+      "source_blob_sha": "3a827228110032dca3fca97a726cbbdd5af149ee",
+      "source_sha256": "75b198065b24dc6f4adbbdd678d93f00bbdc4a2488fa596ee73c2dff40f64a18",
+      "source_bytes": 6586,
+      "destination": "docs/research/upstream/studies/kadomon/steam-2026-11-25/FINAL_REPORT.md",
+      "destination_sha256": "a746ff36fccdddee7eb4a6aaf28001b02a5d0c3b8e6979f70a8dc806f225c853",
+      "destination_bytes": 7022,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/kadomon/steam-2026-11-25/MANIFEST.md",
+      "source_blob_sha": "f398f7c6ab6d72bab6d5b928eb4338653698761f",
+      "source_sha256": "573120a713bb0816d59860253dee328aa11b257a02e682769525ccdc6b83ea89",
+      "source_bytes": 1329,
+      "destination": "docs/research/upstream/studies/kadomon/steam-2026-11-25/MANIFEST.md",
+      "destination_sha256": "133806ede88f68e45be9bac9122cb1d47b387540ba0f9c067fba0f5c07290a28",
+      "destination_bytes": 1761,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/kadomon/steam-2026-11-25/README.md",
+      "source_blob_sha": "a8aef47992e9776789d3b0daf8837d26d0abe8f4",
+      "source_sha256": "0e3a1b795685f90320794bff0a5a3b09d7adf0d65a77e8096946d93497ac46f7",
+      "source_bytes": 1733,
+      "destination": "docs/research/upstream/studies/kadomon/steam-2026-11-25/README.md",
+      "destination_sha256": "0f18c8e491e619fbe971b154e5add4632b5b34db736a156ae75c64ca1c6c25b0",
+      "destination_bytes": 2163,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/kadomon/steam-2026-11-25/architecture/ARCHITECTURE.md",
+      "source_blob_sha": "e45b4749933114f4a65a4f32065604df63542040",
+      "source_sha256": "f2ec434f2f1a85b92022f574a73d0b2a6e95894257e503689ced044895588e3c",
+      "source_bytes": 5323,
+      "destination": "docs/research/upstream/studies/kadomon/steam-2026-11-25/architecture/ARCHITECTURE.md",
+      "destination_sha256": "0887a76c4492872ca634e138c3dad6d3c26bceef90426f6c2a30ba8a4789c8d9",
+      "destination_bytes": 5775,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/kadomon/steam-2026-11-25/content/CONTENT.md",
+      "source_blob_sha": "11c78f0702d6e9d4f794b1d4a79683cdfc8b45b3",
+      "source_sha256": "793bba829a24cda35b14cdf266203fce0aa9eefbb6a26314aea73018e7c8c22b",
+      "source_bytes": 1625,
+      "destination": "docs/research/upstream/studies/kadomon/steam-2026-11-25/content/CONTENT.md",
+      "destination_sha256": "303d11cd3715d48ad1810b2e81cb355c408653e78dba26578a3ce26023eacc4f",
+      "destination_bytes": 2067,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/kadomon/steam-2026-11-25/development-lessons/DEVELOPMENT_LESSONS.md",
+      "source_blob_sha": "68dea6d71abe97ca779c00e8be08b189d8beed03",
+      "source_sha256": "5dc404dc67a8aae8704468f57559cf4024c9fa158b766042dd87926128856896",
+      "source_bytes": 1553,
+      "destination": "docs/research/upstream/studies/kadomon/steam-2026-11-25/development-lessons/DEVELOPMENT_LESSONS.md",
+      "destination_sha256": "45d9ede3e9724ee7c1fccc65241eed665a2da6e4f3358b434efcaf599a757e9a",
+      "destination_bytes": 2019,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/kadomon/steam-2026-11-25/economy/ECONOMY.md",
+      "source_blob_sha": "454d7caaa9127ca5944976856e8fa9a497fbc0c5",
+      "source_sha256": "cab01d4a4dce200a83518b0d609a970eaf19c94065a45f04c710329bb1001ea3",
+      "source_bytes": 624,
+      "destination": "docs/research/upstream/studies/kadomon/steam-2026-11-25/economy/ECONOMY.md",
+      "destination_sha256": "1db7908c2e25964e45a14aaa64357594557ad8e586c034da2ff3387e1ab55987",
+      "destination_bytes": 1066,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/kadomon/steam-2026-11-25/experiments/EXPERIMENT_LOG.md",
+      "source_blob_sha": "f6597f525ab5d26e1e9f067700a82452a217393f",
+      "source_sha256": "c8f5eba600cc87b73b70e316d49428331f7d4dfea21841f40324afcec9a245fb",
+      "source_bytes": 1488,
+      "destination": "docs/research/upstream/studies/kadomon/steam-2026-11-25/experiments/EXPERIMENT_LOG.md",
+      "destination_sha256": "08754bdf9d15cdf957c0c0c3575ea0cb9658df3a0164fc821a9522f5f6ee6fad",
+      "destination_bytes": 1941,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/kadomon/steam-2026-11-25/gameplay/GAMEPLAY_SYSTEMS.md",
+      "source_blob_sha": "a79ed54c189debd553e67dd04c5e76437479c979",
+      "source_sha256": "511df67810387f3bcdcc6e91eef5c18e330feb0c5afe0c281584f9e0638ab344",
+      "source_bytes": 9353,
+      "destination": "docs/research/upstream/studies/kadomon/steam-2026-11-25/gameplay/GAMEPLAY_SYSTEMS.md",
+      "destination_sha256": "1ebba6ba3958c1ae6eadbd476b9197d5ce3404c54b7f335b5ff23a66fe2b1a19",
+      "destination_bytes": 9805,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/kadomon/steam-2026-11-25/mathematics/FORMULAS.md",
+      "source_blob_sha": "11aaf5837208b670cf10c7f4d02be939a9b7d23e",
+      "source_sha256": "d9aba7836a0a3aaa1955b28cef0cfc7b902034a5270b284d82c7ecc76220df74",
+      "source_bytes": 6296,
+      "destination": "docs/research/upstream/studies/kadomon/steam-2026-11-25/mathematics/FORMULAS.md",
+      "destination_sha256": "681a809a03285848447085ca9dfd1cb2e0904129f118a95df08d0014a96c082c",
+      "destination_bytes": 6743,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/kadomon/steam-2026-11-25/progression/PROGRESSION.md",
+      "source_blob_sha": "cbf90dfe2b94be00fdefd568fcf599da65b7f6e1",
+      "source_sha256": "523cbcfee1e54438bfea44976ebc93d62c2374df8dde16cd4d98e980b0629787",
+      "source_bytes": 874,
+      "destination": "docs/research/upstream/studies/kadomon/steam-2026-11-25/progression/PROGRESSION.md",
+      "destination_sha256": "30082099e6ab19bfe4794b22b1c970c0c159df2007fcf8351500fa13d8f420d1",
+      "destination_bytes": 1324,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/kadomon/steam-2026-11-25/simulations/kadomon_model_output.txt",
+      "source_blob_sha": "e9f7d61d891186a350c4eecc9593ec1946f4a703",
+      "source_sha256": "a8334b5629daf4bb772f71007c12714f90f42f5f64dec3c546252b3027a8901d",
+      "source_bytes": 1703,
+      "destination": "docs/research/upstream/studies/kadomon/steam-2026-11-25/simulations/kadomon_model_output.txt",
+      "destination_sha256": "a8334b5629daf4bb772f71007c12714f90f42f5f64dec3c546252b3027a8901d",
+      "destination_bytes": 1703,
+      "classification": "upstream-reported aggregate simulation output; not rerun"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/kadomon/steam-2026-11-25/user-experience/UX_ANALYSIS.md",
+      "source_blob_sha": "760955fefda392866fc3a38862992f519878288f",
+      "source_sha256": "7b262f55f09b3615e806d195573133866f355e7ef08fdab9d80892cb3694b60a",
+      "source_bytes": 1204,
+      "destination": "docs/research/upstream/studies/kadomon/steam-2026-11-25/user-experience/UX_ANALYSIS.md",
+      "destination_sha256": "f5a0155c30f52c99a353717e9a5e4c8f90d15a6aa4b13e9ecbf97b4baf8a27a2",
+      "destination_bytes": 1658,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/koltera/7.0.0/FINAL_REPORT.md",
+      "source_blob_sha": "a301e7d8cfff3fb2b7d896983b0cadf4bc8ed963",
+      "source_sha256": "667e8b85c7ca7f513844b0e7ae100b5485dfef0018c0a395d8df471a2cddd4a1",
+      "source_bytes": 8316,
+      "destination": "docs/research/upstream/studies/koltera/7.0.0/FINAL_REPORT.md",
+      "destination_sha256": "85270352bfff7d4eb493a6bd363662707ebe8fb30f073a7b091438e19a76a44a",
+      "destination_bytes": 8741,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/koltera/7.0.0/MANIFEST.md",
+      "source_blob_sha": "a52f4e7d6b83adb38c991d31ef23a2f315f65e65",
+      "source_sha256": "7747b5b7bef6e4790a06a79d79b89c4761e070d5082da1c635763fd8bf5b1453",
+      "source_bytes": 1295,
+      "destination": "docs/research/upstream/studies/koltera/7.0.0/MANIFEST.md",
+      "destination_sha256": "d26be0cdf0e70850b53f5b12d0f5ce8974c0f2a0c321d84953229c4bb1949a07",
+      "destination_bytes": 1716,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/koltera/7.0.0/README.md",
+      "source_blob_sha": "1ee3804cf2d7627dd7b4c88ddd90c9a27d6569ff",
+      "source_sha256": "8699ce4c4b887b977b5857d487d0306ff108000bb90c1093a0d576bb984fa5e7",
+      "source_bytes": 1367,
+      "destination": "docs/research/upstream/studies/koltera/7.0.0/README.md",
+      "destination_sha256": "c177685ed5632ff27a9ece1d25925c43d98f6e16d1212c724de118d14d568a0e",
+      "destination_bytes": 1786,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/koltera/7.0.0/architecture/TECHNICAL_ARCHITECTURE.md",
+      "source_blob_sha": "373e75935ddadaa7f298a5c6c05d530fee283c11",
+      "source_sha256": "7b2dc38fa96361a98b78a6899485a3aca419768ae29dae61b069ca8675c1825e",
+      "source_bytes": 10082,
+      "destination": "docs/research/upstream/studies/koltera/7.0.0/architecture/TECHNICAL_ARCHITECTURE.md",
+      "destination_sha256": "aa9e56b384a8322c54febbb8b2f4505fa843d7ac3af5234e25ed639ef613052d",
+      "destination_bytes": 10533,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/koltera/7.0.0/content/CONTENT_ARCHITECTURE.md",
+      "source_blob_sha": "3d63a89ae0a87a99672d50ecdb3b6ff28589cdee",
+      "source_sha256": "63238ee9c2bf0d955666b93641253eabcd2dabb5a93486b5e9c0d09084c3c298",
+      "source_bytes": 2254,
+      "destination": "docs/research/upstream/studies/koltera/7.0.0/content/CONTENT_ARCHITECTURE.md",
+      "destination_sha256": "e118c1b9eda1ba1fe7cd2e1fef4e83429e77c030bda1759f5e05ea3a1fed5805",
+      "destination_bytes": 2698,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/koltera/7.0.0/development-lessons/DEVELOPMENT_LESSONS.md",
+      "source_blob_sha": "d67cfe79012aaece55eaa3f425be07f743abc7c7",
+      "source_sha256": "4b0fea7423fb46f5dfbd5c17835d310689447da1fe58e5e8faa85efea5c43b05",
+      "source_bytes": 6729,
+      "destination": "docs/research/upstream/studies/koltera/7.0.0/development-lessons/DEVELOPMENT_LESSONS.md",
+      "destination_sha256": "f92b61c1cb9ebce62da2056c2daaafc50a211587d83a7d8ccd5a5fd31e32bf90",
+      "destination_bytes": 7184,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/koltera/7.0.0/economy/ECONOMY.md",
+      "source_blob_sha": "8da7510a832c518b0bedec8cb7d4cf8b5094e523",
+      "source_sha256": "f63de67dbe81de26470b107acf4f20a77ab64cd40e5c6594a1f85f4f4bed6121",
+      "source_bytes": 4808,
+      "destination": "docs/research/upstream/studies/koltera/7.0.0/economy/ECONOMY.md",
+      "destination_sha256": "5821a19eaba8d5ae56b2ed55edf920dae8a64b1c458fdbab8a7552290aaca0cb",
+      "destination_bytes": 5239,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/koltera/7.0.0/experiments/EXPERIMENT_LOG.md",
+      "source_blob_sha": "fa29b75b7641308d084f599197083cb881a89d2e",
+      "source_sha256": "be14d7e96a5aae368ed88e09a44c4856320c9e757906ebd785296045b71743fc",
+      "source_bytes": 2576,
+      "destination": "docs/research/upstream/studies/koltera/7.0.0/experiments/EXPERIMENT_LOG.md",
+      "destination_sha256": "8c8076550f54495251cb41a1e2506f0888d4b110975c18728b8facca6a74a645",
+      "destination_bytes": 3018,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/koltera/7.0.0/gameplay/DESIGN_AND_PSYCHOLOGY.md",
+      "source_blob_sha": "0f1931b3f55ef0057a72ce273d0d88e0decdccf0",
+      "source_sha256": "acadb63f62322e203c662b0d71ee21c528c2f5a3c3f422b6cf3411619619f861",
+      "source_bytes": 3741,
+      "destination": "docs/research/upstream/studies/koltera/7.0.0/gameplay/DESIGN_AND_PSYCHOLOGY.md",
+      "destination_sha256": "bc816095e675d50e282b7fb8c4888381c448ee4b453e52246654508a8358147e",
+      "destination_bytes": 4187,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/koltera/7.0.0/gameplay/GAMEPLAY_SYSTEMS.md",
+      "source_blob_sha": "adaba784debb33826c91bd27085bbafaba7ea2b2",
+      "source_sha256": "d3a4e47f74bd6934af9ba8c74c5147f8495fdf6ebe0ba5d52f3b5ba92a0a0adf",
+      "source_bytes": 15099,
+      "destination": "docs/research/upstream/studies/koltera/7.0.0/gameplay/GAMEPLAY_SYSTEMS.md",
+      "destination_sha256": "fa39c14d520fad69f92a80c0e6ffeffa90fde90211bde56a6bc90686ccdbe9f9",
+      "destination_bytes": 15540,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/koltera/7.0.0/mathematics/FORMULAS.md",
+      "source_blob_sha": "23e6d2c7453a17e9d6db2292e45d6a95241a6583",
+      "source_sha256": "b1b5514c9c099fdbabe73f2c08e5610bfc90200b055cc2b3f6b915b49930c9a4",
+      "source_bytes": 7620,
+      "destination": "docs/research/upstream/studies/koltera/7.0.0/mathematics/FORMULAS.md",
+      "destination_sha256": "0f6e242acaa46e402395e893ae905a43767f356ed6c34cf2b21fa30855cc3c7a",
+      "destination_bytes": 8056,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/koltera/7.0.0/mathematics/README.md",
+      "source_blob_sha": "2cfc8e89acecae0e7491f12f759a5345e4c7f817",
+      "source_sha256": "3a96043daad54260cec0d55c483e77a1c2b50f2af1e2af38469625769e6b4749",
+      "source_bytes": 391,
+      "destination": "docs/research/upstream/studies/koltera/7.0.0/mathematics/README.md",
+      "destination_sha256": "45becba970755a1fb5cfc42aea055c421dca76d4ca6aa79b6b6dbe4c7865fa40",
+      "destination_bytes": 825,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/koltera/7.0.0/mathematics/charts/exploration_steps.png",
+      "source_blob_sha": "f4e019cb90ce33301e317ec43fdc44b6884204b0",
+      "source_sha256": "2747003878600c94dbcdf9533f98c73ae971ce9c91edb9359ad136221bfa5542",
+      "source_bytes": 24470,
+      "destination": "docs/research/upstream/studies/koltera/7.0.0/mathematics/charts/exploration_steps.png",
+      "destination_sha256": "2747003878600c94dbcdf9533f98c73ae971ce9c91edb9359ad136221bfa5542",
+      "destination_bytes": 24470,
+      "classification": "original analytical chart; upstream-reported"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/koltera/7.0.0/mathematics/charts/gardening_efficiency.png",
+      "source_blob_sha": "1599fb8fd98c6b62b0ffe23e906eebb5092f0d42",
+      "source_sha256": "4c1fa7f17c22c8e001b8bb715de1325753af7adae6c2919ef98b94b505fdae11",
+      "source_bytes": 50659,
+      "destination": "docs/research/upstream/studies/koltera/7.0.0/mathematics/charts/gardening_efficiency.png",
+      "destination_sha256": "4c1fa7f17c22c8e001b8bb715de1325753af7adae6c2919ef98b94b505fdae11",
+      "destination_bytes": 50659,
+      "classification": "original analytical chart; upstream-reported"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/koltera/7.0.0/mathematics/charts/magic_softcap.png",
+      "source_blob_sha": "71c032e06d6536a1fee8640ec953c1b9d16f50ea",
+      "source_sha256": "3d6bbd6a88b1aa7001e2fb1d3aafcf80064b05f97091ec3f17c216d1438ac59d",
+      "source_bytes": 57140,
+      "destination": "docs/research/upstream/studies/koltera/7.0.0/mathematics/charts/magic_softcap.png",
+      "destination_sha256": "3d6bbd6a88b1aa7001e2fb1d3aafcf80064b05f97091ec3f17c216d1438ac59d",
+      "destination_bytes": 57140,
+      "classification": "original analytical chart; upstream-reported"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/koltera/7.0.0/mathematics/charts/mining_income_vs_level.png",
+      "source_blob_sha": "9d8111258ebad89a867733056b99c14a3233bb7c",
+      "source_sha256": "d04432920799ebf086100ce1aee925591988cdf61469eac7d502fabfc84ea181",
+      "source_bytes": 100305,
+      "destination": "docs/research/upstream/studies/koltera/7.0.0/mathematics/charts/mining_income_vs_level.png",
+      "destination_sha256": "d04432920799ebf086100ce1aee925591988cdf61469eac7d502fabfc84ea181",
+      "destination_bytes": 100305,
+      "classification": "original analytical chart; upstream-reported"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/koltera/7.0.0/mathematics/charts/stamina_cost.png",
+      "source_blob_sha": "d81a85d46ff4780d1d148ca2a5d14dbdf76b5481",
+      "source_sha256": "a8f58218d88e628dc418dd52a21ac555deaf4ac31f803dc1f7b03a96c9a0a986",
+      "source_bytes": 40797,
+      "destination": "docs/research/upstream/studies/koltera/7.0.0/mathematics/charts/stamina_cost.png",
+      "destination_sha256": "a8f58218d88e628dc418dd52a21ac555deaf4ac31f803dc1f7b03a96c9a0a986",
+      "destination_bytes": 40797,
+      "classification": "original analytical chart; upstream-reported"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/koltera/7.0.0/mathematics/charts/xp_curve.png",
+      "source_blob_sha": "d79195b54ba70ad9b2a7c8716619f53cc6d2081b",
+      "source_sha256": "56bc512f3e4162a5d3d88221cdad47844c10bf44e0a5e9f3e1957bbc9de77eb3",
+      "source_bytes": 56254,
+      "destination": "docs/research/upstream/studies/koltera/7.0.0/mathematics/charts/xp_curve.png",
+      "destination_sha256": "56bc512f3e4162a5d3d88221cdad47844c10bf44e0a5e9f3e1957bbc9de77eb3",
+      "destination_bytes": 56254,
+      "classification": "original analytical chart; upstream-reported"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/koltera/7.0.0/progression/PROGRESSION.md",
+      "source_blob_sha": "223dbf78a42a72cf24dcbeef8892d659d4ec1f27",
+      "source_sha256": "e336585f2655a9be97a7234c18b77f49d0236ff0e0de9e873a88f2ea8ef7c58c",
+      "source_bytes": 3839,
+      "destination": "docs/research/upstream/studies/koltera/7.0.0/progression/PROGRESSION.md",
+      "destination_sha256": "6fe09eb3715c964056e298eb883431e0304976cab968cf9310ef2937fd261d66",
+      "destination_bytes": 4278,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/koltera/7.0.0/prototypes/collection_idle_prototype.html",
+      "source_blob_sha": "138d4d05022e5983110289a13ba9b965afce5a31",
+      "source_sha256": "5d943d235fc7fac5f6e91170b3e12c30da966677fea130126022afa8a4744a3e",
+      "source_bytes": 5173,
+      "destination": "docs/research/upstream/studies/koltera/7.0.0/prototypes/collection_idle_prototype.html",
+      "destination_sha256": "5d943d235fc7fac5f6e91170b3e12c30da966677fea130126022afa8a4744a3e",
+      "destination_bytes": 5173,
+      "classification": "original self-contained research toy with invented content; not the game"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/koltera/7.0.0/user-experience/UX_ANALYSIS.md",
+      "source_blob_sha": "c3857a862fcc772e701e85f79550d290e124320a",
+      "source_sha256": "68529cc6d70e997e631ccc0f99a68684272ed88330568be9bb4a27b608913c48",
+      "source_bytes": 2931,
+      "destination": "docs/research/upstream/studies/koltera/7.0.0/user-experience/UX_ANALYSIS.md",
+      "destination_sha256": "e82342e6bfc213898859d011485f1bc80a16346ee215f58ae9f5adede47a5500",
+      "destination_bytes": 3374,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/koltera-2/5.4.0/FINAL_REPORT.md",
+      "source_blob_sha": "67add1684d3ce5ac2de7d59987e112b1876985d3",
+      "source_sha256": "f17fbfd7f6f726e31dc30ae52ce8ebc87fd09a5a3c1713ba423a71c7ad1e5773",
+      "source_bytes": 11844,
+      "destination": "docs/research/upstream/studies/koltera-2/5.4.0/FINAL_REPORT.md",
+      "destination_sha256": "455d75078b2f02648ad14baf9c7c1921dc28a26aa487428a773fbde9e7879160",
+      "destination_bytes": 12271,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/koltera-2/5.4.0/MANIFEST.md",
+      "source_blob_sha": "fc53913f558127fd3d34f1089e62bd9141dca63a",
+      "source_sha256": "3776e9e154c96274ddf0983b78ff012b5134680dd1eb95609848f211c9f941e5",
+      "source_bytes": 1600,
+      "destination": "docs/research/upstream/studies/koltera-2/5.4.0/MANIFEST.md",
+      "destination_sha256": "5a011862e044f1cd5e59da8edb71547c562d63033844d7a8ac49acd39a09ac69",
+      "destination_bytes": 2023,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/koltera-2/5.4.0/README.md",
+      "source_blob_sha": "623857461f50c7283eda854060ada95cd93e9ba4",
+      "source_sha256": "7dbe06e8c0cae76c094cfc4dba8bcb36d44b455e209e00cf71ed28287eab8d73",
+      "source_bytes": 2145,
+      "destination": "docs/research/upstream/studies/koltera-2/5.4.0/README.md",
+      "destination_sha256": "f207fcdae5cb11cabcdf0a39ed3cdc3ef00684e65772e9788671aecff2a61ddb",
+      "destination_bytes": 2566,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/koltera-2/5.4.0/architecture/ARCHITECTURE.md",
+      "source_blob_sha": "99a84b1c3f6d719bbe06f1a5e43370b3ec4d9248",
+      "source_sha256": "bd2dc77daf7c63452b05acd2c3e1f3aad7e088142d5972576a544f8c52264421",
+      "source_bytes": 9447,
+      "destination": "docs/research/upstream/studies/koltera-2/5.4.0/architecture/ARCHITECTURE.md",
+      "destination_sha256": "9302de662e516ed825665103204d2307931b031728491758e20ef0e740aa54ca",
+      "destination_bytes": 9890,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/koltera-2/5.4.0/content/CONTENT.md",
+      "source_blob_sha": "fb8b527b27a10f1c9c47392da888ce6f6831a92d",
+      "source_sha256": "11e8fa1f9ce2d4be256cbd1a712774c763b7845794808ffd8c9af4090fcb45bc",
+      "source_bytes": 3936,
+      "destination": "docs/research/upstream/studies/koltera-2/5.4.0/content/CONTENT.md",
+      "destination_sha256": "e9d06049b31583ef97a20d810f43bad4a312f12bb54723827a59ce02cb286453",
+      "destination_bytes": 4369,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/koltera-2/5.4.0/development-lessons/DEVELOPMENT_LESSONS.md",
+      "source_blob_sha": "d58489ddd2e8370ba33e8d59e610121ecec5fb02",
+      "source_sha256": "665bab045e5cb0d3e3baf4cb2eab9cce0a614bc5789aa9b0621ed6519ffa3127",
+      "source_bytes": 4652,
+      "destination": "docs/research/upstream/studies/koltera-2/5.4.0/development-lessons/DEVELOPMENT_LESSONS.md",
+      "destination_sha256": "639c76b1c8445c3b486e12d13514f1475f3928653786093e2d30f5742066ca9f",
+      "destination_bytes": 5109,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/koltera-2/5.4.0/economy/ECONOMY.md",
+      "source_blob_sha": "5799f1306a82415602063e0eda4aa0cdd1f930ac",
+      "source_sha256": "4da56aa134a01ae29f6fced335bb73631221cbd800af4f0071f41aa742afe768",
+      "source_bytes": 4551,
+      "destination": "docs/research/upstream/studies/koltera-2/5.4.0/economy/ECONOMY.md",
+      "destination_sha256": "206b0e58d45c605bbb91e5e2c5996f3ff373d9681ef617d4349fb15dbfd0b821",
+      "destination_bytes": 4984,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/koltera-2/5.4.0/experiments/EXPERIMENT_LOG.md",
+      "source_blob_sha": "bc032a8a48b45ecc58a7797e128699e4814c5b3a",
+      "source_sha256": "a1caa2842fa278d064c93bac0aab00c6709298d49587cb8cc6b80c63f4c48d09",
+      "source_bytes": 3003,
+      "destination": "docs/research/upstream/studies/koltera-2/5.4.0/experiments/EXPERIMENT_LOG.md",
+      "destination_sha256": "458120bfe26e5fe32522d3edca09585fb89cd532fbcb92137ee5a191b8dc2ae9",
+      "destination_bytes": 3447,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/koltera-2/5.4.0/gameplay/GAMEPLAY_SYSTEMS.md",
+      "source_blob_sha": "1879f9fca5bf7d2e41bafc44104af9e0a3a0a356",
+      "source_sha256": "56e780e349f41a3c0827fad7340717ff1b0ef69fd6943fc5b09af2aecf954ddb",
+      "source_bytes": 11100,
+      "destination": "docs/research/upstream/studies/koltera-2/5.4.0/gameplay/GAMEPLAY_SYSTEMS.md",
+      "destination_sha256": "4bd9a667d9693e4ace7d488d336c1073268eebcd53140754d3349a3189c1e122",
+      "destination_bytes": 11543,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/koltera-2/5.4.0/mathematics/FORMULAS.md",
+      "source_blob_sha": "c53f7a50cc136252c1adb9b6dea1f37dce124e30",
+      "source_sha256": "5a0bd1942ccba5529eb11ea8944cdef47be0acb5df65409b0bfc54d1d7a35395",
+      "source_bytes": 15563,
+      "destination": "docs/research/upstream/studies/koltera-2/5.4.0/mathematics/FORMULAS.md",
+      "destination_sha256": "36ed367d3a752149f5e33f1eb91e7ec74e29ce7fc3a649aa4eb625fb959c5053",
+      "destination_bytes": 16001,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/koltera-2/5.4.0/progression/PROGRESSION.md",
+      "source_blob_sha": "699e8c5a5afe8bc0e1d278b707b5ff422f703a3c",
+      "source_sha256": "d15f93cde47c5c06d4b129057a5b16cef31a9267c0d7fd5eb37b34228b1faba4",
+      "source_bytes": 5149,
+      "destination": "docs/research/upstream/studies/koltera-2/5.4.0/progression/PROGRESSION.md",
+      "destination_sha256": "b7c370a9d85d4de2d608fd3e055d12a8d7de292aa4f930e4a4fc45b422e6d045",
+      "destination_bytes": 5590,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/koltera-2/5.4.0/simulations/k2_model_output.txt",
+      "source_blob_sha": "77a437284c217e5ba2bbcc54ba63d026f5cb3e9e",
+      "source_sha256": "4f46f866d1623576d4a82f061af3701a7f6d6e9ad65d278623c0918002811397",
+      "source_bytes": 19870,
+      "destination": "docs/research/upstream/studies/koltera-2/5.4.0/simulations/k2_model_output.txt",
+      "destination_sha256": "4f46f866d1623576d4a82f061af3701a7f6d6e9ad65d278623c0918002811397",
+      "destination_bytes": 19870,
+      "classification": "upstream-reported aggregate simulation output; not rerun"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/koltera-2/5.4.0/user-experience/UX_ANALYSIS.md",
+      "source_blob_sha": "35f10ffd37a47e6ecc5c765e1465b94ea3bff34a",
+      "source_sha256": "7e8c2189e3882e1f77dde2b2e37241c505cbf1dd74f92bfdd9d70e5642ebf84f",
+      "source_bytes": 2973,
+      "destination": "docs/research/upstream/studies/koltera-2/5.4.0/user-experience/UX_ANALYSIS.md",
+      "destination_sha256": "4f0d9c2ce8b9c9a6704541eba28ec07c1ae1fe1db4c5f3fcf4d3a251cb5f9f92",
+      "destination_bytes": 3418,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/legends-of-idleon/build-144/FINAL_REPORT.md",
+      "source_blob_sha": "44294c599aa4bb305bf5d85e03c950fb1536226a",
+      "source_sha256": "3b117a2ca1fbf123149b359ed6fb0f5c4ac41264b370168509cacafb96e8181b",
+      "source_bytes": 4263,
+      "destination": "docs/research/upstream/studies/legends-of-idleon/build-144/FINAL_REPORT.md",
+      "destination_sha256": "7b2beb586b318f475e642cc1854dadbb1fac6d89b614a779c7e50745f6adc6f4",
+      "destination_bytes": 4702,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/legends-of-idleon/build-144/MANIFEST.md",
+      "source_blob_sha": "894462f984f1ef0e32448443224bae4c902d4a75",
+      "source_sha256": "10e2e5c2123a52c717ee6724609b946cbe7fca1980ba243f9276583220935b50",
+      "source_bytes": 1451,
+      "destination": "docs/research/upstream/studies/legends-of-idleon/build-144/MANIFEST.md",
+      "destination_sha256": "d17b2a63ea5c07bb9123b6a3b4d2d3444842ea58b341bd861f1e7f6566bf2f7f",
+      "destination_bytes": 1886,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/legends-of-idleon/build-144/README.md",
+      "source_blob_sha": "b4aab342175021c19c12807e8168a9ee9d20e811",
+      "source_sha256": "8a8a064bf005a5392d01be6bf0005faaf54ea8224f91b75b681bde9f17bc2084",
+      "source_bytes": 2054,
+      "destination": "docs/research/upstream/studies/legends-of-idleon/build-144/README.md",
+      "destination_sha256": "f889a83874a6c5ff62e9380c4c1c41538566219fa5ace05629dac25f5b8da94c",
+      "destination_bytes": 2487,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/legends-of-idleon/build-144/architecture/ARCHITECTURE.md",
+      "source_blob_sha": "6aaaefcce408f100634d36261d8c52bb3f9532ab",
+      "source_sha256": "392ca89b38533f3ed9e7e11e72e2db9f1aacb5ffc36f6cd74a093c04cc6d8dfc",
+      "source_bytes": 7915,
+      "destination": "docs/research/upstream/studies/legends-of-idleon/build-144/architecture/ARCHITECTURE.md",
+      "destination_sha256": "7a2bdb701a787c62924473fe9df421f394ca70013c9a6a50a0aecf4b4f8c5b69",
+      "destination_bytes": 8370,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/legends-of-idleon/build-144/content/CONTENT.md",
+      "source_blob_sha": "ce49ec8e842046ff68e28a273bd0da140e312064",
+      "source_sha256": "0bb2378975bcc4679097bb3853b918e39453ecdfea63d81e4c064986ae5899cf",
+      "source_bytes": 3552,
+      "destination": "docs/research/upstream/studies/legends-of-idleon/build-144/content/CONTENT.md",
+      "destination_sha256": "353b8965eb4bb32c9301e31e27eaa3dd9e7cb89bb040ab011885f35136ae9db6",
+      "destination_bytes": 3997,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/legends-of-idleon/build-144/development-lessons/DEVELOPMENT_LESSONS.md",
+      "source_blob_sha": "5f837bfd34829be0a6008d55b9c7a62544bfd3dd",
+      "source_sha256": "ee084f8c6ee72c88bb41de384cbab5e7a8871386df2dc0b1d86e743bc4ed4d82",
+      "source_bytes": 3184,
+      "destination": "docs/research/upstream/studies/legends-of-idleon/build-144/development-lessons/DEVELOPMENT_LESSONS.md",
+      "destination_sha256": "7fc67b720b334955976edd2c579bbb768bbacfd0be97ed9d4d8f7d52aa206c62",
+      "destination_bytes": 3653,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/legends-of-idleon/build-144/economy/ECONOMY.md",
+      "source_blob_sha": "c706cf6f308212962048d4e17b6e40d536fe6e6f",
+      "source_sha256": "3cf17223d9839767bad5bac97992238d91e0c4f0506516f96fbfc60ad9cc2b67",
+      "source_bytes": 3284,
+      "destination": "docs/research/upstream/studies/legends-of-idleon/build-144/economy/ECONOMY.md",
+      "destination_sha256": "33d543bc8dcb68f2db542492178aa21fe7f2f0d14a61b4ad6ef603eb2fac52e4",
+      "destination_bytes": 3729,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/legends-of-idleon/build-144/experiments/EXPERIMENT_LOG.md",
+      "source_blob_sha": "b96b3103d85d56886dd73a1eccd0453233cfedd0",
+      "source_sha256": "d1683581c74644c6e2f1747f539da2512a0cdf784e476be45866a8e75a1f561e",
+      "source_bytes": 2418,
+      "destination": "docs/research/upstream/studies/legends-of-idleon/build-144/experiments/EXPERIMENT_LOG.md",
+      "destination_sha256": "39dfe2690684d8c30da9ad4d3cdb13841604332c25fcff40ce87ebeda7a6c47d",
+      "destination_bytes": 2874,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/legends-of-idleon/build-144/gameplay/GAMEPLAY_SYSTEMS.md",
+      "source_blob_sha": "292f1d765db4c2327956bf33f2cccb846e6df100",
+      "source_sha256": "4fbb06ba782067a9dc16cb16e0544c9a6f0686feb93a5e3ad6e19580441998c8",
+      "source_bytes": 6211,
+      "destination": "docs/research/upstream/studies/legends-of-idleon/build-144/gameplay/GAMEPLAY_SYSTEMS.md",
+      "destination_sha256": "66fa8c08aa762962960608498c0866c57154d135e01b4a51083cd20cb77e35a7",
+      "destination_bytes": 6666,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/legends-of-idleon/build-144/mathematics/FORMULAS.md",
+      "source_blob_sha": "d766953c817fe08ff68500860c3651636716df28",
+      "source_sha256": "e1463b0055da284a8b5bef23f763c9cfb05bb8d5e806627b7c699baf1b896ed5",
+      "source_bytes": 10705,
+      "destination": "docs/research/upstream/studies/legends-of-idleon/build-144/mathematics/FORMULAS.md",
+      "destination_sha256": "25766fece1cb9b54876c264b9f96659a7d2aa728467736937f28374bf30d8041",
+      "destination_bytes": 11155,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/legends-of-idleon/build-144/progression/PROGRESSION.md",
+      "source_blob_sha": "e178e01bcee970a527cd2971799569cbd081fff3",
+      "source_sha256": "01a9dbc4ea9228f7556f80ee93108cf59c0faa310a46d7ad890aa37d5b2f4445",
+      "source_bytes": 3649,
+      "destination": "docs/research/upstream/studies/legends-of-idleon/build-144/progression/PROGRESSION.md",
+      "destination_sha256": "67e41855740dd0ab509f66d693bf5feb2cbef2b311554a9d83200819219b9343",
+      "destination_bytes": 4102,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/legends-of-idleon/build-144/simulations/idleon_model_output.txt",
+      "source_blob_sha": "125b9a92bcadbc97b1ee83d1d35f5f441342cf22",
+      "source_sha256": "190937b30527f4ee58865b9e76654378fa1eac1fa5178eee36fa257daeb7b5fb",
+      "source_bytes": 13359,
+      "destination": "docs/research/upstream/studies/legends-of-idleon/build-144/simulations/idleon_model_output.txt",
+      "destination_sha256": "190937b30527f4ee58865b9e76654378fa1eac1fa5178eee36fa257daeb7b5fb",
+      "destination_bytes": 13359,
+      "classification": "upstream-reported aggregate simulation output; not rerun"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/legends-of-idleon/build-144/user-experience/UX_ANALYSIS.md",
+      "source_blob_sha": "8337f29ac67183d92c2b5ff5c0142a35d73e3147",
+      "source_sha256": "a855af344532a7ff93e3154aa13d7c0da3dcb252a6522d1c21a28a89d9dde89c",
+      "source_bytes": 2414,
+      "destination": "docs/research/upstream/studies/legends-of-idleon/build-144/user-experience/UX_ANALYSIS.md",
+      "destination_sha256": "ec85ba0e56946d3063907fca8529f7f4fb7fa6ecc6b06bd65c7e6af55d8c8acd",
+      "destination_bytes": 2871,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/melvor-idle/1.3.1/FINAL_REPORT.md",
+      "source_blob_sha": "b73057f15ba3e2e51e46d13d1cdd6b17b9a3e2fa",
+      "source_sha256": "4ce78dee51cd5f5a4b6e8c079a7788501886433c9c13d5be7ec4bb80f36ffcb5",
+      "source_bytes": 7035,
+      "destination": "docs/research/upstream/studies/melvor-idle/1.3.1/FINAL_REPORT.md",
+      "destination_sha256": "27c787e4ca8416c81990f5c21850a5328478a01e250102ead3b7770dd2267786",
+      "destination_bytes": 7464,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/melvor-idle/1.3.1/MANIFEST.md",
+      "source_blob_sha": "503aeb00a48cc9d5814df4ac3b115a9490362b60",
+      "source_sha256": "2b77e798c260da3f808488a72f826959da625acd1ed61b0a1844e99433c36970",
+      "source_bytes": 1440,
+      "destination": "docs/research/upstream/studies/melvor-idle/1.3.1/MANIFEST.md",
+      "destination_sha256": "d647d46f45165cac96b565992c379f952d3d08d5edb34aa2e52fb02324669af6",
+      "destination_bytes": 1865,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/melvor-idle/1.3.1/README.md",
+      "source_blob_sha": "5d109abd2f95f2a6d082d12bab3c7c97f4affed8",
+      "source_sha256": "5c7ace74fd4d017c5252c62127663ec040aa29749787e22a14458b856ecdaccb",
+      "source_bytes": 1526,
+      "destination": "docs/research/upstream/studies/melvor-idle/1.3.1/README.md",
+      "destination_sha256": "a5d4b2a50644e8a519701e577a1e79c708700c58b52a52b0c3bf8665e62b639f",
+      "destination_bytes": 1949,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/melvor-idle/1.3.1/architecture/ARCHITECTURE.md",
+      "source_blob_sha": "cc51c6de731860670c6c9378642641220228c2d2",
+      "source_sha256": "8e30061c42341ab65f9b42b84d70e1dcff6e050883d6b994eae0f98ec28061ea",
+      "source_bytes": 6485,
+      "destination": "docs/research/upstream/studies/melvor-idle/1.3.1/architecture/ARCHITECTURE.md",
+      "destination_sha256": "6ba5baa1a85474783ad0380a48194aef74c0030b0d517f52e68b301f96a87e68",
+      "destination_bytes": 6930,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/melvor-idle/1.3.1/content/CONTENT.md",
+      "source_blob_sha": "71d99f094c9a5326055e988ed4562b917f28800a",
+      "source_sha256": "ae6095c96e1393b60dd26263884f16bb22af6202c7613d040c5dda4f1e64c010",
+      "source_bytes": 2894,
+      "destination": "docs/research/upstream/studies/melvor-idle/1.3.1/content/CONTENT.md",
+      "destination_sha256": "7a481f9481a433521fbd75b748d3a754b3bf14a91c1cee340c8293d9d9012ab7",
+      "destination_bytes": 3329,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/melvor-idle/1.3.1/development-lessons/DEVELOPMENT_LESSONS.md",
+      "source_blob_sha": "7e49025ab2b2d95bdd45955bc5efdfc9fbafd095",
+      "source_sha256": "b2fe7a90678cf50c8b4fd03d97e7a08890d1f14d8e99e1dc60b95e4ef6a99008",
+      "source_bytes": 2675,
+      "destination": "docs/research/upstream/studies/melvor-idle/1.3.1/development-lessons/DEVELOPMENT_LESSONS.md",
+      "destination_sha256": "df61347d108032b5a41ad7d42c1f1830b32805a67d660a7234331cb39075112f",
+      "destination_bytes": 3134,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/melvor-idle/1.3.1/economy/ECONOMY.md",
+      "source_blob_sha": "b649304c922ff9185ebff91586104d8ff95dc8d6",
+      "source_sha256": "31485369afe1fdf55c7436a0026fe30136c459f98d8826295cd9f9fb90acbcfc",
+      "source_bytes": 2991,
+      "destination": "docs/research/upstream/studies/melvor-idle/1.3.1/economy/ECONOMY.md",
+      "destination_sha256": "637d9384c5277d70a724f075b8a73cb02c61452fce7a4246781422decadfce96",
+      "destination_bytes": 3426,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/melvor-idle/1.3.1/experiments/EXPERIMENT_LOG.md",
+      "source_blob_sha": "b8bf5ce3ad84f5c2d6bbaf4a1277908cde7bf9e0",
+      "source_sha256": "97df4ae7a0978518dee1aeae63deb6aa0bdfc4f61371dd5531f9595d85a6304c",
+      "source_bytes": 1914,
+      "destination": "docs/research/upstream/studies/melvor-idle/1.3.1/experiments/EXPERIMENT_LOG.md",
+      "destination_sha256": "9b20f88e88410100def6941db4384fb62d0715368f9a012a39f05d20ae5c97b9",
+      "destination_bytes": 2360,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/melvor-idle/1.3.1/gameplay/GAMEPLAY_SYSTEMS.md",
+      "source_blob_sha": "7b0178e847bc9e71d126a9750da460056d926a87",
+      "source_sha256": "e6205f4b8dd2461b8d6a92c9243290131423a7338e87f8a70eae6054c5342811",
+      "source_bytes": 6480,
+      "destination": "docs/research/upstream/studies/melvor-idle/1.3.1/gameplay/GAMEPLAY_SYSTEMS.md",
+      "destination_sha256": "e6ec7180ab1f1c1dc37c7331b97b14c5841ebd5a59b326be37c5436413e52878",
+      "destination_bytes": 6925,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/melvor-idle/1.3.1/mathematics/FORMULAS.md",
+      "source_blob_sha": "f45fdf5948690347a0172e6221f5e750881b62d4",
+      "source_sha256": "7b6655e21584e5d2a785cc65dbd93a30229d9fcc19522cd4525858c678a092c3",
+      "source_bytes": 9829,
+      "destination": "docs/research/upstream/studies/melvor-idle/1.3.1/mathematics/FORMULAS.md",
+      "destination_sha256": "33a312b363b01c39d211e712bb44e294f901b7f5005fc2eb2ad18380c173ba79",
+      "destination_bytes": 10269,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/melvor-idle/1.3.1/progression/PROGRESSION.md",
+      "source_blob_sha": "c8cf96c67829b893280b666314127486e1c8d5da",
+      "source_sha256": "9b96a77c16194584d5bfac3fb892d1a519cc1bc644e1dfec813819ac134a8b60",
+      "source_bytes": 3262,
+      "destination": "docs/research/upstream/studies/melvor-idle/1.3.1/progression/PROGRESSION.md",
+      "destination_sha256": "22945dcd91bff92c0e6f2fce6c027bfa0c15549557f34bbda6cb62d6109d733b",
+      "destination_bytes": 3705,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/melvor-idle/1.3.1/simulations/melvor_model_output.txt",
+      "source_blob_sha": "dd2fe3696dd0b5eef0e5064e964e69fedc6f658c",
+      "source_sha256": "de464d9c6150c5ecb30fa2cc46465e142146c4a02d59bda7e8bb0a134b2ba738",
+      "source_bytes": 9959,
+      "destination": "docs/research/upstream/studies/melvor-idle/1.3.1/simulations/melvor_model_output.txt",
+      "destination_sha256": "de464d9c6150c5ecb30fa2cc46465e142146c4a02d59bda7e8bb0a134b2ba738",
+      "destination_bytes": 9959,
+      "classification": "upstream-reported aggregate simulation output; not rerun"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/melvor-idle/1.3.1/user-experience/UX_ANALYSIS.md",
+      "source_blob_sha": "edcbd65153435539282bb291a8a2e834f6ef66a2",
+      "source_sha256": "1f6f87dd4693b05cf3a35c19482eb30e6f184c077c1d3b8b6268f872b12256ad",
+      "source_bytes": 2118,
+      "destination": "docs/research/upstream/studies/melvor-idle/1.3.1/user-experience/UX_ANALYSIS.md",
+      "destination_sha256": "027e73b9a3b1651f0b14d49b61f06c3884886978c20426f49e4e2ecbfc6c87e0",
+      "destination_bytes": 2565,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/melvor-idle-2/0.11.7-alpha/FINAL_REPORT.md",
+      "source_blob_sha": "43829c8d9dbf152d20f441c0bf196d1cb3547033",
+      "source_sha256": "59a6840b81cbc86f9c5cc596bf1081774eadb957310fbb55cf5bd3ee0fed59bd",
+      "source_bytes": 7207,
+      "destination": "docs/research/upstream/studies/melvor-idle-2/0.11.7-alpha/FINAL_REPORT.md",
+      "destination_sha256": "4ea12d1d81f8c69c21e033ba710f996ae967ab61626d2212a9fbf19b9e151b67",
+      "destination_bytes": 7645,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/melvor-idle-2/0.11.7-alpha/MANIFEST.md",
+      "source_blob_sha": "6ea29560e46151033443a562cc411a5a390eb4e8",
+      "source_sha256": "0e33cb9d5cbc493ac42ca0c2b21a989fa6f497199da0aeb11e900db9624711ef",
+      "source_bytes": 1379,
+      "destination": "docs/research/upstream/studies/melvor-idle-2/0.11.7-alpha/MANIFEST.md",
+      "destination_sha256": "22264f0a605a3d638a0e24df7aae2bbc802d3f5683e28191ee4e75dc412551ac",
+      "destination_bytes": 1813,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/melvor-idle-2/0.11.7-alpha/README.md",
+      "source_blob_sha": "2f9b612163be4e92fb78b67348831ab407e0dfdc",
+      "source_sha256": "cede001723d6eeda04f1c566959c7fd277ea26906e08f6c921907905a7938acb",
+      "source_bytes": 1551,
+      "destination": "docs/research/upstream/studies/melvor-idle-2/0.11.7-alpha/README.md",
+      "destination_sha256": "fe7672911cc53af69035f219a2933273538c8e67172042921afea5ded3f0997b",
+      "destination_bytes": 1983,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/melvor-idle-2/0.11.7-alpha/architecture/ARCHITECTURE.md",
+      "source_blob_sha": "70a115a21430d6377e49a1930225125924e1779c",
+      "source_sha256": "14302c3877f1208af9a5b3651d9c7940c62fbcf096193e04bfd0158794e8956f",
+      "source_bytes": 5748,
+      "destination": "docs/research/upstream/studies/melvor-idle-2/0.11.7-alpha/architecture/ARCHITECTURE.md",
+      "destination_sha256": "cba0c5653fe26461be5a87aa1a670d3fab5c7af9281585e0380f1dcd9ec4c366",
+      "destination_bytes": 6202,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/melvor-idle-2/0.11.7-alpha/content/CONTENT.md",
+      "source_blob_sha": "c627335b7fb1dee3b49969288050252af0998d55",
+      "source_sha256": "e5050fdef3feb0b2797290e76e04f16e120e0a1b29ec1fb87e63ad8794389c82",
+      "source_bytes": 3067,
+      "destination": "docs/research/upstream/studies/melvor-idle-2/0.11.7-alpha/content/CONTENT.md",
+      "destination_sha256": "f29ab2fec276c6b995e63d45e97c505554e9c5de9d1a1a9fe0a753a92e0661c3",
+      "destination_bytes": 3511,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/melvor-idle-2/0.11.7-alpha/development-lessons/DEVELOPMENT_LESSONS.md",
+      "source_blob_sha": "81c97cef35802fafd031063849edc581b56959e5",
+      "source_sha256": "006886e0234a88aeedd0274c6ef8a89054b5425e815ca03c8c67d56d8db9658c",
+      "source_bytes": 2537,
+      "destination": "docs/research/upstream/studies/melvor-idle-2/0.11.7-alpha/development-lessons/DEVELOPMENT_LESSONS.md",
+      "destination_sha256": "f36edd918088f60d62d4c0559a5ac298580193312e501310c62ccb458dc5bee3",
+      "destination_bytes": 3005,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/melvor-idle-2/0.11.7-alpha/economy/ECONOMY.md",
+      "source_blob_sha": "fbfdb3a1a1ef34511088947a66af658d9cbd4000",
+      "source_sha256": "d378660dfa2212f54a29f04dffda89fa4ee675d06e5362cc9e0c5706721037cd",
+      "source_bytes": 1036,
+      "destination": "docs/research/upstream/studies/melvor-idle-2/0.11.7-alpha/economy/ECONOMY.md",
+      "destination_sha256": "caf2ecd116e266a22101c3a9df39f5ab81460a9e8bb189606253096e91b9c139",
+      "destination_bytes": 1480,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/melvor-idle-2/0.11.7-alpha/experiments/EXPERIMENT_LOG.md",
+      "source_blob_sha": "5090a98a6904a43ebee246923a3040422863d968",
+      "source_sha256": "60d3440631560bb6302f1353d1b3ca8f2b6c67eadda144b5b1459f207847b56c",
+      "source_bytes": 1980,
+      "destination": "docs/research/upstream/studies/melvor-idle-2/0.11.7-alpha/experiments/EXPERIMENT_LOG.md",
+      "destination_sha256": "273b8e5d81b38ffe4e3755126725db02ecea9ff33bc239c3fe72c183c7593caf",
+      "destination_bytes": 2435,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/melvor-idle-2/0.11.7-alpha/gameplay/GAMEPLAY_SYSTEMS.md",
+      "source_blob_sha": "4540125a9001c775ff2de5efacd44113cecce2d0",
+      "source_sha256": "83bef6b4dd844c756ccb329d0b60c2d048d81a7fc3c98de83ab3a076b944236c",
+      "source_bytes": 4184,
+      "destination": "docs/research/upstream/studies/melvor-idle-2/0.11.7-alpha/gameplay/GAMEPLAY_SYSTEMS.md",
+      "destination_sha256": "5b1150035254944fa40638406ff2c66523e2af16124f851b8a9f0da153677cbf",
+      "destination_bytes": 4638,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/melvor-idle-2/0.11.7-alpha/mathematics/FORMULAS.md",
+      "source_blob_sha": "91865fba852e5a04e861c4a038a90d13d9487fc1",
+      "source_sha256": "a98164d3bf921b4dc75496e440a219407e6c1ba08c52bc7bb67c43bba871f47e",
+      "source_bytes": 9987,
+      "destination": "docs/research/upstream/studies/melvor-idle-2/0.11.7-alpha/mathematics/FORMULAS.md",
+      "destination_sha256": "900834e2f0746ea612f1e4ac315df02922ba25067ca9002cd55f86d8f1b4bf70",
+      "destination_bytes": 10436,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/melvor-idle-2/0.11.7-alpha/progression/PROGRESSION.md",
+      "source_blob_sha": "b4892c4ec88bcb8bd20122f62fda9213039594c1",
+      "source_sha256": "e2f454ba4076845f4c543e2c70d057b8eda60fb53d98c4060f22c19aa8b0560e",
+      "source_bytes": 2079,
+      "destination": "docs/research/upstream/studies/melvor-idle-2/0.11.7-alpha/progression/PROGRESSION.md",
+      "destination_sha256": "5981ef5b6fceb5e64788ad56070b76b4bf71234ac196a268d3e1cf340e9e49df",
+      "destination_bytes": 2531,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/melvor-idle-2/0.11.7-alpha/simulations/m2_model_output.txt",
+      "source_blob_sha": "5e10c6c828fa9919874b2dba8b1bd7b0cf7afd14",
+      "source_sha256": "167d885cbca25740a9b6feed02c5438959090ff523d9f20893d8f41cc4ac4bfc",
+      "source_bytes": 15488,
+      "destination": "docs/research/upstream/studies/melvor-idle-2/0.11.7-alpha/simulations/m2_model_output.txt",
+      "destination_sha256": "167d885cbca25740a9b6feed02c5438959090ff523d9f20893d8f41cc4ac4bfc",
+      "destination_bytes": 15488,
+      "classification": "upstream-reported aggregate simulation output; not rerun"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/melvor-idle-2/0.11.7-alpha/user-experience/UX_ANALYSIS.md",
+      "source_blob_sha": "8b7e4ac9e0c2b4ad90f589a8b9dc14f7f0540d95",
+      "source_sha256": "94a57396360f759e1bce79f33d7f752f846402ecf0a213033fc04e5a4c814aae",
+      "source_bytes": 1422,
+      "destination": "docs/research/upstream/studies/melvor-idle-2/0.11.7-alpha/user-experience/UX_ANALYSIS.md",
+      "destination_sha256": "201f262edd68250894b50037d9caef5f2496dd82ffc877465ef77f2054e0e532",
+      "destination_bytes": 1878,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/milky-way-idle/steam-3224420/FINAL_REPORT.md",
+      "source_blob_sha": "f89b49a1e0d111db9024864ef988254a586c4b3f",
+      "source_sha256": "f2c189e6ee5807e71a7070ff7690e9715a2102ac24d08d1a7eb78cefeedecb03",
+      "source_bytes": 8064,
+      "destination": "docs/research/upstream/studies/milky-way-idle/steam-3224420/FINAL_REPORT.md",
+      "destination_sha256": "4a2172d9fb39ffe70d6e96abf9fde50e589510252c7c87afe875133c68290f5e",
+      "destination_bytes": 8504,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/milky-way-idle/steam-3224420/MANIFEST.md",
+      "source_blob_sha": "18f27693c0123f962ac8a2c48caa89c8a09fb5bb",
+      "source_sha256": "26fd0dd2b04fafd68881598444a70c95775a24e99c38d92138a4d329f4a8d7cd",
+      "source_bytes": 1526,
+      "destination": "docs/research/upstream/studies/milky-way-idle/steam-3224420/MANIFEST.md",
+      "destination_sha256": "6323625dd1f79218d8af3a9d1616c2a1306eaf34dc505d8f94d7ba676b78518a",
+      "destination_bytes": 1962,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/milky-way-idle/steam-3224420/README.md",
+      "source_blob_sha": "3f629f072fe2c5aada3d59ea0625688dbbfddc1f",
+      "source_sha256": "19cd44f137571fd9591b1713f23924d37f70948d0b8ba420fcdf2e8f89d7e3b7",
+      "source_bytes": 2885,
+      "destination": "docs/research/upstream/studies/milky-way-idle/steam-3224420/README.md",
+      "destination_sha256": "b901f49c4ef922d408cd7a9b073c592ab44db70e6dac35ba77bf0ab802b22b02",
+      "destination_bytes": 3319,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/milky-way-idle/steam-3224420/architecture/ARCHITECTURE.md",
+      "source_blob_sha": "97fb7dde4939c23326c2a77b5b85a4aa971d2a7a",
+      "source_sha256": "499dc598a7e9dd5fece38e7f75667b2021a0d2c6e9cdbcf6dc704c0752797da3",
+      "source_bytes": 2966,
+      "destination": "docs/research/upstream/studies/milky-way-idle/steam-3224420/architecture/ARCHITECTURE.md",
+      "destination_sha256": "1f582c3e45b1b8b54955fe881bd8f43487470efac452c5470931ab9069a62a03",
+      "destination_bytes": 3422,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/milky-way-idle/steam-3224420/content/CONTENT.md",
+      "source_blob_sha": "4395d7129c77f04b67bb435e5a0df760a0be874a",
+      "source_sha256": "5d096226384760a2512142a778524c2b6aff01bf2cbb6952f78dc243d74f7e97",
+      "source_bytes": 1347,
+      "destination": "docs/research/upstream/studies/milky-way-idle/steam-3224420/content/CONTENT.md",
+      "destination_sha256": "62b107889b3131d0f8a72a0419538f8c2f58593f65966edfcb7ccbba8466b8b8",
+      "destination_bytes": 1793,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/milky-way-idle/steam-3224420/development-lessons/DEVELOPMENT_LESSONS.md",
+      "source_blob_sha": "2e962088c4028617eaaea8aa2f649c6d5e1306fd",
+      "source_sha256": "9af70b366b3238169aa9fd136a967f43e7e099904f64ffeb17d40825b4cd9170",
+      "source_bytes": 1264,
+      "destination": "docs/research/upstream/studies/milky-way-idle/steam-3224420/development-lessons/DEVELOPMENT_LESSONS.md",
+      "destination_sha256": "2903b4dc523240fe3a41d244fde74ca7e748cbe99ab2eec80e54cdb59a81f9c8",
+      "destination_bytes": 1734,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/milky-way-idle/steam-3224420/economy/ECONOMY.md",
+      "source_blob_sha": "6ae6e8a7f13bf08708a8ea1022025a0d91f6b69a",
+      "source_sha256": "baf68f819d3e172974bcfc8244972b9b75b43f203181b9d27dc068919751c856",
+      "source_bytes": 1505,
+      "destination": "docs/research/upstream/studies/milky-way-idle/steam-3224420/economy/ECONOMY.md",
+      "destination_sha256": "85d2bbd5daae6dce735620fc6f3d718141335434c73afa209f41e3a1f9d6e6ef",
+      "destination_bytes": 1951,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/milky-way-idle/steam-3224420/experiments/EXPERIMENT_LOG.md",
+      "source_blob_sha": "d555f374e7f774a2bc969b04b8b0c1a4bfdda335",
+      "source_sha256": "0a5dd3b41ec5f1a6274d6a5dfc0ee56c7a50e44cb705c61e7215adcfd574abcb",
+      "source_bytes": 1837,
+      "destination": "docs/research/upstream/studies/milky-way-idle/steam-3224420/experiments/EXPERIMENT_LOG.md",
+      "destination_sha256": "64b40e99d917b8ce8e770ad5277aa28edf0c6266f1a916048301fe66e1c90d20",
+      "destination_bytes": 2294,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/milky-way-idle/steam-3224420/gameplay/GAMEPLAY_SYSTEMS.md",
+      "source_blob_sha": "08944f7fed24d5bf0b1d734c8828df295a6f53dd",
+      "source_sha256": "dbc0802d554358a2938fe99b280d8ac18a16de256d2768aacff548db14a60f3b",
+      "source_bytes": 3929,
+      "destination": "docs/research/upstream/studies/milky-way-idle/steam-3224420/gameplay/GAMEPLAY_SYSTEMS.md",
+      "destination_sha256": "eb6d1522c6d5e906832ea6b28cef8ab6c773f7d4351486dae52e9ee7e82f7016",
+      "destination_bytes": 4385,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/milky-way-idle/steam-3224420/mathematics/FORMULAS.md",
+      "source_blob_sha": "227f9d3f14048c37c5ce485529bf287360b1337a",
+      "source_sha256": "1f0aa41d207dbf115869b2c150a55e8c175c51823a7e3878a52086e5fafbe124",
+      "source_bytes": 9508,
+      "destination": "docs/research/upstream/studies/milky-way-idle/steam-3224420/mathematics/FORMULAS.md",
+      "destination_sha256": "2e81a7c98e848720a9114e3aebdd6446ffe1606a4244ff199e22ee1a8f8d9bc2",
+      "destination_bytes": 9959,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/milky-way-idle/steam-3224420/progression/PROGRESSION.md",
+      "source_blob_sha": "a69cf449dfd5a108eb7ee918dfbfa8a28863fc91",
+      "source_sha256": "aefaae907d843f11b081c025f5985429fa2f434efa95abd890290c01128dc23e",
+      "source_bytes": 1087,
+      "destination": "docs/research/upstream/studies/milky-way-idle/steam-3224420/progression/PROGRESSION.md",
+      "destination_sha256": "65d60eb2814870809e4a3855e9379eaac20f3a0979e7198ef16cdda71da4233a",
+      "destination_bytes": 1541,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/milky-way-idle/steam-3224420/simulations/mwi_model_output.txt",
+      "source_blob_sha": "2991726d7bd7f55657f575230946d20f11c3336c",
+      "source_sha256": "67962f22980236c246ea690240465c97cd1bc03327d21a4f728dad6a50c00fb0",
+      "source_bytes": 5544,
+      "destination": "docs/research/upstream/studies/milky-way-idle/steam-3224420/simulations/mwi_model_output.txt",
+      "destination_sha256": "67962f22980236c246ea690240465c97cd1bc03327d21a4f728dad6a50c00fb0",
+      "destination_bytes": 5544,
+      "classification": "upstream-reported aggregate simulation output; not rerun"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/milky-way-idle/steam-3224420/user-experience/UX_ANALYSIS.md",
+      "source_blob_sha": "79adedd9d472b509226bde793056a9cde7d63de6",
+      "source_sha256": "01d885edb5f489957e980aec1a1e03a1c1b2c060f8f2c660d8d5858b5cc7099b",
+      "source_bytes": 1286,
+      "destination": "docs/research/upstream/studies/milky-way-idle/steam-3224420/user-experience/UX_ANALYSIS.md",
+      "destination_sha256": "76623546875b011d6f3d6847c7c6b4780da0a6fde8176b8e0620267f75f83bc7",
+      "destination_bytes": 1744,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/palworld/1.0.5.102999/FINAL_REPORT.md",
+      "source_blob_sha": "033919365e7de99df2dc5dd97ff3bb8dfe303488",
+      "source_sha256": "823875fe82b8ab462b19c0a91c5553681488320046ed5a1b447cd4247383d4f8",
+      "source_bytes": 7651,
+      "destination": "docs/research/upstream/studies/palworld/1.0.5.102999/FINAL_REPORT.md",
+      "destination_sha256": "1cbac045c29cc2db6ada13242eab732929dceefcff8b8cd0b3ab9191e8920aa6",
+      "destination_bytes": 8084,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/palworld/1.0.5.102999/MANIFEST.md",
+      "source_blob_sha": "f70f67108292f7a6935156baf7b9c0d25e1cb40c",
+      "source_sha256": "db49760d35e4aee345e4847b76bcf29bcc2e90b6fdc9b9fadcb40b42d10248bf",
+      "source_bytes": 1351,
+      "destination": "docs/research/upstream/studies/palworld/1.0.5.102999/MANIFEST.md",
+      "destination_sha256": "7fba268188bdc6f5c6991acee7353f00b4031c1bff01f534b5c96aad1583e54c",
+      "destination_bytes": 1780,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/palworld/1.0.5.102999/README.md",
+      "source_blob_sha": "c8466d76e0b7c5d057a0d675ba8c72300a18f408",
+      "source_sha256": "ecdf7991ef4df855b966815eb3e1f88f2a30968b491a14dafb453774d1b014a8",
+      "source_bytes": 1880,
+      "destination": "docs/research/upstream/studies/palworld/1.0.5.102999/README.md",
+      "destination_sha256": "b79cfbfbb289a8348265ea805448ac267bb947533db3525e05545224cd944582",
+      "destination_bytes": 2307,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/palworld/1.0.5.102999/architecture/ARCHITECTURE.md",
+      "source_blob_sha": "368fac27a4db0151f2a87ca8641451dc02bc934c",
+      "source_sha256": "dc6f9f5c2ae9c38b35ae32126ae332798d4dd9321a7a29dc3e957f86e7d7ddc1",
+      "source_bytes": 4606,
+      "destination": "docs/research/upstream/studies/palworld/1.0.5.102999/architecture/ARCHITECTURE.md",
+      "destination_sha256": "bf771dd1910b4cda48f68216aa11539cac320d9009ae7f5f1d4227f2214e83b6",
+      "destination_bytes": 5055,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/palworld/1.0.5.102999/content/CONTENT.md",
+      "source_blob_sha": "1bddf73e4e4ad89be7c3484c053998809a5e7fde",
+      "source_sha256": "77c0217a3d7884169af282edddb31d5d59777d26a0493b8bf1f676c57d1b3225",
+      "source_bytes": 1471,
+      "destination": "docs/research/upstream/studies/palworld/1.0.5.102999/content/CONTENT.md",
+      "destination_sha256": "7e5d6f252714991571fcca99f33ff2ae65dea648a706ef822a8f1d36523845c2",
+      "destination_bytes": 1910,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/palworld/1.0.5.102999/development-lessons/DEVELOPMENT_LESSONS.md",
+      "source_blob_sha": "1152beb112898013ce4bff815bb73ab8b71b36f9",
+      "source_sha256": "bdb89016cda1cd5d13b9f5b1887a8e6b9501807550102d9caab30289ba289555",
+      "source_bytes": 1330,
+      "destination": "docs/research/upstream/studies/palworld/1.0.5.102999/development-lessons/DEVELOPMENT_LESSONS.md",
+      "destination_sha256": "f9926fbfcacc4f421ce61761146e6e07d6deee2a294fcf2b88f279e8be032520",
+      "destination_bytes": 1793,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/palworld/1.0.5.102999/economy/ECONOMY.md",
+      "source_blob_sha": "01eb69985063ec4381483b979de891f4fcb2e444",
+      "source_sha256": "7ddaf9edf08823a487e6d0a4d262f34c2616ee99c84cd68f74c7f47fe4844f60",
+      "source_bytes": 925,
+      "destination": "docs/research/upstream/studies/palworld/1.0.5.102999/economy/ECONOMY.md",
+      "destination_sha256": "9f7e4903d7f075e0882ff10ef62e0f5c0b4aeefce96b60a1b9dcf8c960452ffc",
+      "destination_bytes": 1364,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/palworld/1.0.5.102999/experiments/EXPERIMENT_LOG.md",
+      "source_blob_sha": "be15a9693be609071b9bdc94d29783a800497d06",
+      "source_sha256": "eb2c6e97802ef15ce0027460dda454a280ab85588cbaea89d0bb4bae2b95d647",
+      "source_bytes": 1689,
+      "destination": "docs/research/upstream/studies/palworld/1.0.5.102999/experiments/EXPERIMENT_LOG.md",
+      "destination_sha256": "2d3bd316ebbe0d6fbfdbf75419c46a7937ca304d811cc7c501934b1611f53233",
+      "destination_bytes": 2139,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/palworld/1.0.5.102999/gameplay/GAMEPLAY_SYSTEMS.md",
+      "source_blob_sha": "39aaa04667eb1f6b4564894e9f89a5ece3c54713",
+      "source_sha256": "02dd5bb79ab8b84b3f71a91f0bc79b10cb820e5dc37d02ba8b98ecdd670f5c16",
+      "source_bytes": 6683,
+      "destination": "docs/research/upstream/studies/palworld/1.0.5.102999/gameplay/GAMEPLAY_SYSTEMS.md",
+      "destination_sha256": "906cc261a4179114c43ee127a4503103633b48b13e8be8f822b887325a211b90",
+      "destination_bytes": 7132,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/palworld/1.0.5.102999/mathematics/FORMULAS.md",
+      "source_blob_sha": "18c1e319a541e9ce8374a024b9e9873d9e6fbaf5",
+      "source_sha256": "cdd13f306df09d1efdeb959aff7e77d36279f12737f15c9bac868c9c6fb7a047",
+      "source_bytes": 5195,
+      "destination": "docs/research/upstream/studies/palworld/1.0.5.102999/mathematics/FORMULAS.md",
+      "destination_sha256": "0e7385c2ec594f9ff486bc628dd3ba3e650ffbe6dc38520b407e5a42d44b30f1",
+      "destination_bytes": 5639,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/palworld/1.0.5.102999/progression/PROGRESSION.md",
+      "source_blob_sha": "a25a96ef6c5d635be12ad41e14a41d1f63d87c44",
+      "source_sha256": "830ff246cc799ac9433b5c10c5c92d9f892c41127c79930e70561d4c686a299c",
+      "source_bytes": 1078,
+      "destination": "docs/research/upstream/studies/palworld/1.0.5.102999/progression/PROGRESSION.md",
+      "destination_sha256": "7a443b481743419a5df13d4f8cf32008e92ca14a7a884560d87ef14e0d23e0c5",
+      "destination_bytes": 1525,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/palworld/1.0.5.102999/simulations/palworld_model_output.txt",
+      "source_blob_sha": "b34165a2f479771d2e7ba3cf9b7379b3329471d6",
+      "source_sha256": "062ac9f9a93315f3569bc56f1903a2ecc8ed6e5f7b7b04ab20bb482ddb5f8d0b",
+      "source_bytes": 2669,
+      "destination": "docs/research/upstream/studies/palworld/1.0.5.102999/simulations/palworld_model_output.txt",
+      "destination_sha256": "062ac9f9a93315f3569bc56f1903a2ecc8ed6e5f7b7b04ab20bb482ddb5f8d0b",
+      "destination_bytes": 2669,
+      "classification": "upstream-reported aggregate simulation output; not rerun"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/palworld/1.0.5.102999/user-experience/UX_ANALYSIS.md",
+      "source_blob_sha": "78a84e8df5e77708799e9743106d0fe6d1be6f7c",
+      "source_sha256": "13c1403f8d55a7256e5b4e86768307100fc2ec45b87df0ee2e6b1928f29354b5",
+      "source_bytes": 1085,
+      "destination": "docs/research/upstream/studies/palworld/1.0.5.102999/user-experience/UX_ANALYSIS.md",
+      "destination_sha256": "fc0a9fb662f7e1d33e40a7eed8f07b933c6e3be37970f2f8861f418dc64ccb21",
+      "destination_bytes": 1536,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/siralim-ultimate/2.0-gms-2024.14/FINAL_REPORT.md",
+      "source_blob_sha": "508d9348c4529317d1cc5fd57a09cf87ccca7dba",
+      "source_sha256": "e4400dfe4e935d2e90c13848095965f68a566e972e2c4b341f2c36065d651a09",
+      "source_bytes": 7502,
+      "destination": "docs/research/upstream/studies/siralim-ultimate/2.0-gms-2024.14/FINAL_REPORT.md",
+      "destination_sha256": "551eb9512500a797e5214c6e3eb6859eba2994396d3febc02309226d2f79117b",
+      "destination_bytes": 7946,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/siralim-ultimate/2.0-gms-2024.14/MANIFEST.md",
+      "source_blob_sha": "4df0f4069cb2bc792f4af6af24a9dc32acca3458",
+      "source_sha256": "f7d7f23f027e5fb4d1bb6d95eba941bc03ff24ad5c7f29d692a1a18273be59e7",
+      "source_bytes": 1421,
+      "destination": "docs/research/upstream/studies/siralim-ultimate/2.0-gms-2024.14/MANIFEST.md",
+      "destination_sha256": "24e7e5ec1956c99dd3e208ff947239575f6fc79ef9c50cb8e096e9d6e6a08113",
+      "destination_bytes": 1861,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/siralim-ultimate/2.0-gms-2024.14/README.md",
+      "source_blob_sha": "265a98f27cb262a34c418348d1bee14f5ac0705e",
+      "source_sha256": "01dd4d3dc520616a79f3760546f49e9eacc13c16f1ccfb7d9244663e7ef960ab",
+      "source_bytes": 2114,
+      "destination": "docs/research/upstream/studies/siralim-ultimate/2.0-gms-2024.14/README.md",
+      "destination_sha256": "9755a88bddcd8c02727b78af4a43cd548601985876981b6c6137fc1388ce41de",
+      "destination_bytes": 2552,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/siralim-ultimate/2.0-gms-2024.14/architecture/ARCHITECTURE.md",
+      "source_blob_sha": "0101e687e105195f2cb535fdf8c2e083e42337a6",
+      "source_sha256": "5b50f44b329f587b7e94dddd54a445fa8fa54474667936796b6837e2e745ab84",
+      "source_bytes": 4354,
+      "destination": "docs/research/upstream/studies/siralim-ultimate/2.0-gms-2024.14/architecture/ARCHITECTURE.md",
+      "destination_sha256": "157760377be295d9a5bdcd9dfd858429313396296b34166af9d75448a78756bd",
+      "destination_bytes": 4814,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/siralim-ultimate/2.0-gms-2024.14/content/CONTENT.md",
+      "source_blob_sha": "71ff9e96d7f93e15d0d7bdd9121ec1df1a80b1c4",
+      "source_sha256": "a95c327eab399fab81c5a699f53f69c1ab04a0a06d9bdd6d46b3ff418f92b511",
+      "source_bytes": 1294,
+      "destination": "docs/research/upstream/studies/siralim-ultimate/2.0-gms-2024.14/content/CONTENT.md",
+      "destination_sha256": "a7933ad8a349c3a3ddbf59cbce3879e593ffb1d43f92563cf25dc1f73fe1caa3",
+      "destination_bytes": 1744,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/siralim-ultimate/2.0-gms-2024.14/development-lessons/DEVELOPMENT_LESSONS.md",
+      "source_blob_sha": "91c120e67f89793354fb9ef2896918663adcb7ac",
+      "source_sha256": "1878a002f6ddc20c024bc2b60387e916bbd0c236a51b1d2025a111f69034fc5d",
+      "source_bytes": 1055,
+      "destination": "docs/research/upstream/studies/siralim-ultimate/2.0-gms-2024.14/development-lessons/DEVELOPMENT_LESSONS.md",
+      "destination_sha256": "16a3e4d47bc40dc52ff5a0c3cf1361f6bcc0f6523e6ec9def44910391208ee57",
+      "destination_bytes": 1529,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/siralim-ultimate/2.0-gms-2024.14/economy/ECONOMY.md",
+      "source_blob_sha": "709f57b81a13a2e301d5d17c6d299e55ef1671ba",
+      "source_sha256": "302d8379b112009c99fc2762a7f27a33a36be8be3602de3a0e2dfa6b48882c8a",
+      "source_bytes": 1192,
+      "destination": "docs/research/upstream/studies/siralim-ultimate/2.0-gms-2024.14/economy/ECONOMY.md",
+      "destination_sha256": "e0b744bec49e4d937d00fe675f52d83312011c2c5438bc10f33964a0da8dc079",
+      "destination_bytes": 1642,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/siralim-ultimate/2.0-gms-2024.14/experiments/EXPERIMENT_LOG.md",
+      "source_blob_sha": "430dbcf00a3f871e1a277b5e3aac96512a578033",
+      "source_sha256": "4ffd5d0e3ee7f806acde5d80e2202b41a54881585ca17c75c1194dcf132ed336",
+      "source_bytes": 1856,
+      "destination": "docs/research/upstream/studies/siralim-ultimate/2.0-gms-2024.14/experiments/EXPERIMENT_LOG.md",
+      "destination_sha256": "ebfd26883a3e486279830e1c93f6a6a962bb0b4be1744d7d27c50edab9deb5d2",
+      "destination_bytes": 2317,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/siralim-ultimate/2.0-gms-2024.14/gameplay/GAMEPLAY_SYSTEMS.md",
+      "source_blob_sha": "18262f396fab8e057e03893a97a2ecf90dfd0d57",
+      "source_sha256": "d3411b0976b12abf39b834ac5862c6f9195cabe382d1f100ffd79015d286e27c",
+      "source_bytes": 3801,
+      "destination": "docs/research/upstream/studies/siralim-ultimate/2.0-gms-2024.14/gameplay/GAMEPLAY_SYSTEMS.md",
+      "destination_sha256": "36d88cf910e9ab5374307123596689c66eb7693ac2a89157568c36f34397538c",
+      "destination_bytes": 4261,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/siralim-ultimate/2.0-gms-2024.14/mathematics/FORMULAS.md",
+      "source_blob_sha": "5846cf003e2d241c09406432c9373aa62e9b7aef",
+      "source_sha256": "d3e6c7e9959849702b94ce941c82696c2972a702c94896eb7bedfd2100d96752",
+      "source_bytes": 6540,
+      "destination": "docs/research/upstream/studies/siralim-ultimate/2.0-gms-2024.14/mathematics/FORMULAS.md",
+      "destination_sha256": "33b08cd4e7789fc32786b2ca43899474979b9b563b7a094a75d99111fe76093a",
+      "destination_bytes": 6995,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/siralim-ultimate/2.0-gms-2024.14/progression/PROGRESSION.md",
+      "source_blob_sha": "0806c70e320eff451753e3e2f0fe80b81d029e5b",
+      "source_sha256": "52465fa579c9495fea560819a57dc82ebd488030b2dc60a708973a5b4219e585",
+      "source_bytes": 1128,
+      "destination": "docs/research/upstream/studies/siralim-ultimate/2.0-gms-2024.14/progression/PROGRESSION.md",
+      "destination_sha256": "71bbb8ee2bb3f298878f8e28e752a3089110027f52aef4e795ea71c2050d7385",
+      "destination_bytes": 1586,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/siralim-ultimate/2.0-gms-2024.14/simulations/siralim_model_output.txt",
+      "source_blob_sha": "187e44ecd4956f2fecbe1de37c9900a0638340a2",
+      "source_sha256": "cb06be5779563152fd665620210c2b9a12b0bd1c474dc707e90018326c85f045",
+      "source_bytes": 3152,
+      "destination": "docs/research/upstream/studies/siralim-ultimate/2.0-gms-2024.14/simulations/siralim_model_output.txt",
+      "destination_sha256": "cb06be5779563152fd665620210c2b9a12b0bd1c474dc707e90018326c85f045",
+      "destination_bytes": 3152,
+      "classification": "upstream-reported aggregate simulation output; not rerun"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/siralim-ultimate/2.0-gms-2024.14/user-experience/UX_ANALYSIS.md",
+      "source_blob_sha": "52ba0b3ba0ef7acd64d9ab6365fa2b5f8c6ad4f7",
+      "source_sha256": "07f5b9b85e3e2ee51c23cbda97ac06fa594d0a73a1b467ac8bfbd815c8842600",
+      "source_bytes": 1007,
+      "destination": "docs/research/upstream/studies/siralim-ultimate/2.0-gms-2024.14/user-experience/UX_ANALYSIS.md",
+      "destination_sha256": "6485d89bda3eb197dc8c698920c4e03c783ccddcc765d430cf6264047b6fdfad",
+      "destination_bytes": 1469,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/super-auto-pets/steam-2026-11-25/FINAL_REPORT.md",
+      "source_blob_sha": "f0c3822715d200a4cd079143121338400ed71ce3",
+      "source_sha256": "8641b6edefb04d42e81e94e68d1edfdaee04270568f91b8b0453ebc0a1388358",
+      "source_bytes": 11489,
+      "destination": "docs/research/upstream/studies/super-auto-pets/steam-2026-11-25/FINAL_REPORT.md",
+      "destination_sha256": "e2fdae3c3dbb3ba2a6b747e033b8c5c5436c1153739379703fa28f774596a28b",
+      "destination_bytes": 11933,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/super-auto-pets/steam-2026-11-25/MANIFEST.md",
+      "source_blob_sha": "d20c3522aa3bf2b9f2c01da44111f201e12689da",
+      "source_sha256": "54f955a76cb781900658b1c005efe4f60732ee2c3338b96710a1189e0ff23815",
+      "source_bytes": 1565,
+      "destination": "docs/research/upstream/studies/super-auto-pets/steam-2026-11-25/MANIFEST.md",
+      "destination_sha256": "6d1270e88e8d11f6f164d80738da6ce3295133c8afe7696c36260c7c99293b89",
+      "destination_bytes": 2005,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/super-auto-pets/steam-2026-11-25/README.md",
+      "source_blob_sha": "3ee584f21272b7bb5aa58b110859264f72b2888d",
+      "source_sha256": "dd48294606c0bebd0ea22edd4a947283bcce0b4b6e5c5aa8d012bf4d52a286e2",
+      "source_bytes": 1982,
+      "destination": "docs/research/upstream/studies/super-auto-pets/steam-2026-11-25/README.md",
+      "destination_sha256": "f4d43be589f4d2552d2c8a6d3c60837ea5a406817e9e481a5af4e26d0bff8ed7",
+      "destination_bytes": 2420,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/super-auto-pets/steam-2026-11-25/architecture/TECHNICAL_ARCHITECTURE.md",
+      "source_blob_sha": "6500bb924fc31f75334cf2eb02c25ebf3c5ab96d",
+      "source_sha256": "e741028518e09e314ec262043f1473a8eef78dbb5060e4f72e1d776d7fbae409",
+      "source_bytes": 7397,
+      "destination": "docs/research/upstream/studies/super-auto-pets/steam-2026-11-25/architecture/TECHNICAL_ARCHITECTURE.md",
+      "destination_sha256": "b42fad431a7ba0541a170da842d89aca7c2a51dd10e61abc4fde28d7b5294433",
+      "destination_bytes": 7867,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/super-auto-pets/steam-2026-11-25/content/CONTENT_ARCHITECTURE.md",
+      "source_blob_sha": "8a64b03bbd6cb37d269eb272b3301f26aeb74733",
+      "source_sha256": "9d0113910299121c9ee8b573ddd853ed5977663f7bd9e8ab3e74d1b64ed80a66",
+      "source_bytes": 2084,
+      "destination": "docs/research/upstream/studies/super-auto-pets/steam-2026-11-25/content/CONTENT_ARCHITECTURE.md",
+      "destination_sha256": "45dc47f9712676436e28d77a67b279eef917b3bf95af54b70ba5eecc8344d8e8",
+      "destination_bytes": 2547,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/super-auto-pets/steam-2026-11-25/development-lessons/DEVELOPMENT_LESSONS.md",
+      "source_blob_sha": "4195178235924b2bf1000549eb668d9d5ee874fc",
+      "source_sha256": "7b6edcf4065576d202979db639ce6a2ab9b812b2c966e847cc43148851f58f7b",
+      "source_bytes": 2982,
+      "destination": "docs/research/upstream/studies/super-auto-pets/steam-2026-11-25/development-lessons/DEVELOPMENT_LESSONS.md",
+      "destination_sha256": "52f2d2842258bee0588bad09aa0bb8502e48be98835a94fedee699169def1f60",
+      "destination_bytes": 3456,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/super-auto-pets/steam-2026-11-25/economy/ECONOMY.md",
+      "source_blob_sha": "3c1115755782e791605e2175bb063a900a5f581a",
+      "source_sha256": "d6d6940eacb977bc616f1b9dd1d7513668f1f0438de58305498f0f185b7f7e22",
+      "source_bytes": 1413,
+      "destination": "docs/research/upstream/studies/super-auto-pets/steam-2026-11-25/economy/ECONOMY.md",
+      "destination_sha256": "b4839ddba7810307d3c3d7fb05306d0bd3ddfdca9fc5f97607d5e77d284188f0",
+      "destination_bytes": 1863,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/super-auto-pets/steam-2026-11-25/experiments/EXPERIMENT_LOG.md",
+      "source_blob_sha": "5df426a323fd3c6822ce06faea80272976415db5",
+      "source_sha256": "52c4f6b26030fdb4b7449ed2f699bd7c5983f3ea23000f631a64692aef5fe270",
+      "source_bytes": 3125,
+      "destination": "docs/research/upstream/studies/super-auto-pets/steam-2026-11-25/experiments/EXPERIMENT_LOG.md",
+      "destination_sha256": "02dee2873abf6f15709b987ffcfdbe24d64af5b05d2569ba8509a16b8dbc8da9",
+      "destination_bytes": 3586,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/super-auto-pets/steam-2026-11-25/gameplay/DESIGN_AND_PSYCHOLOGY.md",
+      "source_blob_sha": "61977b02be4c2152f3eab38ef1c4df0163ff2ab6",
+      "source_sha256": "7e940d4886e38063268b02fa34a9fed00a3552354baf08f21fa2f1669079f59d",
+      "source_bytes": 2045,
+      "destination": "docs/research/upstream/studies/super-auto-pets/steam-2026-11-25/gameplay/DESIGN_AND_PSYCHOLOGY.md",
+      "destination_sha256": "8c670b0aed48a94eeeb4d6dcfdd6e0ba4d89e45561eff149439f5c9f8c28cf46",
+      "destination_bytes": 2510,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/super-auto-pets/steam-2026-11-25/gameplay/GAMEPLAY_SYSTEMS.md",
+      "source_blob_sha": "1a6a0d7d9e69c3075cec63a2ef53eb7484c03cfe",
+      "source_sha256": "82d951ba30f565bf1893663849f859eaf6eeeea9326cf270d8487f6d13efa92b",
+      "source_bytes": 7978,
+      "destination": "docs/research/upstream/studies/super-auto-pets/steam-2026-11-25/gameplay/GAMEPLAY_SYSTEMS.md",
+      "destination_sha256": "3cc1d40d3f4a5367b68f0cb402c23fa1f459495e2f6d9a3d0ce0638b6057a021",
+      "destination_bytes": 8438,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/super-auto-pets/steam-2026-11-25/mathematics/DECOMPILED_RULES.md",
+      "source_blob_sha": "4a7a63d0946b3d81cd6c18e61c25c6e7eedabbac",
+      "source_sha256": "c52dcad420c9a24ed4a31c79bd119fb2124ed96af40e521a57f6c9c01cb90fb5",
+      "source_bytes": 11144,
+      "destination": "docs/research/upstream/studies/super-auto-pets/steam-2026-11-25/mathematics/DECOMPILED_RULES.md",
+      "destination_sha256": "cce9237678d169922cc1fbee078d5630a20f0e005a538a28e734559925d05444",
+      "destination_bytes": 11607,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/super-auto-pets/steam-2026-11-25/mathematics/FORMULAS.md",
+      "source_blob_sha": "1081adde237624c5ea608d45dd5fca8bfa208fa6",
+      "source_sha256": "1336f9fe4028564743b4fb62c105a5a7d67c7be0f43a12452814410820a3cf66",
+      "source_bytes": 4972,
+      "destination": "docs/research/upstream/studies/super-auto-pets/steam-2026-11-25/mathematics/FORMULAS.md",
+      "destination_sha256": "536779b089b5af374d9409a6da5f3325a71663772098b185007025092bd71dcd",
+      "destination_bytes": 5427,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/super-auto-pets/steam-2026-11-25/mathematics/charts/buff_sensitivity.png",
+      "source_blob_sha": "c7486db063e2759639931dca707c0752692149f2",
+      "source_sha256": "f31b23cfcee4aba4bd2c29e4c09eb7d1cba7dafbba47a08bac203d10829ca603",
+      "source_bytes": 62165,
+      "destination": "docs/research/upstream/studies/super-auto-pets/steam-2026-11-25/mathematics/charts/buff_sensitivity.png",
+      "destination_sha256": "f31b23cfcee4aba4bd2c29e4c09eb7d1cba7dafbba47a08bac203d10829ca603",
+      "destination_bytes": 62165,
+      "classification": "original analytical chart; upstream-reported"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/super-auto-pets/steam-2026-11-25/mathematics/charts/shop_odds.png",
+      "source_blob_sha": "19932882af7a9cf1e9bdc883f6106dcf86d01223",
+      "source_sha256": "51a55cef13b3dc21f0e2f1c79154d00960a25813377237d549016df2a49f7d70",
+      "source_bytes": 68920,
+      "destination": "docs/research/upstream/studies/super-auto-pets/steam-2026-11-25/mathematics/charts/shop_odds.png",
+      "destination_sha256": "51a55cef13b3dc21f0e2f1c79154d00960a25813377237d549016df2a49f7d70",
+      "destination_bytes": 68920,
+      "classification": "original analytical chart; upstream-reported"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/super-auto-pets/steam-2026-11-25/mathematics/charts/tier_stat_budget.png",
+      "source_blob_sha": "6ca022210712338e7eece5ddb05c34f075b1ba86",
+      "source_sha256": "e378af01966f0febd608521cfe40ba299471de395abb204b1b047745cdf782a0",
+      "source_bytes": 26294,
+      "destination": "docs/research/upstream/studies/super-auto-pets/steam-2026-11-25/mathematics/charts/tier_stat_budget.png",
+      "destination_sha256": "e378af01966f0febd608521cfe40ba299471de395abb204b1b047745cdf782a0",
+      "destination_bytes": 26294,
+      "classification": "original analytical chart; upstream-reported"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/super-auto-pets/steam-2026-11-25/mathematics/charts/trigger_distribution.png",
+      "source_blob_sha": "d422c0c384e0797536eec62e42ba58bb7b33af2a",
+      "source_sha256": "802de2147edfbd9bd392c65339c0058502de49a52a8334f6f61c26c95fc44eca",
+      "source_bytes": 40691,
+      "destination": "docs/research/upstream/studies/super-auto-pets/steam-2026-11-25/mathematics/charts/trigger_distribution.png",
+      "destination_sha256": "802de2147edfbd9bd392c65339c0058502de49a52a8334f6f61c26c95fc44eca",
+      "destination_bytes": 40691,
+      "classification": "original analytical chart; upstream-reported"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/super-auto-pets/steam-2026-11-25/progression/PROGRESSION.md",
+      "source_blob_sha": "3f647ad74aaa7fbddd13658fa5037e9c2abe7fc1",
+      "source_sha256": "aaf6c94e97f8970d6e29d3a62bdcf7bebd412dcc10e38208d6647e0e1a9d925b",
+      "source_bytes": 1730,
+      "destination": "docs/research/upstream/studies/super-auto-pets/steam-2026-11-25/progression/PROGRESSION.md",
+      "destination_sha256": "ab97a0cafd9ae21bd9dd18a66981cdd369dfa30978ed445187d4c1dfcf2b3eb4",
+      "destination_bytes": 2188,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/super-auto-pets/steam-2026-11-25/prototypes/autobattler_dsl_prototype.html",
+      "source_blob_sha": "50105d09eed5f6d734553ea022920cd07bef9443",
+      "source_sha256": "6e8e98366c3eb08fe72f27d0ff754ed7691d465abfafa4382757b4532e6556a6",
+      "source_bytes": 5346,
+      "destination": "docs/research/upstream/studies/super-auto-pets/steam-2026-11-25/prototypes/autobattler_dsl_prototype.html",
+      "destination_sha256": "6e8e98366c3eb08fe72f27d0ff754ed7691d465abfafa4382757b4532e6556a6",
+      "destination_bytes": 5346,
+      "classification": "original self-contained research toy with invented content; not the game"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/super-auto-pets/steam-2026-11-25/simulations/shop_sampler_sim_output.txt",
+      "source_blob_sha": "92cda6406a47aebb25ee7abde11dfeb543f3fbcb",
+      "source_sha256": "e888313c1e00135d8794c0d796174f2385776cc4069434be5969d06a9198e8a7",
+      "source_bytes": 1006,
+      "destination": "docs/research/upstream/studies/super-auto-pets/steam-2026-11-25/simulations/shop_sampler_sim_output.txt",
+      "destination_sha256": "e888313c1e00135d8794c0d796174f2385776cc4069434be5969d06a9198e8a7",
+      "destination_bytes": 1006,
+      "classification": "upstream-reported aggregate simulation output; not rerun"
+    },
+    {
+      "source_path": "reverse-engineering/game-dev/super-auto-pets/steam-2026-11-25/user-experience/UX_ANALYSIS.md",
+      "source_blob_sha": "7339005fb56fff681d55c221303c0a6fa0872837",
+      "source_sha256": "ac09c088a182cc2b6edddda62ba1e92c2484478077b98d4e4682798fb7340801",
+      "source_bytes": 1067,
+      "destination": "docs/research/upstream/studies/super-auto-pets/steam-2026-11-25/user-experience/UX_ANALYSIS.md",
+      "destination_sha256": "a6fc31f7cd66ada6e1e7e4f49c6735ce3eb661a6a30de041089470faaa06a96c",
+      "destination_bytes": 1529,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "projects/game-dev/cross-game-research-handoffs/dump/01-numeric-reproducibility-results/INTEGRATION_GUIDE.md",
+      "source_blob_sha": "16acc4e269c31ba97aee35f98d88f58c6f4fdcb2",
+      "source_sha256": "05ea170f1828e54cc50259455f3d6a324c9914cefa73428bb9b1708e56308c12",
+      "source_bytes": 8178,
+      "destination": "docs/research/upstream/engineering/r01-numeric-reproducibility/INTEGRATION_GUIDE.md",
+      "destination_sha256": "532b493f73eb2dd056898ec51e0269293fdc6b2e35921318f54a7e4775f49214",
+      "destination_bytes": 8649,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "projects/game-dev/cross-game-research-handoffs/dump/01-numeric-reproducibility-results/LICENSES.md",
+      "source_blob_sha": "b90ca63acbbf71a672b5281612099c1845e96bca",
+      "source_sha256": "ac000678a57c159e55121ed63bc062f72fd8f508544fe4f4cd1fbe91ece6c5af",
+      "source_bytes": 4218,
+      "destination": "docs/research/upstream/engineering/r01-numeric-reproducibility/LICENSES.md",
+      "destination_sha256": "9f1599eaa928a8880edcbab583529a73c5d9c91530a1b4a1474488d078338718",
+      "destination_bytes": 4680,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "projects/game-dev/cross-game-research-handoffs/dump/03-transactional-state-fuzz-results/INTEGRATION_GUIDE.md",
+      "source_blob_sha": "eeda4b1669039747842b5787fe14de2c14239e5e",
+      "source_sha256": "263d24f91628e54e40c39ae5ac00b27ebde1cd0dc07520b9dca1596e36425a81",
+      "source_bytes": 7493,
+      "destination": "docs/research/upstream/engineering/r03-transaction-isolation/INTEGRATION_GUIDE.md",
+      "destination_sha256": "4427c5b7ee10a9d4bbd4146da684edc338ba9e5d2212c4664945182527778cea",
+      "destination_bytes": 7965,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "projects/game-dev/cross-game-research-handoffs/dump/03-transactional-state-fuzz-results/research/THREAT_MODEL.md",
+      "source_blob_sha": "752e37004813c27b70a5df77f61110ccb2d41f02",
+      "source_sha256": "e97e9d26afad94d3b7157d4004204620e1060cd71235165c3c11059a6183f6c9",
+      "source_bytes": 11040,
+      "destination": "docs/research/upstream/engineering/r03-transaction-isolation/research/THREAT_MODEL.md",
+      "destination_sha256": "cc5fa2a01f7e75c4c6a14ee5335d038c1b68292300ec2964731099081d9291a5",
+      "destination_bytes": 11519,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "projects/game-dev/cross-game-research-handoffs/dump/03-transactional-state-fuzz-results/LICENSES.md",
+      "source_blob_sha": "247d27624fa06b8c470f631a0b8563193a603e58",
+      "source_sha256": "e8114edf4cf0ccf389a5b5246df11dfcd550f569eb895d951cb63e5c788c5dc9",
+      "source_bytes": 2412,
+      "destination": "docs/research/upstream/engineering/r03-transaction-isolation/LICENSES.md",
+      "destination_sha256": "b6ad5e1b83114b84bee9535c1223881214b1a92b6d37bb147647b6c6062fe796",
+      "destination_bytes": 2875,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "projects/game-dev/cross-game-research-handoffs/dump/13-versioned-checkpoints-results/13-versioned-checkpoints/integration/CONTRACT.md",
+      "source_blob_sha": "cee7ce039875ed9ddefd61ed0ac35fa0c34d4cb2",
+      "source_sha256": "063c7bc373f475c7f11e5cc937758a8690d01936c2be5a82aa7b51554f1b598c",
+      "source_bytes": 20809,
+      "destination": "docs/research/upstream/engineering/r13-save-recovery/integration/CONTRACT.md",
+      "destination_sha256": "588c8395858ff9d83119bce4a700d373ac55f1802e92ca2b4ace139b66a9faae",
+      "destination_bytes": 21309,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "projects/game-dev/cross-game-research-handoffs/dump/13-versioned-checkpoints-results/13-versioned-checkpoints/research/DECISION.md",
+      "source_blob_sha": "3b2a714901ae02ece52e34c17eaea522bc13c11d",
+      "source_sha256": "f194bffa1bf635b3a3d5a466b38549c31a84ee5509f153b1fdea9da982076e0d",
+      "source_bytes": 14729,
+      "destination": "docs/research/upstream/engineering/r13-save-recovery/research/DECISION.md",
+      "destination_sha256": "6eb1e0762c8212cba5ef215330e0f4fb33552bd0f0dbc6c4a7c952b1bb75bbb8",
+      "destination_bytes": 15226,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "projects/game-dev/cross-game-research-handoffs/dump/21-event-protocol-rollout-results/21-event-protocol-rollout/INTEGRATION-CONTRACT.md",
+      "source_blob_sha": "420ea2338755dcf6e1fac6d849e77fbb3875e7a5",
+      "source_sha256": "ddcafc8d4b355d020af81c7f586ef73bf3365d06a284fc2674d893aa049bd56c",
+      "source_bytes": 8625,
+      "destination": "docs/research/upstream/engineering/r21-protocol-compatibility/INTEGRATION-CONTRACT.md",
+      "destination_sha256": "3825518a28bbe8a67d5c38781f07b4f9bd168d68305d0718f60448203c18f4aa",
+      "destination_bytes": 9124,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "projects/game-dev/cross-game-research-handoffs/dump/21-event-protocol-rollout-results/21-event-protocol-rollout/EXECUTIVE-FINDINGS.md",
+      "source_blob_sha": "c3d1ae3d6cd1150ca35de36ca5768e2cbd28baf8",
+      "source_sha256": "3352c354d432a4c4c85be7b42bc6275b470474efff13a8cce6f138dc7e1483e2",
+      "source_bytes": 10543,
+      "destination": "docs/research/upstream/engineering/r21-protocol-compatibility/EXECUTIVE-FINDINGS.md",
+      "destination_sha256": "6508b706cefbed16e00292b25896ae248a1cecb6d3e6d6dd0d2e818aeb950cdb",
+      "destination_bytes": 11040,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "projects/game-dev/cross-game-research-handoffs/dump/causal-scenario-sensitivity-results/RESULTS.md",
+      "source_blob_sha": "ea94849171d1b8c57141261cab1b4967c9d42576",
+      "source_sha256": "03729ceb7de2b3f4f678e9ee2861c62134da25d70ac615fb00ff6eb378c4d6ca",
+      "source_bytes": 5655,
+      "destination": "docs/research/upstream/engineering/r30-balance-experiments/RESULTS.md",
+      "destination_sha256": "7b75d654305f28bda5e27e2f2d3b0fbc828390c0d4fc49a19b667c4c9b929a35",
+      "destination_bytes": 6117,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "projects/game-dev/cross-game-research-handoffs/dump/causal-scenario-sensitivity-results/docs/CONTRACT.md",
+      "source_blob_sha": "b691eb3b67c61cfeee439bb6e08a85ebf5365d90",
+      "source_sha256": "3ee34d3754631d09e9157c2d86a7cef40e84ffe71874d079cf214e9844cefe10",
+      "source_bytes": 1817,
+      "destination": "docs/research/upstream/engineering/r30-balance-experiments/docs/CONTRACT.md",
+      "destination_sha256": "e00c1dbb90d1982997262a4c03c06b79fb41cfdfe1f070150609c60d6101f183",
+      "destination_bytes": 2288,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "projects/game-dev/cross-game-research-handoffs/dump/causal-scenario-sensitivity-results/docs/LIMITATIONS.md",
+      "source_blob_sha": "a5b7b2fbca0d8736029e7af709c4758c4361b932",
+      "source_sha256": "8790644557e016e5466151a6ac058e3e1b8500d3b2418ebc862d284039cfc4e8",
+      "source_bytes": 1610,
+      "destination": "docs/research/upstream/engineering/r30-balance-experiments/docs/LIMITATIONS.md",
+      "destination_sha256": "ed7d84591fbaa837219f0d36a141f863faad20c60bd63a28b2fcacd2d5d185e6",
+      "destination_bytes": 2084,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "projects/game-dev/cross-game-research-handoffs/dump/deterministic-deadline-catchup-results/RESULTS.md",
+      "source_blob_sha": "a1cfbecc0b30aac5c48a15102cbe97586dc97b7b",
+      "source_sha256": "efa9e8b789120c329d7f11f3fc138317609de062b9d6b7ebd14b2b76f2774af1",
+      "source_bytes": 5774,
+      "destination": "docs/research/upstream/engineering/r31-offline-catchup/RESULTS.md",
+      "destination_sha256": "c9711cebad1815cc3a01bc4fce56972a7337a327a6a3eb7bf2054a2b4a891c1d",
+      "destination_bytes": 6239,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "projects/game-dev/cross-game-research-handoffs/dump/deterministic-deadline-catchup-results/docs/CONTRACT.md",
+      "source_blob_sha": "df34d43c2cbc548e400c5dc06ff7f49177fdb891",
+      "source_sha256": "eb087f18c2276cf5ba10a1af9ae6ad1f519c6dd6ad14ce70b7e7f6e3bb0b9e73",
+      "source_bytes": 2455,
+      "destination": "docs/research/upstream/engineering/r31-offline-catchup/docs/CONTRACT.md",
+      "destination_sha256": "fb75de6ad4754a93fd17e27c4a7809287806e3ce17a1bfe834e3f5e65e9a8fcd",
+      "destination_bytes": 2929,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "projects/game-dev/cross-game-research-handoffs/dump/deterministic-deadline-catchup-results/docs/LIMITATIONS.md",
+      "source_blob_sha": "35c1c77c81924eb70326fc71857acac30973cfc0",
+      "source_sha256": "b8251ec5bc56695d247677824eac9f77c6fa2ab28cf42199659791dbc753c88f",
+      "source_bytes": 1253,
+      "destination": "docs/research/upstream/engineering/r31-offline-catchup/docs/LIMITATIONS.md",
+      "destination_sha256": "48e69f83c12badc990bd12eb595ad9f7a8d080505dcefa7e82954aa28b7c85ae",
+      "destination_bytes": 1730,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "projects/game-dev/cross-game-research-handoffs/dump/market-quote-exchange-results/RESULTS.md",
+      "source_blob_sha": "521e420617c5f6e41371607c95e793f3a72b0ee3",
+      "source_sha256": "8e199486ff27d0906b602b6cf792695f2093392059699433f11e37547144bad0",
+      "source_bytes": 7319,
+      "destination": "docs/research/upstream/engineering/r34-economy-conservation/RESULTS.md",
+      "destination_sha256": "b743594091a28c4db97f51016535d44fe24ee78924974f2d3808cd6796a4bd31",
+      "destination_bytes": 7775,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "projects/game-dev/cross-game-research-handoffs/dump/market-quote-exchange-results/docs/CONTRACT.md",
+      "source_blob_sha": "80cec6fe21b5987c4c33d599024eea0547a52860",
+      "source_sha256": "4d9546e7fb0ae8785563a3db4118c01935b0efdd62be3c43cf95bf5d6fe94d2f",
+      "source_bytes": 2209,
+      "destination": "docs/research/upstream/engineering/r34-economy-conservation/docs/CONTRACT.md",
+      "destination_sha256": "6c2051500a647baa15ee9b2ce3775956dfc454a6fc2ee2a3dda56ab78a53d5b8",
+      "destination_bytes": 2674,
+      "classification": "authored research narrative"
+    },
+    {
+      "source_path": "projects/game-dev/cross-game-research-handoffs/dump/market-quote-exchange-results/docs/LIMITATIONS.md",
+      "source_blob_sha": "0d41ae313b870849b87fedbbc0d8e1b60a9c79dc",
+      "source_sha256": "f26b04a710b5f6abc137d9380a5dc8e8e5d96c5950d97e03c5843b7cb4e89fcc",
+      "source_bytes": 1360,
+      "destination": "docs/research/upstream/engineering/r34-economy-conservation/docs/LIMITATIONS.md",
+      "destination_sha256": "7d23cef0bda861188a54517a48d38a12b4081cf99aae788799c4ddd948dd7a87",
+      "destination_bytes": 1828,
+      "classification": "authored research narrative"
+    }
+  ],
+  "generated_docs": [
+    "docs/research/upstream/README.md",
+    "docs/research/upstream/engineering/README.md",
+    "docs/research/upstream/studies/super-auto-pets/steam-2026-11-25/mathematics/charts/README.md"
+  ],
+  "exclusions": {
+    "restricted": [
+      "Every evidence/ subtree, including derived extracted datasets; no raw third-party game code, assets, bulk content tables, installers or saves."
+    ],
+    "irrelevant_or_unnecessary": [
+      "Extraction tools and VM/environment backups",
+      "Other-project handoffs, issue mappings and unrelated studies",
+      "Donor package manifests, dependencies and executable frameworks",
+      "Whole-study SHA256SUMS for excluded private artifacts"
+    ],
+    "unavailable": [
+      "RimWorld study not backed up at the selected source commit.",
+      "Legends of Idleon independent review pending upstream."
+    ],
+    "files": [
+      {
+        "source_path": "reverse-engineering/game-dev/koltera/7.0.0/simulations/charts.py",
+        "source_blob_sha": "27895da69eb4ddaeb9c45feb067ae685e57920b5",
+        "reason": "Model requires excluded proprietary evidence; results and analysis retained."
+      },
+      {
+        "source_path": "reverse-engineering/game-dev/koltera/7.0.0/simulations/koltera_model.py",
+        "source_blob_sha": "a0e96d9055f68962172f2eaa566c8ff7fbf7d040",
+        "reason": "Model requires excluded proprietary evidence; results and analysis retained."
+      },
+      {
+        "source_path": "reverse-engineering/game-dev/koltera/7.0.0/simulations/progression_sim.py",
+        "source_blob_sha": "1daff76e2051e35745fb966533beccf15ef149a2",
+        "reason": "Model requires excluded proprietary evidence; results and analysis retained."
+      },
+      {
+        "source_path": "reverse-engineering/game-dev/koltera-2/5.4.0/prototypes/k2_planner.html",
+        "source_blob_sha": "914af15723fa85a002f10fe8b418f59f0f37315b",
+        "reason": "Prototype embeds bulk extracted game data; original narrative retained."
+      },
+      {
+        "source_path": "reverse-engineering/game-dev/koltera-2/5.4.0/simulations/k2_model.py",
+        "source_blob_sha": "40bfb25b322fc76283a808eb838d38d8337f95e7",
+        "reason": "Model requires excluded proprietary evidence; results and analysis retained."
+      },
+      {
+        "source_path": "reverse-engineering/game-dev/melvor-idle/1.3.1/prototypes/melvor_calculator.html",
+        "source_blob_sha": "18a5c72b74cb02bfdda3aabeba00b22ecc237724",
+        "reason": "Prototype embeds bulk extracted game data; original narrative retained."
+      },
+      {
+        "source_path": "reverse-engineering/game-dev/melvor-idle/1.3.1/simulations/melvor_model.py",
+        "source_blob_sha": "a40f5a5fb282f2df74856cb706d0772d825bc87a",
+        "reason": "Model requires excluded proprietary evidence; results and analysis retained."
+      },
+      {
+        "source_path": "reverse-engineering/game-dev/melvor-idle-2/0.11.7-alpha/prototypes/m2_mechanics.html",
+        "source_blob_sha": "cbe889f24ecc56afefad6ca948775c6e99b6bc00",
+        "reason": "Prototype embeds bulk extracted game data; original narrative retained."
+      },
+      {
+        "source_path": "reverse-engineering/game-dev/melvor-idle-2/0.11.7-alpha/simulations/m2_model.py",
+        "source_blob_sha": "a577893ef8cd2e5cdbf86a5ae798830f9ed0a58f",
+        "reason": "Model requires excluded proprietary evidence; results and analysis retained."
+      },
+      {
+        "source_path": "reverse-engineering/game-dev/milky-way-idle/steam-3224420/prototypes/mwi_calculator.html",
+        "source_blob_sha": "aa806f11621d9f07599b8db9a1cb0ea29de491ba",
+        "reason": "Prototype embeds bulk extracted game data; original narrative retained."
+      },
+      {
+        "source_path": "reverse-engineering/game-dev/milky-way-idle/steam-3224420/simulations/mwi_model.py",
+        "source_blob_sha": "11276d086b4870e7a5dcb3ff3eb864251fcd661b",
+        "reason": "Model requires excluded proprietary evidence; results and analysis retained."
+      },
+      {
+        "source_path": "reverse-engineering/game-dev/legends-of-idleon/build-144/prototypes/idleon_workbench.html",
+        "source_blob_sha": "52770c1347d01cdcfae52f1810ce6439e716cbde",
+        "reason": "Prototype embeds bulk extracted game data; original narrative retained."
+      },
+      {
+        "source_path": "reverse-engineering/game-dev/legends-of-idleon/build-144/simulations/idleon_model.py",
+        "source_blob_sha": "043ea3db6beb0e37a942ed6ee66861f948e15b5a",
+        "reason": "Model requires excluded proprietary evidence; results and analysis retained."
+      },
+      {
+        "source_path": "reverse-engineering/game-dev/idle-clans/1.6800/simulations/charts.py",
+        "source_blob_sha": "0d8919021f93e088456966a1544f08385ada8869",
+        "reason": "Model requires excluded proprietary evidence; results and analysis retained."
+      },
+      {
+        "source_path": "reverse-engineering/game-dev/idle-clans/1.6800/simulations/idleclans_model.py",
+        "source_blob_sha": "989688e489c9387272c175cd277cb8f52f10b1b3",
+        "reason": "Model requires excluded proprietary evidence; results and analysis retained."
+      },
+      {
+        "source_path": "reverse-engineering/game-dev/super-auto-pets/steam-2026-11-25/simulations/charts.py",
+        "source_blob_sha": "1393078a8038493322c7c54fa3147f5776822aa1",
+        "reason": "Model requires excluded proprietary evidence; results and analysis retained."
+      },
+      {
+        "source_path": "reverse-engineering/game-dev/super-auto-pets/steam-2026-11-25/simulations/sap_model.py",
+        "source_blob_sha": "10e777f95548f4cd8fa03a27c0ebfb0b3f84cd3d",
+        "reason": "Model requires excluded proprietary evidence; results and analysis retained."
+      },
+      {
+        "source_path": "reverse-engineering/game-dev/super-auto-pets/steam-2026-11-25/simulations/shop_sampler_sim.py",
+        "source_blob_sha": "f5435df4b315f12a09744937535fd3251f8292c8",
+        "reason": "Model requires excluded proprietary evidence; results and analysis retained."
+      },
+      {
+        "source_path": "reverse-engineering/game-dev/kadomon/steam-2026-11-25/prototypes/kadomon_tick_battler.html",
+        "source_blob_sha": "f265eaef45a047aeeee490b1ac77113f5b4c838f",
+        "reason": "Prototype embeds bulk extracted game data; original narrative retained."
+      },
+      {
+        "source_path": "reverse-engineering/game-dev/kadomon/steam-2026-11-25/simulations/kadomon_model.py",
+        "source_blob_sha": "79fd32adff3e7b7b0e705782a77c5a36164ec533",
+        "reason": "Model requires excluded proprietary evidence; results and analysis retained."
+      },
+      {
+        "source_path": "reverse-engineering/game-dev/palworld/1.0.5.102999/prototypes/palworld_breeding_stats.html",
+        "source_blob_sha": "0b0a8d2e42a093509effd6f4e0f5fbbc715e93e2",
+        "reason": "Prototype embeds bulk extracted game data; original narrative retained."
+      },
+      {
+        "source_path": "reverse-engineering/game-dev/palworld/1.0.5.102999/simulations/palworld_model.py",
+        "source_blob_sha": "5604b1d8f3a19117f30d7f682dc72291c9e94101",
+        "reason": "Model requires excluded proprietary evidence; results and analysis retained."
+      },
+      {
+        "source_path": "reverse-engineering/game-dev/siralim-ultimate/2.0-gms-2024.14/prototypes/siralim_calculator.html",
+        "source_blob_sha": "d640d068bab04895af576acfee765ac288e9606e",
+        "reason": "Prototype embeds bulk extracted game data; original narrative retained."
+      },
+      {
+        "source_path": "reverse-engineering/game-dev/siralim-ultimate/2.0-gms-2024.14/simulations/siralim_model.py",
+        "source_blob_sha": "46608c321d800788c7e13e4e79612a364f8e383c",
+        "reason": "Model requires excluded proprietary evidence; results and analysis retained."
+      }
+    ]
+  }
+}
