@@ -87,20 +87,20 @@ describe('progression and content', () => {
     expect(combat.unlockedZones).toEqual(['earth', 'glassreach'])
   })
 
-  it('enforces work slots, node capacity and aptitude, and permits reassignment while paused', () => {
+  it('enforces Bud work slots and aptitude while Tender can share a node', () => {
     let state = parents()
     const [miner, planter] = state.buds
     state = apply(state, { type: 'startActivity', workerId: miner.id, order: { kind: 'gather', nodeId: 'earth-scrap' } })
-    expect(() => apply(state, { type: 'startActivity', order: { kind: 'gather', nodeId: 'earth-scrap' } })).toThrow('already has a running activity')
+    state = apply(state, { type: 'startActivity', order: { kind: 'gather', nodeId: 'earth-scrap' } })
+    expect(state.activities.tender.status).toBe('running')
     expect(() => apply(state, { type: 'startActivity', workerId: planter.id, order: { kind: 'gather', nodeId: 'earth-fiber' } })).toThrow('All Bud work slots')
     expect(() => apply(state, { type: 'setFormation', budIds: [miner.id] })).toThrow('committed')
     state = apply(state, { type: 'pauseActivity', workerId: miner.id }, 1)
     expect(isBudCommitted(state, miner.id)).toBe(true)
     state = apply(state, { type: 'startActivity', order: { kind: 'gather', nodeId: 'earth-scrap', count: 1 } })
-    expect(() => apply(state, { type: 'resumeActivity', workerId: miner.id })).toThrow('already has a running activity')
-    state = advance(state, 4_001).state
     state = apply(state, { type: 'resumeActivity', workerId: miner.id })
-    expect(state.activities[miner.id].nextAt).toBeGreaterThan(4_001)
+    expect(state.activities[miner.id].nextAt).toBeGreaterThan(1)
+    expect(state.activities.tender.status).toBe('running')
     expect(() => apply(state, { type: 'startActivity', workerId: planter.id, order: { kind: 'gather', nodeId: 'earth-minnow' } })).toThrow('aptitude')
   })
 

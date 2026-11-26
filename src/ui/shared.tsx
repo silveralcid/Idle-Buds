@@ -1,9 +1,10 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useId, useRef } from 'react'
 import type { ReactNode } from 'react'
 import { SPECIES } from '../data/index.ts'
-import type { Affinity, PlayerView } from '../game/types.ts'
+import type { PlayerView } from '../game/types.ts'
 import { itemName, number } from './view-model.ts'
 import type { RunCommand } from './api.ts'
+import { BattlePortrait } from './battle-replay.tsx'
 
 export interface GamePanelProps {
   state: PlayerView
@@ -21,20 +22,19 @@ export function Amounts({ items, inventory }: { items: Record<string, number>; i
   })}</ul>
 }
 
-const affinityIcons: Record<Affinity, string> = { Core: '◆', Surge: 'ϟ', Bloom: '✿', Echo: '◒' }
-
 export function BudMark({ speciesId, large = false }: { speciesId: string; large?: boolean }) {
   const species = SPECIES[speciesId]
   return <div className={`bud-mark ${large ? 'bud-mark-large' : ''}`} data-affinity={species.affinity} aria-hidden="true">
-    <span>{affinityIcons[species.affinity]}</span>
+    <BattlePortrait unit={{ id: speciesId, name: species.name, attack: species.attack, health: species.health, affinity: species.affinity, speciesId }} />
   </div>
 }
 
 export function Modal({ title, children, close }: { title: string; children: ReactNode; close: () => void }) {
   const dialog = useRef<HTMLDialogElement>(null)
+  const titleId = useId()
   useEffect(() => { dialog.current?.showModal() }, [])
-  return <dialog ref={dialog} aria-labelledby="dialog-title" onCancel={close} onClose={close}>
-    <h2 id="dialog-title">{title}</h2>
+  return <dialog ref={dialog} aria-labelledby={titleId} onCancel={close} onClose={close}>
+    <h2 id={titleId}>{title}</h2>
     {children}
   </dialog>
 }

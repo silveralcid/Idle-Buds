@@ -2,6 +2,8 @@
 
 Keep lightweight, sanitized, dated reports of things people or agents **actually did**. These records do not set requirements or guarantee later behavior. Place artifacts by purpose:
 
+Current game implementation: [Experience MVP, November 26](experience-mvp-2026-11-26.md), building on the [original MVP baseline](mvp-implementation-2026-11-26.md).
+
 - [`tests/`](tests/): unit, integration, end-to-end, regression, and test-suite runs.
 - [`benchmarks/`](benchmarks/): performance measurements with pinned baseline, workload and environment.
 - [`manual-qa/`](manual-qa/): human observations, UI/UX checklists and visual inspection.

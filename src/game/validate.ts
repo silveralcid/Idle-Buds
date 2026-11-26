@@ -30,7 +30,7 @@ function optionalBoolean(value: unknown): boolean {
 function order(value: unknown): boolean {
   if (!record(value)) return false
   const { count } = value
-  if (count !== undefined && !(typeof count === 'number' && Number.isSafeInteger(count) && count >= 1 && count <= MAX_ORDER_COUNT)) return false
+  if (count !== undefined && !(count === null && value.kind === 'craft') && !(typeof count === 'number' && Number.isSafeInteger(count) && count >= 1 && count <= MAX_ORDER_COUNT)) return false
   switch (value.kind) {
     case 'gather': return keys(value, ['kind', 'count', 'nodeId']) && definedId(NODES, value.nodeId)
     case 'craft':

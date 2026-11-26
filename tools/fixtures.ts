@@ -16,7 +16,7 @@ export function progressedFixture(name: string, now: number): GameState {
   state.coins = 1_000
   state.unlockedZones = ['earth', 'glassreach', 'hollowtide']
   state.discoveries = ['tide-resonator']
-  state.upgrades = { tool: 1, worker: 2, storage: 1, remote: 1 }
+  state.upgrades = { tool: 1, worker: 2, storage: 1, remote: 0 }
   state.inventory = Object.fromEntries(Object.keys(ITEM_DEFINITIONS).map(id => [id, 30]))
   state.stats.catches = 6
   state.stats.gathered = 100

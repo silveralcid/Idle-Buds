@@ -190,7 +190,7 @@ export interface UpgradeDefinition {
 export const UPGRADES: Readonly<Record<Upgrade, UpgradeDefinition>> = {
   tool: { name: 'Gathering Tools', description: 'Adds +1 primary resource to Tender gathering per level.', maxLevel: 2, coins: 15, items: { scrap: 4, fiber: 2 }, skill: 'Mining', level: 2 },
   worker: { name: 'Coordination Rig', description: 'Adds a permanent Bud work slot per level.', maxLevel: 2, coins: 25, items: { scrap: 5, 'portal-compound': 1 }, skill: 'Crafting', level: 2 },
-  storage: { name: 'Storage Racks', description: 'Adds 100 units to the storage cap for each resource.', maxLevel: 3, coins: 20, items: { fiber: 5, scrap: 3 }, skill: 'Woodcutting', level: 2 },
+  storage: { name: 'Storage Racks', description: 'Adds eight shared inventory slots. Item stacks have no quantity cap.', maxLevel: 3, coins: 20, items: { fiber: 5, scrap: 3 }, skill: 'Woodcutting', level: 2 },
   remote: { name: 'Remote Relay', description: 'Lets Buds work at an unlocked node in another zone.', maxLevel: 1, coins: 45, items: { quartz: 2, 'portal-compound': 2 }, skill: 'Crafting', level: 3 },
 }
 

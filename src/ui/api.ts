@@ -199,7 +199,9 @@ export function useGame() {
           setConnected(false)
           showSummary(reply.summary, false)
         } else apply(reply, false)
-        setNotice(reply.message ? { text: reply.message } : null)
+        // Successful commands are reflected in the screen itself. Keep notices
+        // for errors/recovery, rather than announcing every click or chat send.
+        setNotice(null)
         pending.current = null
         setRetry(null)
       })

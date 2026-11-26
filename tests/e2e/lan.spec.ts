@@ -151,9 +151,7 @@ test('explicit LAN launcher serves nonsecure browsers, retries, multiplayer and 
     })
     for (const tender of [page, beta]) {
       await tender.getByRole('link', { name: /Mining/ }).first().click()
-      const salvage = tender.getByRole('article', { name: 'Salvage Verge' })
-      await salvage.getByLabel('Cycles').selectOption('10')
-      await salvage.getByRole('button', { name: 'Start gathering' }).click()
+      await tender.getByRole('button', { name: 'Gather Scrap', exact: true }).click()
       if (tender === page) {
         await page.getByRole('button', { name: 'Retry action' }).click()
         await expect.poll(() => retryId).toEqual(firstId)
@@ -168,6 +166,7 @@ test('explicit LAN launcher serves nonsecure browsers, retries, multiplayer and 
     expect((await state(page)).username).toBe('lan_alpha')
     expect((await state(beta)).username).toBe('lan_beta')
     await Promise.all([page.getByRole('link', { name: 'Community' }).click(), beta.getByRole('link', { name: 'Community' }).click()])
+    await Promise.all([page.getByRole('button', { name: 'Chat', exact: true }).click(), beta.getByRole('button', { name: 'Chat', exact: true }).click()])
     const message = 'LAN multiplayer verification'
     await page.getByLabel('Message', { exact: true }).fill(message)
     await page.getByRole('button', { name: 'Send message' }).click()
@@ -189,6 +188,7 @@ test('explicit LAN launcher serves nonsecure browsers, retries, multiplayer and 
     await server.ready(url)
     await beta.reload()
     await expect(beta.getByRole('heading', { name: 'Community', level: 1 })).toBeVisible()
+    await beta.getByRole('button', { name: 'Chat', exact: true }).click()
     await expect(beta.getByText(message, { exact: true })).toBeVisible()
     await server.stop()
     server = undefined

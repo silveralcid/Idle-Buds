@@ -1,4 +1,5 @@
 export const RULES_VERSION = 1
+export const SAVE_VERSION = 2
 export const MAX_COINS = 1_000_000_000
 export const MAX_BUDS = 100
 export const MAX_GEAR = 100

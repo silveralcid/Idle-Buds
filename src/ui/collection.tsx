@@ -1,13 +1,14 @@
 import { useState } from 'react'
-import { AFFINITIES, NODES, SPECIES, ZONES } from '../data/index.ts'
+import { AFFINITIES, SPECIES, ZONES } from '../data/index.ts'
 import { activityAssigned, BREEDING_MS, breedingPreview, isBudCommitted } from '../game/breeding.ts'
 import { budCombatStats } from '../game/battle.ts'
-import { budLevelForXp, levelForXp, workerCapacity } from '../game/progression.ts'
+import { budLevelForXp, budSlotsUsed, levelForXp } from '../game/progression.ts'
 import { LEARN_MIN_LEVEL, MAX_BUDS, MAX_EGGS, TENDER_ID } from '../game/limits.ts'
 import type { Bud } from '../game/types.ts'
 import { BudMark, Empty, Modal } from './shared.tsx'
-import { activityName, budName, duration, itemName, number, speciesName } from './view-model.ts'
+import { activityName, budName, budOptionLabel, duration, itemName, number, speciesName } from './view-model.ts'
 import type { GamePanelProps } from './shared.tsx'
+import { Assignment, BudWorkPicker } from './activities.tsx'
 
 export function CollectionPanel(props: GamePanelProps) {
   const { state } = props
@@ -21,7 +22,7 @@ export function CollectionPanel(props: GamePanelProps) {
   else collection.reverse()
   const ownedSpecies = new Set(state.buds.map((bud) => bud.speciesId))
   return <div className="stack">
-    <header className="section-heading"><h1 tabIndex={-1}>Collection</h1><p>{state.buds.length}/{MAX_BUDS} specimens · {ownedSpecies.size}/{Object.keys(SPECIES).length} species owned</p></header>
+    <header className="section-heading"><h1 tabIndex={-1}>Collection</h1><p>{budSlotsUsed(state)}/{MAX_BUDS} spaces · {ownedSpecies.size}/{Object.keys(SPECIES).length} species owned{budSlotsUsed(state) > state.buds.length && ` · ${budSlotsUsed(state) - state.buds.length} reserved in market`}</p></header>
     <div className="spread">
       <div className="segmented" aria-label="Collection view">
         <button aria-pressed={view === 'owned'} onClick={() => setView('owned')}>My Buds</button>
@@ -44,7 +45,8 @@ export function CollectionPanel(props: GamePanelProps) {
   </div>
 }
 
-function BudCard({ bud, state, disabled, run }: GamePanelProps & { bud: Bud }) {
+function BudCard({ bud, ...props }: GamePanelProps & { bud: Bud }) {
+  const { state, disabled, run } = props
   const species = SPECIES[bud.speciesId]
   const trainedLevel = budLevelForXp(bud.xp)
   const stats = budCombatStats(bud)
@@ -54,27 +56,19 @@ function BudCard({ bud, state, disabled, run }: GamePanelProps & { bud: Bud }) {
   const inCombat = tenderOrder?.order.kind === 'battle' && activityAssigned(tenderOrder)
   const trainingLock = inCombat ? 'Stop the active patrol first.' : occupied && !state.formation.includes(bud.id) ? 'Remove this Bud from work or breeding first.'
     : trainedLevel < LEARN_MIN_LEVEL || levelForXp(state.xp.Vitality) < LEARN_MIN_LEVEL ? `Requires Bud level ${LEARN_MIN_LEVEL} and Vitality level ${LEARN_MIN_LEVEL}.` : null
-  const workCount = Object.values(state.activities).filter((activity) => activity.workerId !== TENDER_ID && activityAssigned(activity)).length
   const [releaseOpen, setReleaseOpen] = useState(false)
   const [donor, setDonor] = useState('')
   const [condenseOpen, setCondenseOpen] = useState(false)
   const [technique, setTechnique] = useState(species.techniques[0])
-  const workNodes = Object.entries(NODES).filter(([, node]) => species.aptitudes.includes(node.skill) &&
-    state.unlockedZones.includes(node.zoneId) && (state.zoneId === node.zoneId || state.upgrades.remote > 0) && levelForXp(state.xp[node.skill]) >= node.level)
-  const freeNodes = workNodes.filter(([id]) => !Object.values(state.activities).some((activity) => activityAssigned(activity) && activity.order.kind === 'gather' && activity.order.nodeId === id))
   const donors = state.buds.filter((candidate) => candidate.id !== bud.id && candidate.speciesId === bud.speciesId && !candidate.protected && !isBudCommitted(state, candidate.id))
   const donorId = donors.some((candidate) => candidate.id === donor) ? donor : donors[0]?.id ?? ''
   return <article className="surface stack" aria-label={`${species.name} ${bud.id}`}>
-    <div className="bud-heading"><BudMark speciesId={bud.speciesId} large /><div><h2>{species.name}</h2><small>{species.affinity} · {species.rarity} · {bud.sex} · {bud.id}</small></div></div>
+    <div className="bud-heading"><BudMark speciesId={bud.speciesId} large /><div><h2>{species.name}</h2><small>{species.affinity} · {species.rarity} · {bud.sex}</small></div></div>
     <div className="row"><span className="tag">Lv {trainedLevel}</span><span className="tag">{bud.trait}</span>{bud.protected && <span className="tag live">Protected</span>}{occupied && <span className="tag live">{working ? 'Assigned' : state.formation.includes(bud.id) ? 'In formation' : 'Breeding'}</span>}</div>
     <dl className="stat-line bud-stats"><div><dt>Attack</dt><dd>{stats.attack}</dd></div><div><dt>Health</dt><dd>{stats.health}</dd></div><div><dt>Signature</dt><dd>{species.ability}</dd></div></dl>
     <small>Aptitudes · {species.aptitudes.join(', ')}</small>
-    {working ? <p>Assigned to {activityName(state.activities[bud.id].order)}.</p> : !occupied && workCount < workerCapacity(state) && (
-      <div className="stack tight">
-        <h3>Gather with {species.name}</h3>
-        {freeNodes.length ? <div className="row">{freeNodes.map(([id, node]) => <button key={id} className="primary" disabled={disabled} onClick={() => void run({ type: 'startActivity', workerId: bud.id, order: { kind: 'gather', nodeId: id } })}>Assign to {node.name}</button>)}</div> : <small>Free a compatible node or check the Bud’s aptitude skills for more assignments.</small>}
-      </div>
-    )}
+    {working && <><p className="muted">Assigned to {activityName(state.activities[bud.id].order)}.</p><Assignment {...props} activity={state.activities[bud.id]} /></>}
+    {(!occupied || working) && <details className="bud-assignment" open={!working}><summary>{working ? 'Change assignment' : 'Assign work'}</summary><BudWorkPicker {...props} bud={bud} /></details>}
     <details>
       <summary>Inspect {species.name}</summary>
       <div className="stack">
@@ -91,7 +85,7 @@ function BudCard({ bud, state, disabled, run }: GamePanelProps & { bud: Bud }) {
           {!occupied && !bud.protected && <button className="danger" disabled={disabled} onClick={() => setReleaseOpen(true)}>Release Bud</button>}
         </div>
         {!occupied && bud.bond < 3 && donors.length > 0 && <div className="form-grid">
-          <label>Condensation donor<select value={donorId} onChange={(event) => setDonor(event.target.value)}>{donors.map((candidate) => <option key={candidate.id} value={candidate.id}>{species.name} · {candidate.id}</option>)}</select></label>
+          <label>Condensation donor<select value={donorId} onChange={(event) => setDonor(event.target.value)}>{donors.map((candidate) => <option key={candidate.id} value={candidate.id}>{budOptionLabel(state, candidate)}</option>)}</select></label>
           <button disabled={disabled} onClick={() => setCondenseOpen(true)}>Condense duplicate</button>
         </div>}
       </div>
@@ -122,7 +116,7 @@ export function NurseryPanel({ state, now, disabled, run }: GamePanelProps) {
       {breeding ? <div className="surface subtle spread"><strong>{budName(state, breeding.primaryId)} × {budName(state, breeding.secondaryId)}</strong><span className="tag live">{breeding.readyAt > now ? `Egg in ${duration(breeding.readyAt - now)}` : 'Processing egg…'}</span></div> : readyParents.length < 2 ?
         <Empty>Breeding requires two compatible Buds free from work and formation. <a href="#buds">View your Buds</a></Empty> : <form className="stack" onSubmit={(event) => { event.preventDefault(); void run({ type: 'breed', primaryId, secondaryId, enhanced: useTonic && tonic > 0 }) }}>
           <div className="form-grid">{([['Primary parent', primaryId, setPrimary], ['Partner', secondaryId, setSecondary]] as const).map(([label, chosen, setChosen]) => <label key={label}>{label}<select value={chosen} required onChange={(event) => setChosen(event.target.value)}>
-            <option value="">Choose Bud</option>{readyParents.map((bud) => <option key={bud.id} value={bud.id}>{budName(state, bud.id)} · {bud.sex} · {SPECIES[bud.speciesId].breedingGroup} · {bud.id}</option>)}
+            <option value="">Choose Bud</option>{readyParents.map((bud) => <option key={bud.id} value={bud.id}>{budOptionLabel(state, bud)} · {bud.sex} · {SPECIES[bud.speciesId].breedingGroup}</option>)}
           </select></label>)}</div>
           {preview.speciesId && <p>Offspring species · <strong>{speciesName(preview.speciesId)}</strong></p>}
           {preview.reason && <p className="muted">{preview.reason}</p>}
@@ -136,9 +130,9 @@ export function NurseryPanel({ state, now, disabled, run }: GamePanelProps) {
       {eggs.length === 0 && <Empty>No eggs incubating. Breed a pair or look for wild eggs on patrol after your first catch.</Empty>}
       <ul className="list">{eggs.map((egg) => <li className="surface subtle spread" key={egg.id}>
         <div><strong>{speciesName(egg.speciesId)} egg</strong><p className="muted">{egg.source === 'wild' ? 'Wild egg' : 'Bred egg'} · {egg.readyAt <= state.lastAt ? 'Ready to hatch' : egg.readyAt <= now ? 'Checking incubation…' : duration(egg.readyAt - now)}</p></div>
-        <button disabled={disabled || egg.readyAt > state.lastAt || state.buds.length >= MAX_BUDS} onClick={() => void run({ type: 'hatch', eggId: egg.id })}>Hatch egg</button>
+        <button disabled={disabled || egg.readyAt > state.lastAt || budSlotsUsed(state) >= MAX_BUDS} onClick={() => void run({ type: 'hatch', eggId: egg.id })}>Hatch egg</button>
       </li>)}</ul>
-      {state.buds.length >= MAX_BUDS && <small className="attention">Make space in your collection before hatching an egg.</small>}
+      {budSlotsUsed(state) >= MAX_BUDS && <small className="attention">Make space in your collection before hatching an egg.</small>}
     </section>
   </div>
 }

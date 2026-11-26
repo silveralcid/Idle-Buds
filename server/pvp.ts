@@ -107,6 +107,8 @@ interface HistoryRow {
   is_attacker: boolean
   played_at: Date
   rating_change: number
+  attacker_team: BattleTeam
+  defender_team: BattleTeam
 }
 
 export async function pvpView(db: PoolClient, playerId: string): Promise<WorldView['ranked']> {
@@ -122,7 +124,7 @@ export async function pvpView(db: PoolClient, playerId: string): Promise<WorldVi
     [RULES_VERSION],
   )
   const { rows: history } = await db.query<HistoryRow>(
-    `SELECT m.id, a.username, m.result, m.played_at, m.attacker_id = $1 AS is_attacker,
+    `SELECT m.id, a.username, m.result, m.played_at, m.attacker_team, m.defender_team, m.attacker_id = $1 AS is_attacker,
         CASE WHEN m.attacker_id = $1 THEN m.attacker_change ELSE m.defender_change END AS rating_change
       FROM pvp_matches m JOIN accounts a ON a.id = CASE WHEN m.attacker_id = $1 THEN m.defender_id ELSE m.attacker_id END
       WHERE m.attacker_id = $1 OR m.defender_id = $1 ORDER BY played_at DESC, m.id LIMIT 12`,
@@ -143,7 +145,13 @@ export async function pvpView(db: PoolClient, playerId: string): Promise<WorldVi
       isAttacker: match.is_attacker,
       playedAt: match.played_at.getTime(),
       ratingChange: match.rating_change,
-      result: match.result,
+      result: match.result.initial ? match.result : {
+        ...match.result,
+        initial: { left: match.attacker_team, right: match.defender_team },
+        // In rules v1, the only ability event with a target is Mend. No prose parsing or re-resolution.
+        events: match.result.events.map((event) => event.type === 'ability' && event.target
+          ? { ...event, effect: 'Mend' as const } : event),
+      },
     })),
   }
 }

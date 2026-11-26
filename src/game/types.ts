@@ -71,11 +71,12 @@ export interface CaptureFilter {
 
 export type ActivityOrder =
   | { kind: 'gather'; nodeId: string; count?: number }
-  | { kind: 'craft'; recipeId: string; count?: number; markMaker?: boolean }
+  | { kind: 'craft'; recipeId: string; count?: number | null; markMaker?: boolean }
   | { kind: 'battle'; zoneId: ZoneId; count?: number }
 
 export interface Activity {
   workerId: string
+  status: 'running' | 'paused' | 'blocked' | 'complete'
   order: ActivityOrder
   durationMs: number
   nextAt: number | null
@@ -88,6 +89,7 @@ export interface Activity {
 export interface BattleUnit {
   id: string
   name: string
+  speciesId?: string
   attack: number
   health: number
   affinity?: Affinity
@@ -106,6 +108,9 @@ export interface BattleEvent {
   actor?: string
   target?: string
   amount?: number
+  /** Authoritative resulting target HP for hits and healing. */
+  health?: number
+  effect?: Technique
   text: string
 }
 
@@ -114,9 +119,13 @@ export interface BattleResult {
   winner: 'left' | 'right' | 'draw'
   rounds: number
   events: BattleEvent[]
+  /** Absent only on saved battles created before visual playback. */
+  initial?: { left: BattleTeam; right: BattleTeam }
 }
 
 export interface EncounterResult {
+  id?: string
+  completedAt?: number
   zoneId: ZoneId
   speciesId: string
   battle: BattleResult
@@ -143,6 +152,13 @@ export interface GameStats {
   coinsSpent: number
 }
 
+export interface PendingReward {
+  items: Record<string, number>
+  gear: Gear[]
+}
+
+export type StorageReservation = { kind: 'item'; itemId: string } | { kind: 'gear' } | { kind: 'bud' }
+
 export interface PlayerView {
   version: number
   name: string
@@ -151,6 +167,9 @@ export interface PlayerView {
   unlockedZones: ZoneId[]
   discoveries: string[]
   inventory: Record<string, number>
+  pendingRewards: Record<string, PendingReward>
+  storageReservations: Record<string, StorageReservation>
+  pendingRefundCoins?: number
   coins: number
   xp: Record<Skill, number>
   buds: Bud[]

@@ -1,6 +1,6 @@
 import { SPECIES, TRAITS } from '../data/catalog.ts'
 import { MAX_BUDS, MAX_EGGS, requireRule } from './limits.ts'
-import { itemCount, takeItems } from './progression.ts'
+import { budSlotsUsed, itemCount, takeItems } from './progression.ts'
 import { eventRandom, instanceId, pick } from './random.ts'
 import type { Random } from './random.ts'
 import type { Activity, Bud, EggGenetics, GameState, PlayerView, Species } from './types.ts'
@@ -65,7 +65,7 @@ export function rollGenetics(species: Species, random: Random, parents?: { prima
 }
 
 export function addBud(state: GameState, speciesId: string, genetics: EggGenetics): void {
-  requireRule(state.buds.length < MAX_BUDS, 'Your collection is full.')
+  requireRule(budSlotsUsed(state) < MAX_BUDS, 'Your collection is full.')
   state.buds.push({ id: instanceId(state, 'bud'), speciesId, ...genetics, xp: 0, protected: false, bond: 0 })
 }
 

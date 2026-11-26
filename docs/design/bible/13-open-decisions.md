@@ -1,5 +1,11 @@
 > Migrated source text, November 25, 2026. Approved intent, provisional choices and open questions retain their original status. Read the [current authority and scope](../AUTHORITY.md) before implementation.
 
+## Settled by the November 26 Experience playtest
+
+The confirmed follow-up closes geography-as-a-required-action, manual eligible unlocks, gather cycle selection, stop-before-switch, one worker per node, per-resource inventory quantities, and log-only combat presentation. Current rules are owned by [production](06-progression-and-production.md), [combat](08-combat.md), [economy](09-multiplayer-and-economy.md) and [presentation](10-presentation.md). Their later decisions supersede corresponding historical unknowns below.
+
+Still open: exact slot costs and deployment pacing, unlimited-stack economic consequences, final Bud-efficiency curves, broad combat balance, equipment expansion/loadouts, final roster art/audio, and physical-device qualification. Do not reopen the confirmed interface/model interview to implement this bounded pass.
+
 > Reconciliation: this section retains chronological interview checkpoints. Later explicit owner decisions supersede earlier statements that content counts, all type counts, or Tender combat skill structure are still unapproved. Current planning targets and remaining uncertainty are owned by [progression/production](06-progression-and-production.md), [presentation/content](10-presentation.md) and [release direction](12-release-direction.md). The finalized release specification and gameplay authorization remain absent.
 
 # 8\. Open decisions and next design work
