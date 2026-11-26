@@ -33,7 +33,7 @@ Use [game lifecycle](docs/game/development-lifecycle.md), [game testing](docs/ga
 
 Follow [delivery](docs/agents/delivery.md), [code quality](docs/engineering/CODE-QUALITY.md), [testing](docs/engineering/TESTING.md) and [definition of done](docs/agents/definition-of-done.md). Use an isolated branch/worktree, preserve unrelated work, avoid force pushes/history rewrites, and respect protections. The current MVP task has explicit commit/push/merge authorization. Respect branch protections and relevant verification; unrelated merges still require their own authorization.
 
-Run the narrowest useful checks during edits and all relevant registered checks before delivery. [Verification](docs/engineering/VERIFICATION.md) and `.repo/project.json` own the commands. Report exact local results, hosted CI, human acceptance and unavailable coverage separately. Null/unrun checks are not passes. Fix concrete failures without weakening acceptance.
+Run the narrowest useful checks during edits and all relevant registered checks before delivery. [Verification](docs/engineering/VERIFICATION.md) and `.repo/project.json` own the commands. GitHub Actions is disabled by owner direction; do not enable or run hosted workflows without explicit approval. Run verification locally or on the owner's authorized rig. Report exact local results, historical CI, human acceptance and unavailable coverage separately. Null/unrun checks are not passes. Fix concrete failures without weakening acceptance.
 
 ## Context, coordination and trust
 

@@ -93,5 +93,5 @@
       "mutates_external": false
     }
   },
-  "notes": "MVP implementation. npm test starts isolated real PostgreSQL (or requires an explicit loopback idle_buds_test DATABASE_URL), migrates, runs deterministic rules/database tests, builds and exercises the real server in Chromium. Browser install is a local prerequisite. No deployment or production database mutation. Hosted CI results are reported separately. Local Lab API/CLI and stdio MCP reuse authoritative rules and normal player routes. Lab checks use synthetic fixtures and ignored per-run artifacts; no model calls or extra service."
+  "notes": "MVP implementation. npm test starts isolated real PostgreSQL (or requires an explicit loopback idle_buds_test DATABASE_URL), migrates, runs deterministic rules/database tests, builds and exercises the real server in Chromium. Browser install is a local prerequisite. No deployment or production database mutation. GitHub Actions is disabled by owner direction; verify locally or on the authorized rig. Historical hosted CI results are reported separately. Local Lab API/CLI and stdio MCP reuse authoritative rules and normal player routes. Lab checks use synthetic fixtures and ignored per-run artifacts; no model calls or extra service."
 }

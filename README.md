@@ -45,7 +45,7 @@ python3 tools/validate_migration.py
 npm audit --audit-level=high
 ```
 
-Keep actual check commands registered in [.repo/project.json](.repo/project.json). Test results apply to the source and environment exercised. Checks establish only the behavior actually exercised. Human enjoyment, physical-device compatibility and live economy balance need their own evidence.
+GitHub Actions is intentionally inactive. Run checks locally or on the authorized server rig; archived workflow definitions are reference only. Keep actual check commands registered in [.repo/project.json](.repo/project.json). Test results apply to the source and environment exercised. Checks establish only the behavior actually exercised. Human enjoyment, physical-device compatibility and live economy balance need their own evidence.
 
 For repeatable experiments, run `npm run lab -- list`, then `npm run lab -- smoke`. The [Experiment Lab guide](docs/engineering/EXPERIMENT-LAB.md) covers named scenarios, policy comparisons, replay and the five local MCP tools. Player agents use the existing authenticated API; researchers use isolated synthetic fixtures.
 
@@ -63,7 +63,7 @@ For repeatable experiments, run `npm run lab -- list`, then `npm run lab -- smok
 | `docs/migration/`, `docs/archive/` | Source manifests, historical snapshots and recovery instructions |
 | `tools/`, `.repo/` | Reused repository validation and selective context tooling |
 | `.agents/`, `.codex/`, `.claude/` | Shared AI workflows and thin provider adapters |
-| `.github/` | Review templates and bounded validation workflows |
+| `.github/` | Review templates and inactive workflow archive |
 
 [Architecture](docs/architecture/OVERVIEW.md) records one browser app, one Fastify service, one PostgreSQL database and one pure rules implementation. No Redis, microservices, ECS, native shell or paid provider is required. Local PostgreSQL starts from a development-only package when an existing database is not supplied.
 

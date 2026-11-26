@@ -15,9 +15,7 @@ owns completion and status meanings.
 | Actual integration/acceptance procedure | The exercised boundaries and outcomes in that environment | Untested providers, production state or human acceptance |
 
 For documentation changes run `python tools/repo.py docs check`; keep compact
-instructions within `python tools/repo.py docs budget --strict`. The existing
-repository-health CI runs infrastructure checks. It does not discover a new
-application's framework or configure that application's CI automatically.
+instructions within `python tools/repo.py docs budget --strict`. GitHub Actions is disabled by owner direction. Execute repository-health and application checks locally or on the owner's authorized rig. The previous workflows are preserved in `.github/disabled-workflows/` for reference; do not restore or dispatch them without explicit owner approval.
 
 ## Register a project's real checks
 
@@ -54,8 +52,7 @@ python tools/repo.py verify run --name test --execute
 Inspect the plan and underlying scripts first. Select all checks required by
 the changed behavior, including shared contracts and callers beyond an area
 mapping. Native commands may also be run directly with equivalent evidence.
-Configure the application's existing CI to install its reviewed stack and run
-the same applicable commands; template health remains a separate result.
+Use the reviewed local stack and run the same applicable commands; template health remains a separate result. No hosted CI is required or authorized.
 
 ## Inspect and report results
 
@@ -63,7 +60,7 @@ Inspect native output for actual discovered/executed tests, unexpected skips,
 suppressed errors and meaningful assertions. A receipt's process PASS is not an
 assessment of test quality. Report exact source, environment, commands, result
 and limits under the [testing evidence contract](TESTING.md#evidence-sufficient-for-handoff).
-Check hosted workflow results for the actual PR head before claiming CI success.
+Hosted CI is not a current gate. Report local verification of the exact delivered source; do not present historical hosted results as checks of a new revision.
 Release/deploy verification additionally follows [delivery](../agents/delivery.md).
 
 Receipts and raw logs belong in ignored `.repo-local/` or

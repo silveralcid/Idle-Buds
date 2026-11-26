@@ -71,8 +71,12 @@ class TemplateTests(unittest.TestCase):
         self.assertEqual(list(core.links(source)), ['README.md'])
 
 
-    def test_ci_invokes_current_nonempty_infrastructure_suite(self):
-        content = core.text(self.root / '.github/workflows/repo-health.yml')
+    def test_workflow_archive_is_inactive_and_preserves_verification(self):
+        active = self.root / '.github/workflows'
+        self.assertFalse(any(p.is_file() and p.suffix.lower() in ('.yml', '.yaml') for p in active.rglob('*')),
+                         'Hosted workflows require explicit owner approval before restoration.')
+        self.assertTrue((self.root / '.github/disabled-workflows/web-validation.yml').is_file())
+        content = core.text(self.root / '.github/disabled-workflows/repo-health.yml')
         self.assertIn('python3 tools/repo.py check --tests', content)
         self.assertIn('python3 tools/repo.py docs budget --strict', content)
         self.assertNotIn('discover -s tests', content)
