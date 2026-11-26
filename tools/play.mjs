@@ -24,8 +24,8 @@ const shutdown = () => {
   if (lan && child?.connected) child.send('shutdown', () => {})
   else child?.kill('SIGINT')
 }
-process.once('SIGINT', shutdown)
-process.once('SIGTERM', shutdown)
+process.on('SIGINT', shutdown)
+process.on('SIGTERM', shutdown)
 if (process.connected) process.on('message', (message) => { if (message === 'shutdown') shutdown() })
 try {
   if (fixtures) assertTestDatabase(url)
@@ -54,5 +54,6 @@ try {
   }
 } finally {
   await local?.stop()
+  if (lan && stopping) console.log('LAN shutdown complete.')
   if (process.connected) process.disconnect?.()
 }

@@ -45,8 +45,8 @@ try {
       if (process.connected) process.disconnect?.()
     })
   }
-  process.once('SIGINT', shutdown)
-  process.once('SIGTERM', shutdown)
+  process.on('SIGINT', shutdown)
+  process.on('SIGTERM', shutdown)
   if (lan && process.connected) process.on('message', (message) => { if (message === 'shutdown') shutdown() })
   const address = await app.listen({ host, port })
   if (lan) {

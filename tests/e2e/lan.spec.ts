@@ -58,13 +58,16 @@ function launch(database: string, port: number, lan: boolean) {
         expect(output).toContain(`http://localhost:${port}`)
       }
     },
-    async stop() {
+    async stop(verify = true) {
       if (child.exitCode === null && child.signalCode === null) {
         if (process.platform === 'win32') child.send('shutdown', () => {})
         else child.kill('SIGINT')
       }
       const code = await exited
-      expect(code, output).toBe(0)
+      if (verify) {
+        expect(code, output).toBe(0)
+        if (lan) expect(output).toContain('LAN shutdown complete.')
+      }
     },
   }
 }
@@ -187,9 +190,11 @@ test('explicit LAN launcher serves nonsecure browsers, retries, multiplayer and 
     await beta.reload()
     await expect(beta.getByRole('heading', { name: 'Community', level: 1 })).toBeVisible()
     await expect(beta.getByText(message, { exact: true })).toBeVisible()
+    await server.stop()
+    server = undefined
   } finally {
     await other.close()
-    try { await server?.stop() }
+    try { await server?.stop(false) }
     finally {
       try { if (created) await admin.query(`DROP DATABASE ${databaseName} WITH (FORCE)`) }
       finally { await admin.end() }
