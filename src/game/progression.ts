@@ -24,9 +24,6 @@ export function inventoryCapacity(state: PlayerView): number {
   return BASE_STORAGE + state.upgrades.storage * 8
 }
 
-/** Compatibility name for older consumers; this is now a slot limit. */
-export const itemCapacity = inventoryCapacity
-
 export function inventorySlotsUsed(state: PlayerView): number {
   const items = new Set(Object.entries(state.inventory).filter(([, count]) => count > 0).map(([id]) => id))
   let gear = state.equipment.filter((entry) => !Object.values(state.loadout).includes(entry.id)).length
