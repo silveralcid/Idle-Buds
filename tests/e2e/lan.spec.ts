@@ -39,8 +39,8 @@ function launch(database: string, port: number, lan: boolean) {
     stdio: ['ignore', 'pipe', 'pipe', 'ipc'],
   })
   let output = ''
-  child.stdout.on('data', (data) => { output += String(data) })
-  child.stderr.on('data', (data) => { output += String(data) })
+  child.stdout?.on('data', (data) => { output += String(data) })
+  child.stderr?.on('data', (data) => { output += String(data) })
   const exited = new Promise<number | null>((resolve) => {
     child.once('exit', (code) => resolve(code))
     child.once('error', (error) => { output += String(error); resolve(null) })
