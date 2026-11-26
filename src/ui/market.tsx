@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { GEAR_DEFINITIONS, ITEM_DEFINITIONS, SPECIES } from '../data/index.ts'
-import { isBudCommitted, itemCapacity } from '../game/index.ts'
+import { canReceiveItems, isBudCommitted } from '../game/index.ts'
 import type { MarketAsset, MarketListing, StoreLine, WorldView } from '../../server/world-types.ts'
 import { Empty } from './shared.tsx'
 import { itemName, number, speciesName } from './view-model.ts'
@@ -98,7 +98,8 @@ function StoreCard({ line, state, disabled, run }: GamePanelProps & { line: Stor
   const owned = state.inventory[line.itemId] ?? 0
   const buyPrice = line.buyPrice * quantity
   const sellPrice = line.sellPrice * quantity
-  const buyMax = Math.min(line.quantity, Math.floor(state.coins / line.buyPrice), itemCapacity(state) - owned)
+  const available = Math.min(line.quantity, Math.floor(state.coins / line.buyPrice), Number.MAX_SAFE_INTEGER - owned)
+  const buyMax = canReceiveItems(state, { [line.itemId]: available }) ? available : 0
   const sellMax = Math.min(owned, line.maxStock - line.quantity)
   return <article className="surface stack" aria-label={`${itemName(line.itemId)} general store`}>
     <div className="spread"><h2>{itemName(line.itemId)}</h2><span className="tag">{line.quantity} in stock</span></div>
