@@ -22,6 +22,7 @@
     "dev:server": "node --env-file-if-exists=.env tools/play.mjs",
     "start": "node --env-file-if-exists=.env server/index.ts",
     "play": "npm run build && node --env-file-if-exists=.env tools/play.mjs",
+    "play:lan": "npm run build && node --env-file-if-exists=.env tools/play.mjs --lan",
     "db:migrate": "node --env-file-if-exists=.env tools/migrate.mjs",
     "test:unit": "vitest run tests/unit",
     "test:integration": "node tools/test.mjs integration",

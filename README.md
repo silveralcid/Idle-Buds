@@ -27,7 +27,11 @@ npm ci
 npm run play
 ```
 
-Open `http://127.0.0.1:3000`. Register a fresh Tender to gather, craft, catch and deploy your first Bud. `npm run playtest` starts a separate local fixture database with progressed multiplayer accounts. [Development setup](docs/engineering/DEVELOPMENT.md) includes browser prerequisites and the full command reference.
+Open `http://127.0.0.1:3000`. Register a fresh Tender to gather, craft, catch and deploy your first Bud.
+
+For trusted home-network play, run `npm run play:lan` instead. Open a printed private IPv4 HTTP URL on another device on the same network, register without an invite or sign in, and play the same persistent development world. Stop with Ctrl+C. No VPN or HTTPS is needed; do not expose this mode to the internet. [LAN setup and troubleshooting](docs/engineering/DEVELOPMENT.md#trusted-home-lan-playtesting).
+
+ `npm run playtest` starts a separate local fixture database with progressed multiplayer accounts. [Development setup](docs/engineering/DEVELOPMENT.md) includes browser prerequisites and the full command reference.
 
 ```sh
 npm run lint

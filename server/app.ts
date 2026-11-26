@@ -14,6 +14,7 @@ import {
 import { decodeCommand, isWorldCommand, object } from './commands.ts'
 import { lockRawPlayer, reconcilePlayer, savePlayer, transaction } from './db.ts'
 import { ApiError, requireRule } from './errors.ts'
+import { isPrivateIPv4, LOOPBACK } from './lan.ts'
 import { applyWorldCommand, lockWorld, worldView } from './world.ts'
 
 interface AppOptions {
@@ -22,6 +23,7 @@ interface AppOptions {
   allowedOrigin?: string | readonly string[]
   inviteCode?: string
   secureCookies?: boolean
+  lan?: boolean
   distRoot?: string
   logger?: boolean
 }
@@ -42,7 +44,6 @@ interface Receipt {
 const DEFAULT_ORIGINS = [
   'http://127.0.0.1:3000', 'http://localhost:3000', 'http://[::1]:3000', 'http://127.0.0.1:5173', 'http://localhost:5173',
 ]
-const LOOPBACK = new Set(['127.0.0.1', 'localhost', '[::1]'])
 
 function stableJson(value: unknown): string {
   if (Array.isArray(value)) return '[' + value.map(stableJson).join(',') + ']'
@@ -71,7 +72,11 @@ export async function buildApp(options: AppOptions) {
     || origin.pathname !== '/' || origin.search || origin.hash || origin.username || origin.password)) {
     throw new Error('Configure valid HTTP or HTTPS origins for Idle Buds.')
   }
-  if (!localOnly && (!inviteCode || inviteCode.length < 12 || !secureCookies
+  if (options.lan && (inviteCode || secureCookies || parsed.some((origin) => origin.protocol !== 'http:'
+    || (!LOOPBACK.has(origin.hostname) && !isPrivateIPv4(origin.hostname))))) {
+    throw new Error('LAN play requires only exact HTTP loopback/private IPv4 origins, no invite, and HTTP session cookies.')
+  }
+  if (!options.lan && !localOnly && (!inviteCode || inviteCode.length < 12 || !secureCookies
     || parsed.some((origin) => !LOOPBACK.has(origin.hostname) && origin.protocol !== 'https:'))) {
     throw new Error('Nonlocal playtests require an HTTPS origin, secure cookies and a playtest invite of at least 12 characters.')
   }
@@ -83,6 +88,9 @@ export async function buildApp(options: AppOptions) {
 
   app.addHook('onRequest', async (request, reply) => {
     reply.header('X-Content-Type-Options', 'nosniff').header('X-Frame-Options', 'DENY')
+    if (options.lan) {
+      requireRule(LOOPBACK.has(request.ip) || isPrivateIPv4(request.ip), 'LAN play is restricted to private network clients.', 403)
+    }
     if (request.url.startsWith('/api/')) {
       reply.header('Cache-Control', 'no-store')
       if (request.method === 'POST') {

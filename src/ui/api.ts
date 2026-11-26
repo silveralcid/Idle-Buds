@@ -47,6 +47,16 @@ async function request<T>(path: string, options: { body?: unknown; signal?: Abor
   return await response.json() as T
 }
 
+// randomUUID requires a secure context; getRandomValues also works on LAN HTTP.
+function commandId(): string {
+  if (typeof crypto.randomUUID === 'function') return crypto.randomUUID()
+  const bytes = crypto.getRandomValues(new Uint8Array(16))
+  bytes[6] = (bytes[6] & 0x0f) | 0x40
+  bytes[8] = (bytes[8] & 0x3f) | 0x80
+  const hex = Array.from(bytes, (byte) => byte.toString(16).padStart(2, '0')).join('')
+  return [hex.slice(0, 8), hex.slice(8, 12), hex.slice(12, 16), hex.slice(16, 20), hex.slice(20)].join('-')
+}
+
 function messageFrom(error: unknown) {
   return error instanceof RequestError ? error.message : 'Could not reach the outpost. Try again in a moment.'
 }
@@ -218,7 +228,7 @@ export function useGame() {
 
   const command: RunCommand = async (next) => {
     if (write.current || pending.current) return false
-    return await send({ id: crypto.randomUUID(), command: next })
+    return await send({ id: commandId(), command: next })
   }
 
   async function logOut() {
