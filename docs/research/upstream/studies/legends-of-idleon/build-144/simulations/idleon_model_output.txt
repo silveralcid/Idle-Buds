@@ -45,7 +45,7 @@ Next-level ratio at L=300 and L=1000 (where the formula stays finite):
   Spelunking   L300: x1.0504  L1000: x1.0431
   Research     L300: x1.4432  L1000: x1.5108
 The geometric base shrinks with level and then holds (class 1.208-0.164 = 1.044 from about L322; default skill 1.225-0.135 = 1.09);
-Gaming (x1.13 twice above L20) and Research (x1.1 times a growing power) never level off, so they are walls by design.
+Gaming (x1.13 twice above L20) and Research (x1.1 times a growing power) never level off, so they act as walls.
 
 ## 2. Generic bonus formula: shapes at levels 1/10/50/100/1000
 add         x1=1     x2=0    :          1          10          50         100        1000
@@ -89,7 +89,7 @@ pct cap:          447  1.33e+03  2.83e+03     2e+04  1.45e+05  1.05e+07  1.24e+0
 multi cap:        447  1.33e+03  2.83e+03     2e+04  1.45e+05  4.49e+07  2.02e+09
 Base = ((WeaponPower*(1+talents)+t5)/3)^2 + primary stat + gold food + min(150, 2*WP + stat) + flat sources;
 min damage = max * mastery, mastery = min(0.8, 0.35 + sources); expected hit = max*(mastery+(1-mastery)/2).
-Note the order: the Percent factor soft-caps after its own multiplications, and two late multipliers come after the Multiplier caps.
+Note the order: the Percent factor soft-caps after its own multiplications, and about 20 further factors come after the Multiplier caps.
 Expected hit / max at mastery 0.35: 0.675; at the 0.8 cap: 0.900
 
 ## 6. Drop odds: the client draws one uniform number per batch
@@ -117,10 +117,12 @@ In the code the expected damage already includes hit chance and the hit count is
 so below 100 % hit chance the AFK rate is penalised twice (index 0 of the CalcAwayKills result is the one used).
 
 ## 8. AFK gain rate bases
-Fighting: 0.40 + sum(bonuses)/100, times two multipliers; skilling (Mining, Choppin, Fishing, Catching, Cooking ...):
-0.50 + (2 + card + other "all" bonuses)/100 -> 52 % with nothing else; floor 1 %. Bundle bun_u adds +30 points to the "all" pool.
-Away time = server time (callable "ttg") - per-character Player timestamp; gaps <= 120 s give nothing; gaps > 2e8 s are reset;
-the Unending Energy prayer caps it at 36 000 s (10 h). No other general cap is applied in AFKgains; food and carry capacity limit returns.
+Fighting: 0.40 + sum(bonuses)/100, times two multipliers; Mining, Choppin, Fishing, Catching, Cooking, Laboratory:
+0.50 + (2 + card + other "all" bonuses)/100 -> 52 % with nothing else; Divinity 1.00; Spelunking 0.50; Research 0.01; floor 1 %.
+Bundle bun_u adds +30 points to the "all" pool (fighting 0.70, skills 0.82).
+Away time = GlobalTime (server time at each sync via "ttg", advanced locally between syncs) - per-character Player timestamp;
+gaps <= 120 s give nothing; gaps > 2e8 s or a stamp below 1e4 are reset;
+the Unending Energy prayer caps it at 36 000 s (10 h). No other general cap is applied in AFKgains; account systems cap their own stores (anvil, forge, worship, Dream).
 
 ## 9. Class levels vs early-map kills (base EXP per kill, no multipliers)
 monster            EXP | kills for L10->11 | L30->31 | L50->51 | L70->71
@@ -142,7 +144,7 @@ monster            EXP | kills for L10->11 | L30->31 | L50->51 | L70->71
   cumulative EXP class 1->50: 9.411e+06
   cumulative EXP class 1->70: 9.931e+07
   cumulative EXP class 1->100: 1.386e+09
-Kills per level on a fixed map grow ~x1.1 per level, so the next map (higher EXP per kill) is the real progression unit.
+Kills per level on a fixed map grow ~x1.24 per level around L10-30 and ~x1.1 around L50-70, so the next map (higher EXP per kill) is the real progression unit.
 
 ## 10. Stamp costs (coins per level; materials at each upgrade interval), no reductions
   Sword Stamp            BaseDmg   add    coin L1/10/30/60/100:       14.2        112        405   3.49e+03   1.73e+05 | material Grasslands1 at L5: 3, at L100: 7.03e+07
@@ -150,7 +152,8 @@ Kills per level on a fixed map grow ~x1.1 per level, so the next map (higher EXP
   Battleaxe Stamp        PctDmg    decay  coin L1/10/30/60/100:       94.2   6.73e+03   1.78e+06   4.41e+08   1.67e+11 | material Leaf1 at L4: 15, at L100: 6.74e+08
   Pickaxe Stamp          BaseMinEff add    coin L1/10/30/60/100:         12       43.5        207        405   1.32e+03 | material OakTree at L10: 5, at L100: 1.55e+04
   Questin Stamp          QuestExp  decay  coin L1/10/30/60/100:        658   5.83e+03   2.27e+05   1.24e+07   7.84e+08 | material Jungle1 at L10: 30, at L100: 9.77e+05
-Coin cost grows geometrically with a base that falls toward 1.05; every interval-th level costs materials instead of coins.
+Sword Stamp L0 -> L10: 445 coins (coins are paid for every level) plus materials at the cap level.
+Coin cost grows geometrically with a base that falls toward 1.05; at each cap (every interval levels) materials raise the cap without adding a level.
 
 ## 11. Attack interval by weapon speed, crit and EXP from stats
   weapon speed  2: melee 2.55 s, bow 2.40 s, wand 2.96 s, AFK 2.60 s per attack (before attack-speed %)
@@ -169,4 +172,4 @@ Coin cost grows geometrically with a base that falls toward 1.05; every interval
 ## 12. Content counts from the client data classes
 items 2480 (114 types; top: CARD 281, MONSTER_DROP 135, STAMP 128, QUEST_ITEM 113, PREMIUM_HELMET 102, CARRY_BAG 102, HELMET 58, RING 55)
 monsters/resources 418: Monster 341, Ore 24, Tree 19, Fish 19, Bug 15
-maps 327, talents 680, classes 49 named entries, quests 350, achievements 490, star signs 94, cards 312, bubbles 140, vials 87, stamps 128
+maps 327, talents 680, classes 49 upper-case ClassNames entries (incl. skill and basics labels), quests 350, achievements 490, star signs 94, cards 312, bubbles 140, vials 87, stamps 128

@@ -1,4 +1,4 @@
-> **Imported research, not approved Idle Buds design.** [Source snapshot](https://github.com/silveralcid/research/blob/88163607cfd407230512650a5c6750e1b7a96f98/reverse-engineering/game-dev/legends-of-idleon/build-144/content/CONTENT.md); [scope, corrections and rights](../../../../README.md). Upstream evidence labels and reported test results are preserved, not newly reproduced. Counts and commands may refer to excluded upstream artifacts.
+> **Imported research, not approved Idle Buds design.** [Source snapshot](https://github.com/silveralcid/research/blob/3629e5eaec87049d38a0c0f4269135b90beea5d3/reverse-engineering/game-dev/legends-of-idleon/build-144/content/CONTENT.md); [scope, corrections and rights](../../../../README.md). Upstream evidence labels and reported test results are preserved, not newly reproduced. Counts and commands may refer to excluded upstream artifacts.
 
 # Content inventory and data architecture
 
@@ -16,10 +16,10 @@
 | Quests / achievements | 350 / 490 (130 mapped to Steam achievements, 61 Steam achievements) | `quests.csv`, `achievements.csv` |
 | Others | star signs 94, statues 32, prayers 25, shrines 9, meals 74, bribes 41, guild bonuses 18, salt licks 11, arcade upgrades 80, artifacts 41, gods 10, companions 179, islands 17, gaming upgrades 72, research grid 240 squares, compass upgrades 173, cavern premium shop 144 | CSVs and `summary.json` |
 
-`evidence/data/idleon_data.json` holds every table (2 480 items, 418 monsters, 262 list functions from `CustomLists`, `CustomLists2`, `CustomLists3`, `CustomMaps`, `CustomMapsREAL`); `summary.json` lists each table's length.
+`evidence/data/idleon_data.json` holds every table (2 480 items, 418 monsters, 260 list functions (261 JSON entries including the `CustomMaps.get` helper) from `CustomLists`, `CustomLists2`, `CustomLists3`, `CustomMaps`, `CustomMapsREAL`); `summary.json` lists each table's length.
 
 ## Data architecture
-- **Content is code.** There are no data files: tables are Haxe functions compiled into the game script. Items are built by `addNewEquip`/`addNewConsumable` calls in six `ItemDefinitions` classes (split, likely because of compiler or editor limits; INTERPRETATION), monsters by `addNewMonster`, everything else by functions that return arrays of strings.
+- **Content is code.** There are no data files: tables are Haxe functions compiled into the game script. Items are built by `addNewEquip`, `addNewConsumable`, `addNewQuest` and `addNewItem` calls in six `ItemDefinitions` classes (split, likely because of compiler or editor limits; INTERPRETATION), monsters by `addNewMonster`, everything else by functions that return arrays of strings.
 - **Strings as records.** Many rows are flat string arrays with positional meaning (`["ROID_RAGIN","1","0","addDECAY",…]`), and stamps keep their whole definition in one comma-separated `desc_line1` field (`BaseDmg,add,1,0,5,Grasslands1,3,5,10,1.2,0,{}_Base_Damage,3`). Underscores stand for spaces, `{` marks where the computed value goes, `|` is a line break.
 - **Formula parameters in data.** Bonus rows carry `x1, x2, formula type` for the shared formula (FORMULAS #2), so most balance tuning is a data edit, while the rules that combine bonuses are code.
 - **Localisation** lives in separate `LanguageLists*` and `LanguageNPClist*` classes (map names, talent names and descriptions, item names, bubble names …), with English in the main tables.

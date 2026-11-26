@@ -1,4 +1,4 @@
-> **Imported research, not approved Idle Buds design.** [Source snapshot](https://github.com/silveralcid/research/blob/88163607cfd407230512650a5c6750e1b7a96f98/reverse-engineering/game-dev/legends-of-idleon/build-144/gameplay/GAMEPLAY_SYSTEMS.md); [scope, corrections and rights](../../../../README.md). Upstream evidence labels and reported test results are preserved, not newly reproduced. Counts and commands may refer to excluded upstream artifacts.
+> **Imported research, not approved Idle Buds design.** [Source snapshot](https://github.com/silveralcid/research/blob/3629e5eaec87049d38a0c0f4269135b90beea5d3/reverse-engineering/game-dev/legends-of-idleon/build-144/gameplay/GAMEPLAY_SYSTEMS.md); [scope, corrections and rights](../../../../README.md). Upstream evidence labels and reported test results are preserved, not newly reproduced. Counts and commands may refer to excluded upstream artifacts.
 
 # Gameplay systems
 
@@ -10,12 +10,12 @@ An account holds several **characters**. Each has a class, a character level, 20
 Resources from all characters feed **account-wide systems** (stamps, alchemy, construction, cards, statues, star signs, guild, and one or more new systems per world). Those systems feed bonuses back into every character's damage, EXP, drop rate, AFK rate and skill efficiency through the same few hundred named bonus sources (the `DamageDealed` block alone reads about 150).
 
 ## World and system map
-Seven worlds (the `DeathNoteMobs` table has seven monster lists); 327 map scenes; 341 monsters and 77 resource nodes (24 ores, 19 trees, 19 fishing spots, 15 bugs). Skills appear in `SkillNames` order; world attribution of systems below follows that order and the world-coded material names (INTERPRETATION where marked).
+Seven worlds (the `DeathNoteMobs` table has seven monster lists); 327 map scenes; 341 monsters and 77 resource nodes (24 ores, 19 trees, 19 fishing spots, 15 bugs). Skills appear in `SkillNames` order; world attribution of systems below follows that order and the world-coded material names; every world row is INTERPRETATION.
 
 | Area | Skills | Account systems (table sizes) |
 |---|---|---|
 | Character | class level, 25 classes (plus three "basics" placeholder entries) in four lines (Beginner → Journeyman → Maestro → Voidwalker → Infinilyte; Warrior → Barbarian / Squire → Blood Berserker / Divine Knight → Death Bringer / Royal Guardian; Archer → Bowman / Hunter → Siege Breaker / Beast Master → Wind Walker; Mage → Wizard / Shaman → Elemental Sorcerer / Bubonic Conjuror → Spiritual Monk / Arcane Cultist) | 680 talents, 94 star signs, 42 family bonuses (from each class's level, shared by the account), equipment with upgrade slots, 312 cards in 15 sets, obols, 350 quests, 490 achievements |
-| World 1 (INTERPRETATION) | Mining, Smithing, Chopping | anvil production, 128 stamps (A combat, B skills, C misc), 32 statues, forge, post office, colosseum, bribes (41) |
+| World 1 | Mining, Smithing, Chopping | anvil production, 128 stamps (A combat, B skills, C misc), 32 statues, forge, post office, colosseum, bribes (41) |
 | World 2 | Fishing, Alchemy, Catching | 140 bubbles in four cauldrons, 87 vials, liquids, arcade (80 upgrades), obols, bug nests |
 | World 3 | Trapping, Construction, Worship | refinery and salts (9), 3D printer and towers (27), cogs, salt licks (11), worship tower defence, 25 prayers, 9 shrines, atom collider (17) |
 | World 4 | Cooking, Breeding, Laboratory | 74 meals, pets and territories (29), lab chips (22), jewels (24), sigils (24) |
@@ -34,5 +34,5 @@ Seven worlds (the `DeathNoteMobs` table has seven monster lists); 327 map scenes
 - **A workforce, not an avatar.** Several characters on different targets make the account a small economy; choosing who does what (and which class's family bonus to level) is the strategic layer. Classes matter beyond combat because talents and family bonuses boost skills and the account.
 - **Breadth as retention.** Each world adds three skills and several account systems that all multiply each other. Few bonuses are large alone; the game keeps offering one more small multiplier somewhere else, and the sum keeps moving (INTERPRETATION).
 - **Login rhythm.** AFK gains are claimed per character on selection and time-based systems (refinery, printer, traps, cauldrons) accrue in the background, which pulls players back to rotate characters several times a day without forcing it (INTERPRETATION).
-- **Opaque depth.** Formulas are long chains of named lookups with many hidden terms (a damage formula with about 150 sources, a "kill per kill" multiplier with a dozen). The game shows the totals in its stat screens, but planning relies on community tools (INTERPRETATION).
+- **Opaque depth.** Formulas are long chains of named lookups with many hidden terms (a damage formula with about 150 sources, a "kill per kill" multiplier reading about 51 block calls). The game shows the totals in its stat screens, but planning relies on community tools (INTERPRETATION).
 - **Soft over hard limits.** Staged soft caps and decaying bonuses avoid walls in numbers that grow to 10³⁰ and beyond (late monsters have 10³⁶ HP), keeping each further order of magnitude reachable but slower.

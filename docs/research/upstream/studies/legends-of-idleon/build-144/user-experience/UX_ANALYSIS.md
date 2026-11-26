@@ -1,4 +1,4 @@
-> **Imported research, not approved Idle Buds design.** [Source snapshot](https://github.com/silveralcid/research/blob/88163607cfd407230512650a5c6750e1b7a96f98/reverse-engineering/game-dev/legends-of-idleon/build-144/user-experience/UX_ANALYSIS.md); [scope, corrections and rights](../../../../README.md). Upstream evidence labels and reported test results are preserved, not newly reproduced. Counts and commands may refer to excluded upstream artifacts.
+> **Imported research, not approved Idle Buds design.** [Source snapshot](https://github.com/silveralcid/research/blob/3629e5eaec87049d38a0c0f4269135b90beea5d3/reverse-engineering/game-dev/legends-of-idleon/build-144/user-experience/UX_ANALYSIS.md); [scope, corrections and rights](../../../../README.md). Upstream evidence labels and reported test results are preserved, not newly reproduced. Counts and commands may refer to excluded upstream artifacts.
 
 # UX analysis
 
@@ -8,7 +8,7 @@ From code and data only; the game was not played for this pass, so player recept
 - **Everyone keeps working.** Every character earns on its own target while another is played, and returning shows each character's AFK haul when it is selected. The core fantasy of an "idle MMO where you're in control" (the wrapper's own description) is built into the data model.
 - **Generous starts.** Characters below level 25 attack faster, early levels are cheap (class level 10 needs 2 703 EXP), and early maps have low-Defence monsters that any accuracy can hit.
 - **Many short goals.** 350 quests, 490 achievements, card collections, stamp and bubble levels and portal kill counts give a constant supply of small targets.
-- **Cross-platform account.** Steam, web and mobile share one Firebase account (Google, Apple, email or Steam ticket sign-in); a second device signing in greys the first out instead of corrupting the save.
+- **Cross-platform account.** Steam, web and mobile share one Firebase account (Google, Apple, email or Steam ticket sign-in); a uid change during login greys the game out and stops saving ("Possible Double Sign In"), and a `DUP_LOG` message addressed to this device sends it to a separate scene; how the server arbitrates two live devices is not visible.
 
 ## Friction
 - **Opaque formulas.** Hit chance is 0 below half a monster's Defence and AFK fighting counts hit chance twice, so an under-geared character can sit on a map earning nothing or far less than expected; skilling needs about ten times a node's requirement for certainty. Stat screens show totals, but the reasons are hard to see (INTERPRETATION).
