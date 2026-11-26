@@ -13,6 +13,26 @@ Open `http://127.0.0.1:3000`. Register a username and a password of 12+ characte
 
 The PostgreSQL distribution needs local library symlinks; the reviewed package recreates them through `autoRehydrateSymlinks` on startup. No global database package, OS user or service is installed. The local database listens only on loopback and uses SCRAM authentication with a random local password. Do not copy its files while the database is running.
 
+## Trusted home LAN playtesting
+
+```powershell
+npm run play:lan
+```
+
+Run this from the checkout on the host. It builds the app, uses the same development database and migrations as `npm run play`, then prints localhost and detected private IPv4 HTTP URLs. Connect your phone, laptop or Steam Deck to the same home network; open the printed URL corresponding to your host's Wi-Fi/Ethernet adapter (on Windows, compare with `ipconfig`). Register a username/password without an invite, or sign in with an existing account. Different accounts can use separate devices/browser profiles. Ctrl+C stops the server and any database it started; restart to resume the same saves.
+
+LAN mode explicitly ignores `HOST`, `ALLOWED_ORIGIN` and `IDLE_BUDS_INVITE` and uses detected exact HTTP origins plus localhost; `PORT` still applies. If using an existing PostgreSQL service, use the same loopback `DATABASE_URL` as normal play and set PostgreSQL `listen_addresses` to loopback only. The embedded database already binds to loopback. LAN mode refuses the disposable fixture database and cannot combine with fixture/reset flags.
+
+If another device cannot connect, verify the host URL works and both devices are on the same trusted network (not an isolated guest Wi-Fi). On Windows, confirm the network profile is Private. If the firewall blocks the default port, run PowerShell as administrator:
+
+```powershell
+New-NetFirewallRule -DisplayName "Idle Buds LAN playtest" -Direction Inbound -Action Allow -Protocol TCP -LocalPort 3000 -Profile Private -RemoteAddress LocalSubnet
+```
+
+Use the configured port if different. Remove the rule when no longer needed with `Remove-NetFirewallRule -DisplayName "Idle Buds LAN playtest"`. Do not disable the firewall, forward router ports or open PostgreSQL. Guest Wi-Fi/client isolation can prevent peer access even on the same SSID; switch both devices to the trusted home network.
+
+This mode uses unencrypted HTTP on the private network and retains password hashing, sessions and server authority. The seeded fixture commands remain loopback-only. Remote/public deployment retains the existing HTTPS/invite safeguards and is not authorized by LAN mode. Physical Windows/phone compatibility requires testing on those devices. If embedded PostgreSQL cannot initialize on your host, use an existing loopback PostgreSQL development database as described below; do not reset saves to work around a startup error.
+
 ## Seeded multiplayer playtest
 
 ```sh
@@ -31,7 +51,7 @@ The reset command explicitly clears only the loopback `idle_buds_test` database,
 
 Copy `.env.example` to ignored `.env` only when configuration is needed. Set `DATABASE_URL` to the intended development database. `npm run db:migrate` applies migrations; `npm start` runs the server against an existing migrated database. `npm run play` can also launch with an existing `DATABASE_URL` and will not start a second database. No scripts erase an external database automatically.
 
-For UI hot reload use two terminals: `npm run dev:server` and `npm run dev`. The Vite origin is `http://127.0.0.1:5173`, proxied to Fastify on port 3000. Set `ALLOWED_ORIGIN` to the actual browser origin if customizing it. Default local origins include both standard ports. Every `VITE_*` variable is public: secrets belong only in server environment configuration. Nonloopback binding requires a private invite and HTTPS origin; this does not itself authorize deployment.
+For UI hot reload use two terminals: `npm run dev:server` and `npm run dev`. The Vite origin is `http://127.0.0.1:5173`, proxied to Fastify on port 3000. Set `ALLOWED_ORIGIN` to the actual browser origin if customizing it. Default local origins include both standard ports. Every `VITE_*` variable is public: secrets belong only in server environment configuration. Outside the explicit trusted LAN launcher, nonloopback binding requires a private invite and HTTPS origin; this does not itself authorize deployment.
 
 ## Verification
 

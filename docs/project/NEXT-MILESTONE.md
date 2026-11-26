@@ -5,3 +5,5 @@ Status: Blueprint v2 gameplay implementation is authorized and implemented as a 
 Finish any outstanding verification, then play the actual fresh/progressed/two-account game. Use the recorded baselines, address measured combat-style dominance with one bounded tuning/retest cycle, and qualify the intended devices. Do not reopen the broad planning interview or build extra infrastructure. Human enjoyment and retention remain unmeasured until actual sessions occur.
 
 Scope stays fixed at [Current Release Specification](CURRENT-RELEASE.md). Public deployment and commercial launch are separate decisions. The later owner authorization is recorded in [authority](../design/AUTHORITY.md); no BEAT BAES release claim is implied.
+
+Trusted home-network playtesting: use `npm run play:lan` with the normal persistent development world; see [development setup](../engineering/DEVELOPMENT.md#trusted-home-lan-playtesting). Qualify the actual Windows host and physical phone/Steam Deck before marking device acceptance complete. Hosted browser checks do not substitute for physical-device testing.
